@@ -1,0 +1,54 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+<!-- Additional Stylesheet -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    Create Job Listing - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+<br><br>
+<div class="inside-container2" style="width: 60%">
+        <h2>Create Job Listing</h2>
+        <h3>Job details</h3>
+        <hr>
+            <form action="create_job" method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                {% if user_type == 'employer' %}
+
+                    {% for field in form %}
+                        <div class="col1">{{ field.label }}:</div>
+                        <div class="col2">{{ field }} </div><br>
+                    {% endfor %}
+
+                {% elif user_type == 'admin' %}
+                    {% for field in jobForm %}
+                        <div class="col1">{{ field.label }}:</div>
+                        <div class="col2">{{ field }}</div><br>
+                    {% endfor %}
+
+                    {% for field in companyForm %}
+                        <div class="col1">{{ field.label }} </div>
+                        <div class="col2">{{ field }}</div>
+                        {{ field.help_text }}
+                    {% endfor %}
+                {% endif %}
+
+                <div style="display: flex">
+                    <div style="flex: 1" align="center">
+                        <button class="mybutton" type="Submit"><b>Submit</b></button>
+                    </div>
+
+                    <div style="flex: 1" align="center">
+                        <button class="mybutton" type="button"><a href="/"> <b>Cancel</b></a></button>
+                    </div>
+                </div>
+            </form>
+            <br><br>
+            </div>
+<br>
+{% endblock %}

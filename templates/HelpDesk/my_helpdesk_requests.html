@@ -1,0 +1,44 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+<!-- Additional Stylesheets -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Table.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    My HelpDesk Requests - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <br><br>
+    {% if helpdeskRequests %}
+        <table class="table" align="center">
+            <thead>
+            <tr class="text-center">
+                <th>Request Date</th>
+                <th>Issue</th>
+                <th>Subject</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for helpdeskRequest in helpdeskRequests %}
+                <tr class="text-center">
+                    <td>{{ helpdeskRequest.issue_date|date:"d/m/Y"}}</td>
+                    <td>
+                        <a href="{% url 'HelpDesk' helpdeskRequest.id %}">
+                            {{ helpdeskRequest.subject }}</a>
+                    </td>
+                    <td> {{ helpdeskRequest.issue }} </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <body style="min-height: 400px; margin-bottom: 150px;">
+        <h2 align="center">No requests to display</h2>
+        <footer style="position: fixed; font-size: medium">
+    {% endif %}
+{% endblock %}

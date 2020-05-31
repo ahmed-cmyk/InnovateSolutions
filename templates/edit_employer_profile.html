@@ -1,0 +1,74 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+<!-- Additional Stylesheets -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    Edit Profile - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <script>
+        function validatePhone() {
+            const field = document.getElementById("num");
+            if(field.value.length == 0)
+            {
+                return true
+            }
+            else
+            {
+                if (!(/^\+?[0-9 -]+$/.test(field.value))) {
+                    alert("Invalid phone number.");
+                    field.focus();
+                    field.select();
+                    return false
+                }
+            }
+            return true
+        }
+    </script>
+    <div>
+        <br><br>
+        <div class="overall-page">
+            <div class="inside-container">
+                <div class="page">
+                    <div class="icon">
+                        {% if obj.logo %}
+                            <img src="{{ obj.logo.url }}" height="90.0em" width="90.0em">
+                        {% else %}
+                            <img src="{% static 'DefaultDP.jpg' %}" height="90.0em" width="90.0em">
+                        {% endif %}
+                    </div>
+                    <!-- displays welcome message -->
+                    <div class="hello" style="margin-top: 1em"><h1>Edit Profile</h1></div>
+                </div>
+                <div class="inside-container2">
+                    <br/><br/>
+                    <form method="post" enctype="multipart/form-data" action="edit_employer_profile" onsubmit="return validatePhone()">
+                        {% csrf_token %}
+                        {% for field in employer_form %}
+                            <div class="Col1">{{ field.label }}</div>
+                            <div class="Col2">{{ field }}<br>{{ field.help_text }}<br><br></div>
+                        {% endfor %}
+
+                    <div class="middle" style="display: flex">
+                        <div style="flex: 1" align="center">
+                            <button class="mybutton" type="submit"><b>Save Changes</b></button>
+                        </div>
+
+                        <div style="flex: 1" align="center">
+                            <button class="mybutton" type="button"><a href="view_employer_profile"> <b>Cancel</b></a></button>
+                        </div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <br><br>
+        </div>
+    </div>
+</div>
+<br><br><br>
+{% endblock %}

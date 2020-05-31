@@ -1,0 +1,165 @@
+.page{
+    display:flex;
+}
+
+.icon{
+    flex:0.2;
+    margin-left:4.3em;
+    padding-top:1em;
+    padding-bottom:1em;
+
+}
+
+.hello{
+    flex:1;
+    padding-top:1em;
+    padding-bottom:1em;
+}
+
+.sidebar{
+    margin-left: auto;
+    margin-top:0em;
+    width: 20%;
+    height: 15%;
+    background-color: #E8E8E8;
+    padding-top: 0px;
+    padding-bottom: 2em;
+    text-align: center;
+    border: 0.05em solid grey;
+}
+
+.container {
+    margin: auto;
+    width: 70%;
+    height: auto;
+    background-color: #E8E8E8;
+    padding-top: 0px;
+    padding-bottom: 3em;
+    align: center;
+    border: 0.05em solid grey;
+}
+.container2 {
+    margin: auto;
+    width: 80%;
+    height: auto;
+    background-color: #F8F8F8;
+    padding-top:0.0em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    align: center;
+    border: 0.05em solid grey;
+}
+
+.job_post {
+    margin: auto;
+    width: 65%;
+    background-color: #F8F8F8;
+    padding-top:0.0em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    align: center;
+    border: 0.05em solid grey;
+}
+.heading{
+	Background-color: #E8E8E8;
+	height: 3em;
+	width:85%;
+	margin-left:4.4em;
+	border:0.05em solid grey;
+}
+
+.button{
+    background-color:#D3D3D3;
+    height: 2em;
+    width: 15em;
+}
+
+.button2{
+    background-color:rgb(204,0,0);
+    height: 2em;
+    width:10em;
+    align:center;
+    border-radius: 0.45em;
+    margin-left: 20%;
+    padding:0.5em;
+    margin-top:3em;
+    color:white;
+ }
+
+.button2>a{
+    color:white;
+}
+
+.col1{
+    float: left;
+    width: 40%;
+    margin-top: 1em;
+    display: inline-block;
+    margin-bottom:0em;
+}
+
+.col2{
+    float: left;
+    width: 50%;
+    height:5.5em;
+    margin-top: 0.5em;
+    margin-bottom:0em;
+    padding-bottom: 6em;
+}
+
+input[type=text], textarea{
+  width: 75%;
+  padding: 0.75em;
+  border: 0.1em solid #ccc;
+  border-radius: 0.45em;
+  resize: vertical;
+    height: em;
+}
+
+input[type=text], number{
+  width: 75%;
+  padding: 0.75em;
+  border: 0.1em solid #ccc;
+  border-radius: 0.45em;
+  resize: vertical;
+}
+
+input[type=number]{
+  width: 75%;
+  padding: 0.75em;
+  border: 0.1em solid #ccc;
+  border-radius: 0.45em;
+  resize: vertical;
+}
+
+input[type=email], select, options {
+  width: 75%;
+  padding: 0.75em;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 0.45em;
+  box-sizing: border-box;
+}
+
+input[type="file"] {
+  width: 75%;
+  padding: 0.75em;
+  border: 0.1em solid #ccc;
+  border-radius: 0.45em;
+  resize: vertical;
+}
+input[type= checkbox] {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 0.45em;
+  box-sizing: border-box;
+}
+
+.msg{
+    margin:auto;
+    background-color: #E8E8E8;
+    padding-top: 0px;
+    padding-bottom: 2em;
+    text-align: center;
+    border: 0.05em solid grey;
+}

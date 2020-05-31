@@ -1,0 +1,114 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+<!-- Additional Stylesheets -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    Raise Help Desk Request - Murdoch Dubai Job Portal
+{% endblock %}
+
+
+{% block content %}
+    {% load comments %}
+    <br><br>
+    <div class="inside-container2">
+        <form method="POST">
+            <div>
+                {% csrf_token %}
+                <div class="headtop"></div>
+
+                <p>Subject:</p>
+                {{ help_desk_form.subject }}
+                <p>Please describe the issue or concern you are facing in detail:</p>
+                {{ help_desk_form.issue }}
+
+                {% if not thread %}
+                    <br><br>
+                    <div align="center">
+                        <button type="submit" name="submitbutton"
+                                style=" color: white; background-color:rgb(204,0,0); width: 140px; height:30px;"> Submit
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    {% if thread %}
+        <body>
+        <div class="inside-container2">
+            <p> Number of Comment/s: <span
+                    class="paragraph-comment"> {{ thread.text }} </span>
+                {% get_comment_count for thread as comment_count %}
+                <span>
+                {% if comment_count != 0 %}
+                {% endif %}
+                    {{ comment_count }} comment/s
+                                </span>
+            </p>
+
+            {% get_comment_list for thread as comments_list %}
+            {% for comment in comments_list %}
+                {% if comment.user == user %}
+                    <p>
+                        {{ comment.user_name }}
+                    </p>
+                    <p> "{{ comment.submit_date }}"
+                        "{{ comment.submit_date|timesince }}"
+                    </p>
+
+                    <div>
+                        {% if forloop.counter != comment_count %}
+                        {% endif %}
+                        <p>{{ comment.comment }}</p>
+                    </div>
+                {% else %}
+                    <div>
+                    <span>
+                        {{ comment.user_name }}
+                    </span>
+                        <p> "{{ comment.submit_date }}"
+                            "{{ comment.submit_date|timesince }}"
+                        </p>
+
+                        {% if forloop.counter != comment_count %}
+                        {% endif %}
+                        <p>
+                            {{ comment.comment }}
+                        </p>
+                    </div>
+
+                {% endif %}
+            {% endfor %}
+            {% get_comment_form for thread as form %}
+
+            <form method="post">
+                {% csrf_token %}
+                <div>
+                    <textarea id="{{ form.comment.id_for_label }}" name="{{ form.comment.html_name }}"
+                              class="form-control" required></textarea>
+                </div>
+
+                {% for field in form %}
+                    {% if field.is_hidden %}
+                        <div>{{ field }}</div>
+                    {% endif %}
+                {% endfor %}
+                <input type="hidden" name="name" value="{{ request.user.get_full_name }}"/>
+                <input type="hidden" name="email" value="{{ request.user.email }}"/>
+                <input type="hidden" name="url" value="http://dummyurl.com"/>
+                <input type="hidden" name="next" value="{{ request.path }}"/>
+                <div class="text-center my-3"><br><br>
+                    <button type="submit" name="submit" value="Post"
+                            style="background-color: rgb(204,0,0); color:white; width: 140px; height:30px; margin: 0 auto;">
+                        Comment
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    {% endif %}
+{% endblock content %}

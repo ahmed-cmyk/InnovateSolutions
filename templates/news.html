@@ -1,0 +1,16 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    NEWS HEADLINES BY CNN
+{% endblock %}
+
+{% block content %}
+    <h2>Top Headlines by CNN</h2>
+
+    {% for new, des, i, urllink in mylist %}
+        <a href="{{ urllink }}" target="_blank">{{ new }}</a>
+        <hr>
+    {% endfor %}
+
+{% endblock content %}

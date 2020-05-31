@@ -1,0 +1,190 @@
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" rel="text/css" href="{% static 'css/Base.css' %}"/>
+    {% block stylesheets %}
+    {% endblock %}
+{% endblock %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/Favicon.png' %}"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Welcome to Career Portal : 100% Job Board. Find a job near you. Simple, fast and efficient -  United Arab Emirates">
+    <meta name="keywords" content="Career Portal, United Arab Emirates, jobs ads, jobs, ads, script, app, premium jobs">
+</head>
+
+<!--This is the begining of the header!-->
+<header>
+    <nav>
+        <div class="topnav" id="myTopnav">
+            <div class="logo"><a href="/"><img src="{% static 'images/murdochlogo.png' %}" alt="Murdoch University Logo"
+                                               height="60.0em" width="170.0em"></a></div>
+            {% if user.is_authenticated %}
+                {% if user_type == 'student' %}
+                    <div class="dropdown">
+                        <button class="dropbtn">{{ user.first_name }} {{ user.last_name }}</button>
+                        <div class="dropdown-content">
+                            <a href="{% url 'view_student_profile' %}">View Profile</a>
+                            <a href="{% url 'my_applications' %}">My Applications</a>
+                            <a href="{% url 'MyHelpDeskRequests' %}">My Help Desk Requests</a>
+                            <a href="{% url 'logout' %}">Log Out</a>
+                        </div>
+                    </div>
+                {% elif user_type == 'employer' %}
+                    <div class="dropdown">
+                        <button class="dropbtn">{{ obj.company_name }}</button>
+                        <div class="dropdown-content">
+                            <a href="{% url 'view_employer_profile' %}">View Profile</a>
+                            <a href="{% url 'view_jobs' %}">My Jobs</a>
+                            <a href="{% url 'MyHelpDeskRequests' %}">My Help Desk Requests</a>
+                            <a href="{% url 'logout' %}">Log Out</a>
+                        </div>
+                    </div>
+                {% elif user_type == 'admin' %}
+                    <div class="dropdown">
+                        {% if user.super_user %}
+                            <button class="dropbtn">{{ user.username }}</button>
+                        {% else %}
+                            <button class="dropbtn">{{ user.first_name }} {{ user.last_name }}</button>
+                        {% endif %}
+                        <div class="dropdown-content">
+                            <a href="{% url 'view_admin_profile' %}">View Profile</a>
+                            <a href="{% url 'HelpDeskRequests' %}">Help Desk Requests</a>
+                            <a href="{% url 'admin:index' %}">Dashboard</a>
+                            <a href="{% url 'logout' %}">Log Out</a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="dropdown">
+                    <div class="loginButton">
+                        <a href="{% url 'log_in' %}" style="margin-right: 2em">Login</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn" style="margin: 0">SignUp</button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'student_registration' %}">I'm a Student</a>
+                        <a href="{% url 'employer_register' %}">I'm an Employer</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="bottomnav">
+        <a href="/"> <b>Home</b></a>
+        {% if user_type == 'student' %}
+            <a href="{% url 'view_jobs' %}"><b>Browse Jobs</b></a>
+            <a href="{% url 'all_posts' %}"><b>Bulletin</b></a>
+        {% elif user_type == 'employer' %}
+            <a href="{% url 'view_students' %}"><b>Browse Students</b></a>
+            <a href="{% url 'create_job' %}"> <b>Post a Job</b></a>
+            <a href="{% url 'all_posts' %}"><b>Bulletin</b></a>
+        {% elif user_type == 'admin' %}
+            <a href="{% url 'view_jobs' %}"><b>Browse Jobs</b></a>
+            <a href="{% url 'view_students' %}"><b>Browse Students</b></a>
+            <a href="{% url 'statistics' %}"> <b>Statistics</b></a>
+            <a href="{% url 'all_posts' %}"><b>Bulletin</b></a>
+        {% endif %}
+        <a href="{% url 'news' %}"> <b>News</b></a>
+        {% if user_type != 'admin' %}
+            <a href="https://www.murdochuniversitydubai.com/" target="_blank"><b>Murdoch University Home</b></a>
+        {% endif %}
+    </div>
+</header>
+
+<!-- this displays any errors during submission -->
+<div>
+    {% for message in messages %}
+        <h3 class="message"> {{ message }} </h3>
+    {% endfor %}
+</div>
+
+{% block content %}
+    <body>
+    </body>
+{% endblock %}
+
+
+<!--This is the beginning of the footer!-->
+<footer>
+    <div class="main" style="margin-top: 0.1%">
+        <!-- This is the 1st column of the footer!-->
+        <div class="about">
+            <ul><h3>ABOUT US</h3>
+                <li><a href="{% url 'faq' %}"> FAQ</a></li>
+                <li><a href="{% url 'anti_scam' %}"> Anti-Scam</a></li>
+                <li><a href="{% url 'terms' %}"> Terms</a></li>
+                <li><a href="{% url 'privacy' %}"> Privacy</a></li>
+            </ul>
+        </div>
+
+        <!-- This is the 2nd column of the footer !-->
+        <div class="sitemap">
+            <ul>
+                <h3>SITEMAP</h3>
+                <li><a href="{% url 'sitemap' %}" target="_blank">Sitemap</a></li>
+                </a>
+            </ul>
+        </div>
+
+        <!-- This is the 3rd column of the footer !-->
+        {% if user.is_authenticated %}
+            <div class="helpDesk">
+                <ul>
+                    <h3>HELP DESK</h3>
+                    <li><a href="{% url 'HelpDesk' %}"> Help Desk</a></li>
+                </ul>
+            </div>
+        {% else %}
+            <div class="helpDesk">
+            </div>
+        {% endif %}
+
+        <!-- This is the 4th column of the footer !-->
+        <div class="contact">
+            <h3> CONTACT US </h3>
+            <p class="para1">
+                <b>Murdoch University Dubai</b>
+                <br>
+            </p>
+            <p class="para2">
+                Dubai International Academic City <br>
+                Block 10, Fourth floor <br>
+                P.O. Box 345005 <br>
+                Dubai, United Arab Emirates
+            </p>
+        </div>
+
+        <!-- This is the 5th column of the footer !-->
+        <div class="follow">
+            <h3> FOLLOW US </h3>
+            <a href="https://twitter.com/MurdochUniDubai?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">
+                <img
+                        src="{% static 'images/twitter.png' %}" alt="Twitter Icon" height="35.0em" width="35.0em">
+            </a>
+            <a href="https://www.facebook.com/murdochdubai/"><img src="{% static 'images/facebook.png' %}"
+                                                                  alt="Facebook Icon" height="40.0em"
+                                                                  width="40.0em">
+            </a>
+            <a href="https://www.linkedin.com/school/murdoch-university-dxb/"><img
+                    src="{% static 'images/linkedin.png' %}" alt="LinkedIn Icon" height="35.0em" width="35.0em"></a>
+            <a href="https://www.instagram.com/murdochdubai/?hl=en"><img src="{% static 'images/insta.png' %}"
+                                                                         alt="Instagram Icon" height="40.0em"
+                                                                         width="47.0em"></a>
+        </div>
+    </div>
+</footer>
+</html>

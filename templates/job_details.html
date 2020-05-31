@@ -1,0 +1,96 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+<!-- Stylesheet -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    Job Listing Details - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <br><br>
+    <div class="overall-page">
+        <div class="inside-container">
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="overall-page">
+                    {% for company in companies %}
+                        {% if job.posted_by == company.user %}
+                            <div class="icon" style="flex:1;">
+                                {% if company.logo %}
+                                    <img src="{{ company.logo.url }}" height="90.0em" width="90.0em">
+                                {% else %}
+                                    <img src="{% static 'DefaultDP.jpg' %}" height="90.0em" width="90.0em">
+                                {% endif %}
+                            </div>
+
+                            {% if user_type == "student" %}
+                                <div style="flex:6; margin-top: 1em">
+                                    <h1>{{ company.company_name }}</h1>
+                                </div>
+                            {% else %}
+                                <div style="flex:2; margin-top: 1em">
+                                    <h1>{{ company.company_name }}</h1>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+
+                {% if user_type != "student" %}
+                    <div style="display: inline-block; margin-top: 2.5em">
+                        <button class = "mybutton" type="button"><a href="{% url 'close_job' job.id %}">Close Job</a></button>
+                        <button class = "mybutton" type="button"><a href="{% url 'delete_job' job.id %}">Delete Job</a></button>
+                        <button class = "mybutton" style = "margin-right: 5em;" type="button"><a style="text-decoration: none;" href="{% url 'edit_job' job.id %}">Edit Job</a></button>
+                    </div>
+                {% endif %}
+                </div>
+
+                <div class="inside-container2">
+                    <h2>{{ job.job_title }}</h2>
+                    <p><b>About the Job:</b><br>&emsp;{{ job.description }}</p>
+                    <p><b>Location:</b> {{ job.location }} | <b>Duration:</b> {{ job.duration }} | <b>Salary:</b> AED {{ job.salary }}</p>
+                    <p><b>Posted On:</b> {{ job.date_posted }}</p>
+
+                    <b>Skills required:</b>
+                    {% for skill in job.skills.all %}
+                        <li>{{ skill }}</li>
+                    {% endfor %}
+
+                    {% for company in companies %}
+                        {% if job.posted_by == company.user %}
+                            <p><b>About the Company:</b><br>&emsp;{{ company.company_description }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <p>{{ job.desc }}</p>
+                {% if user_type == 'student' %}
+                    <div style="text-align:center;">
+                        {% if applied == False %}
+                            <button class = "mybutton" type="submit" name="apply" value="Apply&Save">&nbsp;Apply To Job</button>
+                        {% else %}
+                            <h4>Your application has been submitted.</h4>
+                            <!-- a disabled button here -->
+                        {% endif %}
+                    </div>
+                {% else %}
+                    {% if job.status == 'Open' %}
+                        <div class="middle" style="display: flex">
+                            <div style="flex: 1" align="center">
+                                <button class="mybutton" type="submit" name="viewcandidates" value="ViewCandidates&Save">View Applicants</button>
+                            </div>
+
+                            <div style="flex: 1" align="center">
+                                <button class="mybutton" type="button"><a href="{% url 'job_to_student_skills' job.id %}">View Candidates</a></button>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    <br><br>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    Help Desk Requests - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Table.css' %}"/>
+{% endblock %}
+
+{% block content %}
+    {% if user_type == 'admin' %}
+        <br><br>
+        <table class="table" align="center">
+            <thead>
+            <tr class="text-center">
+                <th>Request Date</th>
+                <th>Issue</th>
+                <th>Subject</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for helpdeskRequest in reqs %}
+                <tr class="text-center">
+                    <td>{{ helpdeskRequest.issue_date|date:"d/m/Y"}}</td>
+                    <td>
+                        <a href="{% url 'HelpDesk' helpdeskRequest.id %}">
+                            {{ helpdeskRequest.subject }}</a>
+                    </td>
+                    <td> {{ helpdeskRequest.issue }} </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "admin/base_site.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+{% block messages %}{% endblock messages %}
+{% block content %}
+
+<h1>Admin account creation</h1>
+<form action="{% url 'admin_register' %}" method="post">
+    {% csrf_token %}
+
+        {{ user_form.as_p }}
+        {{ admin_form.as_p }}
+
+        <input type="hidden" name="next" value="../admin">
+
+        <button type="submit">Create Admin</button>
+        <button type="button"><a href="../../admin">Cancel</a></button>
+    </form>
+
+    <!-- this displays any errors during submission -->
+    <div>
+        {% for message in messages %}
+            <h3> {{ message }} </h3>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+</body>
+</html>

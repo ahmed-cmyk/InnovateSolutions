@@ -1,0 +1,53 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+<!-- Additional Stylesheet -->
+{% block stylesheets %}
+    <link rel="stylesheet" rel="text/css" href="{% static 'css/Register.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    Bulletin - Add New Post
+{% endblock %}
+
+{% block content %}
+    {% if user_type == 'admin' %}
+        <style>
+            .button3 {
+                background-color: rgb(204, 0, 0);
+                height: 2em;
+                width: 10em;
+                align: center;
+                border-radius: 0.45em;
+                margin-left: 40%;
+                padding: 0.5em;
+                margin-top: 0.1em;
+                color: white;
+            }
+        </style>
+
+        </br></br>
+        <div class="overall-page">
+            <div class="inside-container">
+                <h3 align="center">Add New Post</h3>
+                <div class="inside-container2">
+                    <form method="POST">
+                        <br><br>
+                        {% csrf_token %}
+                        Title: <br>
+                        {{ form.title }}
+                        <br><br>
+                        Feed: <br>
+                        {{ form.feed }}
+                        <br><br>
+
+                        <div align="center">
+                            <button class="mybutton" id="submitbutton" type="submit" name="submitbutton" value="submitbutton">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </br></br>
+    {% endif %}
+{% endblock content %}

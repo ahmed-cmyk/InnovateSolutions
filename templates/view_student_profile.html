@@ -1,0 +1,60 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+<!-- Stylesheet -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    View Profile - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <br><br>
+    <div class="overall-page">
+        <div class="inside-container">
+            <div class="overall-page">
+                <div class="icon">
+                    {% if obj.dp %}
+                        <img src="{{ obj.dp.url }}" height="90.0em" width="90.0em">
+                    {% else %}
+                        <img src="{% static 'DefaultDP.jpg' %}" height="90.0em" width="90.0em">
+                    {% endif %}
+                </div>
+                <div style="align:center; padding-top: 20px;"><h2>My Profile</h2></div>
+            </div>
+            <div class="inside-container2">
+
+                <p class="view"><strong> Student ID:</strong> {{ obj.student_id }}</p>
+                <p class="view"><strong> First Name:</strong> {{ user.first_name }}</p>
+                <p class="view"><strong>Last Name:</strong> {{ user.last_name }}</p>
+                <p class="view"><strong>Email Address:</strong> {{ user.email }}</p>
+                <p class="view"><strong>Date of Birth:</strong> {{ obj.DOB }}</p>
+                <p class="view"><strong>Gender:</strong> {{ obj.gender }}</p>
+
+                <strong>Skills: </strong><br><br>
+                {% for skill in obj.skills.all %}
+                    <li>{{ skill }}</li>
+                {% endfor %}
+
+                {% if obj.alumni_status %}
+                    <p class="view"><strong> Alumni Status:</strong> Alumni</p>
+                {% else %}
+                    <p class="view"><strong>Alumni Status: </strong> Current Student</p>
+                    <p class="view"><strong> Expected Graduation Date:</strong> {{ obj.expected_graduation_date }}</p>
+                    <p class="view"><strong> Personal Email Address:</strong> {{ obj.personal_email }}</p>
+                {% endif %}
+
+                <p class="view"><strong> CV: </strong> {{ obj.cv }}</p><br>
+
+            <div style="text-align:center">
+                <button type="submit" class="mybutton"><a href="/student/edit_student_profile">Edit Profile</a></button>
+            </div>
+            <br><br>
+        </div>
+    </div>
+</div>
+</div>
+<br><br>
+{% endblock %}

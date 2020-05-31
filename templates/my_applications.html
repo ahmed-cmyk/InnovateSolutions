@@ -1,0 +1,38 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    My Applications - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Table.css' %}"/>
+
+{% endblock %}
+
+{% block content %}
+    {% if jobs_applied %}
+        <table class="table" align="center" style="margin-top: 2%; margin-bottom: 2%">
+            <thead>
+                <tr class="text-center">
+                    <th>Job Title</th>
+                    <th>Date Applied</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for job in jobs_applied %}
+                    <tr class="text-center" align="center">
+                        <td><a href="{% url 'job_details' job.job_id_id %}">{{ job.job_id }}</a></td>
+                        <td style="width: 40%">{{ job.date_applied }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <body style="min-height: 400px; margin-bottom: 150px;">
+        <h2 align="center">You have not applied to any jobs yet</h2>
+        <footer style="position: fixed">
+    {% endif %}
+{% endblock %}

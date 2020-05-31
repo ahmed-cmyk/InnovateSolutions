@@ -1,0 +1,62 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block title %}
+    Generate Statistics - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <style>
+        .inside-container2 {
+            margin: auto;
+            width: 60%;
+            height: auto;
+            background-color: #F8F8F8;
+            padding-top: 0.0em;
+            padding-left: 1.5em;
+            padding-right: 1.5em;
+            align: center;
+            border: 0.05em solid grey;
+        }
+
+        input[type=text], select {
+            width: 100%;
+            padding: 12px 12px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .button3 {
+            background-color: rgb(204, 0, 0);
+            height: 2em;
+            width: 10em;
+            align: center;
+            border-radius: 0.45em;
+            margin-left: 40%;
+            margin-bottom: 0.75em;
+            padding: 0.5em;
+            color: white;
+        }
+    </style>
+
+    <body style="min-height: 400px; margin-bottom: 150px;">
+    <br/>
+    <div class="inside-container2">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div align="center">
+                <button class="mybutton" type="Submit">Submit</button>
+            </div>
+            <br/>
+        </form>
+    </div>
+    </body>
+    <footer style="position: fixed; font-size: medium">
+{% endblock %}

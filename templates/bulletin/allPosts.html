@@ -1,0 +1,74 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+
+{% block title %}
+    Bulletin - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+
+    <style>
+        .bulletin {
+            display: flex;
+        }
+
+        .post {
+            flex: 1;
+            border: 0.15em solid grey;
+            width: 90%;
+            background-color: white;
+            border-radius: 1em;
+            padding: 0.25em;
+        }
+
+        .page {
+            margin: auto;
+            width: 70%;
+            height: auto;
+            background-color: #E8E8E8;
+            margin-top: 2em;
+            align: center;
+            border: 0.15em solid grey;
+            padding-bottom: 1em;
+            border-radius: 1.5em;
+        }
+
+        h4 {
+            font-weight: normal;
+        }
+    </style>
+
+    <div style="display: flex; width: 70%; margin-left: 15%">
+        <div align="left" style="flex: 1">
+            <h1>Bulletin</h1>
+        </div>
+
+        {% if user_type == "admin" %}
+            <div align="right" style="flex: 1; margin-top: 2.5%">
+                <button class="mybutton" style="margin-left: 44.75%;"><a href="{% url 'post_new' %}"><b>Create Post</b></a>
+                </button>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="page">
+        <br/><br/>
+        {% for post in posts %}
+            <div class="bulletins" align="center">
+                <div class="post">
+                    <h3 align="left"> {{ post.title }}</h3>
+                    <hr>
+                    <h4 align="left">{{ post.feed }} </h4>
+                    <br/>
+                    <hr>
+                    <b>Author:</b> {{ post.author }}
+                    <b>Release Date</b>: {{ post.release_date }}
+                    <br/>
+                </div>
+                <br/>
+            </div>
+        {% endfor %}
+    </div>
+    <br><br>
+{% endblock %}

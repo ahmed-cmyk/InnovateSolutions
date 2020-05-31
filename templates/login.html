@@ -1,0 +1,59 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+<!-- Additional Stylesheet -->
+{% block stylesheets %}
+    <link rel="stylesheet" rel="text/css" href="{% static 'css/Login.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    Login - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <body style="min-height: 400px; margin-bottom: 150px;">
+    {% if user.is_authenticated %}
+        You are already logged in
+    {% else %}
+        <form action="login" method="post">
+    {% csrf_token %}
+    <div class="headtop">
+        <h2>Log In</h2>
+    </div>
+<br>
+    <div class="login-box-body">
+        <div class="form-group has-feedback">
+            <strong>
+                <label>Email Address </label><br>
+                    <input id="Email" type="Email" class="form-control" name="username" required/>
+            </strong>
+        </div>
+        <div class="form-group has-feedback" >
+            <strong>
+                <label>   Password </label><br>
+                  <input type="password" id="password" class="form-control" name="password"/>
+            </strong>
+        </div>
+        <div class="form-checkbox">
+            <a style="margin-left:1em; color:black" href=" /accounts/password_reset/">Forgot password?</a><br>
+            <!-- <a href="password_reset">Forgot password?</a><br> -->
+        </div>
+        <div style="text-align:right;">
+            <input id="Button1" type="submit" class="mybutton" value="Log in" style="margin-right: 7.5%;">
+        </div>
+    </div>
+    <!-- /.login-box-body -->
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
+        });
+    </script>
+</form>
+        <br>
+    {% endif %}
+    <footer style="position: fixed; font-size: medium">
+{% endblock %}

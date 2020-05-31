@@ -1,0 +1,37 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Table.css' %}"/>
+{% endblock %}
+
+{% block content %}
+    {% if candidates %}
+        <br><br>
+        <table class="table" align="center">
+            <thead>
+            <tr class="text-center">
+                <th>Date Applied</th>
+                <th>Student Name</th>
+                <th>CV</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for candidates in candidates %}
+                <tr class="text-center">
+                <td>{{ candidates.date_applied }}</td>
+                <td>{{ candidates.applied }}</td>
+                <td align="center">
+                    <button type="button" class="mybutton"><a href="{{ candidates.applied.cv.url }}">DOWNLOAD CV</a></button>
+                </td>
+            {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <body style="min-height: 400px; margin-bottom: 150px;">
+            <h1 align="center">No applications received yet</h1>
+        </body>
+        <footer style="position: fixed; font-size: medium">
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+<!-- Additional Stylesheets -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd'});
+    });
+    </script>
+{% endblock %}
+{% block title %}
+    Edit Profile - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <script language="JavaScript">
+        function disable_fields(status) {
+            if (status) {
+                document.getElementById('id_expected_graduation_date').disabled = true
+                document.getElementById('id_personal_email').disabled = true
+                document.getElementById('id_personal_email').required = false
+                document.getElementById('id_expected_graduation_date').required = false
+            } else {
+                document.getElementById('id_expected_graduation_date').disabled = false
+                document.getElementById('id_personal_email').disabled = false
+                document.getElementById('id_personal_email').required = true
+                document.getElementById('id_expected_graduation_date').required = true
+            }
+        }
+    </script>
+
+    <body onload="disable_fields(document.getElementById('id_alumni_status').checked)">
+    <br><br>
+    <div class="overall-page">
+        <div class="inside-container">
+            <div class="page">
+                <div class="icon">
+                    {% if student.dp %}
+                        <img src="{{ student.dp.url }}" height="90.0em" width="90.0em">
+                    {% else %}
+                        <img src="{% static 'DefaultDP.jpg' %}" height="90.0em" width="90.0em">
+                    {% endif %}
+                </div>
+                <!-- displays welcome message -->
+                <div class="hello" style="margin-top: 1em"><h1>Edit Profile</h1></div>
+            </div>
+            <div class="inside-container2">
+                <br/><br/>
+                <form method="post" enctype="multipart/form-data" action="edit_student_profile">
+                    {% csrf_token %}
+
+                    {% for field in user_form %}
+                        <div class="Col1">{{ field.label }}:</div>
+                        <div class="Col2">{{ field }}</div>
+                    {% endfor %}
+
+                    {% for field in student_form %}
+                        {% if field.label == "Select if you are a Murdoch University Alumni" %}
+                            <div class="Col1">{{ field.label }}: {{ field }}<br><br></div>
+                        {% else %}
+                            <div class="Col1">{{ field.label }}:</div>
+                            <div class="Col2">{{ field }}<br><br>{{ field.help_text }}</div>
+                        {% endif %}
+                    {% endfor %}
+
+                <br><br>
+                    <div style="display: flex">
+                        <div style="flex: 1" align="center">
+                            <button class="mybutton" type="submit"><b>Save Changes</b></button>
+                        </div>
+
+                        <div style="flex: 1" align="center">
+                            <button class="mybutton" type="button"><a style="text-decoration: none;" href="view_student_profile"><b>Cancel</b></a></button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    <br><br>
+{% endblock %}

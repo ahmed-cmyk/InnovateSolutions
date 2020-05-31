@@ -1,0 +1,52 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+<!-- Stylesheet -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    Student Details - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    {% csrf_token %}
+    <br><br>
+    <div class="overall-page">
+        <div class="inside-container">
+            <div class="overall-page">
+                <div class="icon">
+                    {% if student.dp %}
+                        <img src="{{ student.dp.url }}" height="80.0em" width="90.0em"><br>
+                    {% else %}
+                        <img src="{% static 'DefaultDP.jpg' %}" height="80.0em" width="90.0em"><br>
+                    {% endif %}
+                </div>
+                <div style="align:center; padding-top: 20px;">
+                    <h3>{{ student.user.first_name }} {{ student.user.last_name }} </h3></div>
+            </div>
+            <div class="inside-container2">
+                <p>Email: {{ student.user }}</p>
+                <p>Gender: {{ student.gender }}</p>
+                <p>Date of Birth: {{ student.DOB }}</p>
+
+                {% if student.alumni_status == False %}
+                    <p>Personal Email: {{ student.personal_email }}</p>
+                    <p>Expected Graduation Date: {{ student.expected_graduation_date }}</p>
+                {% endif %}
+
+                Skills:
+                {% for skill in student.skills.all %}
+                    <li>{{ skill }}</li>
+                {% endfor %}
+
+                <div style="text-align:center">
+                    <button type="button" class="mybutton"><a href="{% url 'get_cv_file' student.user_id %}">Download CV</a></button>
+                </div>
+                <br><br>
+            </div>
+        </div>
+    </div>
+    <br><br>
+{% endblock %}

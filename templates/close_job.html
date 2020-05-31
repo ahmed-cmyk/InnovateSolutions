@@ -1,0 +1,40 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    Close Jobs - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <script>
+        function validate(form) {
+            var rb = document.querySelector('input[name="isMurdochStd"]:checked').value
+            if (rb == 'no') {
+                alert("Jobs can only be closed if filled by murdoch students. Please delete the job instead.")
+                return false
+            } else {
+                return true
+            }
+            return true
+        }
+    </script>
+
+    <body style="min-height: 400px; margin-bottom: 150px;">
+        <div>
+            <form method='POST' onsubmit="return validate(this)">
+                {% csrf_token %}
+                <h2 align="center">Are you sure you want to close the job {{ job.job_title }}?</h2>
+                <h3 align="center">Did a Murdoch Student get this job?</h3>
+                <div style="text-align:center">
+                    <input type='radio' name='isMurdochStd' value='yes' id='yes' onclick="validate(this)"> Yes
+                    <input type='radio' name='isMurdochStd' value='no' id='no' onclick="validate(this)"> No<br>
+                    <br><br>
+                    <button class="mybutton" type="submit" onsubmit="return validate(this)"><b>Close</b></button>
+                    <button class="mybutton" type="button"><a href="{% url 'job_details' job.id %}"><b>Cancel</b></a></button>
+                </div>
+            </form>
+        </div>
+    </body>
+
+    <footer style="position: fixed; font-size: medium">
+{% endblock %}

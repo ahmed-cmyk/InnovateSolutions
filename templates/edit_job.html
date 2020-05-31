@@ -1,0 +1,39 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+<!-- Stylesheet -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    Edit Job - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <br><br>
+    <div class="inside-container2" style="width: 60%">
+        <h2>Edit Job Listing</h2>
+        <hr>
+        <form action="{% url 'edit_job' job.id %}" method="post" enctype="multipart/form-data">
+
+            {% csrf_token %}
+            {% if user_type == 'employer' %}
+                {{ jobForm.as_p }}
+            {% elif user_type == 'admin' %}
+                {{ jobForm.as_p }}
+                {{ companyForm.as_p }}
+            {% endif %}
+
+            <input type="hidden" name="next" value="{% url 'job_details' job.id %}">
+            <div style="display: flex">
+                <div style="flex: 1" align="center">
+                    <button class="mybutton" type="submit"><b>Save Changes</b></button>
+                </div>
+                <div style="flex: 1" align="center">
+                    <button class="mybutton" type="button"><a href="{% url 'job_details' job.id %}"><b>Cancel</b></a></button>
+                </div>
+        </form>
+    </div>
+    </div>
+    <br><br>
+{% endblock %}

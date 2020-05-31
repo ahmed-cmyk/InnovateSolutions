@@ -1,0 +1,160 @@
+body{
+    margin: 0px;
+    font-family: "Arial";
+}
+
+/* the position of overall nav  */
+nav{
+    width:100%;
+    height: 5.8em;
+    position: relative;
+    background: black;
+}
+
+/* the section contains the nav-container */
+.nav-container{
+    width:100%;
+    position: relative;
+    background: rgb(29,26,26);
+    overflow: hidden;
+}
+
+/* the position of overall murdoch logo */
+.nav-container>.logo{
+    float:left;
+    position: relative;
+    top: 1.5em;
+    left: 3.5em;
+}
+
+/*the navbar menu  of signup & login*/
+.menu{
+    width: 100%;
+    height: 1em;
+    background: rgb(29,26,26);
+}
+
+/* the over styling of nav menu-content*/
+.menu>.menu-content{
+
+    height: 8em;
+    float: right;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    position: relative;
+    line-height: 100px;
+    background: rgb(29,26,26);
+    padding-right: 1em;
+}
+
+.menu>.menu-content>a {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    border-width: thin;
+    border: solid;
+    border-color: white;
+    height: 60px;
+    width: 40%;
+    padding-left:0.5em;
+    padding-right:0.5em;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+}
+
+.menu>.menu-content>a:hover{
+    color: rgb(204,0,0);
+}
+
+/*This section contains the styling of bottomnav*/
+.bottomnav {
+    overflow: hidden;
+    background-color: rgb(204,0,0);
+    height: 4.3em;
+}
+
+.bottomnav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 1em 1em ;
+    padding-top: 1.5em;
+    padding-left: 3.5em;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: Segoe UI;
+}
+
+.home_img{
+    display: block;
+    margin-left: 5%;
+
+}
+
+footer{
+    background-color: rgb(29,26,26);
+    color: white;
+    bottom: 0;
+    left:0;
+    width: 100%;
+    position: static;
+    margin: auto;
+}
+
+.para1{
+    padding:0;
+    padding-bottom: 0;
+    border:0;
+    margin: 0;
+}
+
+.para2{
+    font-size: 0.75em;
+    padding:0;
+    border:0;
+    margin: 0;
+}
+
+ul{
+    list-style-type:none;
+}
+
+ul>a{
+    color: white;
+    text-decoration: none;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+.main{
+    background-color: rgb(29,26,26);
+    display:flex;
+    width: 100%;
+    bottom: 0;
+    left:0;
+    margin: auto;
+}
+
+.about{
+    flex:1;
+}
+
+.sitemap{
+    flex:1;
+}
+.helpDesk{
+    flex:1;
+}
+
+.contact{
+    flex:1;
+}
+
+.follow{
+    flex:1;
+}

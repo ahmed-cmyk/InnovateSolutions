@@ -1,0 +1,19 @@
+{% extends "admin/change_list.html" %}
+
+{% block pretitle %}{% endblock %}
+
+{% block content_title %}
+    <!-- link to view profile -->
+    <button>
+        <a href="{% url 'view_admin_profile' %}">Click to View/Edit Your Profile</a>
+    </button>
+    <br>
+    <br>
+    <!-- link to create new job -->
+    <p>
+        Need to create a job without an existing company account?
+        <button><a href="{% url 'admin_create_job' %}">Click Here</a></button>
+    </p>
+    <!---->
+    <h1>Select job to change</h1>
+{% endblock %}

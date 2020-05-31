@@ -1,0 +1,62 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+<!-- Additional Stylesheet -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    Employer Account Signup - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <script>
+        function validatePhone() {
+            const field = document.getElementById("num");
+            if(field.value.length == 0)
+            {
+                return true
+            }
+            else
+            {
+                if (!(/^\+?[0-9 -]+$/.test(field.value))) {
+                    alert("Invalid phone number.");
+                    field.focus();
+                    field.select();
+                    return false
+                }
+            }
+            return true
+        }
+    </script>
+    <br><br>
+        <div class="inside-container2" style="width: 60%">
+            <h2 align="center">Create an account to post jobs</h2>
+            <hr>
+                <form action="employer_registration" method="post" onsubmit="return validatePhone()">
+                    {% csrf_token %}
+
+                    {% for field in user_form %}
+                        <br>
+                        <div class="Col1">{{ field.label }}:</div>
+                        <div class="Col2">{{ field }}</div>
+                    {% endfor %}
+                     <br>
+                    {% for field in employer_form %}
+                        <div class="Col1">{{ field.label }}:</div>
+                        <div class="Col2">{{ field }}<br>{{ field.help_text }}<br><br></div>
+                    {% endfor %}
+
+                    <input type="checkbox" name="terms" required>
+                    <label>*I have read and agree to the <a href="../terms" target="_blank">Terms and
+                        Conditions</a></label><br><br>
+
+                    <div style="text-align:center;">
+                        <input type="submit" class="mybutton">
+                    </div>
+                </form>
+        </div>
+    <br>
+    <br><br>
+{% endblock %}
