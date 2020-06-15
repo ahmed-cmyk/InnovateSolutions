@@ -1,4 +1,4 @@
-Django==2.2.6
+Django==2.2.13
 django-bootstrap-datepicker-plus==3.0.4
 django-cleanup==4.0.0
 django-contrib-comments==1.9.1
@@ -13,6 +13,7 @@ Pillow==6.2.1
 psycopg2-binary
 PyPDF2==1.26.0
 python-http-client==3.2.1
+python-magic-bin==0.4.14
 pytz==2019.3
 reportlab==3.5.32
 sendgrid==6.1.0
