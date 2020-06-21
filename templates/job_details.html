@@ -42,8 +42,10 @@
 
                 {% if user_type != "student" %}
                     <div style="display: inline-block; margin-top: 2.5em">
-                        <button class = "mybutton" type="button"><a href="{% url 'close_job' job.id %}">Close Job</a></button>
-                        <button class = "mybutton" type="button"><a href="{% url 'delete_job' job.id %}">Delete Job</a></button>
+                        {% if job.status != 'Closed' %}
+                            <button class = "mybutton" type="button"><a href="{% url 'close_job' job.id %}">Close Job</a></button>
+                            <button class = "mybutton" type="button"><a href="{% url 'delete_job' job.id %}">Delete Job</a></button>
+                        {% endif %}
                         <button class = "mybutton" style = "margin-right: 5em;" type="button"><a style="text-decoration: none;" href="{% url 'edit_job' job.id %}">Edit Job</a></button>
                     </div>
                 {% endif %}
