@@ -15,5 +15,5 @@ class Employer(models.Model):
     logo = models.ImageField(upload_to='company_logos', null=True, blank=True)
 
     def __str__(self):
-        name = self.user.company_name
+        name = self.company_name
         return name
