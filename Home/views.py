@@ -331,6 +331,20 @@ def news(request):
 
     return render(request, 'news.html', args)
 
+@login_required
+def reopen_job(request, id):
+    user = get_user_type(request)
+    job = Job.objects.get(id=id)
+    if request.method == 'POST':
+        job.status = 'Open'
+        job.save()
+        messages.success(request, "You have successfully reopened the job")
+        args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
+        return render(request, 'reopen_job.html', args)
+    else:
+        form = EditJobForm()
+        args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
+        return render(request, 'reopen_job.html', args)
 
 @login_required
 def delete_job(request, id):

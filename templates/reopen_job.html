@@ -1,0 +1,23 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    Re-Open Jobs - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <body style="min-height: 400px; margin-bottom: 150px;">
+        <form method='POST'>
+            {% csrf_token %}
+            <h2 align="center">Are you sure you wish to reopen the job {{ job.job_title }}?</h2>
+
+            <br><br>
+            <div style="text-align:center">
+                <button class="mybutton" type="submit"><b>Re-Open the Job</b></button>
+                <button class="mybutton" type="button"><a href="{% url 'job_details' job.id %}"><b>Cancel</b></a></button>
+            </div>
+        </form>
+    </body>
+
+    <footer style="position: fixed; font-size: medium">
+{% endblock %}
