@@ -335,30 +335,36 @@ def news(request):
 def reopen_job(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
+    companies = Employer.objects.all()
+
+    args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies, 'applied': True}
     if request.method == 'POST':
         job.status = 'Open'
         job.save()
         messages.success(request, "You have successfully reopened the job")
-        args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
-        return render(request, 'reopen_job.html', args)
+        #args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
+        return render(request, 'job_details.html', args)
     else:
         form = EditJobForm()
-        args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
+        #args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'reopen_job.html', args)
 
 @login_required
 def delete_job(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
+    companies = Employer.objects.all()
+
+    args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies, 'applied': True}
     if request.method == 'POST':
         job.status = 'Deleted'
         job.save()
         messages.success(request, "You have successfully deleted the job")
-        args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
-        return render(request, 'delete_job.html', args)
+        #args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
+        return render(request, 'job_details.html', args)
     else:
         form = EditJobForm()
-        args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
+        #args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'delete_job.html', args)
 
 
@@ -366,16 +372,19 @@ def delete_job(request, id):
 def close_job(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
+    companies = Employer.objects.all()
+
+    args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies, 'applied': True}
     if request.method == 'POST':
         job.status = 'Closed'
         job.date_closed = timezone.now()
         job.save()
         messages.success(request, "You have successfully closed the job")
-        args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
-        return render(request, 'close_job.html', args)
+        #args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
+        return render(request, 'job_details.html', args)
     else:
         form = EditJobForm()
-        args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
+        #args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'close_job.html', args)
 
 
