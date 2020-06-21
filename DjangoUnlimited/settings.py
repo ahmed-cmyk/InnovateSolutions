@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'datatableview',
     'mathfilters',
+    'phone_field',
     'Student',
     'Employer',
     'Admin',
