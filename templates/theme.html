@@ -87,20 +87,12 @@
         <a href="/"> <b>Home</b></a>
         {% if user_type == 'student' %}
             <a href="{% url 'view_jobs' %}"><b>Browse Jobs</b></a>
-            <a href="{% url 'all_posts' %}"><b>Bulletin</b></a>
         {% elif user_type == 'employer' %}
             <a href="{% url 'view_students' %}"><b>Browse Students</b></a>
             <a href="{% url 'create_job' %}"> <b>Post a Job</b></a>
-            <a href="{% url 'all_posts' %}"><b>Bulletin</b></a>
         {% elif user_type == 'admin' %}
             <a href="{% url 'view_jobs' %}"><b>Browse Jobs</b></a>
             <a href="{% url 'view_students' %}"><b>Browse Students</b></a>
-            <a href="{% url 'statistics' %}"> <b>Statistics</b></a>
-            <a href="{% url 'all_posts' %}"><b>Bulletin</b></a>
-        {% endif %}
-        <a href="{% url 'news' %}"> <b>News</b></a>
-        {% if user_type != 'admin' %}
-            <a href="https://www.murdochuniversitydubai.com/" target="_blank"><b>Murdoch University Home</b></a>
         {% endif %}
     </div>
 </header>
