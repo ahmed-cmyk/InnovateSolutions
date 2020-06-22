@@ -79,7 +79,7 @@ def student_signup(request):
                                                       #    type='Sign Up',
                                                       #    to_show=True)
                            # add_notif.save()
-
+                            messages.success(request, "Student Account Successfully Created !", extra_tags="student_account_activated")
                             return redirect("log_in")
                     else:
                         messages.info(request, student_form.errors)

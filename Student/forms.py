@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.forms import models
 from datetime import date
@@ -13,7 +14,7 @@ from DjangoUnlimited import settings
 import dns.resolver, dns.exception
 
 
-class InitialStudentForm(forms.ModelForm):
+class InitialStudentForm(UserCreationForm):
     first_name = forms.CharField(label='*First Name')
     last_name = forms.CharField(label='*Last Name')
     email = forms.EmailField(label='*Email Address', required=True)

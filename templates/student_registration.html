@@ -41,10 +41,18 @@
 
     <br>
         <div class="inside-container2" style="width: 60%">
-            <h2 align="center">Create an account to browse jobs</h2>
+            <h2 align="center">Student Registration</h2>
                 <hr>
                 <form method="post" action="student_registration" enctype="multipart/form-data">
                     {% csrf_token %}
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% ifequal message.tags 'student_account_activated success' %}
+                                <p>{{ message }}</p>
+                            {% endifequal %}
+                        {% endfor %}
+                    {% endif %}
 
                     {% for field in user_form %}
                         <br>
