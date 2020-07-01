@@ -22,7 +22,7 @@
 	<li>Fixed issue with last intruction in "07/01/20 - 10:37PM".</li>
 </ul>
 
-<h2>07/01/20 - 10:45PM</h2>
+<h2>07/01/20 - 11:07PM</h2>
 <ul>
 	<li>Made further modifications to theme.html.</li>
 	<li>Made formatting changes to readme.</li>
