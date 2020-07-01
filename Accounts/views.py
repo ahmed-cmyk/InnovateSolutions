@@ -50,7 +50,7 @@ def login(request):
                     return redirect("log_in")
                 else:
                     auth.login(request, user)
-                    return render(request, "index.html", get_user_type(request))
+                    return render(request, "Home/index.html", get_user_type(request))
     else:
         return render(request, 'login.html', get_user_type(request))
 

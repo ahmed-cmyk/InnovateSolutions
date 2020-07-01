@@ -84,7 +84,7 @@ def create_admin(request):
         user_form = InitialAdminForm()
         admin_form = AdminForm()
         args = {'admin_form': admin_form, 'user_form': user_form}
-        return render(request, 'admin/admin_registration.html', args)
+        return render(request, 'Admin/admin_registration.html', args)
 
 
 @staff_member_required
@@ -94,7 +94,7 @@ def view_profile(request):
     try:
         admin = Admin.objects.get(user_id=user.id)
         args = {'admin': admin, 'user': user, 'hasAdminDetails': hasAdminDetails}
-        return render(request, 'admin/view_admin_profile.html', args)
+        return render(request, 'Admin/view_admin_profile.html', args)
     except:
         if request.method == 'POST':
             admin_form = AdminForm(request.POST, request.FILES)
@@ -113,7 +113,7 @@ def view_profile(request):
             hasAdminDetails = False
             admin_form = AdminForm()
             args = {'admin_form': admin_form, 'hasAdminDetails': hasAdminDetails}
-            return render(request, 'admin/view_admin_profile.html', args)
+            return render(request, 'Admin/view_admin_profile.html', args)
 
 
 @staff_member_required
@@ -138,7 +138,7 @@ def edit_profile(request):
         user_form = EditAdminProfileForm(instance=request.user)
         admin_form = AdminForm(instance=admin)
         args = {'admin_form': admin_form, 'user_form': user_form}
-        return render(request, 'admin/edit_admin_profile.html', args)
+        return render(request, 'Admin/edit_admin_profile.html', args)
 
 
 @staff_member_required
@@ -181,7 +181,7 @@ def create_job(request):
         jobForm = CreateJobForm()
 
         args = {'companyForm': companyForm, 'jobForm': jobForm}
-        return render(request, "admin/admin_create_job.html", args)
+        return render(request, "Admin/admin_create_job.html", args)
 
 
 def export_stats_file(request, users, admins, students, current, alumni, employers, jobs_posted, apps, open_jobs, closed_jobs, deleted_jobs):
@@ -247,8 +247,8 @@ def generate_statistics(request):
                 'jobs_posted': jobs_posted, 'open_jobs': open_jobs, 'closed_jobs': closed_jobs,
                 'deleted_jobs': deleted_jobs, 'apps': apps, 'user_type': user['user_type'], 'obj': user['obj']}
 
-        return render(request, "admin/view_statistics.html", args)
+        return render(request, "Admin/view_statistics.html", args)
     else:
         form = Statistics()
         args = {'form': form, 'user_type': user['user_type'], 'obj': user['obj']}
-        return render(request, "admin/generate_statistics.html", args)
+        return render(request, "Admin/generate_statistics.html", args)

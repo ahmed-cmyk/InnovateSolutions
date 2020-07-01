@@ -1,0 +1,96 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+<!-- Additional Stylesheet -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.datepicker').datepicker({dateFormat: 'yy-mm-dd'});
+        });
+    </script>
+{% endblock %}
+
+{% block title %}
+    Student Account Signup - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <script language="JavaScript">
+        function disable_fields(status) {
+            if (status) {
+                document.getElementById('id_expected_graduation_date').disabled = true
+                document.getElementById('id_personal_email').disabled = true
+                document.getElementById('id_student_id').disabled = true
+                document.getElementById('id_student_id').required = false
+                document.getElementById('id_personal_email').required = true
+                document.getElementById('id_expected_graduation_date').required = false
+            } else {
+                document.getElementById('id_expected_graduation_date').disabled = false
+                document.getElementById('id_personal_email').disabled = false
+                document.getElementById('id_student_id').disabled = false
+                document.getElementById('id_student_id').required = true
+                document.getElementById('id_personal_email').required = true
+                document.getElementById('id_expected_graduation_date').required = true
+            }
+        }
+
+    </script>
+
+
+    <body onload="disable_fields(document.getElementById('id_alumni_status').checked)">
+
+    <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h2 align="center">Student Registration</h2>
+                    <hr>
+                    <form method="POST" class="form-horizontal" action="student_registration" enctype="multipart/form-data">{% csrf_token %}
+                        <div class="form-group">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {{ messages }}
+                                    {% ifequal message.tags 'student_account_activated success' %}
+                                        <p>{{ message }}</p>
+                                    {% endifequal %}
+                                {% endfor %}
+                            {% endif %}
+
+                            <span>{{ user_form.first_name|as_crispy_field }}</span>
+                            <span>{{ user_form.last_name|as_crispy_field }}</span>
+                            <span>{{ user_form.email|as_crispy_field }}</span>
+                            <span>{{ user_form.password1|as_crispy_field }}</span>
+                            <span>{{ user_form.password2|as_crispy_field }}</span>
+                            <span>{{ student_form.gender|as_crispy_field }}</span>
+                            <span>{{ student_form.DOB|as_crispy_field }}</span>
+                            <span>{{ student_form.alumni_status|as_crispy_field }}</span>
+                            <span>{{ student_form.student_id|as_crispy_field }}</span>
+                            <span>{{ student_form.expected_graduation_date|as_crispy_field }}</span>
+                            <span>{{ student_form.personal_email|as_crispy_field }}</span>
+                            <span>{{ student_form.skills|as_crispy_field }}</span>
+                            <span>{{ student_form.dp|as_crispy_field }}</span>
+                            <span>{{ student_form.cv|as_crispy_field }}</span>
+
+                            <br>
+
+                            <label>
+                                <input type="checkbox" name="terms" required/>
+                            </label>
+                            <label>*I have read and agree to the <a href="../terms" target="_blank">Terms and Conditions</a></label><br><br>
+
+                            <div id="register" class="text-center">
+                                <button type="submit">Register</button>
+                            </div>
+                        </div><!-- End of form-group -->
+                    </form>
+                </div><!-- End of col -->
+            </div><!-- End of row -->
+        </div><!-- End of container -->
+    </body>
+    <br><br>
+{% endblock %}

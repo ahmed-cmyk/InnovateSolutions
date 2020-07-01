@@ -1,4 +1,4 @@
-.overall-page{
+/*.overall-page{
     display:flex;
 }
 
@@ -188,4 +188,14 @@ p.view{
     padding-bottom: 2em;
     text-align: center;
     border: 0.05em solid grey;
+}
+*/
+
+#register button {
+  color: #FFF;
+  background-color: #CC0000;
+  border: 2px solid #FFF;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 0 3px;
 }
