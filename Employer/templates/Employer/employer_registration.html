@@ -1,5 +1,6 @@
 {% extends "theme.html" %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 
 <!-- Additional Stylesheet -->
 {% block stylesheets %}
@@ -10,7 +11,7 @@
     Employer Account Signup - Murdoch Dubai Job Portal
 {% endblock %}
 
-{% block content %}
+
     <script>
         function validatePhone() {
             const field = document.getElementById("num");
@@ -30,33 +31,48 @@
             return true
         }
     </script>
-    <br><br>
-        <div class="inside-container2" style="width: 60%">
-            <h2 align="center">Employer Registration</h2>
-            <hr>
-                <form action="employer_registration" method="post" onsubmit="return validatePhone()">
-                    {% csrf_token %}
+        {% block content %}
+        <div id="form" class="row justify-content-center align-items-center">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <h2 align="center">Employer Registration</h2>
+                <hr>
+                <form action="employer_registration" method="post" onsubmit="return validatePhone()">{% csrf_token %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            {{ messages }}
+                            {% ifequal message.tags 'student_account_activated success' %}
+                                <p>{{ message }}</p>
+                            {% endifequal %}
+                        {% endfor %}
+                    {% endif %}
 
-                    {% for field in user_form %}
-                        <br>
-                        <div class="Col1">{{ field.label }}:</div>
-                        <div class="Col2">{{ field }}</div>
-                    {% endfor %}
-                     <br>
-                    {% for field in employer_form %}
-                        <div class="Col1">{{ field.label }}:</div>
-                        <div class="Col2">{{ field }}<br>{{ field.help_text }}<br><br></div>
-                    {% endfor %}
-
-                    <input type="checkbox" name="terms" required>
-                    <label>*I have read and agree to the <a href="../terms" target="_blank">Terms and
-                        Conditions</a></label><br><br>
-
-                    <div style="text-align:center;">
-                        <input type="submit" class="mybutton">
+                    <div class="form-group">
+                        {{ user_form.email|as_crispy_field }}
                     </div>
+                    <div class="form-group">
+                        {{ user_form.password1|as_crispy_field }}
+                    </div>
+                    <div class="form-group">
+                        {{ user_form.password2|as_crispy_field }}
+                    </div>
+                    <div class="form-group">
+                        {{ employer_form.company_name|as_crispy_field }}
+                    </div>
+                    <div class="form-group">
+                        {{ employer_form.company_description|as_crispy_field }}
+                    </div>
+                    <div class="form-group">
+                        {{ employer_form.phone_number|as_crispy_field }}
+                    </div>
+                    <div class="form-group"
+                        <input type="checkbox" name="terms" required>
+                        <label>*I have read and agree to the <a href="../terms" target="_blank">Terms and
+                            Conditions</a></label><br><br>
+                    </div>
+                    <div id="register" class="text-center">
+                        <button class="btn" type="submit">Register</button>
+                    </div><!-- End of register -->
                 </form>
-        </div>
-    <br>
-    <br><br>
-{% endblock %}
+            </div><!-- End of col -->
+        </div><!-- End of row -->
+        {% endblock %}

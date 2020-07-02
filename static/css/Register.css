@@ -191,6 +191,11 @@ p.view{
 }
 */
 
+#form {
+  width: 500px;
+  margin: auto;
+}
+
 #register button {
   color: #FFF;
   background-color: #CC0000;

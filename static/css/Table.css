@@ -1,50 +1,14 @@
-/*.text-center th , .text-center td{
-  border: 1px solid #ddd;
-  padding: 8px;
+.row {
+  
 }
-.text-center:hover {background-color: #ddd;}
-
-.text-center th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: rgb(204,0,0);
-  color: white;
-}
-
-.th {
-text-align: left;
-}
-
-.sidebar{
-    margin-left: 1em;
-    margin-top:0em;
-    width: 17em;
-    background-color: #E8E8E8;
-    padding-left: 1.5em;
-    text-align: left;
-    border: 0.05em solid grey;
-}
-
-input[type=text],select{
-  padding: 12px 12px;
-  margin-right: 12em;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.sidebar input[type=text],select{
-  width: 41%;
-}*/
 
 #sidebar {
   border: 1px solid #CC0000;
   border-radius: 8px;
-  margin: 5em 3em;
   color: #000;
   background-color: #F9F9F9;
+  height: 60%;
+  margin: 8em 1em;
 }
 
 #sidebar #sidebarHead {
@@ -63,4 +27,15 @@ input[type=text],select{
   border: 2px solid #FFF;
   border-radius: 4px;
   padding: 10px;
+}
+
+#job-list-body {
+  margin: 5em 1em; 
+}
+
+#job-cards {
+  border: 1px solid #000;
+  border-radius: 8px;
+  background-color: #F9F9F9;
+  margin-top: 3em;
 }

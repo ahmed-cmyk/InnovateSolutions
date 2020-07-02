@@ -87,4 +87,12 @@
 		<li>YouTube icon points to LinkedIn</li>
 		<li>Horizontal lines don't show up. Probably css issue.</li>
 		<li>Some icons don't match</li>
+	</ul>
+</ul>
+
+<h2>07/02/20 - 09:25PM</h2>
+<ul>
+	<li>Redesigned the view jobs page to make it look better.</li>
+	<li>Updated student registration form with new styles.</li>
+	<li>Updated employer registration form with new styles.</li>
 </ul>
