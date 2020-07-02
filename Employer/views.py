@@ -86,7 +86,7 @@ def signup(request):
         employer_form = EmployerForm()
         user = get_user_type(request)
         args = {'employer_form': employer_form, 'user_form': user_form, 'user_type': user['user_type']}
-        return render(request, 'employer_registration.html', args)
+        return render(request, 'Employer/employer_registration.html', args)
 
 
 @login_required
@@ -105,11 +105,11 @@ def edit_profile(request):
         else:
             form = EmployerForm(instance=args['obj'])
             args = {'employer_form': form, 'obj': args['obj'], 'user_type': args['user_type']}
-            return render(request, 'edit_employer_profile.html', args)
+            return render(request, 'Employer/edit_employer_profile.html', args)
     else:
         messages.info(request, 'This employer user does not exist')
 
 
 @login_required
 def view_profile(request):
-    return render(request, 'view_employer_profile.html', get_user_type(request))
+    return render(request, 'Employer/view_employer_profile.html', get_user_type(request))

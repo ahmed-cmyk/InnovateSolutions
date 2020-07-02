@@ -1,4 +1,4 @@
-.table {
+/*.table {
   font-family: Arial;
   border-collapse: collapse;
   width: 70%;
@@ -44,4 +44,30 @@ input[type=text],select{
 
 .sidebar input[type=text],select{
   width: 41%;
+}*/
+
+#sidebar {
+  border: 1px solid #CC0000;
+  border-radius: 8px;
+  margin: 5em 3em;
+  color: #000;
+  background-color: #F9F9F9;
+}
+
+#sidebar #sidebarHead {
+  color: #FFF;
+  background-color: #CC0000;
+  padding: 5px 2px 3px 2px;
+}
+
+#sidebar #sidebarContent {
+  padding: 0 4px;
+}
+
+#sidebar #filter {
+  color: #FFF;
+  background-color: #CC0000;
+  border: 2px solid #FFF;
+  border-radius: 4px;
+  padding: 10px;
 }

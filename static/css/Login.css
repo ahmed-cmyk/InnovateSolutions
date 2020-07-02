@@ -1,4 +1,4 @@
-Form {
+/*Form {
     border-color: #D3D3D3;
     border-style: solid;
     color: black;
@@ -55,4 +55,32 @@ input[type=password], select {
 
 label{
     margin:12px 14px;;
+}*/
+
+#formbox {
+  height: 60%;
+  margin: 10% 0;
+  padding: 8px;
+  border: 1px solid #CC0000;
+  border-radius: 8px;
+  background-color: #F9F9F9
+}
+
+#formbox hr {
+  width: 70%;
+  background-color: #000;
+}
+
+#formbox button {
+  color: #FFF;
+  background-color: #CC0000;
+  border: 2px solid #FFF;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 0 3px;
+}
+
+#formbox .form-group {
+  width: 70%;
+  margin: auto;
 }

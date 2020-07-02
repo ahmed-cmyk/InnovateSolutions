@@ -1,19 +1,101 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto Slab', serif;
+}
+
 body{
-    font-family: Arial;
-    margin: 0px;
-    clear: both;
+    position: relative;
+}
+
+body .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#navigationBar {
+    position: relative;
+}
+
+#navigationBar #navTop {
+    background-color: #CC0000;
+    height: 100px;
+}
+
+#navigationBar .navElements {
+    margin: 7px 50px;
+}
+
+/*#navTop #murdochLogo {
+    margin: 5px 20px;
+}*/
+
+#navTop #murdochLogo img {
+    width: 170px;
+    height: 60px;
+}
+
+/*#userElements {
+    margin: 5px 20px;
+}*/
+
+#userElements button {
+    
+}
+
+#userElements #signup, #login {
+    color: #FFF;
+    background-color: #CC0000;
+    border: 2px solid #FFF;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 0 3px;
+}
+
+#userElements #userIcon {
+    color: #FFF;
+}
+
+#userElements svg {
+    width: 30px;
+    height: 30px;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+/*#userElements #signup{
+}
+
+#userElements #login{
+}*/
+
+#navigationBar #navBottom {
+    background-color: #000;
+}
+
+#navigationBar #navBottom button {
+    color: #FFF;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+#navigationBar #navBottom button:hover {
+    color: #CC0000;
+    background: #FFF;
 }
 
 /* the position of overall nav  */
-nav{
+/*nav{
     width:100%;
     height: 5.8em;
     position: relative;
     background: rgb(29,26,26);
-}
+}*/
 
 /*This section contains the styling of bottomnav*/
-.bottomnav {
+/*.bottomnav {
     overflow: hidden;
     background-color: rgb(204,0,0);
     height: 3.5em;
@@ -33,32 +115,13 @@ nav{
 
 .bottomnav>a:hover{
     color: rgb(29,26,26);
-}
+}*/
 
 footer{
-    font-family: Arial;
-    background-color: rgb(29,26,26);
+    background-color: #000;
     color: white;
-    bottom: 0;
-    left:0;
-    width: 100%;
-    position: static;
-    margin: auto;
     font-size: 0.85em;
-    height:8em;
-}
-
-.para1{
-    padding:0;
-    border:0;
-    margin: 0;
-}
-
-.para2{
-    font-size: 0.75em;
-    padding:0;
-    border:0;
-    margin: 0;
+    height:15em;
 }
 
 ul{
@@ -70,7 +133,33 @@ li>a{
     text-decoration: none;
 }
 
-.button{
+footer .row {
+    padding: 15px 5px;
+}
+
+footer h3 {
+    text-transform: uppercase;
+}
+
+#quoteBody {
+    width: 60%;
+    margin: auto;
+}
+
+/*.para1{
+    padding:0;
+    border:0;
+    margin: 0;
+}
+
+.para2{
+    font-size: 0.75em;
+    padding:0;
+    border:0;
+    margin: 0;
+}*/
+
+/*.button{
     background-color:rgb(204,0,0);
     height: 2.5em;
     width:10em;
@@ -97,18 +186,18 @@ li>a{
 .mybutton>a{
     text-decoration: none;
     color:white;
-}
+}*/
 
-.main{
+/*.main{
     background-color: rgb(29,26,26);
     display:flex;
     width: 100%;
     bottom: 0;
     left:0;
     margin-top: 5em;
-}
+}*/
 
-.about{
+/*.about{
     flex:1;
 }
 
@@ -125,15 +214,15 @@ li>a{
 
 .follow{
     flex:1;
-}
+}*/
 
-.topnav {
+/*.topnav {
   background-color: rgb(29,26,26);
   overflow: hidden;
-}
+}*/
 
 /* Style the links inside the navigation bar */
-.topnav a {
+/*.topnav a {
   float: right;
   display: block;
   padding: 34px 36px;
@@ -142,8 +231,8 @@ li>a{
   font-size: 17px;
   color: white;
 }
-
-.logo>a{
+*/
+/*.logo>a{
     float:left;
     position: absolute;
     padding-top: 0.1%;
@@ -152,23 +241,23 @@ li>a{
     padding-left: 0.1%;
     padding-right: 0.1%;
     padding-bottom: 0.1%;
-}
+}*/
 
 /* Add an active class to highlight the current page */
-.active {
+/*.active {
     background-color: rgb(29,26,26);
     color: white;
-}
+}*/
 
 /* Dropdown container - needed to position the dropdown content */
-.dropdown {
+/*.dropdown {
     float: right;
     overflow: hidden;
     background-color: rgb(29,26,26);
-}
+}*/
 
 /* Style the dropdown button to fit inside the topnav */
-.dropdown .dropbtn {
+/*.dropdown .dropbtn {
     font-size: 17px;
     border: none;
     outline: none;
@@ -176,40 +265,40 @@ li>a{
     padding: 34px 36px;
     background-color: rgb(29,26,26);
     margin-right: 2em;
-}
+}*/
 
 /* Style the dropdown content (hidden by default) */
-.dropdown-content {
+/*.dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
-
+*/
 /* Style the links inside the dropdown */
-.dropdown-content a {
+/*.dropdown-content a {
     float: none;
     color: rgb(29,26,26);;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     text-align: left;
-}
+}*/
 
 /* Add a dark background on topnav links and the dropdown button on hover */
-.loginButton a:hover, .dropdown:hover .dropbtn {
+/*.loginButton a:hover, .dropdown:hover .dropbtn {
     background-color: rgb(204,0,0);;
     color: white;
-}
+}*/
 
 /* Add a grey background to dropdown links on hover */
-.dropdown-content a:hover {
+/*.dropdown-content a:hover {
     background-color: #555;
     color: white;
-}
+}*/
 
 /* Show the dropdown menu when the user moves the mouse over the dropdown button */
-.dropdown:hover .dropdown-content {
+/*.dropdown:hover .dropdown-content {
     display: block;
-}
+}*/

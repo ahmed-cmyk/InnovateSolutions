@@ -2,6 +2,8 @@
 
 {% block css %}
     <link rel="stylesheet" rel="text/css" href="{% static 'css/Base.css' %}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&display=swap" rel="stylesheet">
     {% block stylesheets %}
     {% endblock %}
 {% endblock %}
@@ -23,80 +25,6 @@
     <meta name="keywords" content="Career Portal, United Arab Emirates, jobs ads, jobs, ads, script, app, premium jobs">
 </head>
 
-<!--This is the begining of the header!-->
-<header>
-    <nav>
-        <div class="topnav" id="myTopnav">
-            <div class="logo"><a href="/"><img src="{% static 'images/murdochlogo.png' %}" alt="Murdoch University Logo"
-                                               height="60.0em" width="170.0em"></a></div>
-            {% if user.is_authenticated %}
-                {% if user_type == 'student' %}
-                    <div class="dropdown">
-                        <button class="dropbtn">{{ user.first_name }} {{ user.last_name }}</button>
-                        <div class="dropdown-content">
-                            <a href="{% url 'view_student_profile' %}">View Profile</a>
-                            <a href="{% url 'my_applications' %}">My Applications</a>
-                            <a href="{% url 'MyHelpDeskRequests' %}">My Help Desk Requests</a>
-                            <a href="{% url 'logout' %}">Log Out</a>
-                        </div>
-                    </div>
-                {% elif user_type == 'employer' %}
-                    <div class="dropdown">
-                        <button class="dropbtn">{{ obj.company_name }}</button>
-                        <div class="dropdown-content">
-                            <a href="{% url 'view_employer_profile' %}">View Profile</a>
-                            <a href="{% url 'view_jobs' %}">My Jobs</a>
-                            <a href="{% url 'MyHelpDeskRequests' %}">My Help Desk Requests</a>
-                            <a href="{% url 'logout' %}">Log Out</a>
-                        </div>
-                    </div>
-                {% elif user_type == 'admin' %}
-                    <div class="dropdown">
-                        {% if user.super_user %}
-                            <button class="dropbtn">{{ user.username }}</button>
-                        {% else %}
-                            <button class="dropbtn">{{ user.first_name }} {{ user.last_name }}</button>
-                        {% endif %}
-                        <div class="dropdown-content">
-                            <a href="{% url 'view_admin_profile' %}">View Profile</a>
-                            <a href="{% url 'HelpDeskRequests' %}">Help Desk Requests</a>
-                            <a href="{% url 'admin:index' %}">Dashboard</a>
-                            <a href="{% url 'logout' %}">Log Out</a>
-                        </div>
-                    </div>
-                {% endif %}
-            {% else %}
-                <div class="dropdown">
-                    <div class="loginButton">
-                        <a href="{% url 'log_in' %}" style="margin-right: 2em">Login</a>
-                    </div>
-                </div>
-
-                <div class="dropdown">
-                    <button class="dropbtn" style="margin: 0">SignUp</button>
-                    <div class="dropdown-content">
-                        <a href="{% url 'student_registration' %}">I'm a Student</a>
-                        <a href="{% url 'employer_register' %}">I'm an Employer</a>
-                    </div>
-                </div>
-            {% endif %}
-        </div>
-    </nav>
-
-    <div class="bottomnav">
-        <a href="/"> <b>Home</b></a>
-        {% if user_type == 'student' %}
-            <a href="{% url 'view_jobs' %}"><b>Browse Jobs</b></a>
-        {% elif user_type == 'employer' %}
-            <a href="{% url 'view_students' %}"><b>Browse Students</b></a>
-            <a href="{% url 'create_job' %}"> <b>Post a Job</b></a>
-        {% elif user_type == 'admin' %}
-            <a href="{% url 'view_jobs' %}"><b>Browse Jobs</b></a>
-            <a href="{% url 'view_students' %}"><b>Browse Students</b></a>
-        {% endif %}
-    </div>
-</header>
-
 <!-- this displays any errors during submission -->
 <div>
     {% for message in messages %}
@@ -104,79 +32,164 @@
     {% endfor %}
 </div>
 
-{% block content %}
     <body>
+        <div class="container-fluid">
+            <!--This is the begining of the header!-->
+            <header>
+                <nav id="navigationBar">
+                    <div id="navTop" class="navbar-nav mr-auto">
+                        <div class="navElements">
+                            <a class="navbar-brand" href="/">
+                                <div id="murdochLogo" class="float-left">
+                                    <img src="{% static 'images/murdochlogo.png' %}" alt="Murdoch University Logo">
+                                </div><!-- End of navbar-brand -->
+                            </a>
+                            <div id="userElements" class="float-right">
+                                {% if not user.is_authenticated %}
+                                    <div class="dropdown">
+                                        <button id="signup" class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                                            Sign Up
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{% url 'student_registration' %}">I'm a Student</a>
+                                            <a class="dropdown-item" href="{% url 'employer_register' %}">I'm an Employer</a>
+                                        </div><!-- End of dropdown-menu -->
+                                    </div><!-- End of dropdown -->
+                                    <a href="{% url 'log_in' %}">
+                                        <button id="login" class="btn">Login</button>
+                                    </a>
+                                {% else %}
+                                    <div class="dropdown">
+                                        <button type="button" id="userIcon" class="btn dropdown-toggle" data-toggle="dropdown">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                              <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                                              <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                              <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                                            </svg>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            {% if user_type == 'student' %}
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url 'view_student_profile' %}">View Profile</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                                                </li>
+                                            {% elif user_type == 'employer' %}
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url 'view_employer_profile' %}">View Profile</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                                                </li>
+                                            {% elif user_type == 'admin' %}
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url 'view_admin_profile' %}">View Profile</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url 'admin:index' %}">Dashboard</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            </div><!-- End of userElements -->
+                        </div><!-- End of navElements -->
+                    </div><!-- End of navTop -->
+                    <div id="navBottom" class="nav navbar-nav mr-auto">
+                        <div class="navElements">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/">
+                                        <button class="btn">Home</button>
+                                    </a>
+                                </li>
+                                {% if user_type == 'student' %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'view_jobs' %}">
+                                            <button class="btn">Browse Jobs</button>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'my_applications' %}">My Applications</a>
+                                    </li>
+                                {% elif user_type == 'employer' %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'view_students' %}">
+                                            <button class="btn">Browse Students</button>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'view_jobs' %}">
+                                            <button class="btn">My Jobs</button>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'create_job' %}">
+                                            <button class="btn">Post a Job</button>
+                                        </a>
+                                    </li>
+                                {% elif user_type == 'admin' %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'view_jobs' %}">
+                                            <button class="btn">Browse Jobs</button>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'view_students' %}">
+                                            <button class="btn">Browse Students</button>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div><!-- End of navBottom -->
+                </nav>
+            </header>
+            {% block content %}
+
+            {% endblock %}
+            <!--This is the beginning of the footer!-->
+            <footer class="page-footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="aboutus col-md-4">
+                            <ul>
+                                <span class="text-center">
+                                    <h3>About Us</h3>
+                                    <li><a href="{% url 'faq' %}"> FAQ</a></li>
+                                    <li><a href="{% url 'anti_scam' %}"> Anti-Scam</a></li>
+                                    <li><a href="{% url 'terms' %}"> Terms</a></li>
+                                    <li><a href="{% url 'privacy' %}"> Privacy</a></li>
+                                    <li><a href="{% url 'sitemap' %}" target="_blank">Sitemap</a></li>
+                                </span>
+                            </ul>
+                        </div><!-- End of aboutus -->
+                        <div class="contactus col-md-4">
+                            <ul>
+                                <span class="text-center">
+                                    <h3>Contact Us</h3>
+                                    <p>Dubai International Academic City</p>
+                                    <p>Block 10, Fourth floor</p>
+                                    <p>P.O. Box 345005</p>
+                                    <p>Dubai, United Arab Emirates</p>
+                                </span>
+                            </ul>
+                        </div><!-- End of contactus -->
+                        <div class="followus col-md-4">
+                            <span class="text-center">
+                                <h3>Follow Us</h3>
+                            </span>
+                        </div><!-- End of followus -->
+                    </div><!-- End of row -->
+                </div><!-- End of container-fluid -->
+            </footer>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
-{% endblock %}
-
-
-<!--This is the beginning of the footer!-->
-<footer>
-    <div class="main" style="margin-top: 0.1%">
-        <!-- This is the 1st column of the footer!-->
-        <div class="about">
-            <ul><h3>ABOUT US</h3>
-                <li><a href="{% url 'faq' %}"> FAQ</a></li>
-                <li><a href="{% url 'anti_scam' %}"> Anti-Scam</a></li>
-                <li><a href="{% url 'terms' %}"> Terms</a></li>
-                <li><a href="{% url 'privacy' %}"> Privacy</a></li>
-            </ul>
-        </div>
-
-        <!-- This is the 2nd column of the footer !-->
-        <div class="sitemap">
-            <ul>
-                <h3>SITEMAP</h3>
-                <li><a href="{% url 'sitemap' %}" target="_blank">Sitemap</a></li>
-                </a>
-            </ul>
-        </div>
-
-        <!-- This is the 3rd column of the footer !-->
-        {% if user.is_authenticated %}
-            <div class="helpDesk">
-                <ul>
-                    <h3>HELP DESK</h3>
-                    <li><a href="{% url 'HelpDesk' %}"> Help Desk</a></li>
-                </ul>
-            </div>
-        {% else %}
-            <div class="helpDesk">
-            </div>
-        {% endif %}
-
-        <!-- This is the 4th column of the footer !-->
-        <div class="contact">
-            <h3> CONTACT US </h3>
-            <p class="para1">
-                <b>Murdoch University Dubai</b>
-                <br>
-            </p>
-            <p class="para2">
-                Dubai International Academic City <br>
-                Block 10, Fourth floor <br>
-                P.O. Box 345005 <br>
-                Dubai, United Arab Emirates
-            </p>
-        </div>
-
-        <!-- This is the 5th column of the footer !-->
-        <div class="follow">
-            <h3> FOLLOW US </h3>
-            <a href="https://twitter.com/MurdochUniDubai?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">
-                <img
-                        src="{% static 'images/twitter.png' %}" alt="Twitter Icon" height="35.0em" width="35.0em">
-            </a>
-            <a href="https://www.facebook.com/murdochdubai/"><img src="{% static 'images/facebook.png' %}"
-                                                                  alt="Facebook Icon" height="40.0em"
-                                                                  width="40.0em">
-            </a>
-            <a href="https://www.linkedin.com/school/murdoch-university-dxb/"><img
-                    src="{% static 'images/linkedin.png' %}" alt="LinkedIn Icon" height="35.0em" width="35.0em"></a>
-            <a href="https://www.instagram.com/murdochdubai/?hl=en"><img src="{% static 'images/insta.png' %}"
-                                                                         alt="Instagram Icon" height="40.0em"
-                                                                         width="47.0em"></a>
-        </div>
-    </div>
-</footer>
 </html>

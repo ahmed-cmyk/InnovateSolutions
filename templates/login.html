@@ -11,49 +11,38 @@
 {% endblock %}
 
 {% block content %}
-    <body style="min-height: 400px; margin-bottom: 150px;">
-    {% if user.is_authenticated %}
-        You are already logged in
-    {% else %}
-        <form action="login" method="post">
-    {% csrf_token %}
-    <div class="headtop">
-        <h2>Log In</h2>
-    </div>
-<br>
-    <div class="login-box-body">
-        <div class="form-group has-feedback">
-            <strong>
-                <label>Email Address </label><br>
-                    <input id="Email" type="Email" class="form-control" name="username" required/>
-            </strong>
-        </div>
-        <div class="form-group has-feedback" >
-            <strong>
-                <label>   Password </label><br>
-                  <input type="password" id="password" class="form-control" name="password"/>
-            </strong>
-        </div>
-        <div class="form-checkbox">
-            <a style="margin-left:1em; color:black" href=" /accounts/password_reset/">Forgot password?</a><br>
-            <!-- <a href="password_reset">Forgot password?</a><br> -->
-        </div>
-        <div style="text-align:right;">
-            <input id="Button1" type="submit" class="mybutton" value="Log in" style="margin-right: 7.5%;">
-        </div>
-    </div>
-    <!-- /.login-box-body -->
-    <script>
-        $(function () {
-            $('input').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
-                increaseArea: '20%' /* optional */
+    <body>
+        <div class="container">
+            <div class="row">
+                <div id="formbox" class="col-md-12 col-sm-12 col-xs-12">
+                    <form action="login" method="post">{% csrf_token %}
+                        <div id="form" class="form-group">
+                            <h2 class="text-center">Sign In</h2>
+                            <hr>
+                            <label for="email">Email Address</label>
+                            <input id="Email" class="form-control form-control-sm" type="Email" name="username" required/>
+                            <label for="email">Password</label>
+                            <input id="password" class="form-control form-control-sm text-center" type="password" name="password"/>
+                            <br>
+                            <div class="text-center">
+                                <button class="btn" type="submit">Login</button>
+                            </div>
+                            <hr>
+                            <a href="/accounts/password_reset/"> Forgot password?</a>
+                        </div><!-- End of for-group -->
+                    </form>
+                </div><!-- End of col -->
+            </div><!-- End of row -->
+        </div><!-- End of container -->
+        <!-- /.login-box-body -->
+        <script>
+            $(function () {
+                $('input').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue',
+                    increaseArea: '20%' /* optional */
+                });
             });
-        });
-    </script>
-</form>
+        </script>
         <br>
-    {% endif %}
-    <footer style="position: fixed; font-size: medium">
 {% endblock %}
