@@ -36,8 +36,13 @@
         <div class="container-fluid">
             <!--This is the begining of the header!-->
             <header>
+<<<<<<< HEAD
                 <nav id="navigationBar">
                     <div id="navTop" class="navbar-nav mr-auto">
+=======
+                <nav id="navigationBar" class="navbar-nav" >
+                    <div id="navTop">
+>>>>>>> 1cd3ef59213aa98048b1152e48fd03dcefd1c182
                         <div class="navElements">
                             <a class="navbar-brand" href="/">
                                 <div id="murdochLogo" class="float-left">
@@ -45,6 +50,7 @@
                                 </div><!-- End of navbar-brand -->
                             </a>
                             <div id="userElements" class="float-right">
+<<<<<<< HEAD
                                 {% if not user.is_authenticated %}
                                     <div class="dropdown">
                                         <button id="signup" class="btn dropdown-toggle" type="button" data-toggle="dropdown">
@@ -145,6 +151,80 @@
                                     </li>
                                 {% endif %}
                             </ul>
+=======
+                                {% if user.is_authenticated %}
+                                    {% if user_type == 'student' %}
+                                        <a href="{% url 'view_jobs' %}">
+                                            <button>Browse Jobs</button>
+                                        </a>
+                                    {% elif user_type == 'employer' %}
+                                        <a href="{% url 'view_students' %}">
+                                            <button>Browse Students</button>
+                                        </a>
+                                        <a href="{% url 'create_job' %}">
+                                            <button>Post a Job</button>
+                                        </a>
+                                    {% elif user_type == 'admin' %}
+                                        <a href="{% url 'view_jobs' %}">
+                                            <button>Browse Jobs</button>
+                                        </a>
+                                        <a href="{% url 'view_students' %}">
+                                            <button>Browse Students</button>
+                                        </a>
+                                    {% endif %}
+                                {% else %}
+                                    <div class="dropdown">
+                                        <button id="signup">Sign Up</button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item href="{% url 'student_registration' %}">I'm a Student</a></li>
+                                            <li><a class="dropdown-item href="{% url 'employer_register' %}">I'm an Employer</a></li>
+                                        </ul><!-- End of dropdown-menu -->
+                                    </div>
+                                    <a href="{% url 'log_in' %}">
+                                        <button id="login">Login</button>
+                                    </a>
+                                {% endif %}
+                                <div class="dropdown">
+                                    <button type="button" id="userIcon" class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                                          <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                          <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                                        </svg>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">View Profile</a></li>
+                                        <li><a class="dropdown-item" href="#">My Applications</a></li>
+                                        <li><a class="dropdown-item" href="#">My Help Desk Requests</a></li>
+                                        <li><a class="dropdown-item" href="#">Log Out</a></li>
+                                    </ul><!-- End of dropdown-menu -->
+                                </div><!-- End of dropdown -->
+                            </div><!-- End of userElements -->
+                        </div><!-- End of navElements -->
+                    </div><!-- End of navTop -->
+                    <div id="navBottom">
+                        <div class="navElements">
+                            <button class="btn">Home</button>
+                            {% if user_type == 'student' %}
+                                <a href="{% url 'view_jobs' %}">
+                                    <button class="btn">Browse Jobs</button>
+                                </a>
+                            {% elif user_type == 'employer' %}
+                                <a href="{% url 'view_students' %}">
+                                    <button class="btn">Browse Students</button>
+                                </a>
+                                <a href="{% url 'create_job' %}">
+                                    <button class="btn">Post a Job</button>
+                                </a>
+                            {% elif user_type == 'admin' %}
+                                <a href="{% url 'view_jobs' %}">
+                                    <button class="btn">Browse Jobs</button>
+                                </a>
+                                <a href="{% url 'view_students' %}">
+                                    <button class="btn">Browse Students</button>
+                                </a>
+                            {% endif %}
+>>>>>>> 1cd3ef59213aa98048b1152e48fd03dcefd1c182
                         </div>
                     </div><!-- End of navBottom -->
                 </nav>

@@ -4,6 +4,7 @@
 }
 
 body{
+<<<<<<< HEAD
     position: relative;
 }
 
@@ -12,6 +13,12 @@ body .container-fluid {
     padding-right: 0;
 }
 
+=======
+    margin: 0px;
+    position: relative;
+}
+
+>>>>>>> 1cd3ef59213aa98048b1152e48fd03dcefd1c182
 #navigationBar {
     position: relative;
 }
@@ -118,6 +125,7 @@ body .container-fluid {
 }*/
 
 footer{
+<<<<<<< HEAD
     background-color: #000;
     color: white;
     font-size: 0.85em;
@@ -128,6 +136,18 @@ ul{
     list-style-type:none;
 }
 
+=======
+    background-color: rgb(29,26,26);
+    color: white;
+    font-size: 0.85em;
+    height:15em;
+}
+
+ul{
+    list-style-type:none;
+}
+
+>>>>>>> 1cd3ef59213aa98048b1152e48fd03dcefd1c182
 li>a{
     color: white;
     text-decoration: none;

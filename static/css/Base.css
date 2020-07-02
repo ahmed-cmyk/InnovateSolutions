@@ -118,7 +118,11 @@ body .container-fluid {
 }*/
 
 footer{
+<<<<<<< HEAD
     background-color: #000;
+=======
+    background-color: rgb(29,26,26);
+>>>>>>> 1cd3ef59213aa98048b1152e48fd03dcefd1c182
     color: white;
     font-size: 0.85em;
     height:15em;

@@ -67,7 +67,11 @@ input[type=text],select{
 #sidebar #filter {
   color: #FFF;
   background-color: #CC0000;
+<<<<<<< HEAD
   border: 2px solid #FFF;
+=======
+  border: 2px solid #000;
+>>>>>>> 1cd3ef59213aa98048b1152e48fd03dcefd1c182
   border-radius: 4px;
   padding: 10px;
 }
