@@ -1,11 +1,4 @@
-/*.table {
-  font-family: Arial;
-  border-collapse: collapse;
-  width: 70%;
-    margin-bottom: 2%;
-}
-
-.text-center th , .text-center td{
+/*.text-center th , .text-center td{
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -67,11 +60,7 @@ input[type=text],select{
 #sidebar #filter {
   color: #FFF;
   background-color: #CC0000;
-<<<<<<< HEAD
   border: 2px solid #FFF;
-=======
-  border: 2px solid #000;
->>>>>>> 1cd3ef59213aa98048b1152e48fd03dcefd1c182
   border-radius: 4px;
   padding: 10px;
 }
