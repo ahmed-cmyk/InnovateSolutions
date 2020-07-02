@@ -28,3 +28,10 @@
 	<li>Made formatting changes to readme.</li>
 </ul>
 
+<h2>07/02/20 - 10:12AM</h2>
+<ul>
+	<li>Changed container to container-fluid.</li>
+	<li>Moved header and footer to body (previous group kept it outside the body which I didn't realize).</li>
+	<li>Changed container-fluid padding-left, padding-right to 0.</li>
+</ul>
+
