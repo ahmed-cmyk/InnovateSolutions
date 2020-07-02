@@ -67,7 +67,7 @@ body .container-fluid {
 }*/
 
 #navigationBar #navBottom {
-    background-color: #000;
+    background-color: #1D1A1A;
 }
 
 #navigationBar #navBottom button {
@@ -79,7 +79,7 @@ body .container-fluid {
 
 #navigationBar #navBottom button:hover {
     color: #CC0000;
-    background: #FFF;
+    background-color: : #FFF;
 }
 
 /* the position of overall nav  */
@@ -114,10 +114,25 @@ body .container-fluid {
 }*/
 
 footer{
-    background-color: #000;
+    background-color: #1D1A1A;
     color: white;
     font-size: 0.85em;
-    height:15em;
+    height:30em;
+    padding-top: 5px;
+}
+
+footer .row hr {
+    color: white;
+}
+
+#extra-info {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#extra-info p {
+    color: white;
+    font-size: 0.9em;
 }
 
 ul{
@@ -130,7 +145,8 @@ li>a{
 }
 
 footer .row {
-    padding: 15px 5px;
+    margin-left: 15px; 
+    margin-right: 15px;
 }
 
 footer h3 {
@@ -142,159 +158,7 @@ footer h3 {
     margin: auto;
 }
 
-/*.para1{
-    padding:0;
-    border:0;
-    margin: 0;
+footer #social-section img {
+    width: 40px;
+    height: 40px;
 }
-
-.para2{
-    font-size: 0.75em;
-    padding:0;
-    border:0;
-    margin: 0;
-}*/
-
-/*.button{
-    background-color:rgb(204,0,0);
-    height: 2.5em;
-    width:10em;
-    align:center;
-    border-radius: 0.45em;
-    margin-left: 20%;
-    color:white;
-    text-align: center;
- }
-
-.button>a{
-    text-decoration: none;
-    color:white;
-}
-
-.mybutton{
-    background-color: rgb(204,0,0);
-    color:white;
-    width: 140px;
-    height:30px;
-    margin: 0 auto;
-}
-
-.mybutton>a{
-    text-decoration: none;
-    color:white;
-}*/
-
-/*.main{
-    background-color: rgb(29,26,26);
-    display:flex;
-    width: 100%;
-    bottom: 0;
-    left:0;
-    margin-top: 5em;
-}*/
-
-/*.about{
-    flex:1;
-}
-
-.sitemap{
-    flex:1;
-}
-.helpDesk{
-    flex:1;
-}
-
-.contact{
-    flex:1;
-}
-
-.follow{
-    flex:1;
-}*/
-
-/*.topnav {
-  background-color: rgb(29,26,26);
-  overflow: hidden;
-}*/
-
-/* Style the links inside the navigation bar */
-/*.topnav a {
-  float: right;
-  display: block;
-  padding: 34px 36px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 17px;
-  color: white;
-}
-*/
-/*.logo>a{
-    float:left;
-    position: absolute;
-    padding-top: 0.1%;
-    margin-top: 1.25%;
-    margin-left: 5%;
-    padding-left: 0.1%;
-    padding-right: 0.1%;
-    padding-bottom: 0.1%;
-}*/
-
-/* Add an active class to highlight the current page */
-/*.active {
-    background-color: rgb(29,26,26);
-    color: white;
-}*/
-
-/* Dropdown container - needed to position the dropdown content */
-/*.dropdown {
-    float: right;
-    overflow: hidden;
-    background-color: rgb(29,26,26);
-}*/
-
-/* Style the dropdown button to fit inside the topnav */
-/*.dropdown .dropbtn {
-    font-size: 17px;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 34px 36px;
-    background-color: rgb(29,26,26);
-    margin-right: 2em;
-}*/
-
-/* Style the dropdown content (hidden by default) */
-/*.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-*/
-/* Style the links inside the dropdown */
-/*.dropdown-content a {
-    float: none;
-    color: rgb(29,26,26);;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}*/
-
-/* Add a dark background on topnav links and the dropdown button on hover */
-/*.loginButton a:hover, .dropdown:hover .dropbtn {
-    background-color: rgb(204,0,0);;
-    color: white;
-}*/
-
-/* Add a grey background to dropdown links on hover */
-/*.dropdown-content a:hover {
-    background-color: #555;
-    color: white;
-}*/
-
-/* Show the dropdown menu when the user moves the mouse over the dropdown button */
-/*.dropdown:hover .dropdown-content {
-    display: block;
-}*/

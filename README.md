@@ -68,4 +68,23 @@
 	<li>Changed container-fluid padding-left, padding-right to 0.</li>
 </ul>
 
->>>>>>> 1cd3ef59213aa98048b1152e48fd03dcefd1c182
+<h2>07/02/20 - 03:40PM</h2>
+<ul>
+	<li>Modified navigation bar.</li>
+	<li>Moved some options from drop down such as My Applications and View Jobs to the navigation bar of certain users.</li>
+	<li>Fixed signup button dropdown.</li>
+</ul>
+
+<h2>07/02/20 - 05:43PM</h2>
+<ul>
+	<li>Changed from black to a gray color to match murdoch website.</li>
+	<li>Modified footer.</li>
+	<li>Moved some elements around in the footer.</li>
+	<li>Added a section that exists in the murdoch website.</li>
+	<li>Added social media icons to the footer</li>
+	<ul>
+		<h3>Known issues:</h3>
+		<li>YouTube icon points to LinkedIn</li>
+		<li>Horizontal lines don't show up. Probably css issue.</li>
+		<li>Some icons don't match</li>
+</ul>

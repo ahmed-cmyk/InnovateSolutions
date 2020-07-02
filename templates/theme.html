@@ -154,40 +154,53 @@
             {% endblock %}
             <!--This is the beginning of the footer!-->
             <footer class="page-footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="aboutus col-md-4">
-                            <ul>
-                                <span class="text-center">
-                                    <h3>About Us</h3>
-                                    <li><a href="{% url 'faq' %}"> FAQ</a></li>
-                                    <li><a href="{% url 'anti_scam' %}"> Anti-Scam</a></li>
-                                    <li><a href="{% url 'terms' %}"> Terms</a></li>
-                                    <li><a href="{% url 'privacy' %}"> Privacy</a></li>
-                                    <li><a href="{% url 'sitemap' %}" target="_blank">Sitemap</a></li>
-                                </span>
-                            </ul>
-                        </div><!-- End of aboutus -->
-                        <div class="contactus col-md-4">
-                            <ul>
-                                <span class="text-center">
-                                    <h3>Contact Us</h3>
-                                    <p>Dubai International Academic City</p>
-                                    <p>Block 10, Fourth floor</p>
-                                    <p>P.O. Box 345005</p>
-                                    <p>Dubai, United Arab Emirates</p>
-                                </span>
-                            </ul>
-                        </div><!-- End of contactus -->
-                        <div class="followus col-md-4">
+                <div class="row">
+                    <div class="aboutus col-md-6 col-sm-6 col-xs-12">
+                        <ul>
                             <span class="text-center">
-                                <h3>Follow Us</h3>
+                                <h4>About Us</h4>
+                                <li><a href="{% url 'faq' %}"> FAQ</a></li>
+                                <li><a href="{% url 'anti_scam' %}"> Anti-Scam</a></li>
+                                <li><a href="{% url 'terms' %}"> Terms</a></li>
+                                <li><a href="{% url 'privacy' %}"> Privacy</a></li>
+                                <li><a href="{% url 'sitemap' %}" target="_blank">Sitemap</a></li>
                             </span>
-                        </div><!-- End of followus -->
-                    </div><!-- End of row -->
-                </div><!-- End of container-fluid -->
+                        </ul>
+                    </div><!-- End of aboutus -->
+                    <div class="contactus col-md-6 col-sm-6 col-xs-12 text-center">
+                        <ul>
+                            <h4>Contact Us</h4>
+                            <li>Dubai International Academic City</li>
+                            <li>Block 10, Fourth floor</li>
+                            <li>P.O. Box 345005</li>
+                            <li>Dubai, United Arab Emirates</li>
+                        </ul>
+                    </div><!-- End of contactus -->
+                    <br><hr><br>
+                    <div id="extra-info" class="col-md-12 col-sm-12 col-xs-12 text-center">
+                        <p>Murdoch University CRICOS code: 00125J</p>
+                        <p>TEQSA number: PRV12163</p>
+                        <p>Murdoch University has partnered with Navitas Middle East FZ-LLC, for Navitas to provide administrative assistance and support to the University in respect of its Dubai Campus.</p>
+                    </div><!-- End of extra-info -->
+                    <br><hr><br>
+                    <div id ="social-section" class="followus col-md-12 col-sm-12 col-xs-12 text-center">
+                        <h4>Follow Us</h4>
+                        <a class="image-thumbnail" href="https://twitter.com/MurdochUniDubai?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">
+                            <img src="{% static 'images/twitterIcon.png' %}" alt="Twitter Icon">
+                        </a>
+                        <a class="image-thumbnail" href="https://www.facebook.com/murdochdubai/">
+                            <img src="{% static 'images/facebookIcon.png' %}" alt="Facebook Icon">
+                        </a>
+                        <a class="image-thumbnail" href="https://www.linkedin.com/school/murdoch-university-dxb/">
+                            <img src="{% static 'images/youtubeIcon.png' %}" alt="LinkedIn Icon">
+                        </a>
+                        <a class="image-thumbnail" href="https://www.instagram.com/murdochdubai/?hl=en">
+                            <img src="{% static 'images/instagramIcon.png' %}" alt="Instagram Icon">
+                        </a>
+                    </div><!-- End of followus -->
+                </div><!-- End of row -->
             </footer>
-        </div>
+        </div><!-- End of container-fluid -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
