@@ -142,9 +142,11 @@
                     </div><!-- End of navBottom -->
                 </nav>
             </header>
-            {% for message in messages %}
-                <p class="alert alert-{{ message.tags }}"> {{ message }} </p>
-            {% endfor %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="alert alert-{{ message.tags }}"> {{ message }} </p>
+                {% endfor %}
+            {% endif %}
             {% block content %}
 
             {% endblock %}

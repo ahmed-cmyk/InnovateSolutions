@@ -102,3 +102,11 @@
 	<li>Fixed banners and styled them using bootstrap alerts.</li>
 	<li>Fixed an issue with login page.</li>
 </ul>
+
+<h2>07/03/20 - 08:54PM</h2>
+<ul>
+	<li>Redesigned job details page.</li>
+	<li>Modified reopen job behavior so that the "Edit Job" button disappears.</li>
+</ul>
+
+
