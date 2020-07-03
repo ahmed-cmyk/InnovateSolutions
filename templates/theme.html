@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 {% block css %}
-    <link rel="stylesheet" rel="text/css" href="{% static 'css/Base.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Base.css' %}"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&display=swap" rel="stylesheet">
     {% block stylesheets %}
@@ -27,11 +27,11 @@
 
     <body>
         <div class="container-fluid">
-            <!--This is the begining of the header!-->
+            <!--This is the beginning of the header!-->
             <header>
                 <nav id="navigationBar">
                     <div id="navTop" class="navbar-nav mr-auto">
-                        <div class="navElements">
+                        <div class="navElements navbar-expand-md">
                             <a class="navbar-brand" href="/">
                                 <div id="murdochLogo" class="float-left">
                                     <img src="{% static 'images/murdochlogo.png' %}" alt="Murdoch University Logo">
@@ -89,11 +89,16 @@
                                         </ul>
                                     </div>
                                 {% endif %}
+                                <button class="navbar-toggler visible-sm visible-xs text-white" type="button" data-toggle="collapse" data-target="#navDrop">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots-vertical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                      <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                    </svg>
+                                </button>
                             </div><!-- End of userElements -->
                         </div><!-- End of navElements -->
                     </div><!-- End of navTop -->
-                    <div id="navBottom" class="nav navbar-nav mr-auto">
-                        <div class="navElements">
+                    <div id="navBottom" class="nav navbar-nav navbar-expand-md mr-auto">
+                        <div id="navDrop" class="navElements collapse navbar-collapse">
                             <ul class="nav nav-pills">
                                 <li class="nav-item">
                                     <a class="nav-link" href="/">

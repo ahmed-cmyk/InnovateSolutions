@@ -21,10 +21,6 @@ body .container-fluid {
     height: 100px;
 }
 
-#navigationBar .navElements {
-    margin: 7px 50px;
-}
-
 #navTop #murdochLogo img {
     width: 170px;
     height: 60px;
@@ -39,7 +35,6 @@ body .container-fluid {
     background-color: #CC0000;
     border: 2px solid #FFF;
     border-radius: 12px;
-    padding: 10px;
     margin: 0 3px;
 }
 
@@ -56,12 +51,6 @@ body .container-fluid {
     display: inline-block;
 }
 
-/*#userElements #signup{
-}
-
-#userElements #login{
-}*/
-
 #navigationBar #navBottom {
     background-color: #1D1A1A;
 }
@@ -70,7 +59,6 @@ body .container-fluid {
     color: #FFF;
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 12px;
 }
 
 #navigationBar #navBottom button:hover {
@@ -126,4 +114,51 @@ footer h3 {
 footer #social-section img {
     width: 40px;
     height: 40px;
+}
+
+/******** Mobile Devices ********/
+@media (max-width: 767px) {
+    #navigationBar .navElements {
+        margin: 3px 20px;
+    }
+    #userElements #signup, #login {
+        font-size: 3vw;
+        padding: 4px;
+    }
+    #navDrop li {
+        display: block;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid white;
+    }
+    #body-image img {
+        height: 5vh;
+        width: 2vw;
+    }
+}
+
+/******** Tablet Devices ********/
+@media (min-width: 768px) and (max-width: 991px) {
+    #navigationBar .navElements {
+        margin: 6px 40px;
+    }
+    #navigationBar #navBottom button {
+        font-size: 1.5vw;
+        padding: 0.2vw;
+    }
+}
+
+/******** Desktop Devices ********/
+@media (min-width: 992px) {
+    #navigationBar .navElements {
+        margin: 7px 50px;
+    }
+    #navigationBar #navBottom button {
+        font-size: 0.8vw;
+        padding: 0.2vw;
+    }
+    #body-image img {
+        height: 5vh;
+        width: 2vw;
+    }
 }

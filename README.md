@@ -109,4 +109,11 @@
 	<li>Modified reopen job behavior so that the "Edit Job" button disappears.</li>
 </ul>
 
+<h2>07/04/20 - 12:10AM</h2>
+<ul>
+	<li>Modified some of the font sizes for mobile layouts.</li>
+	<li>Made the bottom navigation bar disappear on mobile.</li>
+	<li>Implemented the bottom navigation as a dropdown for mobile devices.</li>
+</ul>
+
 

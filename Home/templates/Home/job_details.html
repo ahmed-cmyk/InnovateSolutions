@@ -12,7 +12,7 @@
 {% block content %}
     <br><br>
     <div id="job-detail-box">
-        <div class="text-right">
+        <div class="text-right text-xs-center">
             {% if user_type != "student" %}
                 {% if job.status != 'Closed' %}
                     <a href="{% url 'close_job' job.id %}">
