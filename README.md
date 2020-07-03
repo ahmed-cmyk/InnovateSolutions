@@ -96,3 +96,9 @@
 	<li>Updated student registration form with new styles.</li>
 	<li>Updated employer registration form with new styles.</li>
 </ul>
+
+<h2>07/03/20 - 06:03PM</h2>
+<ul>
+	<li>Fixed banners and styled them using bootstrap alerts.</li>
+	<li>Fixed an issue with login page.</li>
+</ul>

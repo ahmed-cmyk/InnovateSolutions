@@ -25,13 +25,6 @@
     <meta name="keywords" content="Career Portal, United Arab Emirates, jobs ads, jobs, ads, script, app, premium jobs">
 </head>
 
-<!-- this displays any errors during submission -->
-<div>
-    {% for message in messages %}
-        <h3 class="message"> {{ message }} </h3>
-    {% endfor %}
-</div>
-
     <body>
         <div class="container-fluid">
             <!--This is the begining of the header!-->
@@ -149,6 +142,9 @@
                     </div><!-- End of navBottom -->
                 </nav>
             </header>
+            {% for message in messages %}
+                <p class="alert alert-{{ message.tags }}"> {{ message }} </p>
+            {% endfor %}
             {% block content %}
 
             {% endblock %}
