@@ -103,6 +103,11 @@ class FilterJobForm(forms.ModelForm):
         super(FilterJobForm, self).__init__(*args, **kwargs)
         self.fields['job_type_id'].required = False
         self.fields['industry_id'].required = False
+        self.fields['min_duration'].widget.attrs['placeholder'] = 'Min'
+        self.fields['max_duration'].widget.attrs['placeholder'] = 'Max'
+        self.fields['location'].widget.attrs['placeholder'] = 'Location'
+        self.fields['min_salary'].widget.attrs['placeholder'] = 'Min'
+        self.fields['max_salary'].widget.attrs['placeholder'] = 'Min'
 
 
 class FilterStudentForm(forms.ModelForm):

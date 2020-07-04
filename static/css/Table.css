@@ -1,37 +1,63 @@
-#sidebar {
-  border: 1px solid #CC0000;
-  border-radius: 8px;
-  color: #000;
-  background-color: #F9F9F9;
-  height: 60%;
-  margin: 8em 1em;
-}
+/*#sidebar {*/
+/*  border: 1px solid #CC0000;*/
+/*  border-radius: 8px;*/
+/*  color: #000;*/
+/*  background-color: #F9F9F9;*/
+/*  height: 60%;*/
+/*  margin: 8em 1em;*/
+/*}*/
 
-#sidebar #sidebarHead {
-  color: #FFF;
-  background-color: #CC0000;
-  padding: 5px 2px 3px 2px;
-}
+/*#sidebar #sidebarHead {*/
+/*  color: #FFF;*/
+/*  background-color: #CC0000;*/
+/*  padding: 5px 2px 3px 2px;*/
+/*}*/
 
-#sidebar #sidebarContent {
-  padding: 0 4px;
-}
+/*#sidebar #sidebarContent {*/
+/*  padding: 0 4px;*/
+/*}*/
 
-#sidebar #filter {
+/*#sidebar #filter {*/
+/*  color: #FFF;*/
+/*  background-color: #CC0000;*/
+/*  border: 2px solid #FFF;*/
+/*  border-radius: 4px;*/
+/*  padding: 10px;*/
+/*}*/
+
+#filter button {
   color: #FFF;
   background-color: #CC0000;
   border: 2px solid #FFF;
-  border-radius: 4px;
-  padding: 10px;
+  border-radius: 12px;
 }
 
-#job-list-body {
-  margin: 5em 1em; 
+#job-list-body .horizontal-rule {
+  background-color: #000000;
+  width: 60%;
 }
 
 #job-cards {
   border: 1px solid #000;
   border-radius: 8px;
   background-color: #F9F9F9;
-  margin-top: 3em;
+  width: 70vw;
+  margin: 2vh auto;
+}
+
+/******** Mobile Devices ********/
+@media (max-width: 767px) {
+    #filter button {
+      width: 100%;
+    }
+}
+
+/******** Tablet Devices ********/
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/******** Desktop Devices ********/
+@media (min-width: 992px) {
+
 }

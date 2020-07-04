@@ -13,39 +13,70 @@
     {% if jobs %}
         <div class="row">
             {% if user_type != "employer" %}
-                <div id="sidebar" class="col-md-4 col-sm-5 col-xs-12">
-                    <div id="sidebarHead" class="text-center">
-                        <h3>Filter Job Listings</h3>
-                    </div><!-- End of sidebarHead -->
-                    <br>
-                    <div id="sidebarContent">
-                        <form method="POST">{% csrf_token %}
-                            <b>Duration (in months):</b><br>
-                            Min: {{ form.min_duration }}<br>
-                            Max: {{ form.max_duration }}<br><br>
-                            <b>{{ form.industry_id.label }}:</b> {{ form.industry_id }}<br><br>
-                            <b>{{ form.location.label }}:</b> {{ form.location }}<br><br>
-                            <b>{{ form.job_type_id.label }}:</b> {{ form.job_type_id }}<br><br>
-                            <b>Salary (AED/month):</b><br>
-                            From: {{ form.min_salary }}<br>
-                            To: {{ form.max_salary }}<br><br>
-                            <div class="text-center">
-                                <button id="filter" class="btn" type="Submit">
-                                    <b>Filter</b>
+                <div class="modal fade" id="jobFilter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger text-white">
+                                <h5 class="modal-title" id="exampleModalLabel">Filter Job Listings</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
                                 </button>
-                            </div><!-- End of text-center -->
-                        </form>
-                    </div><!-- End of sidebarContent -->
-                </div><!-- End of sidebar -->
+                            </div>
+                            <form method="POST">{% csrf_token %}
+                                <div class="modal-body form-group">
+                                    <b>Duration (in months):</b><br>
+                                    {{ form.min_duration }} {{ form.max_duration }}<br><br>
+                                    <b>{{ form.industry_id.label }}:</b> {{ form.industry_id }}<br><br>
+                                    <b>{{ form.location.label }}:</b> {{ form.location }}<br><br>
+                                    <b>{{ form.job_type_id.label }}:</b> {{ form.job_type_id }}<br><br>
+                                    <b>Salary (AED/month):</b><br>
+                                    {{ form.min_salary }} {{ form.max_salary }}<br>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="reset" class="btn btn-danger">Reset</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Apply</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
+{#        <div class="row">#}
+{#            {% if user_type != "employer" %}#}
+{#                <div id="sidebar" class="col-md-4 col-sm-5 col-xs-12">#}
+{#                    <div id="sidebarHead" class="text-center">#}
+{#                        <h3>Filter Job Listings</h3>#}
+{#                    </div><!-- End of sidebarHead -->#}
+{#                    <br>#}
+{#                    <div id="sidebarContent">#}
+{#                        <form method="POST">{% csrf_token %}#}
+{#                            <b>Duration (in months):</b><br>#}
+{#                            Min: {{ form.min_duration }}<br>#}
+{#                            Max: {{ form.max_duration }}<br><br>#}
+{#                            <b>{{ form.industry_id.label }}:</b> {{ form.industry_id }}<br><br>#}
+{#                            <b>{{ form.location.label }}:</b> {{ form.location }}<br><br>#}
+{#                            <b>{{ form.job_type_id.label }}:</b> {{ form.job_type_id }}<br><br>#}
+{#                            <b>Salary (AED/month):</b><br>#}
+{#                            From: {{ form.min_salary }}<br>#}
+{#                            To: {{ form.max_salary }}<br><br>#}
+{#                            <div class="text-center">#}
+{#                                <button id="filter" class="btn" type="Submit">#}
+{#                                    <b>Filter</b>#}
+{#                                </button>#}
+{#                            </div><!-- End of text-center -->#}
+{#                        </form>#}
+{#                    </div><!-- End of sidebarContent -->#}
+{#                </div><!-- End of sidebar -->#}
+{#            {% endif %}#}
 
-            <div id="job-list-body" class="col-md-7 col-sm-7 col-xs-12">
+            <div id="job-list-body" class="col-12">
                 {% if user_type == "employer" %}
-                    <h2>My Jobs</h2>
-                    <hr>
+                    <h3 class="text-center">My Jobs</h3>
+                    <hr class="horizontal-rule">
                 {% else %}
-                    <h2>Browse Jobs</h2>
-                    <hr>
+                    <h3 class="text-center">Browse Jobs</h3>
+                    <hr class="horizontal-rule">
                 {% endif %}
                 {% for job in jobs %}
                     <div id="job-cards" class="card">
@@ -96,7 +127,7 @@
                                         <h3 class="card-header">
                                             <a href="{% url 'job_details' job.id %}"> {{ job.job_title }} </a>
                                         </h3>
-                                        <h4 class="card-title"> {{ company.company_name }}</h4>
+                                        <h4 class="card-title"><span class="font-weight-bold">Company Name:</span>  {{ company.company_name }}</h4>
                                         {% if user_type == "admin" %}
                                             <div class="card-subtitle">
                                                 <p><span class="font-weight-bold">Status:</span> {{ job.status }} </p>
@@ -104,7 +135,7 @@
                                         {% endif %}
                                         <p class="card-text">{{ job.description }}</p>
                                         <p class="card-text"><span class="font-weight-bold">Salary:</span> AED {{ job.salary }} </p>
-                                        <p class="card-text"><span class="font-weight-bold">Duration:</span><p> {{ job.duration }} months</p>
+                                        <p class="card-text"><span class="font-weight-bold">Duration:</span> {{ job.duration }} months</p>
                                         <p class="card-text"><span class="font-weight-bold">Industry:</span> {{ job.industry_id }} </p>
                                         <p class="card-text"><span class="font-weight-bold">Job Type:</span> {{ job.job_type_id }} </p>
                                         <p class="card-text"><span class="font-weight-bold">Location:</span> {{ job.location }} </p>
@@ -119,4 +150,9 @@
             <h1 align="center">No jobs to display</h1>
         {% endif %}
         </div><!-- End of row -->
+        <div id="filter" class="text-center">
+            <button type="button" class="btn" data-toggle="modal" data-target="#jobFilter">
+              Filter Jobs
+            </button>
+        </div>
 {% endblock %}

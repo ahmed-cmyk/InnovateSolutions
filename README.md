@@ -133,4 +133,9 @@
 	<li>Fixed missing Statistics page link.</li>
 </ul>
 
+<h2>07/04/20 - 04:34PM</h2>
+<ul>
+	<li>Redesigned View Jobs page.</li>
+	<li>Put the filter jobs form into a popup window.</li>
+</ul>
 
