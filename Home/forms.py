@@ -77,7 +77,7 @@ class EditJobForm(forms.ModelForm):
 class FilterJobForm(forms.ModelForm):
     min_duration = forms.IntegerField(required=False)
     max_duration = forms.IntegerField(required=False)
-    location = forms.CharField(max_length=100, required=False)
+    location = CountryField().formfield(blank_label='(Select country)')
     job_type_id = forms.ModelChoiceField(
         widget=forms.Select(attrs={'class': 'custom-select'}),
         queryset=JobType.objects.all(),
@@ -98,6 +98,7 @@ class FilterJobForm(forms.ModelForm):
         model = Job
         fields = ['min_duration', 'max_duration', 'location', 'job_type_id', 'min_salary', 'max_salary',
                   'industry_id']
+        widgets = {'country': CountrySelectWidget()}
 
     def __init__(self, *args, **kwargs):
         super(FilterJobForm, self).__init__(*args, **kwargs)
@@ -105,7 +106,6 @@ class FilterJobForm(forms.ModelForm):
         self.fields['industry_id'].required = False
         self.fields['min_duration'].widget.attrs['placeholder'] = 'Min'
         self.fields['max_duration'].widget.attrs['placeholder'] = 'Max'
-        self.fields['location'].widget.attrs['placeholder'] = 'Location'
         self.fields['min_salary'].widget.attrs['placeholder'] = 'Min'
         self.fields['max_salary'].widget.attrs['placeholder'] = 'Min'
 

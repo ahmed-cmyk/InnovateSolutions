@@ -139,3 +139,9 @@
 	<li>Put the filter jobs form into a popup window.</li>
 </ul>
 
+<h2>07/04/20 - 04:38PM</h2>
+<ul>
+	<li>Turned location field in filter form into a country field.</li>
+	<li>Modified locations through admin dashboard</li>
+</ul>
+
