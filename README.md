@@ -120,11 +120,17 @@
 	<li>Added new horizontal line that appears in footer for mobile layouts to separate various sections.</li>
 	<li>Modified image on index.html to better fit mobile layouts.</li>
 	<li>Added a new CountryField to various forms that ask for location.</li>
-	<li>Updated requirements.txt to include django-countries<./li>
+	<li>Updated requirements.txt to include django-countries</li>
 	<h3>Installations:</h3>
 	<ul>
 	    <li>pip install django-countries</li>
 	</ul>
+</ul>
+
+<h2>07/04/20 - 01:30PM</h2>
+<ul>
+	<li>Fixed YouTube link.</li>
+	<li>Fixed missing Statistics page link.</li>
 </ul>
 
 

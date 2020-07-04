@@ -141,6 +141,11 @@
                                             <button class="btn">Browse Students</button>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'statistics' %}">
+                                            <button class="btn">Statistics</button>
+                                        </a>
+                                    </li>
                                 {% endif %}
                             </ul>
                         </div>
@@ -152,9 +157,7 @@
                     <p class="alert alert-{{ message.tags }}"> {{ message }} </p>
                 {% endfor %}
             {% endif %}
-            {% block content %}
-
-            {% endblock %}
+            {% block content %}{% endblock %}
             <!--This is the beginning of the footer!-->
             <footer class="page-footer">
                 <div class="row">
@@ -195,8 +198,8 @@
                     <a class="image-thumbnail" href="https://www.facebook.com/murdochdubai/">
                         <img src="{% static 'images/facebookIcon.png' %}" alt="Facebook Icon">
                     </a>
-                    <a class="image-thumbnail" href="https://www.linkedin.com/school/murdoch-university-dxb/">
-                        <img src="{% static 'images/youtubeIcon.png' %}" alt="LinkedIn Icon">
+                    <a class="image-thumbnail" href="https://www.youtube.com/user/MurdochDubai">
+                        <img src="{% static 'images/youtubeIcon.png' %}" alt="YouTube Icon">
                     </a>
                     <a class="image-thumbnail" href="https://www.instagram.com/murdochdubai/?hl=en">
                         <img src="{% static 'images/instagramIcon.png' %}" alt="Instagram Icon">
