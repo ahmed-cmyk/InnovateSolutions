@@ -145,3 +145,8 @@
 	<li>Modified locations through admin dashboard</li>
 </ul>
 
+<h2>07/04/20 - 05:42PM</h2>
+<ul>
+	<li>Moved the jQuery code in View Students to an external file.</li>
+</ul>
+

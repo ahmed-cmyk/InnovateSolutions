@@ -157,7 +157,9 @@
                     <p class="alert alert-{{ message.tags }}"> {{ message }} </p>
                 {% endfor %}
             {% endif %}
-            {% block content %}{% endblock %}
+            <main>
+                {% block content %}{% endblock %}
+            </main>
             <!--This is the beginning of the footer!-->
             <footer class="page-footer">
                 <div class="row">
