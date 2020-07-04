@@ -150,3 +150,10 @@
 	<li>Moved the jQuery code in View Students to an external file.</li>
 </ul>
 
+<h2>07/04/20 - 08:26PM</h2>
+<ul>
+	<li>Redesigned View Students page.</li>
+	<li>Put the filter students form into a popup window.</li>
+	<li>Transformed filter students form into a crispy form. (Not food, it's a different way of rendering forms)</li>
+</ul>
+

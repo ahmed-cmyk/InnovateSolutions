@@ -110,7 +110,7 @@ class FilterJobForm(forms.ModelForm):
         self.fields['max_salary'].widget.attrs['placeholder'] = 'Min'
 
 
-class FilterStudentForm(forms.ModelForm):
+class FilterStudentForm(forms.Form):
     choices = [
         ('Current', 'Current'),
         ('Alumni', 'Alumni')
@@ -141,3 +141,8 @@ class FilterStudentForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = ['alumni_status', 'skills']
+
+    def __init__(self, *args, **kwargs):
+        super(FilterStudentForm, self).__init__(*args, **kwargs)
+        self.fields['min_graduation_date'].widget.attrs['placeholder'] = 'Min'
+        self.fields['max_graduation_date'].widget.attrs['placeholder'] = 'Max'
