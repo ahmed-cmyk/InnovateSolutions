@@ -1,17 +1,19 @@
 from django import forms
 from Home.models import Job, Skill, JobType, Industry
 from Student.models import Student
+from django_countries.fields import CountryField
+from django_countries.widgets import CountrySelectWidget
 
 from DjangoUnlimited import settings
 
 
-class CreateJobForm(forms.ModelForm):
+class CreateJobForm(forms.Form):
     job_title = forms.CharField(label='*Job Title', max_length=100, required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     description = forms.CharField(label='*Job Description', max_length=750, required=True, widget=forms.Textarea(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     duration = forms.IntegerField(label='*Duration (in months)')
-    location = forms.CharField(label='*Location', max_length=100, required=True)
+    location = CountryField().formfield(blank_label='(Select country)')
     job_type_id = forms.ModelChoiceField(
         widget=forms.Select(attrs={'class': 'custom-select'}),
         queryset=JobType.objects.all(),
@@ -36,6 +38,7 @@ class CreateJobForm(forms.ModelForm):
     class Meta:
         model = Job
         exclude = ['posted_by', 'date_posted', 'status', 'date_closed']
+        widgets = {'country': CountrySelectWidget()}
 
 
 class EditJobForm(forms.ModelForm):

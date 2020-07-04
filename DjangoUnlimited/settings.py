@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_cleanup',
     'django.contrib.staticfiles',
+    'django_countries',
     'rest_framework',
     'django.contrib.humanize',
     'rest_framework_datatables',

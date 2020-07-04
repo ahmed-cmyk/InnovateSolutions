@@ -11,7 +11,6 @@
 		<li>Alternatively, you can just run "pip install -r requirements"</li>
 	</ul>
 </ul>
-<<<<<<< HEAD
 
 <h2>07/01/20 - 10:41PM</h2>
 <ul>
@@ -43,7 +42,6 @@
 	<li>Fixed signup button drop-down.</li>
 	<li>Changed footer color to match navigation bar color.</li>
 </ul>
-=======
 
 <h2>07/01/20 - 10:41PM</h2>
 <ul>
@@ -114,6 +112,19 @@
 	<li>Modified some of the font sizes for mobile layouts.</li>
 	<li>Made the bottom navigation bar disappear on mobile.</li>
 	<li>Implemented the bottom navigation as a dropdown for mobile devices.</li>
+</ul>
+
+<h2>07/04/20 - 12:35PM</h2>
+<ul>
+	<li>Fixed footer for mobile devices.</li>
+	<li>Added new horizontal line that appears in footer for mobile layouts to separate various sections.</li>
+	<li>Modified image on index.html to better fit mobile layouts.</li>
+	<li>Added a new CountryField to various forms that ask for location.</li>
+	<li>Updated requirements.txt to include django-countries<./li>
+	<h3>Installations:</h3>
+	<ul>
+	    <li>pip install django-countries</li>
+	</ul>
 </ul>
 
 

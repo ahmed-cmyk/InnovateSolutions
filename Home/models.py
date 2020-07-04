@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
+from django_countries.fields import CountryField
 
 # Create your models here.
 from Admin.models import Admin
@@ -52,7 +53,7 @@ class Job(models.Model):
     ]
     status = models.CharField(max_length=15, choices=job_status, default='Open')
     date_closed = models.DateField(null=True, blank=True)
-    location = models.CharField(max_length=100)
+    location = CountryField(blank_label='(select country)')
     job_type_id = models.ForeignKey(JobType, on_delete=models.CASCADE, related_name='job_type')
     industry_id = models.ForeignKey(Industry, on_delete=models.CASCADE, related_name='job_industry')
     duration = models.IntegerField(null=True, validators=[MinValueValidator(1)])
