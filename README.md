@@ -160,3 +160,6 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 - Fixed the job creation form.
 - Fixed a bug which I accidentally introduced into the job creation form.
 - Add some styles to the View Jobs page so that the footer doesn't get cut off.
+
+## 07/05/20 - 06:40PM
+- Fixed the Edit Job Listing Form

@@ -1,8 +1,9 @@
 {% extends "theme.html" %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 <!-- Stylesheet -->
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/EditJob.css' %}"/>
 {% endblock %}
 
 {% block title %}
@@ -10,30 +11,43 @@
 {% endblock %}
 
 {% block content %}
-    <br><br>
-    <div class="inside-container2" style="width: 60%">
-        <h2>Edit Job Listing</h2>
+    <div id="editJobBody" class="col-12">
+        <h2 class="text-center">Edit Job Listing</h2>
         <hr>
-        <form action="{% url 'edit_job' job.id %}" method="post" enctype="multipart/form-data">
-
-            {% csrf_token %}
+        <form action="{% url 'edit_job' job.id %}" method="post" enctype="multipart/form-data">{% csrf_token %}
             {% if user_type == 'employer' %}
-                {{ jobForm.as_p }}
+                {{ jobForm.job_title|as_crispy_field }}
+                {{ jobForm.description|as_crispy_field }}
+                {{ jobForm.duration|as_crispy_field }}
+                {{ jobForm.location|as_crispy_field }}
+                {{ jobForm.job_type_id|as_crispy_field }}
+                {{ jobForm.salary|as_crispy_field }}
+                {{ jobForm.skills|as_crispy_field }}
+                {{ jobForm.industry_id|as_crispy_field }}
             {% elif user_type == 'admin' %}
-                {{ jobForm.as_p }}
-                {{ companyForm.as_p }}
+                {{ jobForm.job_title|as_crispy_field }}
+                {{ jobForm.description|as_crispy_field }}
+                {{ jobForm.duration|as_crispy_field }}
+                {{ jobForm.location|as_crispy_field }}
+                {{ jobForm.job_type_id|as_crispy_field }}
+                {{ jobForm.salary|as_crispy_field }}
+                {{ jobForm.skills|as_crispy_field }}
+                {{ jobForm.industry_id|as_crispy_field }}
+                {{ companyForm.logo|as_crispy_field }}
+                {{ companyForm.company_name|as_crispy_field }}
+                {{ companyForm.company_description|as_crispy_field }}
+                {{ companyForm.phone_number|as_crispy_field }}
             {% endif %}
 
             <input type="hidden" name="next" value="{% url 'job_details' job.id %}">
-            <div style="display: flex">
-                <div style="flex: 1" align="center">
-                    <button class="mybutton" type="submit"><b>Save Changes</b></button>
-                </div>
-                <div style="flex: 1" align="center">
-                    <button class="mybutton" type="button"><a href="{% url 'job_details' job.id %}"><b>Cancel</b></a></button>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit">
+                        Save Changes
+                    </button>
+                    <button class="btn btn-secondary" type="button">
+                        <a class="text-decoration-none text-white" href="{% url 'job_details' job.id %}">Cancel</a>
+                    </button>
                 </div>
         </form>
     </div>
-    </div>
-    <br><br>
 {% endblock %}
