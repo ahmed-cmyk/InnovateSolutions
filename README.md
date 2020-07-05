@@ -141,3 +141,6 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 ## 07/05/20 - 01:47PM
 - Changed index page image.
 - Put blockquote inside image.
+
+## 07/05/20 - 02:35PM
+- Redesigned the sitemap page. It looks ugly still but it's not the final design.

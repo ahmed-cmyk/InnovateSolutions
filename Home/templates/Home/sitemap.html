@@ -1,48 +1,40 @@
 {% extends "theme.html" %}
 {% load staticfiles %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Sitemap.css' %}"/>
+{% endblock %}
+
 {% block title %}
     Sitemap - Murdoch Dubai Job Portal
 {% endblock %}
 
 {% block content %}
-    <style>
-        .column {
-            float: left;
-            width: 20%;
-            flex: 1;
-        }
-
-    </style>
-
-    <body>
-    <h1 align="center" style="margin-bottom: 0.1%;">Sitemap</h1>
-    <div style="display: flex; margin-left: 10%">
-        <div class="column">
-            <h3><a href="/">Home</a></h3>
+    <div id="sitemapBody">
+        <h1 class="text-center">Sitemap</h1>
+        <div class="col-12 text-sm-center">
+            <h4><a href="/">Home</a></h4>
             <p><a href="{% url 'news' %}">News</a></p>
             <p><a href="{% url 'log_in' %}">Log In</a></p>
             <p><a href="{% url 'password_reset' %}">Forgot Password</a></p>
-
+            <hr>
             <h3>About Us</h3>
             <p><a href="{% url 'faq' %}">FAQ</a></p>
             <p><a href="{% url 'anti_scam' %}">Anti-Scam</a></p>
             <p><a href="{% url 'terms' %}">Terms</a></p>
             <p><a href="{% url 'privacy' %}">Privacy</a></p>
-        </div>
-
-        <div class="column">
+            <hr>
             <h3>Sign Up</h3>
             <p><a href="{% url 'student_registration' %}">Student Sign Up</a></p>
             <p><a href="{% url 'employer_register' %}">Employer Sign Up</a></p>
-
+            <hr>
             {% if user_type == 'student' %}
                 <h3>Student</h3>
                 <p><a href="{% url 'view_student_profile' %}">View Profile</a></p>
                 <p><a href="{% url 'edit_student_profile' %}">Edit Profile</a></p>
                 <p><a href="{% url 'my_applications' %}">My Applications</a></p>
                 <p><a href="{% url 'view_jobs' %}">Browse Jobs</a></p>
-
+                <hr>
             {% elif user_type == 'employer' %}
                 <h3>Employer</h3>
                 <p><a href="{% url 'view_employer_profile' %}">View Profile</a></p>
@@ -50,6 +42,7 @@
                 <p><a href="{% url 'view_students' %}">Browse Students</a></p>
                 <p><a href="{% url 'create_job' %}">Post a Job</a></p>
                 <p><a href="{% url 'view_jobs' %}">My Jobs</a></p>
+                <hr>
             {% elif user_type == "admin" %}
                 <h3>Admin</h3>
                 <p><a href="{% url 'edit_admin_profile' %}">Edit Profile</a></p>
@@ -57,20 +50,18 @@
                 <p><a href="{% url 'admin_register' %}">Create New Admin</a></p>
                 <p><a href="{% url 'view_jobs' %}">Browse Jobs</a></p>
                 <p><a href="{% url 'view_students' %}">Browse Students</a></p>
+                <hr>
             {% endif %}
-        </div>
 
-        {% if user_type == "student" or user_type == "employer" %}
-            <div class="column">
+            {% if user_type == "student" or user_type == "employer" %}
                 <h3>Bulletin</h3>
                 <p><a href="{% url 'all_posts' %}">Bulletin Posts</a></p>
-
+                <hr>
                 <h3>Help Desk</h3>
                 <p><a href="{% url 'HelpDesk' %}">Help Desk</a></p>
                 <p><a href="{% url 'MyHelpDeskRequests' %}">My HelpDesk Requests</a></p>
-            </div>
-        {% elif user_type == "admin" %}
-            <div class="column">
+                <hr>
+            {% elif user_type == "admin" %}
                 <br><br><br>
                 <a href="{% url 'admin:index' %}">Dashboard</a>
                 <p><a href="{% url 'statistics' %}">Statistics</a></p>
@@ -79,18 +70,15 @@
                 <p><a href="../admin/Home/industry">Add Industry</a></p>
                 <p><a href="../admin/Home/skill">Add Skill</a></p>
                 <p><a href="../admin/Home/jobtype">Add Job Type</a></p>
-            </div>
-
-            <div class="column">
+                <hr>
                 <h3>Bulletin</h3>
                 <p><a href="{% url 'all_posts' %}">Bulletin Posts</a></p>
                 <p><a href="{% url 'post_new' %}">Create New Post</a></p>
-
+                <hr>
                 <h3>Help Desk</h3>
                 <p><a href="{% url 'HelpDeskRequests' %}">HelpDesk Requests</a></p>
-            </div>
-        {% endif %}
+                <hr>
+            {% endif %}
+        </div>
     </div>
-    </body>
-    <footer style="position: fixed; font-size: medium;">
 {% endblock %}
