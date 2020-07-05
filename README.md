@@ -1,159 +1,128 @@
-# InnovateSolutions
+# **InnovateSolutions**
 
-<h2>07/01/20 - 10:37PM</h2>
-<ul>
-	<li>Some pages have been redesigned.</li>
-	<li>Dropdown aren't working so some urls have to be entered manually.</li>
-	<ul>
-		<h3>Installations:</h3>
-		<li>Run "pip install django-crispy-forms"</li>
-		<li>Run "pip install django==2.2.13"</li>
-		<li>Alternatively, you can just run "pip install -r requirements"</li>
-	</ul>
-</ul>
+# Introduction
+The purpose of this project is to redesign the existing murdoch job portal by using the portal created by the previous group as a base.
 
-<h2>07/01/20 - 10:41PM</h2>
-<ul>
-	<li>Modification made to readme.md to show update times.</li>
-</ul>
+# Project Task List
+- [ ] Implement proper input validation
+- [ ] Improve Student/Employer registration page UI
+- [ ] *Update FAQ page (Optional)*
+- [ ] *Remove "Recent Actions" pane from admin dashboard (Optional)*
+- [ ] Get emails working
+- [ ] Implement password reset feature
+- [ ] Make the website responsive with mobile layouts
+- [X] Admin can edit employer profile
+- [X] Disable close/reset buttons for closed jobs
+- [X] Employer can reopen closed jobs
+- [X] Remove "News" page
+- [X] Remove "Murdoch University Home" page
 
-<h2>07/01/20 - 10:45PM</h2>
-<ul>
-	<li>Fixed issue with last intruction in "07/01/20 - 10:37PM".</li>
-</ul>
+# Version History
+## 07/01/20 - 10:37PM
+- Some pages have been redesigned.
+- Dropdown aren't working so some urls have to be entered manually.
+    ### Installations:
+    - Run "pip install django-crispy-forms"
+    - Run "pip install django==2.2.13"
+    - Alternatively, you can just run "pip install -r requirements"
 
-<h2>07/01/20 - 11:07PM</h2>
-<ul>
-	<li>Made further modifications to theme.html.</li>
-	<li>Made formatting changes to readme.</li>
-</ul>
 
-<h2>07/02/20 - 10:12AM</h2>
-<ul>
-	<li>Changed container to container-fluid.</li>
-	<li>Moved header and footer to body (previous group kept it outside the body which I didn't realize).</li>
-	<li>Changed container-fluid padding-left, padding-right to 0.</li>
-</ul>
+## 07/01/20 - 10:41PM
+- Modification made to readme.md to show update times.
 
-<h2>07/02/20 - 03:43PM</h2>
-<ul>
-	<li>Modified navigation bar.</li>
-	<li>Moved View Jobs and View Applications from drop down to navigation bar for some users.</li>
-	<li>Fixed signup button drop-down.</li>
-	<li>Changed footer color to match navigation bar color.</li>
-</ul>
+## 07/01/20 - 10:45PM
+- Fixed issue with last instruction in "07/01/20 - 10:37PM"
 
-<h2>07/01/20 - 10:41PM</h2>
-<ul>
-	<li>Modification made to readme.md to show update times.</li>
-</ul>
+## 07/01/20 - 11:07PM
+- Made further modifications to theme.html.
+- Made formatting changes to readme.
 
-<h2>07/01/20 - 10:45PM</h2>
-<ul>
-	<li>Fixed issue with last intruction in "07/01/20 - 10:37PM".</li>
-</ul>
+## 07/02/20 - 10:12AM
+- Changed container to container-fluid.
+- Moved header and footer to body (previous group kept it outside the body which I didn't realize).
+- Changed container-fluid padding-left, padding-right to 0.
 
-<h2>07/01/20 - 11:07PM</h2>
-<ul>
-	<li>Made further modifications to theme.html.</li>
-	<li>Made formatting changes to readme.</li>
-</ul>
+## 07/02/20 - 03:43PM
+- Modified navigation bar.
+- Moved View Jobs and View Applications from drop down to navigation bar for some users.
+- Fixed signup button drop-down.
+- Changed footer color to match navigation bar color.
 
-<h2>07/02/20 - 10:12AM</h2>
-<ul>
-	<li>Changed container to container-fluid.</li>
-	<li>Moved header and footer to body (previous group kept it outside the body which I didn't realize).</li>
-	<li>Changed container-fluid padding-left, padding-right to 0.</li>
-</ul>
+##07/01/20 - 10:41PM
+- Modification made to readme.md to show update times.
 
-<h2>07/02/20 - 03:40PM</h2>
-<ul>
-	<li>Modified navigation bar.</li>
-	<li>Moved some options from drop down such as My Applications and View Jobs to the navigation bar of certain users.</li>
-	<li>Fixed signup button dropdown.</li>
-</ul>
+## 07/01/20 - 10:45PM
+- Fixed issue with last instruction in "07/01/20 - 10:37PM".
 
-<h2>07/02/20 - 05:43PM</h2>
-<ul>
-	<li>Changed from black to a gray color to match murdoch website.</li>
-	<li>Modified footer.</li>
-	<li>Moved some elements around in the footer.</li>
-	<li>Added a section that exists in the murdoch website.</li>
-	<li>Added social media icons to the footer</li>
-	<ul>
-		<h3>Known issues:</h3>
-		<li>YouTube icon points to LinkedIn</li>
-		<li>Horizontal lines don't show up. Probably css issue.</li>
-		<li>Some icons don't match</li>
-	</ul>
-</ul>
+## 07/01/20 - 11:07PM
+- Made further modifications to "theme.html".
+- Made formatting changes to readme.
 
-<h2>07/02/20 - 09:25PM</h2>
-<ul>
-	<li>Redesigned the view jobs page to make it look better.</li>
-	<li>Updated student registration form with new styles.</li>
-	<li>Updated employer registration form with new styles.</li>
-</ul>
+## 07/02/20 - 10:12AM
+- Changed container to container-fluid.
+- Moved header and footer to body (previous group kept it outside the body which I didn't realize).
+- Changed container-fluid padding-left, padding-right to 0.
 
-<h2>07/03/20 - 06:03PM</h2>
-<ul>
-	<li>Fixed banners and styled them using bootstrap alerts.</li>
-	<li>Fixed an issue with login page.</li>
-</ul>
+## 07/02/20 - 03:40PM
+- Modified navigation bar.
+- Moved some options from drop down such as My Applications and View Jobs to the navigation bar of certain users.
+- Fixed signup button dropdown.
 
-<h2>07/03/20 - 08:54PM</h2>
-<ul>
-	<li>Redesigned job details page.</li>
-	<li>Modified reopen job behavior so that the "Edit Job" button disappears.</li>
-</ul>
+## 07/02/20 - 05:43PM
+- Changed from black to a gray color to match murdoch website.
+- Modified footer.
+- Moved some elements around in the footer.
+- Added a section that exists in the murdoch website.
+- Added social media icons to the footer
+    ### Known issues:
+    - YouTube icon points to LinkedIn
+    - Horizontal lines don't show up. Probably css issue.
+    - Some icons don't match
 
-<h2>07/04/20 - 12:10AM</h2>
-<ul>
-	<li>Modified some of the font sizes for mobile layouts.</li>
-	<li>Made the bottom navigation bar disappear on mobile.</li>
-	<li>Implemented the bottom navigation as a dropdown for mobile devices.</li>
-</ul>
+## 07/02/20 - 09:25PM
+- Redesigned the view jobs page to make it look better.
+- Updated student registration form with new styles.
+- Updated employer registration form with new styles.
 
-<h2>07/04/20 - 12:35PM</h2>
-<ul>
-	<li>Fixed footer for mobile devices.</li>
-	<li>Added new horizontal line that appears in footer for mobile layouts to separate various sections.</li>
-	<li>Modified image on index.html to better fit mobile layouts.</li>
-	<li>Added a new CountryField to various forms that ask for location.</li>
-	<li>Updated requirements.txt to include django-countries</li>
-	<h3>Installations:</h3>
-	<ul>
-	    <li>pip install django-countries</li>
-	</ul>
-</ul>
+## 07/03/20 - 06:03PM
+- Fixed banners and styled them using bootstrap alerts.
+- Fixed an issue with login page.
 
-<h2>07/04/20 - 01:30PM</h2>
-<ul>
-	<li>Fixed YouTube link.</li>
-	<li>Fixed missing Statistics page link.</li>
-</ul>
+## 07/03/20 - 08:54PM
+- Redesigned job details page.
+- Modified reopen job behavior so that the "Edit Job" button disappears.
 
-<h2>07/04/20 - 04:34PM</h2>
-<ul>
-	<li>Redesigned View Jobs page.</li>
-	<li>Put the filter jobs form into a popup window.</li>
-</ul>
+## 07/04/20 - 12:10AM
+- Modified some of the font sizes for mobile layouts.
+- Made the bottom navigation bar disappear on mobile.
+- Implemented the bottom navigation as a dropdown for mobile devices.
 
-<h2>07/04/20 - 04:38PM</h2>
-<ul>
-	<li>Turned location field in filter form into a country field.</li>
-	<li>Modified locations through admin dashboard</li>
-</ul>
+## 07/04/20 - 12:35PM
+- Fixed footer for mobile devices.
+- Added new horizontal line that appears in footer for mobile layouts to separate various sections.
+- Modified image on index.html to better fit mobile layouts.
+- Added a new CountryField to various forms that ask for location.
+- Updated requirements.txt to include django-countries
+    ### Installations:
+    - pip install django-countries
+	
+## 07/04/20 - 01:30PM
+- Fixed YouTube link.
+- Fixed missing Statistics page link.
 
-<h2>07/04/20 - 05:42PM</h2>
-<ul>
-	<li>Moved the jQuery code in View Students to an external file.</li>
-</ul>
+## 07/04/20 - 04:34PM
+- Redesigned View Jobs page.
+- Put the filter jobs form into a popup window.
 
-<h2>07/04/20 - 08:26PM</h2>
-<ul>
-	<li>Redesigned View Students page.</li>
-	<li>Put the filter students form into a popup window.</li>
-	<li>Transformed filter students form into a crispy form. (Not food, it's a different way of rendering forms)</li>
-</ul>
+## 07/04/20 - 04:38PM
+- Turned location field in filter form into a country field.
+- Modified locations through admin dashboard
+
+## 07/04/20 - 05:42PM
+- Moved the jQuery code in View Students to an external file.
+
+## 07/04/20 - 08:26PM
+- Redesigned View Students page.
+- Put the filter students form into a popup window.
+- Transformed filter students form into a crispy form. (Not food, it's a different way of rendering forms)
 
