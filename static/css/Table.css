@@ -1,35 +1,5 @@
-/*#sidebar {*/
-/*  border: 1px solid #CC0000;*/
-/*  border-radius: 8px;*/
-/*  color: #000;*/
-/*  background-color: #F9F9F9;*/
-/*  height: 60%;*/
-/*  margin: 8em 1em;*/
-/*}*/
-
-/*#sidebar #sidebarHead {*/
-/*  color: #FFF;*/
-/*  background-color: #CC0000;*/
-/*  padding: 5px 2px 3px 2px;*/
-/*}*/
-
-/*#sidebar #sidebarContent {*/
-/*  padding: 0 4px;*/
-/*}*/
-
-/*#sidebar #filter {*/
-/*  color: #FFF;*/
-/*  background-color: #CC0000;*/
-/*  border: 2px solid #FFF;*/
-/*  border-radius: 4px;*/
-/*  padding: 10px;*/
-/*}*/
-
-#filter button {
-  color: #FFF;
-  background-color: #CC0000;
-  border: 2px solid #FFF;
-  border-radius: 12px;
+#view-job-body {
+  margin: 5% 0;
 }
 
 #job-list-body .horizontal-rule {
@@ -43,6 +13,13 @@
   background-color: #F9F9F9;
   width: 70vw;
   margin: 2vh auto;
+}
+
+#filter button {
+  color: #FFF;
+  background-color: #CC0000;
+  border: 2px solid #FFF;
+  border-radius: 12px;
 }
 
 .padding {

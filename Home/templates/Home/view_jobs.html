@@ -10,38 +10,38 @@
 {% endblock %}
 
 {% block content %}
-    {% if jobs %}
-        <div class="row">
-            {% if user_type != "employer" %}
-                <div class="modal fade" id="jobFilter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header bg-danger text-white">
-                                <h5 class="modal-title" id="exampleModalLabel">Filter Job Listings</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form method="POST">{% csrf_token %}
-                                <div class="modal-body form-group">
-                                    <b>Duration (in months):</b><br>
-                                    {{ form.min_duration }} {{ form.max_duration }}<br><br>
-                                    <b>{{ form.industry_id.label }}:</b> {{ form.industry_id }}<br><br>
-                                    <b>{{ form.location.label }}:</b> {{ form.location }}<br><br>
-                                    <b>{{ form.job_type_id.label }}:</b> {{ form.job_type_id }}<br><br>
-                                    <b>Salary (AED/month):</b><br>
-                                    {{ form.min_salary }} {{ form.max_salary }}<br>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="reset" class="btn btn-danger">Reset</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Apply</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
+    {% if user_type != "employer" %}
+        <div class="modal fade" id="jobFilter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title" id="exampleModalLabel">Filter Job Listings</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div><!-- End of modal-header -->
+                    <form method="POST">{% csrf_token %}
+                        <div class="modal-body form-group">
+                            <b>Duration (in months):</b><br>
+                            {{ form.min_duration }} {{ form.max_duration }}<br><br>
+                            <b>{{ form.industry_id.label }}:</b> {{ form.industry_id }}<br><br>
+                            <b>{{ form.location.label }}:</b> {{ form.location }}<br><br>
+                            <b>{{ form.job_type_id.label }}:</b> {{ form.job_type_id }}<br><br>
+                            <b>Salary (AED/month):</b><br>
+                            {{ form.min_salary }} {{ form.max_salary }}<br>
+                        </div><!-- End of modal-body -->
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Apply</button>
+                        </div><!-- End of modal-footer -->
+                    </form>
+                </div><!-- End of modal-content -->
+            </div><!-- End of modal-dialog -->
+        </div><!-- End of jobFilter -->
+    {% endif %}
+    <div id="view-job-body">
+        {% if jobs %}
             <div id="job-list-body" class="col-12">
                 {% if user_type == "employer" %}
                     <h3 class="text-center">My Jobs</h3>
@@ -57,10 +57,10 @@
                                 <div class="card-image-left">
                                     {% if obj.logo %}
                                         <img src="{{ obj.logo.url }}" height="150.0em"
-                                             width="150.0em">
+                                             width="150.0em" alt="job-pic">
                                     {% else %}
                                         <img src="{% static 'DefaultDP.jpg' %}" height="150.0em"
-                                             width="150.0em">
+                                             width="150.0em" alt="default-job-pic">
                                     {% endif %}
                                 </div>
                                 <h3 class="card-title">
@@ -90,10 +90,10 @@
                                         <div class="card-image-left">
                                             {% if obj.logo %}
                                                 <img src="{{ obj.logo.url }}" height="150.0em"
-                                                     width="150.0em">
+                                                     width="150.0em" alt="normal-pic">
                                             {% else %}
                                                 <img src="{% static 'DefaultDP.jpg' %}" height="150.0em"
-                                                     width="150.0em">
+                                                     width="150.0em" alt="default-pic">
                                             {% endif %}
                                         </div>
                                         <h3 class="card-header">
@@ -114,17 +114,18 @@
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}
-                        </div>
-                    </div>
+                        </div><!-- End of card-body -->
+                    </div><!-- End of job-cards -->
                 {% endfor %}
             </div><!-- End of job-list-body -->
+            <div id="filter" class="text-center">
+                <button type="button" class="btn" data-toggle="modal" data-target="#jobFilter">
+                  Filter Jobs
+                </button>
+            </div>
         {% else %}
             <h1 class="text-center">No jobs to display</h1>
+            <p class="text-center">Want to create a new job? Click <a href="{% url 'create_job' %}">this</a> link to do just that!</p>
         {% endif %}
-        </div><!-- End of row -->
-        <div id="filter" class="text-center">
-            <button type="button" class="btn" data-toggle="modal" data-target="#jobFilter">
-              Filter Jobs
-            </button>
-        </div>
+    </div><!-- End of row -->
 {% endblock %}

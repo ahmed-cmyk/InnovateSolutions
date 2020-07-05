@@ -7,7 +7,7 @@ from django_countries.widgets import CountrySelectWidget
 from DjangoUnlimited import settings
 
 
-class CreateJobForm(forms.Form):
+class CreateJobForm(forms.ModelForm):
     job_title = forms.CharField(label='*Job Title', max_length=100, required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     description = forms.CharField(label='*Job Description', max_length=750, required=True, widget=forms.Textarea(
@@ -17,7 +17,7 @@ class CreateJobForm(forms.Form):
     job_type_id = forms.ModelChoiceField(
         widget=forms.Select(attrs={'class': 'custom-select'}),
         queryset=JobType.objects.all(),
-        required = True,
+        required=True,
         label="*Job Type"
     )
     salary = forms.FloatField(label="*Salary (AED per month)")
@@ -25,14 +25,14 @@ class CreateJobForm(forms.Form):
         label='*Skill',
         widget=forms.CheckboxSelectMultiple,
         queryset=Skill.objects.all(),
-        required = True
+        required=True
     )
 
     industry_id = forms.ModelChoiceField(
         label='*Industry',
         widget=forms.Select(attrs={'class': 'custom-select'}),
         queryset=Industry.objects.all(),
-        required = True,
+        required=True,
     )
 
     class Meta:
@@ -48,24 +48,24 @@ class EditJobForm(forms.ModelForm):
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
 
     duration = forms.IntegerField(label='Duration (in months)')
-    location = forms.CharField(max_length = 100, required = True)
+    location = forms.CharField(max_length=100, required=True)
     job_type_id = forms.ModelChoiceField(
         widget=forms.Select(attrs={'class': 'custom-select'}),
         queryset=JobType.objects.all(),
-        required = True,
+        required=True,
         label="Job Type"
     )
     salary = forms.FloatField(label="Salary (AED per month)")
     skills = forms.ModelMultipleChoiceField(
         widget=forms.CheckboxSelectMultiple,
         queryset=Skill.objects.all(),
-        required = True
+        required=True
     )
 
     industry_id = forms.ModelChoiceField(
         widget=forms.Select(attrs={'class': 'custom-select'}),
         queryset=Industry.objects.all(),
-        required = True,
+        required=True,
         label="Industry"
     )
 
@@ -116,16 +116,16 @@ class FilterStudentForm(forms.Form):
         ('Alumni', 'Alumni')
     ]
     alumni_status = forms.ChoiceField(required=False, label='Student Status', choices=choices,
-                                       widget=forms.RadioSelect(attrs={'class': 'custom-select',
-                                                                       'onClick': 'disable_fields(this.checked)'}))
+                                      widget=forms.RadioSelect(attrs={'class': 'custom-select',
+                                                                      'onClick': 'disable_fields(this.checked)'}))
 
     min_graduation_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, required=False,
-                                               label='Minimum Graduation Date',
-                                               widget=forms.DateInput(attrs={
-                                                   'class': 'datepicker form-control-text',
-                                                   'placeholder': 'YYYY-MM-DD',
-                                                   'autocomplete': 'off'
-                                                }))
+                                          label='Minimum Graduation Date',
+                                          widget=forms.DateInput(attrs={
+                                              'class': 'datepicker form-control-text',
+                                              'placeholder': 'YYYY-MM-DD',
+                                              'autocomplete': 'off'
+                                          }))
     max_graduation_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, required=False,
                                           label='Maximum Graduation Date',
                                           widget=forms.DateInput(attrs={

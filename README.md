@@ -16,6 +16,7 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 - [X] Employer can reopen closed jobs
 - [X] Remove "News" page
 - [X] Remove "Murdoch University Home" page
+- [X] Put the Help Desk links on the navigation bar
 
 # Version History
 ## 07/01/20 - 10:37PM
@@ -154,3 +155,8 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 - Redesigned Edit Profile View for students.
 - Redesigned Edit Profile View for employers.
 - Brought back the help desk links and placed them inside the navigation bar.
+
+## 07/05/20 - 06:02PM
+- Fixed the job creation form.
+- Fixed a bug which I accidentally introduced into the job creation form.
+- Add some styles to the View Jobs page so that the footer doesn't get cut off.
