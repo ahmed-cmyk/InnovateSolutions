@@ -127,3 +127,7 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 
 ## 07/05/20 - 10:38AM
 - Fix "My Applications" button
+
+## 07/05/20 - 12:15PM
+- Modified the View Statistics page
+- Modified the Generate Statistics page

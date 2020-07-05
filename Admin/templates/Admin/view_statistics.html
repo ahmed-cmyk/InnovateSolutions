@@ -6,77 +6,82 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/Table.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Statistics.css' %}"/>
 {% endblock %}
 
 {% block content %}
     <br><br>
-    <table class="table" align="center">
-        <thead>
-        <tr class="text-center">
-            <th>Type of Statistics</th>
-            <th>Count</th>
-        </tr>
-        </thead>
+    <div id="statBody" class="col-12 d-flex justify-content-center">
+        <table class="table table-striped table-responsive-sm text-center">
+            <thead class="thead-dark">
+            <tr class="text-left">
+                <th>Type of Statistics</th>
+                <th>Count</th>
+            </tr>
+            </thead>
 
-        <tbody>
-        <tr class="text-center">
-            <td><b>Total Users Signed Up</b></td>
-            <td><b>{{ users }}</b></td>
-        </tr>
+            <tbody>
+            <tr class="text-left">
+                <td>Total Users Signed Up</td>
+                <td>{{ users }}</td>
+            </tr>
 
-        <tr class="text-center">
-            <td>Administrators Signed Up</td>
-            <td>{{ admins }}</td>
-        </tr>
+            <tr class="text-left">
+                <td>Administrators Signed Up</td>
+                <td>{{ admins }}</td>
+            </tr>
 
-        <tr class="text-center">
-            <td>Total Students Signed Up</td>
-            <td>{{ students }}</td>
-        </tr>
+            <tr class="text-left">
+                <td>Total Students Signed Up</td>
+                <td>{{ students }}</td>
+            </tr>
 
-        <tr class="text-center">
-            <td>Current Students Signed Up</td>
-            <td>{{ current }}</td>
-        </tr>
+            <tr class="text-left">
+                <td>Current Students Signed Up</td>
+                <td>{{ current }}</td>
+            </tr>
 
-        <tr class="text-center">
-            <td>Alumni Signed Up</td>
-            <td>{{ alumni }}</td>
-        </tr>
+            <tr class="text-left">
+                <td>Alumni Signed Up</td>
+                <td>{{ alumni }}</td>
+            </tr>
 
-        <tr class="text-center">
-            <td>Employers Signed Up</td>
-            <td>{{ employers }}</td>
-        </tr>
+            <tr class="text-left">
+                <td>Employers Signed Up</td>
+                <td>{{ employers }}</td>
+            </tr>
 
-        <tr class="text-center">
-            <td>Jobs Posted</td>
-            <td>{{ jobs_posted }}</td>
-        </tr>
+            <tr class="text-left">
+                <td>Jobs Posted</td>
+                <td>{{ jobs_posted }}</td>
+            </tr>
 
-        <tr class="text-center">
-            <td>Student Applications</td>
-            <td>{{ apps }}</td>
-        </tr>
+            <tr class="text-left">
+                <td>Student Applications</td>
+                <td>{{ apps }}</td>
+            </tr>
 
-        <tr class="text-center">
-            <td>Active Jobs</td>
-            <td>{{ open_jobs }}</td>
-        </tr>
+            <tr class="text-left">
+                <td>Active Jobs</td>
+                <td>{{ open_jobs }}</td>
+            </tr>
 
-        <tr class="text-center">
-            <td>Jobs Closed and Filled by Murdoch Students</td>
-            <td>{{ closed_jobs }}</td>
-        </tr>
+            <tr class="text-left">
+                <td>Jobs Closed and Filled by Murdoch Students</td>
+                <td>{{ closed_jobs }}</td>
+            </tr>
 
-        <tr class="text-center">
-            <td>Jobs Deleted</td>
-            <td>{{ deleted_jobs }}</td>
-        </tr>
-        </tbody>
-    </table>
-    <button type="button" class="mybutton" style="margin-left: 43em;"><a href="{% url 'export_stats_file' users admins students current alumni employers jobs_posted apps open_jobs closed_jobs deleted_jobs %}">Export Data</a></button>
+            <tr class="text-left">
+                <td>Jobs Deleted</td>
+                <td>{{ deleted_jobs }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <button type="button" class="btn btn-primary">
+            <a class="text-decoration-none text-white" href="{% url 'export_stats_file' users admins students current alumni employers jobs_posted apps open_jobs closed_jobs deleted_jobs %}">Export Data</a>
+        </button>
+    </div>
     <br><br>
 {% endblock %}
