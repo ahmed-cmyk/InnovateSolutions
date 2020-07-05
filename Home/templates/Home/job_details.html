@@ -58,7 +58,7 @@
             </div><!-- End of card -->
             <div class="col-md-12 text-center">
                 {% if user_type == 'student' %}
-                    {% if applied == 'False' %}
+                    {% if applied == False %}
                         <button class = "btn" type="submit" name="apply" value="Apply&Save">&nbsp;Apply To Job</button>
                     {% else %}
                         <small>Your application has been submitted.</small>

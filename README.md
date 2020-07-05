@@ -129,5 +129,11 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 - Fix "My Applications" button
 
 ## 07/05/20 - 12:15PM
-- Modified the View Statistics page
-- Modified the Generate Statistics page
+- Modified the View Statistics page.
+- Modified the Generate Statistics page.
+
+## 07/05/20 - 12:55PM
+- Fixed the footer for the My Applications page so that it doesn't cut out all of a sudden.
+- Modified the My Applications page so that it looks better.
+- Added a link to the View Jobs page on the My Applications page for students who haven't applied to any jobs.
+- Fixed the View Jobs page so that students can actually apply for jobs.

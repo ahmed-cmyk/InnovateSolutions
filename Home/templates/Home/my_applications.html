@@ -6,33 +6,35 @@
 {% endblock %}
 
 {% block stylesheets %}
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/Table.css' %}"/>
-
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Applications.css' %}"/>
 {% endblock %}
 
 {% block content %}
-    {% if jobs_applied %}
-        <table class="table" align="center" style="margin-top: 2%; margin-bottom: 2%">
-            <thead>
-                <tr class="text-center">
-                    <th>Job Title</th>
-                    <th>Date Applied</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for job in jobs_applied %}
-                    <tr class="text-center" align="center">
-                        <td><a href="{% url 'job_details' job.job_id_id %}">{{ job.job_id }}</a></td>
-                        <td style="width: 40%">{{ job.date_applied }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <body style="min-height: 400px; margin-bottom: 150px;">
-        <h2 align="center">You have not applied to any jobs yet</h2>
-        <footer style="position: fixed">
-    {% endif %}
+    <div id="applicationBody" class="col-12">
+        {% if jobs_applied %}
+            <div class="text-center">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th>Job Title</th>
+                            <th>Date Applied</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for job in jobs_applied %}
+                            <tr class="text-center">
+                                <td><a href="{% url 'job_details' job.job_id_id %}">{{ job.job_id }}</a></td>
+                                <td>{{ job.date_applied }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div id="noApplications">
+                <h2 class="text-uppercase text-center">You have not applied to any jobs yet</h2>
+                <p class="text-center">Looking for a job? Try this <a href="{% url 'view_jobs' %}">link</a> to view jobs posted by employers for students.</p>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

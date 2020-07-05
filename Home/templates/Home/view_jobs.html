@@ -42,34 +42,6 @@
                     </div>
                 </div>
             {% endif %}
-{#        <div class="row">#}
-{#            {% if user_type != "employer" %}#}
-{#                <div id="sidebar" class="col-md-4 col-sm-5 col-xs-12">#}
-{#                    <div id="sidebarHead" class="text-center">#}
-{#                        <h3>Filter Job Listings</h3>#}
-{#                    </div><!-- End of sidebarHead -->#}
-{#                    <br>#}
-{#                    <div id="sidebarContent">#}
-{#                        <form method="POST">{% csrf_token %}#}
-{#                            <b>Duration (in months):</b><br>#}
-{#                            Min: {{ form.min_duration }}<br>#}
-{#                            Max: {{ form.max_duration }}<br><br>#}
-{#                            <b>{{ form.industry_id.label }}:</b> {{ form.industry_id }}<br><br>#}
-{#                            <b>{{ form.location.label }}:</b> {{ form.location }}<br><br>#}
-{#                            <b>{{ form.job_type_id.label }}:</b> {{ form.job_type_id }}<br><br>#}
-{#                            <b>Salary (AED/month):</b><br>#}
-{#                            From: {{ form.min_salary }}<br>#}
-{#                            To: {{ form.max_salary }}<br><br>#}
-{#                            <div class="text-center">#}
-{#                                <button id="filter" class="btn" type="Submit">#}
-{#                                    <b>Filter</b>#}
-{#                                </button>#}
-{#                            </div><!-- End of text-center -->#}
-{#                        </form>#}
-{#                    </div><!-- End of sidebarContent -->#}
-{#                </div><!-- End of sidebar -->#}
-{#            {% endif %}#}
-
             <div id="job-list-body" class="col-12">
                 {% if user_type == "employer" %}
                     <h3 class="text-center">My Jobs</h3>
@@ -147,7 +119,7 @@
                 {% endfor %}
             </div><!-- End of job-list-body -->
         {% else %}
-            <h1 align="center">No jobs to display</h1>
+            <h1 class="text-center">No jobs to display</h1>
         {% endif %}
         </div><!-- End of row -->
         <div id="filter" class="text-center">
