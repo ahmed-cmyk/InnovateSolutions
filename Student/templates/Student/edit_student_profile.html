@@ -21,21 +21,20 @@
     <script language="JavaScript">
         function disable_fields(status) {
             if (status) {
-                document.getElementById('id_expected_graduation_date').disabled = true
-                document.getElementById('id_personal_email').disabled = true
-                document.getElementById('id_personal_email').required = false
-                document.getElementById('id_expected_graduation_date').required = false
+                document.getElementById('id_expected_graduation_date').disabled = true;
+                document.getElementById('id_personal_email').disabled = true;
+                document.getElementById('id_personal_email').required = false;
+                document.getElementById('id_expected_graduation_date').required = false;
             } else {
-                document.getElementById('id_expected_graduation_date').disabled = false
-                document.getElementById('id_personal_email').disabled = false
-                document.getElementById('id_personal_email').required = true
-                document.getElementById('id_expected_graduation_date').required = true
+                document.getElementById('id_expected_graduation_date').disabled = false;
+                document.getElementById('id_personal_email').disabled = false;
+                document.getElementById('id_personal_email').required = true;
+                document.getElementById('id_expected_graduation_date').required = true;
             }
         }
     </script>
 
     <body onload="disable_fields(document.getElementById('id_alumni_status').checked)">
-    <br><br>
     <div class="overall-page">
         <div class="inside-container">
             <div class="page">

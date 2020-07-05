@@ -3,7 +3,7 @@
 
 <!-- Stylesheet -->
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Profile.css' %}"/>
 {% endblock %}
 
 {% block title %}
@@ -11,33 +11,27 @@
 {% endblock %}
 
 {% block content %}
-    <br><br>
-    <div class="overall-page">
-        <div class="inside-container">
-            <div class="overall-page">
-                <div class="icon">
-                    {% if obj.dp %}
-                        <img src="{{ obj.dp.url }}" height="90.0em" width="90.0em">
-                    {% else %}
-                        <img src="{% static 'DefaultDP.jpg' %}" height="90.0em" width="90.0em">
-                    {% endif %}
-                </div>
-                <div style="align:center; padding-top: 20px;"><h2>My Profile</h2></div>
-            </div>
-            <div class="inside-container2">
-
-                <p class="view"><strong> Student ID:</strong> {{ obj.student_id }}</p>
-                <p class="view"><strong> First Name:</strong> {{ user.first_name }}</p>
-                <p class="view"><strong>Last Name:</strong> {{ user.last_name }}</p>
-                <p class="view"><strong>Email Address:</strong> {{ user.email }}</p>
-                <p class="view"><strong>Date of Birth:</strong> {{ obj.DOB }}</p>
-                <p class="view"><strong>Gender:</strong> {{ obj.gender }}</p>
-
-                <strong>Skills: </strong><br><br>
+    <div id="profileBody">
+        <h2 class="text-center">My Profile</h2>
+        <div class="row">
+            <div class="icon col-md-4 text-center">
+                {% if obj.dp %}
+                    <img src="{{ obj.dp.url }}" height="300.0em" width="300.0em">
+                {% else %}
+                    <img src="{% static 'DefaultDP.jpg' %}" height="300.0em" width="300.0em">
+                {% endif %}
+            </div><!-- End of icon -->
+            <div class="student-profile col-md-8 text-left">
+                <p><strong>Student ID:</strong> {{ obj.student_id }}</p>
+                <p><strong>Name:</strong> {{ user.first_name}} {{ user.last_name }}</p>
+                <p><strong>Email Address:</strong> {{ user.email }}</p>
+                <p><strong>Date of Birth:</strong> {{ obj.DOB }}</p>
+                <p><strong>Gender:</strong> {{ obj.gender }}</p>
+                <p><strong>Skills: </strong></p>
                 {% for skill in obj.skills.all %}
                     <li>{{ skill }}</li>
                 {% endfor %}
-
+                <br>
                 {% if obj.alumni_status %}
                     <p class="view"><strong> Alumni Status:</strong> Alumni</p>
                 {% else %}
@@ -45,16 +39,13 @@
                     <p class="view"><strong> Expected Graduation Date:</strong> {{ obj.expected_graduation_date }}</p>
                     <p class="view"><strong> Personal Email Address:</strong> {{ obj.personal_email }}</p>
                 {% endif %}
-
-                <p class="view"><strong> CV: </strong> {{ obj.cv }}</p><br>
-
-            <div style="text-align:center">
-                <button type="submit" class="mybutton"><a href="/student/edit_student_profile">Edit Profile</a></button>
-            </div>
-            <br><br>
-        </div>
+    {#                <p class="view"><strong> CV: </strong> {{ obj.cv }}</p><br>#}
+            </div><!-- End of student-profile -->
+        </div><!-- End of row -->
+        <div id="edit-profile" class="text-center">
+            <button type="submit" class="btn btn-primary">
+                <a class="text-decoration-none text-white" href="/student/edit_student_profile">Edit Profile</a>
+            </button>
+        </div><!-- End of text-center -->
     </div>
-</div>
-</div>
-<br><br>
 {% endblock %}

@@ -158,6 +158,7 @@ class StudentForm(forms.ModelForm):
         student_id = self.cleaned_data.get('student_id')
         if User.objects.filter(student_id).exists():
             raise forms.ValidationError("This student id belongs to another student")
+        return student_id
 
     class Meta:
         model = Student
