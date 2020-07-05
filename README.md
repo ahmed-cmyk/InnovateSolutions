@@ -17,6 +17,7 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 - [X] Remove "News" page
 - [X] Remove "Murdoch University Home" page
 - [X] Put the Help Desk links on the navigation bar
+- [X] Added address to footer
 
 # Version History
 ## 07/01/20 - 10:37PM
@@ -162,4 +163,11 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 - Add some styles to the View Jobs page so that the footer doesn't get cut off.
 
 ## 07/05/20 - 06:40PM
-- Fixed the Edit Job Listing Form
+- Fixed the Edit Job Listing Form.
+
+## 07/05/20 - 07:59PM
+- Modified FAQ page (played with styles).
+- Modified Anti Scam page.
+- Modified Terms page.
+- Modified privacy page.
+- Added new address to footer.
