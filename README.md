@@ -26,7 +26,6 @@ The purpose of this project is to redesign the existing murdoch job portal by us
     - Run "pip install django==2.2.13"
     - Alternatively, you can just run "pip install -r requirements"
 
-
 ## 07/01/20 - 10:41PM
 - Modification made to readme.md to show update times.
 
@@ -48,7 +47,7 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 - Fixed signup button drop-down.
 - Changed footer color to match navigation bar color.
 
-##07/01/20 - 10:41PM
+## 07/01/20 - 10:41PM
 - Modification made to readme.md to show update times.
 
 ## 07/01/20 - 10:45PM
@@ -126,3 +125,5 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 - Put the filter students form into a popup window.
 - Transformed filter students form into a crispy form. (Not food, it's a different way of rendering forms)
 
+## 07/05/20 - 10:38AM
+- Fix "My Applications" button
