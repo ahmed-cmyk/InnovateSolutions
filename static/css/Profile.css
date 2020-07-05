@@ -5,3 +5,12 @@
 #edit-profile button {
     margin: 2% auto;
 }
+
+#editProfileBody {
+    margin: 2% auto;
+}
+
+#editProfileBody form {
+    margin: auto;
+    width: 80%;
+}

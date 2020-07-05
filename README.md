@@ -149,3 +149,8 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 - Redesigned Student Profile View
 - Redesigned Employer Profile View
 - Renamed "I'm a Student" and "I'm an Employer" under the Sign Up dropdown to "Student Registration" and "Employer Registration".
+
+## 07/05/20 - 05:10PM
+- Redesigned Edit Profile View for students.
+- Redesigned Edit Profile View for employers.
+- Brought back the help desk links and placed them inside the navigation bar.

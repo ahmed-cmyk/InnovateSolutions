@@ -99,7 +99,7 @@
                     </div><!-- End of navTop -->
                     <div id="navBottom" class="nav navbar-nav navbar-expand-md mr-auto">
                         <div id="navDrop" class="navElements collapse navbar-collapse">
-                            <ul class="nav nav-pills">
+                            <div class="nav nav-pills">
                                 <li class="nav-item">
                                     <a class="nav-link" href="/">
                                         <button class="btn">Home</button>
@@ -114,6 +114,16 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'my_applications' %}">
                                             <button class="btn">My Applications</button>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'HelpDesk' %}">
+                                            <button class="btn">Help Desk</button>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'MyHelpDeskRequests' %}">
+                                            <button class="btn">My HelpDesk Requests</button>
                                         </a>
                                     </li>
                                 {% elif user_type == 'employer' %}
@@ -132,6 +142,16 @@
                                             <button class="btn">Post a Job</button>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'HelpDesk' %}">
+                                            <button class="btn">Help Desk</button>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'MyHelpDeskRequests' %}">
+                                            <button class="btn">My HelpDesk Requests</button>
+                                        </a>
+                                    </li>
                                 {% elif user_type == 'admin' %}
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'view_jobs' %}">
@@ -146,6 +166,16 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'statistics' %}">
                                             <button class="btn">Statistics</button>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'HelpDesk' %}">
+                                            <button class="btn">Help Desk</button>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'MyHelpDeskRequests' %}">
+                                            <button class="btn">My HelpDesk Requests</button>
                                         </a>
                                     </li>
                                 {% endif %}
