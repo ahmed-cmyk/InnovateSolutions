@@ -3,7 +3,7 @@
 
 <!-- Stylesheet -->
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Profile.css' %}"/>
 {% endblock %}
 
 {% block title %}
@@ -12,41 +12,35 @@
 
 {% block content %}
     {% csrf_token %}
-    <br><br>
-    <div class="overall-page">
-        <div class="inside-container">
-            <div class="overall-page">
-                <div class="icon">
-                    {% if student.dp %}
-                        <img src="{{ student.dp.url }}" height="80.0em" width="90.0em"><br>
-                    {% else %}
-                        <img src="{% static 'DefaultDP.jpg' %}" height="80.0em" width="90.0em"><br>
-                    {% endif %}
-                </div>
-                <div style="align:center; padding-top: 20px;">
-                    <h3>{{ student.user.first_name }} {{ student.user.last_name }} </h3></div>
+    <div id="profileBody">
+        <div class="row">
+            <div class="icon col-md-4 text-center">
+                {% if student.dp %}
+                    <img src="{{ student.dp.url }}" height="300.0em" width="300.0em"><br>
+                {% else %}
+                    <img src="{% static 'DefaultDP.jpg' %}" height="300.0em" width="300.0em"><br>
+                {% endif %}
             </div>
-            <div class="inside-container2">
-                <p>Email: {{ student.user }}</p>
-                <p>Gender: {{ student.gender }}</p>
-                <p>Date of Birth: {{ student.DOB }}</p>
+            <div class="student-profile col-md-8 text-left">
+                <h3>{{ student.user.first_name }} {{ student.user.last_name }} </h3>
+                <p><b>Email:</b> {{ student.user }}</p>
+                <p><b>Gender:</b> {{ student.gender }}</p>
+                <p><b>Date of Birth:</b> {{ student.DOB }}</p>
 
                 {% if student.alumni_status == False %}
-                    <p>Personal Email: {{ student.personal_email }}</p>
-                    <p>Expected Graduation Date: {{ student.expected_graduation_date }}</p>
+                    <p><b>Personal Email:</b> {{ student.personal_email }}</p>
+                    <p><b>Expected Graduation Date:</b> {{ student.expected_graduation_date }}</p>
                 {% endif %}
 
-                Skills:
+                <b>Skills:</b>
                 {% for skill in student.skills.all %}
                     <li>{{ skill }}</li>
                 {% endfor %}
-
-                <div style="text-align:center">
-                    <button type="button" class="mybutton"><a href="{% url 'get_cv_file' student.user_id %}">Download CV</a></button>
-                </div>
-                <br><br>
             </div>
+        </div><!-- End of row -->
+        <div class="text-center">
+            <button type="button" class="btn btn-primary">
+                <a class="text-decoration-none text-white" href="{% url 'get_cv_file' student.user_id %}">Download CV</a>
+            </button>
         </div>
-    </div>
-    <br><br>
 {% endblock %}

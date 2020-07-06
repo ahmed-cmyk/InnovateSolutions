@@ -1,53 +1,53 @@
-body h1 {
-    text-align: center;
-    color: black;
-    padding: 0;
-}
+/*body h1 {*/
+/*    text-align: center;*/
+/*    color: black;*/
+/*    padding: 0;*/
+/*}*/
 
-.container h2 {
-    color: black;
-}
+/*.container h2 {*/
+/*    color: black;*/
+/*}*/
 
-.container h3 {
-    text-align: left;
-    color: black;
-}
+/*.container h3 {*/
+/*    text-align: left;*/
+/*    color: black;*/
+/*}*/
 
-.container p {
-    text-align: left;
-    color: black;
-}
-
-
-
-.container ul {
-    text-align: left;
-    color: black;
-    list-style-type: circle;
-}
-
-.container ol {
-    text-align: left;
-    color: black;
-
-}
+/*.container p {*/
+/*    text-align: left;*/
+/*    color: black;*/
+/*}*/
 
 
-.container {
-    background-color: #E8E8E8;
-    padding: 0;
-    margin: 2% auto;
-    padding-left: 0.5%;
-    height: auto%;
 
-    width: 70%;
+/*.container ul {*/
+/*    text-align: left;*/
+/*    color: black;*/
+/*    list-style-type: circle;*/
+/*}*/
+
+/*.container ol {*/
+/*    text-align: left;*/
+/*    color: black;*/
+
+/*}*/
 
 
-    padding-top: 0px;
-    padding-bottom: 2em;
-    text-align: center;
-    border: 0.05em solid grey;
-}
+/*.container {*/
+/*    background-color: #E8E8E8;*/
+/*    padding: 0;*/
+/*    margin: 2% auto;*/
+/*    padding-left: 0.5%;*/
+/*    height: auto%;*/
+
+/*    width: 70%;*/
+
+
+/*    padding-top: 0px;*/
+/*    padding-bottom: 2em;*/
+/*    text-align: center;*/
+/*    border: 0.05em solid grey;*/
+/*}*/
 
 
 

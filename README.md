@@ -174,4 +174,8 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 
 ## 07/06/20 - 12:12PM
 - Modified My HelpDesk Requests page.
+- Moved HelpDesk templates to App folder
 - Changed font to Open Sans to match murdoch website.
+
+## 07/06/20 - 12:36PM
+- Redesigned Student Details page
