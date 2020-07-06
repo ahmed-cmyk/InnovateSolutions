@@ -67,6 +67,12 @@ header {
     background-color: #FFF;
 }
 
+#navigationBar #navBottom .active {
+    /*color: #CC0000;*/
+    /*background-color: #FFF;*/
+    border-bottom: 2px solid #CC0000;
+}
+
 footer{
     background-color: #1D1A1A;
     color: white;
@@ -182,7 +188,7 @@ footer #social-section img {
     }
     #navigationBar #navBottom button {
         font-size: 0.8vw;
-        padding: 0.2vw 0.7vw;
+        padding: 0.05vw 0.7vw;
     }
     #body-image img {
         /*height: 70vh;*/
