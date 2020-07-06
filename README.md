@@ -186,3 +186,8 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 ## 07/06/20 - 03:41PM
 - Fixed a bug I created that prevented the checkbox in Employer Registration from showing up.
 - Fixed another bug I caused in Student Registration that prevented students from registering.
+
+## 07/06/20 - 09:37PM
+- Created two separate js files for both student registration and employer registration page.
+- Added some live validation to the student registration page but it's still a work in progress.
+- Fixed a bug where the datepicker object did not appear. Naturally, I was the one who accidentally created this too.
