@@ -182,3 +182,7 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 
 ## 07/06/20 - 02:57PM
 - Used jQuery to highlight the page the user is currently on at any given time.
+
+## 07/06/20 - 03:41PM
+- Fixed a bug I created that prevented the checkbox in Employer Registration from showing up.
+- Fixed another bug I caused in Student Registration that prevented students from registering.

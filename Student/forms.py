@@ -1,26 +1,23 @@
-from django import forms
-from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
-from django.forms import models
-from datetime import date
-from upload_validator import FileTypeValidator
-
-from .models import Student, StudentJobApplication
-from Home.models import Skill
-from Accounts.views import isValidated, get_user_type, number_symbol_exists
 from re import search
-from DjangoUnlimited import settings
 
 # Note: we need dnspython for this to work
-import dns.resolver, dns.exception
+import dns.exception
+import dns.resolver
+from django import forms
+from django.contrib.auth.models import User
+from upload_validator import FileTypeValidator
+
+from Accounts.views import isValidated, number_symbol_exists
+from Home.models import Skill
+from .models import Student, StudentJobApplication
 
 
 class InitialStudentForm(forms.ModelForm):
-    first_name  = forms.CharField(label='*First Name')
-    last_name   = forms.CharField(label='*Last Name')
-    email       = forms.EmailField(label='*Email Address', required=True)
-    password1   = forms.CharField(label='*Password', widget=forms.PasswordInput)
-    password2   = forms.CharField(label='*Confirm Password', widget=forms.PasswordInput)
+    first_name = forms.CharField(label='*First Name')
+    last_name = forms.CharField(label='*Last Name')
+    email = forms.EmailField(label='*Email Address', required=True)
+    password1 = forms.CharField(label='*Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='*Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -32,7 +29,7 @@ class InitialStudentForm(forms.ModelForm):
             'password2'
         )
 
-    #password1.disabled = True
+    # password1.disabled = True
     def save(self, commit=True):
         user = super(InitialStudentForm, self).save(commit=False)
         user.username = self.cleaned_data["email"]
@@ -43,14 +40,14 @@ class InitialStudentForm(forms.ModelForm):
 
     def clean_first_name(self):
         first_name = self.cleaned_data.get('first_name')
-        if number_symbol_exists(first_name):#checks if number/symbol exists in string
+        if number_symbol_exists(first_name):  # checks if number/symbol exists in string
             raise forms.ValidationError("You cannot have numbers in your first name.")
 
         return first_name
 
     def clean_last_name(self):
         last_name = self.cleaned_data.get('last_name')
-        if number_symbol_exists(last_name): #checks if number/symbol exists in string
+        if number_symbol_exists(last_name):  # checks if number/symbol exists in string
             raise forms.ValidationError('You cannot have numbers in your last name.')
 
         return last_name
@@ -77,7 +74,6 @@ class InitialStudentForm(forms.ModelForm):
             raise forms.ValidationError('Password is not valid.')
 
         return password2
-
 
     # def usernameExists(self):
     #     email = self.cleaned_data.get("email")
@@ -124,7 +120,7 @@ class StudentForm(forms.ModelForm):
                               'placeholder': 'YYYY-MM-DD',
                               'autocomplete': 'off'
                           }))
-    #student_id.disabled = True
+    # student_id.disabled = True
     alumni_status = forms.BooleanField(required=False, label='Select if you are a Murdoch University Alumni',
                                        widget=forms.CheckboxInput(attrs={'onClick': 'disable_fields(this.checked)'}))
     student_id = forms.CharField(label='*Student ID', max_length=8, min_length=8)
@@ -143,7 +139,7 @@ class StudentForm(forms.ModelForm):
     dp = forms.ImageField(label='Select a profile picture (only jpeg and png file formats allowed)',
                           required=False,
                           validators=[FileTypeValidator(
-                              allowed_types=['image/jpeg','image/png']
+                              allowed_types=['image/jpeg', 'image/png']
                           )])
     cv = forms.FileField(allow_empty_file=False,
                          label='*Attach CV (only PDF, docx, and doc file formats allowed)',
@@ -153,12 +149,6 @@ class StudentForm(forms.ModelForm):
                                  "application/msword",
                                  "application/vnd.openxmlformats-officedocument.wordprocessingml.document"]
                          )])
-
-    def clean_student_id(self):
-        student_id = self.cleaned_data.get('student_id')
-        if User.objects.filter(student_id).exists():
-            raise forms.ValidationError("This student id belongs to another student")
-        return student_id
 
     class Meta:
         model = Student
@@ -181,9 +171,9 @@ class EditStudentProfileInitialForm(forms.ModelForm):
 
 class EditStudentProfileForm(forms.ModelForm):
     gender_choices = [
-            ('Male', 'Male'),
-            ('Female', 'Female')
-        ]
+        ('Male', 'Male'),
+        ('Female', 'Female')
+    ]
     gender = forms.ChoiceField(choices=gender_choices, widget=forms.RadioSelect(attrs={'class': 'custom-select'}))
     DOB = forms.DateField(required=True, label='Date of Birth',
                           widget=forms.DateInput(attrs={
@@ -205,7 +195,7 @@ class EditStudentProfileForm(forms.ModelForm):
     dp = forms.ImageField(label='Select a profile picture (Only jpeg and png file formats allowed.)',
                           required=False,
                           validators=[FileTypeValidator(
-                              allowed_types=['image/jpeg','image/png']
+                              allowed_types=['image/jpeg', 'image/png']
                           )])
     cv = forms.FileField(allow_empty_file=False, label='Attach CV (Only PDF, docx, and doc file formats allowed.)',
                          validators=[FileTypeValidator(
