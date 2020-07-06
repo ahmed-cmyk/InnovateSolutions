@@ -24,15 +24,6 @@
                 <hr>
                 <form method="POST" class="form-horizontal" action="student_registration" enctype="multipart/form-data">{% csrf_token %}
                     <div class="form-group">
-                        {% if messages %}
-                            {% for message in messages %}
-                                {{ messages }}
-                                {% ifequal message.tags 'student_account_activated success' %}
-                                    <p>{{ message }}</p>
-                                {% endifequal %}
-                            {% endfor %}
-                        {% endif %}
-
                         <div>{{ user_form.first_name|as_crispy_field }}</div>
                         <div id="firstNameError"></div>
                         <div>{{ user_form.last_name|as_crispy_field }}</div>

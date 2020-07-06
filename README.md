@@ -191,3 +191,9 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 - Created two separate js files for both student registration and employer registration page.
 - Added some live validation to the student registration page but it's still a work in progress.
 - Fixed a bug where the datepicker object did not appear. Naturally, I was the one who accidentally created this too.
+
+## 07/06/20 -10:00PM
+- Fixed the behavior of the alumni toggle. The right fields are disabled this time.
+    ### Known Problems:
+    - The program still requires that both emails are entered. Problem probably exits because of the way the
+     database is structure i.e. there is probably a rule stating that these two fields must exist.

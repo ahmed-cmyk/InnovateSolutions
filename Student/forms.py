@@ -15,7 +15,7 @@ from .models import Student, StudentJobApplication
 class InitialStudentForm(forms.ModelForm):
     first_name = forms.CharField(label='*First Name')
     last_name = forms.CharField(label='*Last Name')
-    email = forms.EmailField(label='*Email Address', required=True)
+    email = forms.EmailField(label='*Email Address')
     password1 = forms.CharField(label='*Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='*Confirm Password', widget=forms.PasswordInput)
 
@@ -131,7 +131,7 @@ class StudentForm(forms.ModelForm):
                                                    'placeholder': 'YYYY-MM-DD',
                                                    'autocomplete': 'off'
                                                }))
-    personal_email = forms.EmailField(required=False, label='*Personal Email Address')
+    personal_email = forms.EmailField(label='*Personal Email Address')
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             label='*Skill',
                                             widget=forms.CheckboxSelectMultiple,

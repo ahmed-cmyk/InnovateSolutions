@@ -1,17 +1,21 @@
 function disable_fields(status) {
     if (status) {
-        document.getElementById('id_expected_graduation_date').disabled = true
-        document.getElementById('id_personal_email').disabled = true
         document.getElementById('id_student_id').disabled = true
         document.getElementById('id_student_id').required = false
+        document.getElementById('id_email').disabled = true
+        document.getElementById('id_email').required = false
+        document.getElementById('id_personal_email').disabled = false
         document.getElementById('id_personal_email').required = true
+        document.getElementById('id_expected_graduation_date').disabled = true
         document.getElementById('id_expected_graduation_date').required = false
     } else {
-        document.getElementById('id_expected_graduation_date').disabled = false
-        document.getElementById('id_personal_email').disabled = false
         document.getElementById('id_student_id').disabled = false
         document.getElementById('id_student_id').required = true
-        document.getElementById('id_personal_email').required = true
+        document.getElementById('id_email').disabled = false
+        document.getElementById('id_email').required = true
+        document.getElementById('id_personal_email').disabled = true
+        document.getElementById('id_personal_email').required = false
+        document.getElementById('id_expected_graduation_date').disabled = false
         document.getElementById('id_expected_graduation_date').required = true
     }
 }
