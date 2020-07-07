@@ -216,3 +216,7 @@ The purpose of this project is to redesign the existing murdoch job portal by us
     - The verification for the phone number field in the Employer Registration page doesn't work
     for some reason.
     - Still have to change the form in View Jobs and View Students.
+    
+## 07/07/20 - 08:50PM
+- Redesigned View Students and View Jobs pages
+- Renamed Table.css to View.css

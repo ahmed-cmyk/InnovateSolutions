@@ -1,17 +1,31 @@
-#view-job-body {
-  margin: 5% 0;
+.row {
+  margin: 0;
 }
 
-#job-list-body .horizontal-rule {
+#viewBody {
+  margin: 2% 0;
+}
+
+#filterForm {
+  border: 1px solid black;
+  border-radius: 12px;
+  height: 50%;
+  background-color: #F9F9F9;
+}
+
+#filterForm #formHeader {
+  background-color: #CC0000;
+}
+
+.horizontal-rule {
   background-color: #000000;
   width: 60%;
 }
 
-#job-cards {
+.job-cards {
   border: 1px solid #000;
   border-radius: 8px;
   background-color: #F9F9F9;
-  width: 70vw;
   margin: 2vh auto;
 }
 
@@ -31,6 +45,9 @@
     #filter button {
       width: 100%;
     }
+    #job-cards {
+      width: 80vw;
+    }
 }
 
 /******** Tablet Devices ********/
@@ -40,5 +57,7 @@
 
 /******** Desktop Devices ********/
 @media (min-width: 992px) {
-
+  #job-cards {
+    width: 60vw;
+  }
 }
