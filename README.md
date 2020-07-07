@@ -220,3 +220,7 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 ## 07/07/20 - 08:50PM
 - Redesigned View Students and View Jobs pages
 - Renamed Table.css to View.css
+
+## 07/07/20 - 09:41PM
+- Added FAQs from a document created by the previous group who worked on 
+this project 
