@@ -4,10 +4,10 @@
 
 <!-- Additional Stylesheet -->
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
     <script src="{% static 'js/StudentRegistration.js' %}" type="text/javascript"></script>
 {% endblock %}
 
@@ -16,48 +16,47 @@
 {% endblock %}
 
 {% block content %}
-    <body onload="disable_fields(document.getElementById('id_alumni_status').checked)">
     <br>
         <div id="form" class="row">
             <div class="col-12">
-                <h2 align="center">Student Registration</h2>
+                <h2 class="text-center">Student Registration</h2>
                 <hr>
                 <form method="POST" class="form-horizontal" action="student_registration" enctype="multipart/form-data">{% csrf_token %}
-                    <div class="form-group">
-                        <div>{{ user_form.first_name|as_crispy_field }}</div>
-                        <div id="firstNameError"></div>
-                        <div>{{ user_form.last_name|as_crispy_field }}</div>
-                        <div id="lastNameError"></div>
-                        <div>{{ user_form.email|as_crispy_field }}</div>
-                        <div>{{ user_form.password1|as_crispy_field }}</div>
-                        <div id="password1Error"></div>
-                        <div>{{ user_form.password2|as_crispy_field }}</div>
-                        <div id="password2Error"></div>
-                        <div>{{ student_form.gender|as_crispy_field }}</div>
-                        <div>{{ student_form.DOB|as_crispy_field }}</div>
-                        <div>{{ student_form.alumni_status|as_crispy_field }}</div>
-                        <div>{{ student_form.student_id|as_crispy_field }}</div>
-                        <div>{{ student_form.expected_graduation_date|as_crispy_field }}</div>
-                        <div>{{ student_form.personal_email|as_crispy_field }}</div>
-                        <div>{{ student_form.skills|as_crispy_field }}</div>
-                        <div>{{ student_form.dp|as_crispy_field }}</div>
-                        <div>{{ student_form.cv|as_crispy_field }}</div>
+                    <div>{{ user_form.first_name|as_crispy_field }}</div>
+                    <div id="firstNameError"></div>
+                    <div>{{ user_form.last_name|as_crispy_field }}</div>
+                    <div id="lastNameError"></div>
+                    <div>{{ user_form.password1|as_crispy_field }}</div>
+                    <div id="password1Error"></div>
+                    <div>{{ user_form.password2|as_crispy_field }}</div>
+                    <div id="password2Error"></div>
+                    <div>{{ student_form.gender|as_crispy_field }}</div>
+                    <div>{{ student_form.DOB|as_crispy_field }}</div>
+                    <div>{{ student_form.alumni_status|as_crispy_field }}</div>
+                    <div>{{ student_form.student_id|as_crispy_field }}</div>
+                    <div id="studentIdError"></div>
+                    <div>{{ student_form.expected_graduation_date|as_crispy_field }}</div>
+                    <div>{{ student_form.personal_email|as_crispy_field }}</div>
+                    <div id="personalEmailError"></div>
+                    <div>{{ user_form.email|as_crispy_field }}</div>
+                    <div id="studentEmailError"></div>
+                    <div>{{ student_form.skills|as_crispy_field }}</div>
+                    <div>{{ student_form.dp|as_crispy_field }}</div>
+                    <div>{{ student_form.cv|as_crispy_field }}</div>
 
-                        <br>
+                    <br>
 
-                        <label>
-                            <input type="checkbox" name="terms" required/>
-                        </label>
-                        <label>*I have read and agree to the <a href="../terms" target="_blank">Terms and Conditions</a></label><br><br>
+                    <label>
+                        <input type="checkbox" name="terms" required/>
+                    </label>
+                    <label>*I have read and agree to the <a href="../terms" target="_blank">Terms and Conditions</a></label><br><br>
 
-                        <div id="register" class="text-center">
-                            <button type="submit">Register</button>
-                        </div>
-                    </div><!-- End of form-group -->
+                    <div id="register" class="text-center">
+                        <button type="submit">Register</button>
+                    </div>
                 </form>
             </div><!-- End of row -->
         </div><!-- End of container -->
         {% block jQueryCall %}{% endblock %}
-    </body>
     <br><br>
 {% endblock %}

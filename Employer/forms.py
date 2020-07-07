@@ -1,12 +1,10 @@
+import dns.exception
+import dns.resolver
 from django import forms
-from django.core.exceptions import ValidationError
-from django.forms import models, HiddenInput
 from django.contrib.auth.models import User
 from upload_validator import FileTypeValidator
 
 from .models import Employer
-
-import dns.resolver, dns.exception
 
 
 class InitialEmployerForm(forms.ModelForm):

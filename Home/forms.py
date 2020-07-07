@@ -7,9 +7,13 @@ from DjangoUnlimited import settings
 
 class CreateJobForm(forms.ModelForm):
     LOCATION_CHOICES = [
-        ('academic city', 'Academic City'),
-        ('silicon oasis', 'Silicon Oasis'),
-        ('knowledge park', 'Knowledge Park')
+        ('Dubai Silicon Oasis', 'Dubai Silicon Oasis'),
+        ('Dubai Academic City', 'Dubai Academic City'),
+        ('International City', 'International City'),
+        ('Al Warqa', 'Al Warqa'),
+        ('Rashidiya', 'Rashidiya'),
+        ('Mirdif', 'Mirdif'),
+        ('Dubai Festival City', 'Dubai Festival City')
     ]
     job_title = forms.CharField(label='*Job Title', max_length=100, required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
@@ -45,9 +49,13 @@ class CreateJobForm(forms.ModelForm):
 
 class EditJobForm(forms.ModelForm):
     LOCATION_CHOICES = [
-        ('academic city', 'Academic City'),
-        ('silicon oasis', 'Silicon Oasis'),
-        ('knowledge park', 'Knowledge Park')
+        ('Dubai Silicon Oasis', 'Dubai Silicon Oasis'),
+        ('Dubai Academic City', 'Dubai Academic City'),
+        ('International City', 'International City'),
+        ('Al Warqa', 'Al Warqa'),
+        ('Rashidiya', 'Rashidiya'),
+        ('Mirdif', 'Mirdif'),
+        ('Dubai Festival City', 'Dubai Festival City')
     ]
     job_title = forms.CharField(max_length=100, required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
@@ -83,9 +91,13 @@ class EditJobForm(forms.ModelForm):
 
 class FilterJobForm(forms.ModelForm):
     LOCATION_CHOICES = [
-        ('academic city', 'Academic City'),
-        ('silicon oasis', 'Silicon Oasis'),
-        ('knowledge park', 'Knowledge Park')
+        ('Dubai Silicon Oasis', 'Dubai Silicon Oasis'),
+        ('Dubai Academic City', 'Dubai Academic City'),
+        ('International City', 'International City'),
+        ('Al Warqa', 'Al Warqa'),
+        ('Rashidiya', 'Rashidiya'),
+        ('Mirdif', 'Mirdif'),
+        ('Dubai Festival City', 'Dubai Festival City')
     ]
     min_duration = forms.IntegerField(required=False)
     max_duration = forms.IntegerField(required=False)
@@ -127,8 +139,7 @@ class FilterStudentForm(forms.Form):
         ('Alumni', 'Alumni')
     ]
     alumni_status = forms.ChoiceField(required=False, label='Student Status', choices=choices,
-                                      widget=forms.RadioSelect(attrs={'class': 'custom-select',
-                                                                      'onClick': 'disable_fields(this.checked)'}))
+                                      widget=forms.RadioSelect(attrs={'class': 'custom-select'}))
 
     min_graduation_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, required=False,
                                           label='Minimum Graduation Date',

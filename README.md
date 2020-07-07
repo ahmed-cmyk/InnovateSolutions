@@ -203,6 +203,16 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 - Turned location into a dropdown which allows users to select a location from dubai.
 - Fixed the issue where admins cannot edit jobs.
 - Fixed the issue where the information of the job that an admin is editing wasn't shown.
-    ### Known Issues
+    ### Known Problems:
     - Fix for edit job required removal company form fields but I've tried the original groups
     project and it doesn't work there either so it's an issue as old as time.
+    
+## 07/07/20 - 05:29PM
+- Added more live validation functionality to Student Registration.
+- Added live validation functionality to Employer Registration.
+- Changed the list of locations and added some more. 
+- Fixed a bug which prevented users from bringing up drop-down on Student Registration page.
+    ## Known Problems:
+    - The verification for the phone number field in the Employer Registration page doesn't work
+    for some reason.
+    - Still have to change the form in View Jobs and View Students.
