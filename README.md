@@ -224,3 +224,6 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 ## 07/07/20 - 09:41PM
 - Added FAQs from a document created by the previous group who worked on 
 this project 
+
+## 07/07/20 - 10:57PM
+- Fixed some issues with the sitemap

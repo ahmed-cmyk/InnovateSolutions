@@ -9,8 +9,6 @@ from django.core.mail import send_mail
 from DjangoUnlimited.settings import SENDGRID_API_KEY, DEFAULT_FROM_EMAIL
 from django.http import HttpResponseRedirect
 
-# Create your views here.
-
 from Accounts.views import isValidated, get_user_type, number_symbol_exists
 from .models import Student
 from .forms import *
@@ -19,11 +17,9 @@ from re import search
 
 
 def student_signup(request):
-    print("---Accessing the terminal---")
     if request.method == 'POST':
         user_form = InitialStudentForm(request.POST)
         if user_form.is_valid():
-            print("---User form is valid.---")
             student_form = StudentForm(request.POST, request.FILES)
 
             if student_form.is_valid():
@@ -34,15 +30,12 @@ def student_signup(request):
                     student.save()
                     student_form.save_m2m()
 
-                #messages.success(f'An account has been created for {student_form.user}')
-                print('The student form is valid.')
+                messages.success(request, f'An account has been created for {student_form.user}')
                 return redirect('log_in')
             else:
-                print('The student form is valid.')
                 return redirect('student_registration')
         else:
-            print('---The user form is not valid.---')
-            messages.info(request, user_form.errors)
+            messages.error(request, user_form.errors)
             return redirect("student_registration")
     else:
         user_form = InitialStudentForm()
@@ -68,8 +61,9 @@ def edit_profile(request):
                 return redirect('view_student_profile')
         else:
             print(student_form)
-            messages.info(request, student_form.errors)
-            messages.info(request, user_form.errors)
+            messages.error(request, student_form.errors)
+            messages.error(request, student_form.errors)
+            messages.error(request, user_form.errors)
             return redirect("edit_student_profile")
     else:
         user_form = EditStudentProfileInitialForm(instance=request.user)

@@ -14,7 +14,6 @@
         <h1 class="text-center">Sitemap</h1>
         <div class="col-12 text-sm-center">
             <h4><a href="/">Home</a></h4>
-            <p><a href="{% url 'news' %}">News</a></p>
             <p><a href="{% url 'log_in' %}">Log In</a></p>
             <p><a href="{% url 'password_reset' %}">Forgot Password</a></p>
             <hr>
@@ -54,26 +53,18 @@
             {% endif %}
 
             {% if user_type == "student" or user_type == "employer" %}
-                <h3>Bulletin</h3>
-                <p><a href="{% url 'all_posts' %}">Bulletin Posts</a></p>
-                <hr>
                 <h3>Help Desk</h3>
                 <p><a href="{% url 'HelpDesk' %}">Help Desk</a></p>
                 <p><a href="{% url 'MyHelpDeskRequests' %}">My HelpDesk Requests</a></p>
                 <hr>
             {% elif user_type == "admin" %}
-                <br><br><br>
-                <a href="{% url 'admin:index' %}">Dashboard</a>
+                <p><a href="{% url 'admin:index' %}">Dashboard</a></p>
                 <p><a href="{% url 'statistics' %}">Statistics</a></p>
                 <p><a href="../admin/Home/job/add">Post a Job</a></p>
                 <p><a href="{% url 'admin_create_job' %}">Create Job Without Existing Company Account</a></p>
                 <p><a href="../admin/Home/industry">Add Industry</a></p>
                 <p><a href="../admin/Home/skill">Add Skill</a></p>
                 <p><a href="../admin/Home/jobtype">Add Job Type</a></p>
-                <hr>
-                <h3>Bulletin</h3>
-                <p><a href="{% url 'all_posts' %}">Bulletin Posts</a></p>
-                <p><a href="{% url 'post_new' %}">Create New Post</a></p>
                 <hr>
                 <h3>Help Desk</h3>
                 <p><a href="{% url 'HelpDeskRequests' %}">HelpDesk Requests</a></p>
