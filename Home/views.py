@@ -29,6 +29,7 @@ from Employer.forms import EmployerForm
 from Student.forms import StudentJobApplicationForm
 from django.core.mail import send_mail
 
+
 def index(request):
     user = get_user_type(request)
     print(SENDGRID_API_KEY)
@@ -53,6 +54,7 @@ def privacy(request):
 
 def sitemap(request):
     return render(request, "Home/sitemap.html", get_user_type(request))
+
 
 @login_required
 def view_jobs(request):
@@ -131,7 +133,7 @@ def view_jobs(request):
 def create_job(request):
     try:
         user = get_user_type(request)
-        Employer.objects.get(user_id= request.user.id)
+        Employer.objects.get(user_id=request.user.id)
         if request.method == 'POST':
             form = CreateJobForm(request.POST)
             if form.is_valid():
@@ -203,10 +205,10 @@ def job_details(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
     companies = Employer.objects.all()
-    
+
     args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies, 'applied': True}
     form = StudentJobApplicationForm()
-    
+
     if request.method == 'POST':
         if request.POST.get("apply"):
 
@@ -228,14 +230,15 @@ def job_details(request, id):
 
     try:
         student = Student.objects.get(user_id=request.user.id)
-        
+
         job = Job.objects.get(id=id)
         StudentJobApplication.objects.get(job_id_id=job, applied=student)
-        
+
         return render(request, 'Home/job_details.html', args)
 
     except:
-        args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies, 'applied': False}
+        args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies,
+                'applied': False}
         return render(request, 'Home/job_details.html', args)
 
 
@@ -244,7 +247,7 @@ def edit_job(request, id):
     job = Job.objects.get(id=id)
     try:
         user = get_user_type(request)
-        Employer.objects.get(user_id= request.user.id)
+        Employer.objects.get(user_id=request.user.id)
         if request.method == 'POST':
             form = EditJobForm(request.POST, request.FILES, instance=job)
             if form.is_valid():
@@ -287,9 +290,10 @@ def edit_job(request, id):
                 messages.info(request, companyForm.errors)
                 return redirect(request.path_info)
         else:
-            jobForm = EditJobForm()
-            companyForm = EmployerForm()
-            args = {'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type']}
+            jobForm = EditJobForm(instance=job)
+            # companyForm = EmployerForm()
+            args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type']}
+            # args = {'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type']}
             return render(request, 'Home/edit_job.html', args)
     except Admin.DoesNotExist:
         pass
@@ -331,6 +335,7 @@ def news(request):
 
     return render(request, 'Home/news.html', args)
 
+
 @login_required
 def reopen_job(request, id):
     user = get_user_type(request)
@@ -342,12 +347,13 @@ def reopen_job(request, id):
         job.status = 'Open'
         job.save()
         messages.success(request, "You have successfully reopened the job")
-        #args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
+        # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Home/job_details.html', args)
     else:
         form = EditJobForm()
-        #args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
+        # args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Home/reopen_job.html', args)
+
 
 @login_required
 def delete_job(request, id):
@@ -360,11 +366,11 @@ def delete_job(request, id):
         job.status = 'Deleted'
         job.save()
         messages.success(request, "You have successfully deleted the job")
-        #args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
+        # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Home/job_details.html', args)
     else:
         form = EditJobForm()
-        #args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
+        # args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Home/delete_job.html', args)
 
 
@@ -380,11 +386,11 @@ def close_job(request, id):
         job.date_closed = timezone.now()
         job.save()
         messages.success(request, "You have successfully closed the job")
-        #args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
+        # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Home/job_details.html', args)
     else:
         form = EditJobForm()
-        #args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
+        # args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Home/close_job.html', args)
 
 

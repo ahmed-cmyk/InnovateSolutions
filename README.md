@@ -197,3 +197,12 @@ The purpose of this project is to redesign the existing murdoch job portal by us
     ### Known Problems:
     - The program still requires that both emails are entered. Problem probably exits because of the way the
      database is structure i.e. there is probably a rule stating that these two fields must exist.
+     
+## 07/07/20 - 09:45AM
+- Removed CountryFields :sob: .
+- Turned location into a dropdown which allows users to select a location from dubai.
+- Fixed the issue where admins cannot edit jobs.
+- Fixed the issue where the information of the job that an admin is editing wasn't shown.
+    ### Known Issues
+    - Fix for edit job required removal company form fields but I've tried the original groups
+    project and it doesn't work there either so it's an issue as old as time.

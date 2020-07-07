@@ -33,10 +33,10 @@
                 {{ jobForm.salary|as_crispy_field }}
                 {{ jobForm.skills|as_crispy_field }}
                 {{ jobForm.industry_id|as_crispy_field }}
-                {{ companyForm.logo|as_crispy_field }}
-                {{ companyForm.company_name|as_crispy_field }}
-                {{ companyForm.company_description|as_crispy_field }}
-                {{ companyForm.phone_number|as_crispy_field }}
+{#                {{ companyForm.logo|as_crispy_field }}#}
+{#                {{ companyForm.company_name|as_crispy_field }}#}
+{#                {{ companyForm.company_description|as_crispy_field }}#}
+{#                {{ companyForm.phone_number|as_crispy_field }}#}
             {% endif %}
 
             <input type="hidden" name="next" value="{% url 'job_details' job.id %}">

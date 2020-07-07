@@ -1,19 +1,22 @@
 from django import forms
 from Home.models import Job, Skill, JobType, Industry
 from Student.models import Student
-from django_countries.fields import CountryField
-from django_countries.widgets import CountrySelectWidget
 
 from DjangoUnlimited import settings
 
 
 class CreateJobForm(forms.ModelForm):
+    LOCATION_CHOICES = [
+        ('academic city', 'Academic City'),
+        ('silicon oasis', 'Silicon Oasis'),
+        ('knowledge park', 'Knowledge Park')
+    ]
     job_title = forms.CharField(label='*Job Title', max_length=100, required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     description = forms.CharField(label='*Job Description', max_length=750, required=True, widget=forms.Textarea(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     duration = forms.IntegerField(label='*Duration (in months)')
-    location = CountryField().formfield(blank_label='(Select country)')
+    location = forms.CharField(max_length=100, required=True, widget=forms.Select(choices=LOCATION_CHOICES))
     job_type_id = forms.ModelChoiceField(
         widget=forms.Select(attrs={'class': 'custom-select'}),
         queryset=JobType.objects.all(),
@@ -38,17 +41,21 @@ class CreateJobForm(forms.ModelForm):
     class Meta:
         model = Job
         exclude = ['posted_by', 'date_posted', 'status', 'date_closed']
-        widgets = {'country': CountrySelectWidget()}
 
 
 class EditJobForm(forms.ModelForm):
+    LOCATION_CHOICES = [
+        ('academic city', 'Academic City'),
+        ('silicon oasis', 'Silicon Oasis'),
+        ('knowledge park', 'Knowledge Park')
+    ]
     job_title = forms.CharField(max_length=100, required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     description = forms.CharField(label='Job Description', max_length=750, required=True, widget=forms.Textarea(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
 
     duration = forms.IntegerField(label='Duration (in months)')
-    location = forms.CharField(max_length=100, required=True)
+    location = forms.CharField(max_length=100, required=True, widget=forms.Select(choices=LOCATION_CHOICES))
     job_type_id = forms.ModelChoiceField(
         widget=forms.Select(attrs={'class': 'custom-select'}),
         queryset=JobType.objects.all(),
@@ -75,9 +82,14 @@ class EditJobForm(forms.ModelForm):
 
 
 class FilterJobForm(forms.ModelForm):
+    LOCATION_CHOICES = [
+        ('academic city', 'Academic City'),
+        ('silicon oasis', 'Silicon Oasis'),
+        ('knowledge park', 'Knowledge Park')
+    ]
     min_duration = forms.IntegerField(required=False)
     max_duration = forms.IntegerField(required=False)
-    location = CountryField().formfield(blank_label='(Select country)')
+    location = forms.CharField(max_length=100, required=True, widget=forms.Select(choices=LOCATION_CHOICES))
     job_type_id = forms.ModelChoiceField(
         widget=forms.Select(attrs={'class': 'custom-select'}),
         queryset=JobType.objects.all(),
@@ -98,7 +110,6 @@ class FilterJobForm(forms.ModelForm):
         model = Job
         fields = ['min_duration', 'max_duration', 'location', 'job_type_id', 'min_salary', 'max_salary',
                   'industry_id']
-        widgets = {'country': CountrySelectWidget()}
 
     def __init__(self, *args, **kwargs):
         super(FilterJobForm, self).__init__(*args, **kwargs)
