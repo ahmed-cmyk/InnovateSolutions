@@ -169,41 +169,7 @@ class EditStudentProfileInitialForm(forms.ModelForm):
         exclude = ['email', 'password1', 'password2']
 
 
-class EditStudentProfileForm(forms.ModelForm):
-    gender_choices = [
-        ('Male', 'Male'),
-        ('Female', 'Female')
-    ]
-    gender = forms.ChoiceField(choices=gender_choices, widget=forms.RadioSelect(attrs={'class': 'custom-select'}))
-    DOB = forms.DateField(required=True, label='Date of Birth',
-                          widget=forms.DateInput(attrs={
-                              'class': 'datepicker form-control-text', 'placeholder': 'YYYY-MM-DD',
-                              'autocomplete': 'off'
-                          }))
-    alumni_status = forms.BooleanField(required=False, label='Select if you are a Murdoch University Alumni',
-                                       widget=forms.CheckboxInput(attrs={'onClick': 'disable_fields(this.checked)'}))
-    expected_graduation_date = forms.DateField(required=False,
-                                               label='Expected Graduation Date',
-                                               widget=forms.DateInput(attrs={
-                                                   'class': 'datepicker form-control-text', 'placeholder': 'YYYY-MM-DD',
-                                                   'autocomplete': 'off'
-                                               }))
-    personal_email = forms.EmailField(required=False, label='Personal Email Address')
-    skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
-                                            widget=forms.CheckboxSelectMultiple,
-                                            required=True)
-    dp = forms.ImageField(label='Select a profile picture (Only jpeg and png file formats allowed.)',
-                          required=False,
-                          validators=[FileTypeValidator(
-                              allowed_types=['image/jpeg', 'image/png']
-                          )])
-    cv = forms.FileField(allow_empty_file=False, label='Attach CV (Only PDF, docx, and doc file formats allowed.)',
-                         validators=[FileTypeValidator(
-                             allowed_types=["application/pdf",
-                                            "application/msword",
-                                            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"])]
-                         )
-
+class EditStudentProfileForm(StudentForm):
     class Meta:
         model = Student
         exclude = ['user', 'jobs_applied', 'student_id']
@@ -212,5 +178,4 @@ class EditStudentProfileForm(forms.ModelForm):
 class StudentJobApplicationForm(forms.ModelForm):
     class Meta:
         model = StudentJobApplication
-
         fields = ['job_id', 'applied']

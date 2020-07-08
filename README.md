@@ -227,3 +227,13 @@ this project
 
 ## 07/07/20 - 10:57PM
 - Fixed some issues with the sitemap
+
+## 07/08/20 - 01:04PM
+- Fixed some more issues with the sitemap
+- Shortened some of the code in the forms.py files (Home and Student)
+- Changed "View Profile" to "My Profile"
+
+## 07/08/20 - 02:29PM
+- Shortened some more code
+- Fixed an issue where users can't view applicants after reopening a job
+ and would normally have to reload the job details page

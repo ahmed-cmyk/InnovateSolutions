@@ -62,7 +62,6 @@ def edit_profile(request):
         else:
             print(student_form)
             messages.error(request, student_form.errors)
-            messages.error(request, student_form.errors)
             messages.error(request, user_form.errors)
             return redirect("edit_student_profile")
     else:

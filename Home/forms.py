@@ -6,84 +6,48 @@ from DjangoUnlimited import settings
 
 
 class CreateJobForm(forms.ModelForm):
-    LOCATION_CHOICES = [
-        ('Dubai Silicon Oasis', 'Dubai Silicon Oasis'),
-        ('Dubai Academic City', 'Dubai Academic City'),
-        ('International City', 'International City'),
-        ('Al Warqa', 'Al Warqa'),
-        ('Rashidiya', 'Rashidiya'),
-        ('Mirdif', 'Mirdif'),
-        ('Dubai Festival City', 'Dubai Festival City')
-    ]
-    job_title = forms.CharField(label='*Job Title', max_length=100, required=True, widget=forms.TextInput(
-        attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
-    description = forms.CharField(label='*Job Description', max_length=750, required=True, widget=forms.Textarea(
-        attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
-    duration = forms.IntegerField(label='*Duration (in months)')
-    location = forms.CharField(max_length=100, required=True, widget=forms.Select(choices=LOCATION_CHOICES))
-    job_type_id = forms.ModelChoiceField(
-        widget=forms.Select(attrs={'class': 'custom-select'}),
-        queryset=JobType.objects.all(),
-        required=True,
-        label="*Job Type"
-    )
-    salary = forms.FloatField(label="*Salary (AED per month)")
+    # LOCATION_CHOICES = [
+    #     ('Dubai Silicon Oasis', 'Dubai Silicon Oasis'),
+    #     ('Dubai Academic City', 'Dubai Academic City'),
+    #     ('International City', 'International City'),
+    #     ('Al Warqa', 'Al Warqa'),
+    #     ('Rashidiya', 'Rashidiya'),
+    #     ('Mirdif', 'Mirdif'),
+    #     ('Dubai Festival City', 'Dubai Festival City')
+    # ]
+    # job_title = forms.CharField(label='*Job Title', max_length=100, required=True, widget=forms.TextInput(
+    #     attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
+    # description = forms.CharField(label='*Job Description', max_length=750, required=True, widget=forms.Textarea(
+    #     attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
+    # duration = forms.IntegerField(label='*Duration (in months)')
+    # location = forms.CharField(max_length=50, required=True, widget=forms.Select(choices=LOCATION_CHOICES))
+    # job_type_id = forms.ModelChoiceField(
+    #     widget=forms.Select(attrs={'class': 'custom-select'}),
+    #     queryset=JobType.objects.all(),
+    #     required=True,
+    #     label="*Job Type"
+    # )
+    # salary = forms.FloatField(label="*Salary (AED per month)")
     skills = forms.ModelMultipleChoiceField(
         label='*Skill',
         widget=forms.CheckboxSelectMultiple,
         queryset=Skill.objects.all(),
         required=True
     )
-
-    industry_id = forms.ModelChoiceField(
-        label='*Industry',
-        widget=forms.Select(attrs={'class': 'custom-select'}),
-        queryset=Industry.objects.all(),
-        required=True,
-    )
-
+    #
+    # industry_id = forms.ModelChoiceField(
+    #     label='*Industry',
+    #     widget=forms.Select(attrs={'class': 'custom-select'}),
+    #     queryset=Industry.objects.all(),
+    #     required=True,
+    # )
+    #
     class Meta:
         model = Job
         exclude = ['posted_by', 'date_posted', 'status', 'date_closed']
 
 
-class EditJobForm(forms.ModelForm):
-    LOCATION_CHOICES = [
-        ('Dubai Silicon Oasis', 'Dubai Silicon Oasis'),
-        ('Dubai Academic City', 'Dubai Academic City'),
-        ('International City', 'International City'),
-        ('Al Warqa', 'Al Warqa'),
-        ('Rashidiya', 'Rashidiya'),
-        ('Mirdif', 'Mirdif'),
-        ('Dubai Festival City', 'Dubai Festival City')
-    ]
-    job_title = forms.CharField(max_length=100, required=True, widget=forms.TextInput(
-        attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
-    description = forms.CharField(label='Job Description', max_length=750, required=True, widget=forms.Textarea(
-        attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
-
-    duration = forms.IntegerField(label='Duration (in months)')
-    location = forms.CharField(max_length=100, required=True, widget=forms.Select(choices=LOCATION_CHOICES))
-    job_type_id = forms.ModelChoiceField(
-        widget=forms.Select(attrs={'class': 'custom-select'}),
-        queryset=JobType.objects.all(),
-        required=True,
-        label="Job Type"
-    )
-    salary = forms.FloatField(label="Salary (AED per month)")
-    skills = forms.ModelMultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple,
-        queryset=Skill.objects.all(),
-        required=True
-    )
-
-    industry_id = forms.ModelChoiceField(
-        widget=forms.Select(attrs={'class': 'custom-select'}),
-        queryset=Industry.objects.all(),
-        required=True,
-        label="Industry"
-    )
-
+class EditJobForm(CreateJobForm):
     class Meta:
         model = Job
         exclude = ['posted_by', 'date_posted', 'date_closed', 'status']
@@ -140,7 +104,6 @@ class FilterStudentForm(forms.Form):
     ]
     alumni_status = forms.ChoiceField(required=False, label='Student Status', choices=choices,
                                       widget=forms.RadioSelect(attrs={'class': 'custom-select'}))
-
     min_graduation_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, required=False,
                                           label='Minimum Graduation Date',
                                           widget=forms.DateInput(attrs={
@@ -155,7 +118,6 @@ class FilterStudentForm(forms.Form):
                                               'placeholder': 'YYYY-MM-DD',
                                               'autocomplete': 'off'
                                           }))
-
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             widget=forms.CheckboxSelectMultiple,
                                             required=True)

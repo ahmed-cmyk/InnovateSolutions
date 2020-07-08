@@ -31,9 +31,9 @@
                     <div id="navTop" class="navbar-nav mr-auto">
                         <div class="navElements navbar-expand-md">
                             <a class="navbar-brand" href="/">
-                                <div id="murdochLogo" class="float-left">
+                                <span id="murdochLogo" class="float-left">
                                     <img src="{% static 'images/murdochlogo.png' %}" alt="Murdoch University Logo">
-                                </div><!-- End of navbar-brand -->
+                                </span><!-- End of navbar-brand -->
                             </a>
                             <div id="userElements" class="float-right">
                                 {% if not user.is_authenticated %}
@@ -61,21 +61,21 @@
                                         <ul class="dropdown-menu">
                                             {% if user_type == 'student' %}
                                                 <li>
-                                                    <a class="dropdown-item" href="{% url 'view_student_profile' %}">View Profile</a>
+                                                    <a class="dropdown-item" href="{% url 'view_student_profile' %}">My Profile</a>
                                                 </li>
                                                 <li>
                                                     <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
                                                 </li>
                                             {% elif user_type == 'employer' %}
                                                 <li>
-                                                    <a class="dropdown-item" href="{% url 'view_employer_profile' %}">View Profile</a>
+                                                    <a class="dropdown-item" href="{% url 'view_employer_profile' %}">My Profile</a>
                                                 </li>
                                                 <li>
                                                     <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
                                                 </li>
                                             {% elif user_type == 'admin' %}
                                                 <li>
-                                                    <a class="dropdown-item" href="{% url 'view_admin_profile' %}">View Profile</a>
+                                                    <a class="dropdown-item" href="{% url 'view_admin_profile' %}">My Profile</a>
                                                 </li>
                                                 <li>
                                                     <a class="dropdown-item" href="{% url 'admin:index' %}">Dashboard</a>

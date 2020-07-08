@@ -12,7 +12,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
 from DjangoUnlimited.settings import SENDGRID_API_KEY, DEFAULT_FROM_EMAIL
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from wsgiref.util import FileWrapper
 from django.core.files import File
 import os
@@ -291,7 +291,7 @@ def edit_job(request, id):
                 return redirect(request.path_info)
         else:
             jobForm = EditJobForm(instance=job)
-            # companyForm = EmployerForm()
+            # companyForm = EmployerForm(instance=admin)
             args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type']}
             # args = {'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type']}
             return render(request, 'Home/edit_job.html', args)
@@ -348,7 +348,7 @@ def reopen_job(request, id):
         job.save()
         messages.success(request, "You have successfully reopened the job")
         # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
-        return render(request, 'Home/job_details.html', args)
+        return redirect('job_details', job.id)
     else:
         form = EditJobForm()
         # args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
@@ -387,7 +387,7 @@ def close_job(request, id):
         job.save()
         messages.success(request, "You have successfully closed the job")
         # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
-        return render(request, 'Home/job_details.html', args)
+        return redirect('job_details', job.id)
     else:
         form = EditJobForm()
         # args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
