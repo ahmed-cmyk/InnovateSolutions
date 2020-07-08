@@ -243,3 +243,7 @@ this project
  login page despite having been redirected to the index page. This would cause issues
  where if you were to move to another page and then go back to the index page by
  clicking the back button it would give an error
+ 
+## 07/08/20 - 05:22PM 
+- Fixed a bug where employers can close a job without verifying whether or not
+a student received that job.
