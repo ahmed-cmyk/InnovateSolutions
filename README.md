@@ -237,3 +237,9 @@ this project
 - Shortened some more code
 - Fixed an issue where users can't view applicants after reopening a job
  and would normally have to reload the job details page
+ 
+## 07/08/20 - 04:28PM
+- Fixed a bug where after login the url would still show that you were on the
+ login page despite having been redirected to the index page. This would cause issues
+ where if you were to move to another page and then go back to the index page by
+ clicking the back button it would give an error

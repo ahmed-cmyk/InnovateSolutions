@@ -13,12 +13,12 @@ def isValidated(passwd):
     if len(passwd) > 8:
         status = True
 
-    if not any(char.isdigit() for char in passwd): 
+    if not any(char.isdigit() for char in passwd):
         status = False
 
-    if not any(char.isalpha() for char in passwd): 
+    if not any(char.isalpha() for char in passwd):
         status = False
-        
+
     return status
 
 def number_symbol_exists(string):
@@ -50,7 +50,8 @@ def login(request):
                     return redirect("log_in")
                 else:
                     auth.login(request, user)
-                    return render(request, "Home/index.html", get_user_type(request))
+                    return redirect('/', get_user_type(request))
+                    # return render(request, "Home/index.html", get_user_type(request))
     else:
         return render(request, 'login.html', get_user_type(request))
 
