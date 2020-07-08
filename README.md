@@ -256,3 +256,6 @@ a student received that job.
 - Used CSS to modify the main tag to provide space between body elements of every
 page that uses the theme.html body template tags and form from cutting off in the middle
 of the screen.
+
+## 07/08/20 - 05:59PM
+- Fixed links to password reset pages
