@@ -12,7 +12,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
 from DjangoUnlimited.settings import SENDGRID_API_KEY, DEFAULT_FROM_EMAIL
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from wsgiref.util import FileWrapper
 from django.core.files import File
 import os
@@ -348,7 +348,7 @@ def reopen_job(request, id):
         job.save()
         messages.success(request, "You have successfully reopened the job")
         # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
-        return render(request, 'Home/job_details.html', args)
+        return redirect('job_details', job.id)
     else:
         form = EditJobForm()
         # args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
@@ -387,7 +387,7 @@ def close_job(request, id):
         job.save()
         messages.success(request, "You have successfully closed the job")
         # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
-        return render(request, 'Home/job_details.html', args)
+        return redirect('job_details', job.id)
     else:
         form = EditJobForm()
         # args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
