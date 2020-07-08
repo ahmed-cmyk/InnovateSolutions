@@ -8,14 +8,14 @@
 {% endblock %}
 
 {% csrf_token %}
-{% block content %}
-    <div id="body-image" class="text-center">
-        <img src="{% static 'images/workingStudents.jpg' %}" alt="Home page image">
-        <div class="blockquote text-center text-black">
-            “Far and away the best prize that life has to offer is the chance to work hard at work worth doing.”
-            <span class="blockquote-footer font-italic">Theodore Roosevelt</span>
+    {% block image %}
+        <div id="body-image" class="text-center">
+            <img src="{% static 'images/workingStudents.jpg' %}" alt="Home page image">
         </div>
+    {% endblock %}
+{% block content %}
+    <div id="quoteBody" class="blockquote text-center text-black">
+        <p>“Far and away the best prize that life has to offer is the chance to work hard at work worth doing.”</p>
+        <div class="blockquote-footer font-italic">Theodore Roosevelt</div>
     </div>
-    <br>
-    <br><br>
 {% endblock %}

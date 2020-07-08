@@ -78,67 +78,54 @@
                         </form>
                     </div>
                 {% endif %}
-                <div id="job-list-body" class="col-md-8 col-sm-8 col-xs-12">
+                <div id="job-list-body" class="col-md-7 col-sm-7 col-xs-12">
                     {% for job in jobs %}
                         {% if user_type == "employer" %}
                             <div class="card job-cards">
+                                <div class="card-image-left">
+                                    {% if obj.logo %}
+                                        <img src="{{ obj.logo.url }}" height="150.0em"
+                                             width="150.0em" alt="job-pic">
+                                    {% else %}
+                                        <img src="{% static 'DefaultDP.jpg' %}" height="150.0em"
+                                             width="150.0em" alt="default-job-pic">
+                                    {% endif %}
+                                </div>
                                 <div class="card-body">
-                                    <div class="card-image-left">
-                                        {% if obj.logo %}
-                                            <img src="{{ obj.logo.url }}" height="150.0em"
-                                                 width="150.0em" alt="job-pic">
-                                        {% else %}
-                                            <img src="{% static 'DefaultDP.jpg' %}" height="150.0em"
-                                                 width="150.0em" alt="default-job-pic">
-                                        {% endif %}
-                                    </div>
-                                    <h3 class="card-title">
-                                        <a href="{% url 'job_details' job.id %}">{{ job.job_title }}</a>
-                                    </h3>
-                                    <div class="card-subtitle">
-                                        <p><span>Status:</span> {{ job.status }} </p>
-                                    </div>
-                                    <div class="card-text">
-                                        <p><span class="job-specs font-weight-bold">Salary:</span>AED {{ job.salary }}</p>
-                                    </div>
-                                    <div class="card-text">
-                                        <p><span class="job-specs font-weight-bold">Duration:</span>{{ job.duration }} months</p>
-                                    </div>
-                                    <div class="card-text">
-                                        <p><span class="job-specs font-weight-bold">Industry:</span>{{ job.industry_id }} </p>
-                                    </div>
-                                    <div class="card-text">
-                                        <p><span class="job-specs font-weight-bold">Job Type:</span>{{ job.job_type_id }} </p>
-                                    </div>
-                                    <div class="card-text">
-                                        <p><span class="job-specs font-weight-bold">Location:</span>{{ job.location }} </p>
-                                    </div>
+                                    <a href="{% url 'job_details' job.id %}">
+                                        <h5 class="card-title">{{ job.job_title }}</h5>
+                                    </a>
+                                    <p><span class="card-text job-specs font-weight-bold">Status:</span> {{ job.status }} </p>
+                                    <p><span class="card-text job-specs font-weight-bold">Salary:</span>AED {{ job.salary }}</p>
+                                    <p><span class="card-text job-specs font-weight-bold">Duration:</span>{{ job.duration }} months</p>
+                                    <p><span class="card-text job-specs font-weight-bold">Industry:</span>{{ job.industry_id }} </p>
+                                    <p><span class="card-text job-specs font-weight-bold">Job Type:</span>{{ job.job_type_id }} </p>
+                                    <p><span class="card-text job-specs font-weight-bold">Location:</span>{{ job.location }} </p>
                                 </div><!-- End of card-body -->
+                                <br>
                             </div>
                         {% else %}
                             {% for company in companies %}
                                 {% if job.posted_by == company.user %}
-                                    <div class="card job-cards">
+                                    <div class="card bg-light job-cards">
+{#                                        <div class="card-image-left">#}
+{#                                            {% if obj.logo %}#}
+{#                                                <img src="{{ obj.logo.url }}" height="150.0em"#}
+{#                                                     width="150.0em" alt="normal-pic">#}
+{#                                            {% else %}#}
+{#                                                <img src="{% static 'DefaultDP.jpg' %}" height="150.0em"#}
+{#                                                     width="150.0em" alt="default-pic">#}
+{#                                            {% endif %}#}
+{#                                        </div>#}
+                                        <a href="{% url 'job_details' job.id %}">
+                                            <h4 class="card-header">{{ job.job_title }}</h4>
+                                        </a>
                                         <div class="card-body">
-                                            <div class="card-image-left">
-                                                {% if obj.logo %}
-                                                    <img src="{{ obj.logo.url }}" height="150.0em"
-                                                         width="150.0em" alt="normal-pic">
-                                                {% else %}
-                                                    <img src="{% static 'DefaultDP.jpg' %}" height="150.0em"
-                                                         width="150.0em" alt="default-pic">
-                                                {% endif %}
-                                            </div>
-                                            <h3 class="card-header">
-                                                <a href="{% url 'job_details' job.id %}"> {{ job.job_title }} </a>
-                                            </h3>
-                                            <h4 class="card-title"><span class="font-weight-bold">Company Name:</span>  {{ company.company_name }}</h4>
+                                            <h6 class="card-subtitle"><b>Company Name:</b> {{ company.company_name }}</h6>
                                             {% if user_type == "admin" %}
-                                                <div class="card-subtitle">
-                                                    <p><span class="font-weight-bold">Status:</span> {{ job.status }} </p>
-                                                </div>
+                                                <p><span class="card-text font-weight-bold">Status:</span> {{ job.status }} </p>
                                             {% endif %}
-                                            <p class="card-text">{{ job.description }}</p>
+                                            <p class="card-text"><span class="font-weight-bold">Description:</span> {{ job.description }}</p>
                                             <p class="card-text"><span class="font-weight-bold">Salary:</span> AED {{ job.salary }} </p>
                                             <p class="card-text"><span class="font-weight-bold">Duration:</span> {{ job.duration }} months</p>
                                             <p class="card-text"><span class="font-weight-bold">Industry:</span> {{ job.industry_id }} </p>
@@ -146,6 +133,7 @@
                                             <p class="card-text"><span class="font-weight-bold">Location:</span> {{ job.location }} </p>
                                         </div>
                                     </div>
+                                    <br>
                                 {% endif %}
                             {% endfor %}
                         {% endif %}

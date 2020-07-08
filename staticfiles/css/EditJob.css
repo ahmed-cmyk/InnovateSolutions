@@ -1,0 +1,9 @@
+#editJobBody hr {
+    width: 70%;
+    background-color: #000000;
+}
+
+#editJobBody form {
+    width: 80%;
+    margin: 0 auto;
+}

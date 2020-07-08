@@ -1,0 +1,9 @@
+#applicationBody #noApplications {
+    height: 20vh;
+    margin: 5% 0;
+}
+
+#applicationBody table {
+    width: auto;
+    margin: 5% auto;
+}

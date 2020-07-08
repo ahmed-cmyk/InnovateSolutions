@@ -55,7 +55,7 @@
             </div>
         {% endif %}
         <div class="row">
-            <div id="filterForm" class="col-md-4 col-sm-4 col-xs-12 d-none d-sm-block">
+            <div id="filterForm" class="col-md-3 col-sm-3 col-xs-12 d-none d-sm-block">
                 <form method="POST">{% csrf_token %}
                     <div id="formHeader" class="text-center">
                         <h5 class="text-white">Filter Students Listings</h5>
@@ -73,7 +73,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="col-md-8 col-sm-7 col-xs-12">
                 {% if user_type != 'student' %}
                     <div class="float-right">
                         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Student Names...">

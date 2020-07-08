@@ -1,13 +1,5 @@
 {% load staticfiles %}
 
-{% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/Base.css' %}"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
-    {% block stylesheets %}
-    {% endblock %}
-{% endblock %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,10 +7,16 @@
         {% block title %}{% endblock %}
     </title>
 
+    {% block css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/Base.css' %}"/>
+        <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+        {% block stylesheets %}{% endblock %}
+    {% endblock %}
     <link rel="shortcut icon" type="image/png" href="{% static 'images/Favicon.png' %}"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="description" content="Welcome to Career Portal : 100% Job Board. Find a job near you. Simple, fast and efficient">
     <meta name="keywords" content="Career Portal, United Arab Emirates, jobs ads, jobs, ads, script, app, premium jobs">
 </head>
@@ -182,6 +180,7 @@
                     <p class="alert alert-{{ message.tags }}"> {{ message }} </p>
                 {% endfor %}
             {% endif %}
+            {% block image %}{% endblock %}
             <main>
                 {% block content %}{% endblock %}
             </main>

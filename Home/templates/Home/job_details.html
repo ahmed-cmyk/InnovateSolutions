@@ -34,13 +34,13 @@
         <form method="POST">{% csrf_token %}
             <div class="card border-dark mb-3">
                 <h2 class="card-header">{{ job.job_title }}</h2>
-                {% for company in companies %}
-                    {% if job.posted_by == company.user %}
-                            <h2 class="card-title">{{ company.company_name }}</h2>
-                    {% endif %}
-                {% endfor %}
                 <div class="card-body">
-                    <p class="card-text"><b>About the Job:</b><br>&emsp;{{ job.description }}</p>
+                    {% for company in companies %}
+                        {% if job.posted_by == company.user %}
+                                <h5 class="card-title text-capitalize"><b>Company Name: </b>{{ company.company_name }}</h5>
+                        {% endif %}
+                    {% endfor %}
+                    <p class="card-text"><b>About the Job:</b><br>{{ job.description }}</p>
                     <p class="card-text"><b>Location:</b> {{ job.location }} | <b>Duration:</b> {{ job.duration }} | <b>Salary:</b> AED {{ job.salary }}</p>
                     <p class="card-text"><b>Posted On:</b> {{ job.date_posted }}</p>
                     {% for company in companies %}

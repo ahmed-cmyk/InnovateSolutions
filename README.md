@@ -259,3 +259,10 @@ of the screen.
 
 ## 07/08/20 - 05:59PM
 - Fixed links to password reset pages
+
+## 07/08/20 - 10:45PM
+- Modified index
+- Modified View Jobs
+- Modified View Students
+- Modified Job Details
+- Added font awesome icon folder

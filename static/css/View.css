@@ -1,5 +1,5 @@
-.row {
-  margin: 0;
+#viewBody div {
+  margin: 0 1%;
 }
 
 #filterForm {
@@ -21,8 +21,6 @@
 .job-cards {
   border: 1px solid #000;
   border-radius: 8px;
-  background-color: #F9F9F9;
-  margin: 2vh auto;
 }
 
 #filter button {
@@ -34,10 +32,6 @@
 
 .padding {
   margin: 10px 0;
-}
-
-.noApplications {
-  margin: 5% 0;
 }
 
 /******** Mobile Devices ********/
