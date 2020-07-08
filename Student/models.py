@@ -16,7 +16,7 @@ class Student(models.Model):
     DOB = models.DateField(null=True)
     skills = models.ManyToManyField(Skill, related_name='student_skills')
     alumni_status = models.BooleanField(default=False)
-    student_id = models.CharField(null=False, max_length=8, unique=True)
+    student_id = models.CharField(max_length=8, null=False, unique=True)
     personal_email = models.EmailField(max_length=100)
     expected_graduation_date = models.DateField(null=True, blank=True)
     jobs_applied = models.ManyToManyField(Job, through='StudentJobApplication')

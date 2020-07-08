@@ -291,7 +291,7 @@ def edit_job(request, id):
                 return redirect(request.path_info)
         else:
             jobForm = EditJobForm(instance=job)
-            # companyForm = EmployerForm()
+            # companyForm = EmployerForm(instance=admin)
             args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type']}
             # args = {'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type']}
             return render(request, 'Home/edit_job.html', args)

@@ -40,6 +40,10 @@
   margin: 10px 0;
 }
 
+.noApplications {
+  margin: 5% 0;
+}
+
 /******** Mobile Devices ********/
 @media (max-width: 767px) {
     #filter button {

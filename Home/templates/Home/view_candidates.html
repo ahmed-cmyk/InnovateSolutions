@@ -7,31 +7,31 @@
 
 {% block content %}
     {% if candidates %}
-        <br><br>
-        <table class="table" align="center">
-            <thead>
-            <tr class="text-center">
-                <th>Date Applied</th>
-                <th>Student Name</th>
-                <th>CV</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for candidates in candidates %}
+        <div id="viewBody">
+            <table class="table text-center">
+                <thead>
                 <tr class="text-center">
-                <td>{{ candidates.date_applied }}</td>
-                <td>{{ candidates.applied }}</td>
-                <td align="center">
-                    <button type="button" class="mybutton"><a href="{{ candidates.applied.cv.url }}">DOWNLOAD CV</a></button>
-                </td>
-            {% endfor %}
-            </tr>
-            </tbody>
-        </table>
+                    <th>Date Applied</th>
+                    <th>Student Name</th>
+                    <th>CV</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for candidates in candidates %}
+                    <tr class="text-center">
+                    <td>{{ candidates.date_applied }}</td>
+                    <td>{{ candidates.applied }}</td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-primary"><a href="{{ candidates.applied.cv.url }}">DOWNLOAD CV</a></button>
+                    </td>
+                {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
     {% else %}
-        <body style="min-height: 400px; margin-bottom: 150px;">
-            <h1 align="center">No applications received yet</h1>
-        </body>
-        <footer style="position: fixed; font-size: medium">
+        <div class="noApplications">
+            <h1 class="text-center">No applications received yet</h1>
+        </div>
     {% endif %}
 {% endblock %}
