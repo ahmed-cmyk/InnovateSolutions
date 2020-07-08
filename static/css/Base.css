@@ -73,6 +73,10 @@ header {
     border-bottom: 2px solid #CC0000;
 }
 
+main {
+    margin: 5% 0;
+}
+
 footer{
     background-color: #1D1A1A;
     color: white;

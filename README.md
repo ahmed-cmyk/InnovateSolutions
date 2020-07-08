@@ -251,3 +251,8 @@ a student received that job.
 ## 07/08/20 - 05:33PM
 - Removed "My HelpDesk Requests" from admin view
 - Fixed issue where admin couldn't respond to HelpDesk requests
+
+## 07/08/20 - 05:45PM
+- Used CSS to modify the main tag to provide space between body elements of every
+page that uses the theme.html body template tags and form from cutting off in the middle
+of the screen.
