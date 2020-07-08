@@ -247,3 +247,7 @@ this project
 ## 07/08/20 - 05:22PM 
 - Fixed a bug where employers can close a job without verifying whether or not
 a student received that job.
+
+## 07/08/20 - 05:33PM
+- Removed "My HelpDesk Requests" from admin view
+- Fixed issue where admin couldn't respond to HelpDesk requests
