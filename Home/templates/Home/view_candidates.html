@@ -22,7 +22,9 @@
                     <td>{{ candidates.date_applied }}</td>
                     <td>{{ candidates.applied }}</td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-primary"><a href="{{ candidates.applied.cv.url }}">DOWNLOAD CV</a></button>
+                        <button type="button" class="btn btn-primary">
+                            <a class="text-decoration-none text-white" href="{{ candidates.applied.cv.url }}">DOWNLOAD CV</a>
+                        </button>
                     </td>
                 {% endfor %}
                 </tr>

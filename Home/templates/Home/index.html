@@ -14,8 +14,45 @@
         </div>
     {% endblock %}
 {% block content %}
+    <div id="mobileButtons" class="col-xs-12 text-center d-block d-sm-none">
+        {% if not user.is_authenticated %}
+            <div class="dropdown">
+                <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">
+                    Sign Up
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'student_registration' %}">Student Registration</a>
+                    <a class="dropdown-item" href="{% url 'employer_register' %}">Employer Registration</a>
+                </div><!-- End of dropdown-menu -->
+            </div><!-- End of dropdown -->
+            <a href="{% url 'log_in' %}">
+                <button class="btn btn-danger">Login</button>
+            </a>
+        {% endif %}
+    </div>
+    <br>
     <div id="quoteBody" class="blockquote text-center text-black">
         <p>“Far and away the best prize that life has to offer is the chance to work hard at work worth doing.”</p>
         <div class="blockquote-footer font-italic">Theodore Roosevelt</div>
+    </div>
+    <br><br>
+    <div id="jobDetBody" class="row text-center">
+        <div class="jobDetCard col-md-4 col-sm-4 col-xs-12">
+            <i class="fa fa-envelope fa-3x" aria-hidden="true"></i>
+            <h5>Post a Job</h5>
+            <p>Do you have a post to be filled within your company? Find the right candidate in a few clicks using the Career Portal.</p>
+        </div>
+        <br class="d-block d-sm-none">
+        <div class="jobDetCard col-md-4 col-sm-4 col-xs-12">
+            <i class="fa fa-briefcase fa-3x" aria-hidden="true"></i>
+            <h5>Create and Manage Jobs</h5>
+            <p>Create and Manage your jobs. Repost your old jobs, etc.</p>
+        </div>
+        <br class="d-block d-sm-none">
+        <div class="jobDetCard col-md-4 col-sm-4 col-xs-12">
+            <i class="fa fa-search fa-3x" aria-hidden="true"></i>
+            <h5>Find a Job</h5>
+            <p>Are you looking for a job in the UAE? Create an account and register your CV to be a candidate.</p>
+        </div>
     </div>
 {% endblock %}

@@ -79,30 +79,18 @@ main {
     margin: 5% 0;
 }
 
+#mobileButtons {
+    margin: auto;
+}
+
 #quoteBody {
     width: 80%;
     margin: auto;
 }
 
-#regCardBody {
-    background-color: #F6F3F4;
-    height: 50vh;
+#jobDetBody {
+    width: 90%;
     margin: auto;
-}
-
-.registrationCard {
-    background-color: #FFFFFF;
-    position: relative;
-    margin: auto;
-    padding: 1%;
-    border: 1px solid black;
-    border-radius: 8px;
-}
-
-.fa {}
-
-.registrationCard button {
-    width: 100%;
 }
 
 footer{

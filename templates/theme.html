@@ -33,7 +33,7 @@
                                     <img src="{% static 'images/murdochlogo.png' %}" alt="Murdoch University Logo">
                                 </span><!-- End of navbar-brand -->
                             </a>
-                            <div id="userElements" class="float-right">
+                            <div id="userElements" class="float-right d-none d-sm-block">
                                 {% if not user.is_authenticated %}
                                     <div class="dropdown">
                                         <button id="signup" class="btn dropdown-toggle" type="button" data-toggle="dropdown">

@@ -277,3 +277,8 @@ lists all 7 states of UAE.
 - Removed Student ID field from Edit Student Profile page
 - Added (AED) and (in Months) to the Salary and Duration columns respectively
 - Turned skills into a dropdown in the Create/Edit Job pages
+
+## 07/09/20 - 03:54PM
+- Added a new section to index page.
+- Hid the top user login elements for mobile users
+- Created login elements in the middle of the page for mobile users.
