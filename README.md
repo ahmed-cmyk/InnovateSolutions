@@ -266,3 +266,9 @@ of the screen.
 - Modified View Students
 - Modified Job Details
 - Added font awesome icon folder
+
+## 07/09/20 - 11:16AM
+- Fixed horizontal overflow that existed on all devices (At least I think I 
+did based on what I've seen).
+- Replaced the drop down which listed areas in dubai with a drop down that 
+lists all 7 states of UAE.

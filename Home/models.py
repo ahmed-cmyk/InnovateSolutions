@@ -42,13 +42,13 @@ class JobType(models.Model):
 
 class Job(models.Model):
     LOCATION_CHOICES = [
-        ('Dubai Silicon Oasis', 'Dubai Silicon Oasis'),
-        ('Dubai Academic City', 'Dubai Academic City'),
-        ('International City', 'International City'),
-        ('Al Warqa', 'Al Warqa'),
-        ('Rashidiya', 'Rashidiya'),
-        ('Mirdif', 'Mirdif'),
-        ('Dubai Festival City', 'Dubai Festival City')
+        ('Abu Dhabi', 'Abu Dhabi'),
+        ('Dubai', 'Dubai'),
+        ('Sharjah', 'Sharjah'),
+        ('Umm al-Qaiwain', 'Umm al-Qaiwain'),
+        ('Fujairah', 'Fujairah'),
+        ('Ajman', 'Ajman'),
+        ('Ra’s al-Khaimah', 'Ra’s al-Khaimah')
     ]
     date_posted = models.DateField(null=False, blank=False, auto_now_add=True)
     posted_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='job_author')

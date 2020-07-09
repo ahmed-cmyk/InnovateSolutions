@@ -55,13 +55,13 @@ class EditJobForm(CreateJobForm):
 
 class FilterJobForm(forms.ModelForm):
     LOCATION_CHOICES = [
-        ('Dubai Silicon Oasis', 'Dubai Silicon Oasis'),
-        ('Dubai Academic City', 'Dubai Academic City'),
-        ('International City', 'International City'),
-        ('Al Warqa', 'Al Warqa'),
-        ('Rashidiya', 'Rashidiya'),
-        ('Mirdif', 'Mirdif'),
-        ('Dubai Festival City', 'Dubai Festival City')
+        ('Abu Dhabi', 'Abu Dhabi'),
+        ('Dubai', 'Dubai'),
+        ('Sharjah', 'Sharjah'),
+        ('Umm al-Qaiwain', 'Umm al-Qaiwain'),
+        ('Fujairah', 'Fujairah'),
+        ('Ajman', 'Ajman'),
+        ('Ra’s al-Khaimah', 'Ra’s al-Khaimah')
     ]
     min_duration = forms.IntegerField(required=False)
     max_duration = forms.IntegerField(required=False)

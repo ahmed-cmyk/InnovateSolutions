@@ -1,11 +1,13 @@
 * {
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
+    /*border: 1px solid #f00 !important;*/
 }
 
 html, body {
     width: 100%;
     height: 100%;
+    overflow-x: -moz-hidden-unscrollable;
 }
 
 body .container-fluid {
@@ -120,11 +122,6 @@ footer .row hr {
 footer .footer-rule {
     background-color: #FFFFFF;
     width: 70%;
-}
-
-#extra-info {
-    margin-left: 15px;
-    margin-right: 15px;
 }
 
 #extra-info p {
