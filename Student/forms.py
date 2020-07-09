@@ -174,6 +174,10 @@ class EditStudentProfileForm(StudentForm):
         model = Student
         exclude = ['user', 'jobs_applied', 'student_id']
 
+    def __init__(self, *args, **kwargs):
+        super(EditStudentProfileForm, self).__init__(*args, **kwargs)
+        self.fields.pop('student_id')
+
 
 class StudentJobApplicationForm(forms.ModelForm):
     class Meta:

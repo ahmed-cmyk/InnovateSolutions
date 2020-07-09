@@ -272,3 +272,8 @@ of the screen.
 did based on what I've seen).
 - Replaced the drop down which listed areas in dubai with a drop down that 
 lists all 7 states of UAE.
+
+## 07/09/20 - 12:01PM
+- Removed Student ID field from Edit Student Profile page
+- Added (AED) and (in Months) to the Salary and Duration columns respectively
+- Turned skills into a dropdown in the Create/Edit Job pages

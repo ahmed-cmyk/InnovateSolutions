@@ -41,7 +41,7 @@
                         {% endif %}
                     {% endfor %}
                     <p class="card-text"><b>About the Job:</b><br>{{ job.description }}</p>
-                    <p class="card-text"><b>Location:</b> {{ job.location }} | <b>Duration:</b> {{ job.duration }} | <b>Salary:</b> AED {{ job.salary }}</p>
+                    <p class="card-text"><b>Location:</b> {{ job.location }} | <b>Duration (in Months):</b> {{ job.duration }} | <b>Salary (AED):</b> AED {{ job.salary }}</p>
                     <p class="card-text"><b>Posted On:</b> {{ job.date_posted }}</p>
                     {% for company in companies %}
                         {% if job.posted_by == company.user %}
