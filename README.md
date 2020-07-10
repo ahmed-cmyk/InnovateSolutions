@@ -282,3 +282,9 @@ lists all 7 states of UAE.
 - Added a new section to index page.
 - Hid the top user login elements for mobile users
 - Created login elements in the middle of the page for mobile users.
+
+## 07/10/20 - 12:21PM
+- Fixed a bug where users would be able to access the link to create a new job.
+- Fixed a bug where admins could not create/edit jobs.
+- Redesigned both the View Jobs and View Students pages.
+- Added a link on the View Jobs filter form that lets users view all jobs.

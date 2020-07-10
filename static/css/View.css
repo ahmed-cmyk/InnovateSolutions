@@ -7,15 +7,12 @@
   border-radius: 12px;
   height: 50%;
   background-color: #F9F9F9;
-}
-
-#filterForm #formHeader {
-  background-color: #CC0000;
+  padding: 1% 0;
 }
 
 .horizontal-rule {
   background-color: #000000;
-  width: 60%;
+  width: 80%;
 }
 
 .job-cards {

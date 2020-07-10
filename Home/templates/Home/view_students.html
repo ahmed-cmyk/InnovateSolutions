@@ -18,7 +18,7 @@
     <div id="viewBody">
         <div class="text-center">
             <h2>Browse Students</h2>
-            <hr class="horizontal-rule">
+            <br>
         </div>
         {% if user_type != 'student' %}
             <!-- Button trigger modal -->
@@ -58,7 +58,8 @@
             <div id="filterForm" class="col-md-3 col-sm-3 col-xs-12 d-none d-sm-block">
                 <form method="POST">{% csrf_token %}
                     <div id="formHeader" class="text-center">
-                        <h5 class="text-white">Filter Students Listings</h5>
+                        <h4 class="font-weight-bold">Filter Students Listings</h4>
+                        <hr class="horizontal-rule">
                     </div>
                     <div class="form-group">
                         <p>{{ form.alumni_status|as_crispy_field }}</p>

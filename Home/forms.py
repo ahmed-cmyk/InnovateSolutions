@@ -6,12 +6,13 @@ from DjangoUnlimited import settings
 
 
 class CreateJobForm(forms.ModelForm):
-    skillsDict = dict.fromkeys(zip(Skill.objects.all(), Skill.objects.all()))
-    skills = forms.CharField(
+    skills = forms.ModelMultipleChoiceField(
         label='*Skill',
-        widget=forms.Select(choices=skillsDict),
+        widget=forms.CheckboxSelectMultiple,
+        queryset=Skill.objects.all(),
         required=True
     )
+
     class Meta:
         model = Job
         exclude = ['posted_by', 'date_posted', 'status', 'date_closed']

@@ -15,10 +15,10 @@
         {% if jobs %}
             {% if user_type == "employer" %}
                 <h2 class="text-center">My Jobs</h2>
-                <hr class="horizontal-rule">
+                <br>
             {% else %}
                 <h2 class="text-center">Browse Jobs</h2>
-                <hr class="horizontal-rule">
+                <br>
             {% endif %}
             {% if user_type != "employer" %}
                 <div id="filter" class="text-center d-block d-sm-none">
@@ -60,7 +60,8 @@
                     <div id="filterForm" class="col-md-4 col-sm-4 col-xs-12 d-none d-sm-block">
                         <form method="POST">{% csrf_token %}
                             <div id="formHeader" class="text-center">
-                                <h5 class="text-white">Filter Job Listings</h5>
+                                <h4 class="font-weight-bold">Filter Job Listings</h4>
+                                <hr class="horizontal-rule">
                             </div>
                             <div class="form-group">
                                 <b>Duration (in months):</b><br>
@@ -70,6 +71,7 @@
                                 <b>{{ form.job_type_id.label }}:</b> {{ form.job_type_id }}<br><br>
                                 <b>Salary (AED/month):</b><br>
                                 {{ form.min_salary }} {{ form.max_salary }}<br>
+                                <a href='../view_jobs'>View All Jobs</a>
                             </div><!-- End of modal-body -->
                             <div class="form-footer text-center">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -92,7 +94,7 @@
                                     {% endif %}
                                 </div>
                                 <div class="card-body">
-                                    <a href="{% url 'job_details' job.id %}">
+                                    <a class="text-danger font-weight-bold" href="{% url 'job_details' job.id %}">
                                         <h5 class="card-title">{{ job.job_title }}</h5>
                                     </a>
                                     <p><span class="card-text job-specs font-weight-bold">Status:</span> {{ job.status }} </p>
@@ -117,7 +119,7 @@
 {#                                                     width="150.0em" alt="default-pic">#}
 {#                                            {% endif %}#}
 {#                                        </div>#}
-                                        <a href="{% url 'job_details' job.id %}">
+                                        <a class="text-danger font-weight-bold" href="{% url 'job_details' job.id %}">
                                             <h4 class="card-header">{{ job.job_title }}</h4>
                                         </a>
                                         <div class="card-body">
@@ -141,8 +143,12 @@
                 </div><!-- End of job-list-body -->
             </div><!-- End of row -->
         {% else %}
-            <h1 class="text-center">No jobs to display</h1>
-            <p class="text-center">Want to create a new job? Click <a href="{% url 'create_job' %}">this</a> link to do just that!</p>
+            {% if user_type != "student" %}
+                <h1 class="text-center">No jobs to display</h1>
+                <p class="text-center">Want to create a new job? Click <a href="{% url 'create_job' %}">this</a> link to do just that!</p>
+            {% else %}
+                <h1 class="text-center">Sorry about that it looks like there are no Jobs here</h1>
+            {% endif %}
         {% endif %}
     </div><!-- End of viewBody -->
 {% endblock %}

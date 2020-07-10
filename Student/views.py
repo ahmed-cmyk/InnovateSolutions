@@ -21,7 +21,7 @@ def student_signup(request):
         user_form = InitialStudentForm(request.POST)
         if user_form.is_valid():
             student_form = StudentForm(request.POST, request.FILES)
-
+            
             if student_form.is_valid():
                 with transaction.atomic():
                     user = user_form.save()
