@@ -1,0 +1,42 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+<!-- Additional Stylesheets -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Profile.css' %}"/>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script src="{% static 'js/EditProfile.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block title %}
+    Edit Profile - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <body>
+    <div id="editProfileBody">
+        <h1 class="text-center">Edit Profile</h1>
+        <div class="col-12">
+            <form method="post" enctype="multipart/form-data" action="edit_alumni_profile">{% csrf_token %}
+                {% for field in user_form %}
+                    <div>{{ field|as_crispy_field }}</div>
+                {% endfor %}
+                {% for field in alumni_form %}
+                    <div>{{ field|as_crispy_field }}</div>
+                {% endfor %}
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="submit">
+                            Save Changes
+                        </button>
+                        <button class="btn btn-secondary" type="button">
+                            <a class="text-decoration-none text-white" href="view_alumni_profile">Cancel</a>
+                        </button>
+                    </div>
+            </form>
+        </div>
+    </div>
+    <br><br>
+{% endblock %}

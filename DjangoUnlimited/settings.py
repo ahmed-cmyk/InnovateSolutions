@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'Home',
     'HelpDesk',
     'Accounts',
+    'Alumni',
     'Bulletin'
 ]
 

@@ -1,0 +1,42 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+<!-- Stylesheet -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Profile.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    View Profile - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <div id="profileBody">
+        <h2 class="text-center">My Profile</h2>
+        <div class="row">
+            <div class="icon col-md-4 text-center">
+                {% if obj.dp %}
+                    <img src="{{ obj.dp.url }}" height="300.0em" width="300.0em">
+                {% else %}
+                    <img src="{% static 'DefaultDP.jpg' %}" height="300.0em" width="300.0em">
+                {% endif %}
+            </div><!-- End of icon -->
+            <div class="student-profile col-md-8 text-left">
+                <p><strong>Name:</strong> {{ user.first_name}} {{ user.last_name }}</p>
+                <p><strong>Email Address:</strong> {{ user.email }}</p>
+                <p><strong>Date of Birth:</strong> {{ obj.date_of_birth }}</p>
+                <p><strong>Gender:</strong> {{ obj.gender }}</p>
+                <p><strong>Skills: </strong></p>
+                {% for skill in obj.skills.all %}
+                    <li>{{ skill }}</li>
+                {% endfor %}
+                <p class="view"><strong> CV: </strong> {{ obj.cv }}</p><br>
+            </div><!-- End of student-profile -->
+        </div><!-- End of row -->
+        <div id="edit-profile" class="text-center">
+            <button type="submit" class="btn btn-primary">
+                <a class="text-decoration-none text-white" href="/alumni/edit_alumni_profile">Edit Profile</a>
+            </button>
+        </div><!-- End of text-center -->
+    </div>
+{% endblock %}

@@ -30,7 +30,7 @@ def student_signup(request):
                     student.save()
                     student_form.save_m2m()
 
-                messages.success(request, f'An account has been created for {student_form.user}')
+                messages.success(request, 'A student account has been created')
                 return redirect('log_in')
             else:
                 return redirect('student_registration')

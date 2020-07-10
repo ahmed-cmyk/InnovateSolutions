@@ -41,6 +41,7 @@
                                         </button>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="{% url 'student_registration' %}">Student Registration</a>
+                                            <a class="dropdown-item" href="{% url 'alumni_register' %}">Alumni Registration</a>
                                             <a class="dropdown-item" href="{% url 'employer_register' %}">Employer Registration</a>
                                         </div><!-- End of dropdown-menu -->
                                     </div><!-- End of dropdown -->
@@ -67,6 +68,13 @@
                                             {% elif user_type == 'employer' %}
                                                 <li>
                                                     <a class="dropdown-item" href="{% url 'view_employer_profile' %}">My Profile</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                                                </li>
+                                            {% elif user_type == 'alumni' %}
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url 'view_alumni_profile' %}">My Profile</a>
                                                 </li>
                                                 <li>
                                                     <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
@@ -101,7 +109,7 @@
                                         <button class="btn">Home</button>
                                     </a>
                                 </li>
-                                {% if user_type == 'student' %}
+                                {% if user_type == 'student' or user_type == 'alumni' %}
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'view_jobs' %}">
                                             <button class="btn">Browse Jobs</button>

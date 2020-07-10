@@ -4,6 +4,7 @@ from django.contrib.auth.models import User, auth
 from django.views.generic import TemplateView
 
 from Student.models import Student
+from Alumni.models import Alumni
 from Employer.models import Employer
 from Admin.models import Admin
 
@@ -81,6 +82,13 @@ def get_user_type(request):
         type = 'student'
         args = {'user_type': type, 'obj': s}
     except Student.DoesNotExist:
+        pass
+
+    try:
+        al = Alumni.objects.get(user_id=request.user.id)
+        type = 'alumni'
+        args = {'user_type': type, 'obj': al}
+    except Alumni.DoesNotExist:
         pass
 
     try:

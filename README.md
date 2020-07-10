@@ -295,3 +295,7 @@ lists all 7 states of UAE.
 ## 07/10/20 - 02:30PM
 - Made some CSS modifications in the privacy and terms and conditions pages.
 - Replaced the social media icons in the footer with font-awesome icons.
+
+## 07/10/20 - 11:50PM
+- Created an Alumni table
+- Modified the program to be able to handle Alumni models (to an extent)

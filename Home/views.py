@@ -15,6 +15,7 @@ from DjangoUnlimited.settings import SENDGRID_API_KEY, DEFAULT_FROM_EMAIL
 from django.http import HttpResponse, HttpResponseRedirect
 from wsgiref.util import FileWrapper
 from django.core.files import File
+from itertools import chain
 import os
 from sendgrid.helpers.mail import To
 # Create your views here.
@@ -22,11 +23,13 @@ from sendgrid.helpers.mail import To
 from Employer.models import Employer
 from Admin.models import Admin
 from Student.models import Student, StudentJobApplication
+from Alumni.models import Alumni, AlumniJobApplication
 from Accounts.views import get_user_type
 from .models import Job, Skill, UserNotifications
 from .forms import CreateJobForm, EditJobForm, FilterJobForm, FilterStudentForm
 from Employer.forms import EmployerForm
 from Student.forms import StudentJobApplicationForm
+from Alumni.forms import AlumniJobApplicationForm
 from django.core.mail import send_mail
 
 
@@ -124,6 +127,11 @@ def view_jobs(request):
         companies = Employer.objects.all()
         form = FilterJobForm()
         args = {'jobs': jobs, 'companies': companies, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
+    elif user['user_type'] == 'alumni':
+        jobs = Job.objects.filter(status="Open").order_by('-date_posted')
+        companies = Employer.objects.all()
+        form = FilterJobForm()
+        args = {'jobs': jobs, 'companies': companies, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
     else:
         redirect('/')
     return render(request, 'Home/view_jobs.html', args)
@@ -200,33 +208,49 @@ def job_details(request, id):
     job = Job.objects.get(id=id)
     companies = Employer.objects.all()
 
+    print(user['user_type'])
+
     args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies, 'applied': True}
     form = StudentJobApplicationForm()
+    alumniForm = AlumniJobApplicationForm()
 
     if request.method == 'POST':
         if request.POST.get("apply"):
+            if user['user_type'] == 'student':
+                post = form.save(commit=False)
+                post.job_id = job
+                id = request.user.id
+                student = Student.objects.get(user_id=id)
+            elif user['user_type'] == 'alumni':
+                post = alumniForm.save(commit=False)
+                post.job_id = job
+                id = request.user.id
+                alumni = Alumni.objects.get(user_id=id)
+                post.applied = alumni
 
-            post = form.save(commit=False)
-            post.job_id = job
-            id = request.user.id
-            student = Student.objects.get(user_id=id)
-            post.applied = student
             post.date_applied = timezone.now()
             post.save()
             return render(request, 'Home/job_details.html', args)
 
         elif request.POST.get("viewcandidates"):
-
-            candidates = StudentJobApplication.objects.filter(job_id=job)
-            print(candidates)
+            if user['user_type'] == 'student':
+                candidates = StudentJobApplication.objects.filter(job_id=job)
+            elif user['user_type'] == 'alumni':
+                candidates = AlumniJobApplication.objects.filter(job_id=job)
+            else:
+                candidates = chain(AlumniJobApplication.objects.filter(job_id=job), StudentJobApplication.objects.filter(job_id=job))
             args = {'candidates': candidates, 'obj': user['obj'], 'user_type': user['user_type']}
             return render(request, 'Home/view_candidates.html', args)
 
     try:
-        student = Student.objects.get(user_id=request.user.id)
-
-        job = Job.objects.get(id=id)
-        StudentJobApplication.objects.get(job_id_id=job, applied=student)
+        if user['user_type'] == 'student':
+            student = Student.objects.get(user_id=request.user.id)
+            job = Job.objects.get(id=id)
+            StudentJobApplication.objects.get(job_id_id=job, applied=student)
+        elif user['user_type'] == 'alumni':
+            alumni = Alumni.objects.get(user_id=request.user.id)
+            job = Job.objects.get(id=id)
+            AlumniJobApplication.objects.get(job_id_id=job, applied=student)
 
         return render(request, 'Home/job_details.html', args)
 
@@ -298,8 +322,10 @@ def edit_job(request, id):
 @login_required
 def my_applications(request):
     user = get_user_type(request)
-    jobs_applied = StudentJobApplication.objects.filter(applied_id=user['obj'])
-    print(jobs_applied)
+    if user['user_type'] == 'student':
+        jobs_applied = StudentJobApplication.objects.filter(applied_id=user['obj'])
+    elif user['user_type'] == 'alumni':
+        jobs_applied = AlumniJobApplication.objects.filter(applied_id=user['obj'])
     args = {'jobs_applied': jobs_applied, 'obj': user['obj'], 'user_type': user['user_type']}
     return render(request, 'Home/my_applications.html', args)
 
@@ -399,9 +425,9 @@ def view_students(request):
 
         if alumni_status:
             if alumni_status == "Alumni":
-                alumni_status_students = Student.objects.filter(alumni_status=True)
+                alumni_status_students = Student.objects.all()
             elif alumni_status == "Current":
-                alumni_status_students = Student.objects.filter(alumni_status=False)
+                alumni_status_students = Student.objects.all()
         else:
             alumni_status_students = Student.objects.all()
 
@@ -422,7 +448,7 @@ def view_students(request):
 
         filtered_stds = skills_students & alumni_status_students & min_graduation_date_students & max_graduation_date_students
         students_all = Student.objects.all()
-        students = students_all & filtered_stds
+        students = students_all  & filtered_stds
         form = FilterStudentForm()
         print("students", students)
         args = {'students': students, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}

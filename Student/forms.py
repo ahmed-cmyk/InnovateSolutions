@@ -121,8 +121,6 @@ class StudentForm(forms.ModelForm):
                               'placeholder': 'YYYY-MM-DD',
                               'autocomplete': 'off'
                           }))
-    # student_id.disabled = True
-    alumni_status = forms.BooleanField(required=False, label='Select if you are a Murdoch University Alumni')
     student_id = forms.CharField(label='Student ID', max_length=8, min_length=8)
     expected_graduation_date = forms.DateField(required=False,
                                                label='Expected Graduation Date',

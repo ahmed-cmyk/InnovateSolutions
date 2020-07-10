@@ -143,7 +143,7 @@
                 </div><!-- End of job-list-body -->
             </div><!-- End of row -->
         {% else %}
-            {% if user_type != "student" %}
+            {% if user_type != "student" and user_type != "alumni" %}
                 <h1 class="text-center">No jobs to display</h1>
                 <p class="text-center">Want to create a new job? Click <a href="{% url 'create_job' %}">this</a> link to do just that!</p>
             {% else %}

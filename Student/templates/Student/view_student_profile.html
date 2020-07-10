@@ -32,13 +32,8 @@
                     <li>{{ skill }}</li>
                 {% endfor %}
                 <br>
-                {% if obj.alumni_status %}
-                    <p class="view"><strong> Alumni Status:</strong> Alumni</p>
-                {% else %}
-                    <p class="view"><strong>Alumni Status: </strong> Current Student</p>
-                    <p class="view"><strong> Expected Graduation Date:</strong> {{ obj.expected_graduation_date }}</p>
-                    <p class="view"><strong> Personal Email Address:</strong> {{ obj.personal_email }}</p>
-                {% endif %}
+                <p class="view"><strong> Expected Graduation Date:</strong> {{ obj.expected_graduation_date }}</p>
+                <p class="view"><strong> Personal Email Address:</strong> {{ obj.personal_email }}</p>
     {#                <p class="view"><strong> CV: </strong> {{ obj.cv }}</p><br>#}
             </div><!-- End of student-profile -->
         </div><!-- End of row -->
