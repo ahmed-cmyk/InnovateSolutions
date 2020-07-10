@@ -288,3 +288,6 @@ lists all 7 states of UAE.
 - Fixed a bug where admins could not create/edit jobs.
 - Redesigned both the View Jobs and View Students pages.
 - Added a link on the View Jobs filter form that lets users view all jobs.
+
+## 07/10/20 - 01:29PM
+- Fixed an issue with create job form not rendering for admins

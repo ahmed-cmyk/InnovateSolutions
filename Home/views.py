@@ -133,6 +133,37 @@ def view_jobs(request):
 def create_job(request):
     try:
         user = get_user_type(request)
+        admin = Admin.objects.get(user_id=request.user.id)
+        print(admin.user.id)
+        if request.user.id == 'admin':
+            if request.method == 'POST':
+                jobForm = CreateJobForm(request.POST)
+                companyForm = EmployerForm(request.POST, request.FILES)
+
+                if jobForm.is_valid() and companyForm.is_valid():
+                    with transaction.atomic():
+                        company = companyForm.save(commit=False)
+                        company.user_id = admin.user.id
+                        company.save()
+                        job = jobForm.save(commit=False)
+                        job.posted_by = request.user
+                        job.save()
+                        jobForm.save_m2m()
+                        return redirect('/')
+                else:
+                    messages.info(request, jobForm.errors)
+                    messages.info(request, companyForm.errors)
+                    return redirect('create_job')
+        else:
+            jobForm = CreateJobForm()
+            companyForm = EmployerForm()
+            args = {'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type']}
+            return render(request, "Home/employer_create_jobs.html", args)
+    except Admin.DoesNotExist:
+        pass
+
+    try:
+        user = get_user_type(request)
         Employer.objects.get(user_id=request.user.id)
         if request.method == 'POST':
             form = CreateJobForm(request.POST)
@@ -149,52 +180,15 @@ def create_job(request):
                     html_content="A new Job has been posted on the Murdoch Career Portal."
                 )
                 sg = SendGridAPIClient(SENDGRID_API_KEY)
-                # sg.send(message)
-
-                # notification = "A new job has been posted on the Murdoch Career Portal"
-                # add_notif = UserNotifications(to_user_id=1, from_user_id=request.user.id, notification=notification,
-                #   type='Job Posted',
-                #   to_show=True)
-                # add_notif.save()
                 return redirect('/')
             else:
                 messages.info(request, form.errors)
-                return redirect('/create_job')
+                return redirect('create_job')
         else:
             form = CreateJobForm()
             args = {'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
             return render(request, "Home/employer_create_jobs.html", args)
     except Employer.DoesNotExist:
-        pass
-
-    try:
-        user = get_user_type(request)
-        admin = Admin.objects.get(user_id=request.user.id)
-        print(admin.user.id)
-        if request.method == 'POST':
-            jobForm = CreateJobForm(request.POST)
-            companyForm = EmployerForm(request.POST, request.FILES)
-
-            if jobForm.is_valid() and companyForm.is_valid():
-                with transaction.atomic():
-                    company = companyForm.save(commit=False)
-                    company.user_id = admin.user.id
-                    company.save()
-                    job = jobForm.save(commit=False)
-                    job.posted_by = request.user
-                    job.save()
-                    jobForm.save_m2m()
-                    return redirect('/')
-            else:
-                messages.info(request, jobForm.errors)
-                messages.info(request, companyForm.errors)
-                return redirect('Home/create_job')
-        else:
-            jobForm = CreateJobForm()
-            companyForm = EmployerForm()
-            args = {'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type']}
-            return render(request, "Home/employer_create_jobs.html", args)
-    except Admin.DoesNotExist:
         pass
 
     return redirect('log_in')

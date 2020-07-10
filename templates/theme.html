@@ -150,6 +150,11 @@
                                     </li>
                                 {% elif user_type == 'admin' %}
                                     <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'create_job' %}">
+                                            <button class="btn">Post a Job</button>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" href="{% url 'view_jobs' %}">
                                             <button class="btn">Browse Jobs</button>
                                         </a>
@@ -157,11 +162,6 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'view_students' %}">
                                             <button class="btn">Browse Students</button>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{% url 'create_job' %}">
-                                            <button class="btn">Post a Job</button>
                                         </a>
                                     </li>
                                     <li class="nav-item">

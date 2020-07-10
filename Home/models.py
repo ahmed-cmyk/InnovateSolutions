@@ -7,6 +7,7 @@ from django.core.validators import MinValueValidator
 from Admin.models import Admin
 from django.db.models import ManyToManyField
 
+
 class Industry(models.Model):
     industry_name = models.CharField(max_length=50, unique=True)
 

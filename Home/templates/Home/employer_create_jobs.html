@@ -14,17 +14,18 @@
 <div id="createJobBody">
     <h2 class="text-center">Create Job Listing</h2>
     <hr>
-    <form action="create_job" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <form action="create_job" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         {% if user_type == 'employer' %}
             {% for field in form %}
                 <div>{{ field|as_crispy_field }} </div>
             {% endfor %}
         {% elif user_type == 'admin' %}
-            {% for field in jobForm %}
-                <div>{{ field|as_crispy_field }}</div>
+            {% for jobField in jobForm %}
+                <div>{{ jobField|as_crispy_field }}</div>
             {% endfor %}
-            {% for field in companyForm %}
-                <div>{{ field|as_crispy_field }}</div>
+            {% for companyField in companyForm %}
+                <div>{{ companyField|as_crispy_field }}</div>
             {% endfor %}
         {% endif %}
         <div class="text-center">

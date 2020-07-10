@@ -68,7 +68,7 @@ class FilterJobForm(forms.ModelForm):
         self.fields['max_salary'].widget.attrs['placeholder'] = 'Min'
 
 
-class FilterStudentForm(forms.Form):
+class FilterStudentForm(forms.ModelForm):
     choices = [
         ('Current', 'Current'),
         ('Alumni', 'Alumni')
