@@ -140,6 +140,22 @@ footer #social-section img {
     height: 40px;
 }
 
+.fa-twitter {
+    color: #00ACED;
+}
+
+.fa-facebook {
+    color: #355DA8;
+}
+
+.fa-youtube-play {
+    color: #FF0000;
+}
+
+.fa-instagram {
+    color: #DD2A7B;
+}
+
 /******** Mobile Devices ********/
 @media (max-width: 767px) {
     #navigationBar .navElements {
