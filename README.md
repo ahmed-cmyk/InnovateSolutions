@@ -312,6 +312,6 @@ the dashboard and these majors are assigned to students
     - The View Alumni Candidates button on job details gives an empty list of
     alumni
     
-## 07/11/20 - 0103PM
+## 07/11/20 - 01:03PM
 - Fixed a typo in the View Alumni page where the filter form was called 
 "Filter Student Listings" rather than "Filter Alumni Listings"
