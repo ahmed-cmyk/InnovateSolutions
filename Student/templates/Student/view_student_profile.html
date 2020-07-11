@@ -32,6 +32,11 @@
                     <li>{{ skill }}</li>
                 {% endfor %}
                 <br>
+                <p><strong>Majors: </strong></p>
+                {% for major in obj.majors.all %}
+                    <li>{{ major }}</li>
+                {% endfor %}
+                <br>
                 <p class="view"><strong> Expected Graduation Date:</strong> {{ obj.expected_graduation_date }}</p>
                 <p class="view"><strong> Personal Email Address:</strong> {{ obj.personal_email }}</p>
     {#                <p class="view"><strong> CV: </strong> {{ obj.cv }}</p><br>#}

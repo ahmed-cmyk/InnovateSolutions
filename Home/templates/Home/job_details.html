@@ -66,7 +66,8 @@
                 {% else %}
                     {% if job.status == 'Open' %}
                             <button class="btn" type="submit" name="viewcandidates" value="ViewCandidates&Save">View Applicants</button>
-                            <a href="{% url 'job_to_student_skills' job.id %}"><button class="btn" type="button">View Candidates</button></a>
+                            <a href="{% url 'job_to_student_skills' job.id %}"><button class="btn" type="button">View Student Candidates</button></a>
+                            <a href="{% url 'job_to_alumni_skills' job.id %}"><button class="btn" type="button">View Alumni Candidates</button></a>
                     {% endif %}
                 {% endif %}
             </div>

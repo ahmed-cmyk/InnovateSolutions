@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from upload_validator import FileTypeValidator
 
 from Accounts.views import isValidated, number_symbol_exists
-from Home.models import Skill
+from Home.models import Skill, Major
 from .models import Student, StudentJobApplication
 
 
@@ -132,6 +132,10 @@ class StudentForm(forms.ModelForm):
     personal_email = forms.EmailField(label='Personal Email Address')
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             label='Skill',
+                                            widget=forms.CheckboxSelectMultiple,
+                                            required=True)
+    majors = forms.ModelMultipleChoiceField(queryset=Major.objects.all(),
+                                            label='Major',
                                             widget=forms.CheckboxSelectMultiple,
                                             required=True)
     dp = forms.ImageField(label='Select a profile picture (only jpeg and png file formats allowed)',

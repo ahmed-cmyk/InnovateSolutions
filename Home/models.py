@@ -30,6 +30,17 @@ class Skill(models.Model):
         return name
 
 
+class Major(models.Model):
+    major_name = models.CharField(max_length=50, unique=True)
+
+    def clean(self):
+        self.major_name = self.major_name.capitalize()
+
+    def __str__(self):
+        name = self.major_name
+        return name
+
+
 class JobType(models.Model):
     type_name = models.CharField(max_length=50, unique=True)
 

@@ -299,3 +299,15 @@ lists all 7 states of UAE.
 ## 07/10/20 - 11:50PM
 - Created an Alumni table
 - Modified the program to be able to handle Alumni models (to an extent)
+
+## 07/11/20 - 12:42PM
+- Modified many pages for alumni students
+- Redesigned some pages
+- Created a View Alumni page
+- Created a new class called Majors which lets an admin add more majors through
+the dashboard and these majors are assigned to students
+- Created a Filter for Majors in the View Students and View Alumni pages
+- Added a button to view alumni candidates on job details page
+    ### Known Problems:
+    - The View Alumni Candidates button on job details gives an empty list of
+    alumni

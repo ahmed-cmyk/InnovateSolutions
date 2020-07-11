@@ -1,6 +1,7 @@
 from django import forms
-from Home.models import Job, Skill, JobType, Industry
+from Home.models import Job, Skill, JobType, Industry, Major
 from Student.models import Student
+from Alumni.models import Alumni
 
 from DjangoUnlimited import settings
 
@@ -92,12 +93,33 @@ class FilterStudentForm(forms.ModelForm):
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             widget=forms.CheckboxSelectMultiple,
                                             required=True)
+    majors = forms.ModelMultipleChoiceField(queryset=Major.objects.all(),
+                                            widget=forms.CheckboxSelectMultiple,
+                                            required=True)
 
     class Meta:
         model = Student
-        fields = ['alumni_status', 'skills']
+        fields = ['alumni_status', 'skills', 'majors']
 
     def __init__(self, *args, **kwargs):
         super(FilterStudentForm, self).__init__(*args, **kwargs)
         self.fields['min_graduation_date'].widget.attrs['placeholder'] = 'Min'
         self.fields['max_graduation_date'].widget.attrs['placeholder'] = 'Max'
+
+
+class FilterAlumniForm(forms.ModelForm):
+    skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
+                                            widget=forms.CheckboxSelectMultiple,
+                                            required=True)
+    majors = forms.ModelMultipleChoiceField(queryset=Major.objects.all(),
+                                            widget=forms.CheckboxSelectMultiple,
+                                            required=True)
+
+    class Meta:
+        model = Alumni
+        fields = ['skills', 'majors']
+
+    # def __init__(self, *args, **kwargs):
+    #     super(FilterAlumniForm, self).__init__(*args, **kwargs)
+    #     self.fields['min_graduation_date'].widget.attrs['placeholder'] = 'Min'
+    #     self.fields['max_graduation_date'].widget.attrs['placeholder'] = 'Max'

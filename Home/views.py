@@ -26,7 +26,7 @@ from Student.models import Student, StudentJobApplication
 from Alumni.models import Alumni, AlumniJobApplication
 from Accounts.views import get_user_type
 from .models import Job, Skill, UserNotifications
-from .forms import CreateJobForm, EditJobForm, FilterJobForm, FilterStudentForm
+from .forms import CreateJobForm, EditJobForm, FilterJobForm, FilterStudentForm, FilterAlumniForm
 from Employer.forms import EmployerForm
 from Student.forms import StudentJobApplicationForm
 from Alumni.forms import AlumniJobApplicationForm
@@ -420,6 +420,7 @@ def view_students(request):
     if request.method == 'POST':
         alumni_status = request.POST.get("alumni_status")
         skills = request.POST.get("skills")
+        majors = request.POST.get("majors")
         min_graduation_date = request.POST.get('min_graduation_date')
         max_graduation_date = request.POST.get('max_graduation_date')
 
@@ -446,11 +447,15 @@ def view_students(request):
         else:
             max_graduation_date_students = Student.objects.all()
 
-        filtered_stds = skills_students & alumni_status_students & min_graduation_date_students & max_graduation_date_students
+        if majors:
+            majors_students = Student.objects.filter(majors=majors)
+        else:
+            majors_students = Student.objects.filter(majors=majors)
+
+        filtered_stds = skills_students & majors_students & alumni_status_students & min_graduation_date_students & max_graduation_date_students
         students_all = Student.objects.all()
         students = students_all  & filtered_stds
         form = FilterStudentForm()
-        print("students", students)
         args = {'students': students, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, "Home/view_students.html", args)
     elif user['user_type'] == 'employer' or user['user_type'] == 'admin':
@@ -464,12 +469,50 @@ def view_students(request):
 
 
 @login_required
+def view_alumni(request):
+    user = get_user_type(request)
+    if request.method == 'POST':
+        skills = request.POST.get("skills")
+        majors = request.POST.get("majors")
+
+        if skills:
+            skills_students = Alumni.objects.filter(skills=skills)
+        else:
+            skills_students = Alumni.objects.all()
+
+        if majors:
+            majors_alumni = Alumni.objects.filter(majors=majors)
+        else:
+            majors_alumni = Alumni.objects.filter(majors=majors)
+
+        filtered_stds = skills_students & majors_alumni
+        alumni_all = Alumni.objects.all()
+        alumnus = alumni_all  & filtered_stds
+        form = FilterAlumniForm()
+        args = {'alumnus': alumnus, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
+        return render(request, "Home/view_alumni.html", args)
+    elif user['user_type'] == 'employer' or user['user_type'] == 'admin':
+        alumnus = Alumni.objects.all()
+        users = User.objects.all()
+        form = FilterAlumniForm()
+        args = {'alumnus': alumnus, 'obj': user['obj'], 'user_type': user['user_type'], 'form': form}
+    else:
+        return redirect('/')
+    return render(request, 'Home/view_alumni.html', args)
+
+@login_required
 def student_details(request, id):
     student = Student.objects.get(user_id=id)
     user = get_user_type(request)
     args = {'student': student, 'obj': user['obj'], 'user_type': user['user_type']}
     return render(request, 'Home/student_details.html', args)
 
+@login_required
+def alumni_details(request, id):
+    alumni = Alumni.objects.get(user_id=id)
+    user = get_user_type(request)
+    args = {'alumni': alumni, 'obj': user['obj'], 'user_type': user['user_type']}
+    return render(request, 'Home/alumni_details.html', args)
 
 @login_required
 def job_to_student_skills(request, id):
@@ -490,6 +533,25 @@ def job_to_student_skills(request, id):
     # sg.send(message)
 
     return render(request, "Home/view_students.html", args)
+
+@login_required
+def job_to_alumni_skills(request, id):
+    user = get_user_type(request)
+    job = Job.objects.get(id=id)
+    alumni = Alumni.objects.filter(skills__in=job.skills.all())
+    alumni = list(set(alumni))
+    args = {'alumni': alumni, 'form': FilterAlumniForm(), 'obj': user['obj'], 'user_type': user['user_type']}
+
+    message = Mail(
+        from_email='info@murdochcareerportal.com',
+        to_emails=['ict302jan2020@gmail.com'],
+        subject='Alumni Skill match',
+        html_content="Alumni having skills matching to your job have been found."
+    )
+    sg = SendGridAPIClient(SENDGRID_API_KEY)
+    # sg.send(message)
+
+    return render(request, "Home/view_alumni.html", args)
 
 
 @login_required

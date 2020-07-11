@@ -17,7 +17,7 @@
 {% block content %}
     <div id="viewBody">
         <div class="text-center">
-            <h2>Browse Students</h2>
+            <h2>Browse Alumni</h2>
             <br>
         </div>
         {% if user_type != 'student' and user_type != 'alumni' %}
@@ -39,11 +39,9 @@
                   </div>
                     <form method="POST">
                         <div class="modal-body">{% csrf_token %}
-                            <!-- <p>{{ form.alumni_status|as_crispy_field }}</p> -->
                             <p>{{ form.skills|as_crispy_field }}</p>
                             <p>{{ form.majors|as_crispy_field }}</p>
-                            <p>{{ form.min_graduation_date|as_crispy_field }}</p>
-                            <p>{{ form.max_graduation_date|as_crispy_field }}</p>
+                            <a href='../view_alumni'>View All Alumni</a>
                         </div>
                         <div class="modal-footer">
                             <a href='../view_alumni'><button class="btn btn-danger">Reset</button></a>
@@ -63,14 +61,11 @@
                         <hr class="horizontal-rule">
                     </div>
                     <div class="form-group">
-                        <!-- <p>{{ form.alumni_status|as_crispy_field }}</p> -->
                         <p>{{ form.skills|as_crispy_field }}</p>
                         <p>{{ form.majors|as_crispy_field }}</p>
-                        <p>{{ form.min_graduation_date|as_crispy_field }}</p>
-                        <p>{{ form.max_graduation_date|as_crispy_field }}</p>
                     </div>
                     <div class="text-center">
-                        <a href='../view_students'><button class="btn btn-danger">Reset</button></a>
+                        <a href='../view_alumni'><button class="btn btn-danger">Reset</button></a>
                         <button type="Submit" class="btn btn-primary"><b>Apply Filters</b></button>
                     </div>
                 </form>
@@ -78,26 +73,24 @@
             <div class="col-md-8 col-sm-7 col-xs-12">
                 {% if user_type != 'student' and user_type != 'alumni' %}
                     <div class="float-right">
-                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Students...">
+                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Alumni...">
                     </div>
                     <table id="myTable" class="table table-sm">
                         <thead class="thead-dark">
                         <tr class="text-center">
                             <th>Student Name</th>
                             <th>Email</th>
-                            <th>Expected Graduation Date</th>
                             <th class="d-none d-sm-block">Majors</th>
                         </tr>
                         </thead>
                         <tbody>
-                            {% for student in students %}
+                            {% for alumni in alumnus %}
                                 <tr class="text-center">
                                 <td>
-                                    <a href="{% url 'student_details' student.user_id %}"> {{ student.user.first_name }} {{ student.user.last_name }}</a>
+                                    <a href="{% url 'alumni_details' alumni.user_id %}"> {{ alumni.user.first_name }} {{ alumni.user.last_name }}</a>
                                 </td>
-                                <td>{{ student.user }}</td>
-                                <td>{{ student.expected_graduation_date }}</td>
-                                <td class="d-none d-sm-block">{% for major in student.majors.all %}
+                                <td>{{ alumni.user }}</td>
+                                <td class="d-none d-sm-block">{% for major in alumni.majors.all %}
                                         <li>{{ major }}</li>
                                     {% endfor %}
                                 </td>

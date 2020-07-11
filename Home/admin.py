@@ -4,7 +4,7 @@ from django.urls import path
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 
-from .models import Industry, Skill, Job, JobType
+from .models import Industry, Skill, Job, JobType, Major
 from Employer.models import Employer
 from Student.models import Student
 
@@ -28,3 +28,4 @@ admin.site.register(Job, JobAdmin)
 admin.site.register(JobType)
 admin.site.register(Industry)
 admin.site.register(Skill)
+admin.site.register(Major)

@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block title %}
-    Student Details - Murdoch Dubai Job Portal
+    Alumni Details - Murdoch Dubai Job Portal
 {% endblock %}
 
 {% block content %}
@@ -15,31 +15,30 @@
     <div id="profileBody">
         <div class="row">
             <div class="icon col-md-4 text-center">
-                {% if student.dp %}
+                {% if alumni.dp %}
                     <img src="{{ student.dp.url }}" height="300.0em" width="300.0em"><br>
                 {% else %}
                     <img src="{% static 'DefaultDP.jpg' %}" height="300.0em" width="300.0em"><br>
                 {% endif %}
             </div>
             <div class="student-profile col-md-8 text-left">
-                <h3>{{ student.user.first_name }} {{ student.user.last_name }} </h3>
-                <p><b>Email:</b> {{ student.user }}</p>
-                <p><b>Gender:</b> {{ student.gender }}</p>
-                <p><b>Date of Birth:</b> {{ student.DOB }}</p>
-
+                <h3>{{ alumni.user.first_name }} {{ alumni.user.last_name }} </h3>
+                <p><b>Email:</b> {{ alumni.user }}</p>
+                <p><b>Gender:</b> {{ alumni.gender }}</p>
+                <p><b>Date of Birth:</b> {{ alumni.date_of_birth }}</p>
                 <b>Skills:</b>
-                {% for skill in student.skills.all %}
+                {% for skill in alumni.skills.all %}
                     <li>{{ skill }}</li>
                 {% endfor %}
                 <b>Majors: </b>
-                {% for major in student.majors.all %}
+                {% for major in alumni.majors.all %}
                     <li>{{ major }}</li>
                 {% endfor %}
             </div>
         </div><!-- End of row -->
         <div class="text-center">
             <button type="button" class="btn btn-primary">
-                <a class="text-decoration-none text-white" href="{% url 'get_cv_file' student.user_id %}">Download CV</a>
+                <a class="text-decoration-none text-white" href="{% url 'get_cv_file' alumni.user_id %}">Download CV</a>
             </button>
         </div>
 {% endblock %}

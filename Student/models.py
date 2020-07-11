@@ -3,21 +3,22 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from datetime import datetime
 
-from Home.models import Skill, Job
+from Home.models import Skill, Job, Major
 
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    gender_choices = [
+    GENDER_CHOICES = [
         ('Male', 'Male'),
         ('Female', 'Female')
     ]
-    gender = models.CharField(max_length=10, choices=gender_choices)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     DOB = models.DateField(null=True)
     skills = models.ManyToManyField(Skill, related_name='student_skills')
     student_id = models.CharField(max_length=8, null=False, unique=True)
     personal_email = models.EmailField(max_length=100)
     expected_graduation_date = models.DateField(null=True, blank=True)
+    majors = models.ManyToManyField(Major, related_name='student_majors')
     jobs_applied = models.ManyToManyField(Job, through='StudentJobApplication')
     dp = models.ImageField(upload_to='profile_pictures', null=True, blank=True)
     cv = models.FileField(upload_to='documents', default='../staticfiles/DefaultCV.txt')

@@ -30,7 +30,12 @@
                 {% for skill in obj.skills.all %}
                     <li>{{ skill }}</li>
                 {% endfor %}
-                <p class="view"><strong> CV: </strong> {{ obj.cv }}</p><br>
+                <br>
+                <p><strong>Majors: </strong></p>
+                {% for major in obj.majors.all %}
+                    <li>{{ major }}</li>
+                {% endfor %}
+{#                <p class="view"><strong> CV: </strong> {{ obj.cv }}</p><br>#}
             </div><!-- End of student-profile -->
         </div><!-- End of row -->
         <div id="edit-profile" class="text-center">
