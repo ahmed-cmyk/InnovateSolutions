@@ -11,38 +11,48 @@
 {% endblock %}
 
 {% block content %}
-    <body>
-        <div class="container">
-            <div class="row">
-                <div id="formbox" class="col-12">
-                    <form action="login" method="post">{% csrf_token %}
-                        <div id="form" class="form-group">
-                            <h2 class="text-center">Sign In</h2>
-                            <hr>
-                            <label for="email">Email Address</label>
-                            <input id="Email" class="form-control form-control-sm" type="Email" name="username" required/>
-                            <label for="email">Password</label>
-                            <input id="password" class="form-control form-control-sm" type="password" name="password"/>
-                            <br>
-                            <div class="text-center">
-                                <button class="btn" type="submit">Login</button>
-                            </div>
-                            <hr>
-                            <a href="/accounts/password_reset/"> Forgot password?</a>
-                        </div><!-- End of for-group -->
-                    </form>
-                </div><!-- End of col -->
-            </div><!-- End of row -->
-        </div><!-- End of container -->
-        <!-- /.login-box-body -->
-        <script>
-            $(function () {
-                $('input').iCheck({
-                    checkboxClass: 'icheckbox_square-blue',
-                    radioClass: 'iradio_square-blue',
-                    increaseArea: '20%' /* optional */
-                });
+    <div id="logForm">
+        <div id="topContent">
+            <div class="text-center"><img src="{% static 'images/Favicon.png' %}" alt="Murdoch University Logo"></div>
+{#            <h4>Job Portal LogIn page</h4>#}
+{#            <small>Login here to start building your future</small>#}
+        </div>
+        <div id="formbox">
+            <form action="login" method="post">{% csrf_token %}
+                <div id="form" class="form-group">
+                    <h2 class="text-center">Sign In</h2>
+                    <br>
+                    <label for="email">Email Address</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <i class="fa fa-user input-group-text" aria-hidden="true"></i>
+                        </div>
+                        <input id="Email" class="form-control" type="Email" name="username" placeholder="example@example.com" required/>
+                    </div>
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <i class="fa fa-key input-group-text" aria-hidden="true"></i>
+                        </div>
+                        <input id="password" class="form-control" type="password" name="password"/>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <button class="btn" type="submit">Login</button>
+                    </div>
+                    <hr>
+                    <a href="/accounts/password_reset/"> Forgot password?</a>
+                </div><!-- End of for-group -->
+            </form>
+        </div>
+    </div><!-- End of row -->
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
             });
-        </script>
-        <br>
+        });
+    </script>
 {% endblock %}

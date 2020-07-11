@@ -314,4 +314,7 @@ the dashboard and these majors are assigned to students
     
 ## 07/11/20 - 01:03PM
 - Fixed a typo in the View Alumni page where the filter form was called 
-"Filter Student Listings" rather than "Filter Alumni Listings"
+"Filter Student Listings" rather than "Filter Alumni Listings".
+
+## 07/11/20 - 06:30PM
+- Made some minor CSS modifications.

@@ -16,16 +16,9 @@
 {% block content %}
     <div id="mobileButtons" class="col-xs-12 text-center d-block d-sm-none">
         {% if not user.is_authenticated %}
-            <div class="dropdown">
-                <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">
-                    Sign Up
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'student_registration' %}">Student Registration</a>
-                    <a class="dropdown-item" href="{% url 'alumni_register' %}">Alumni Registration</a>
-                    <a class="dropdown-item" href="{% url 'employer_register' %}">Employer Registration</a>
-                </div><!-- End of dropdown-menu -->
-            </div><!-- End of dropdown -->
+            <a href="{% url 'sign_up' %}">
+                <button class="btn btn-danger" type="button">Sign Up</button>
+            </a>
             <a href="{% url 'log_in' %}">
                 <button class="btn btn-danger">Login</button>
             </a>

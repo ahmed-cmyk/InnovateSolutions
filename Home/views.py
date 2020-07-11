@@ -538,9 +538,9 @@ def job_to_student_skills(request, id):
 def job_to_alumni_skills(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
-    alumni = Alumni.objects.filter(skills__in=job.skills.all())
-    alumni = list(set(alumni))
-    args = {'alumni': alumni, 'form': FilterAlumniForm(), 'obj': user['obj'], 'user_type': user['user_type']}
+    alumnus = Alumni.objects.filter(skills__in=job.skills.all())
+    alumnus = list(set(alumnus))
+    args = {'alumni': alumnus, 'form': FilterAlumniForm(), 'obj': user['obj'], 'user_type': user['user_type']}
 
     message = Mail(
         from_email='info@murdochcareerportal.com',

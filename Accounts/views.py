@@ -8,6 +8,7 @@ from Alumni.models import Alumni
 from Employer.models import Employer
 from Admin.models import Admin
 
+
 def isValidated(passwd):
     status = True
 
@@ -22,6 +23,7 @@ def isValidated(passwd):
 
     return status
 
+
 def number_symbol_exists(string):
     status = False
 
@@ -35,36 +37,44 @@ def number_symbol_exists(string):
 
     return status
 
+
+def signup(request):
+    return render(request, 'signup.html', get_user_type(request))
+
+
 def login(request):
     if request.method == 'POST':
-            username = request.POST['username']
-            password = request.POST['password']
+        username = request.POST['username']
+        password = request.POST['password']
 
-            user = auth.authenticate(username=username, password=password)
+        user = auth.authenticate(username=username, password=password)
 
-            if user is None:
-                messages.info(request, 'Credentials do not exist, please try a different username/password')
+        if user is None:
+            messages.info(request, 'Credentials do not exist, please try a different username/password')
+            return redirect("log_in")
+        else:
+            if user.is_superuser == True or user.is_staff == True:
+                messages.info(request, 'To login in as admin, please visit the admin site.')
                 return redirect("log_in")
             else:
-                if user.is_superuser == True or user.is_staff == True:
-                    messages.info(request, 'To login in as admin, please visit the admin site.')
-                    return redirect("log_in")
-                else:
-                    auth.login(request, user)
-                    return redirect('/', get_user_type(request))
-                    # return render(request, "Home/index.html", get_user_type(request))
+                auth.login(request, user)
+                return redirect('/', get_user_type(request))
+                # return render(request, "Home/index.html", get_user_type(request))
     else:
         return render(request, 'login.html', get_user_type(request))
+
 
 def forgot_password(request):
     if request.method == 'POST':
         return redirect("/")
     else:
-        return render(request, 'forgot_password.html')
+        return render(request, 'Accounts/forgot_password.html')
+
 
 def logout(request):
     auth.logout(request)
     return redirect("/")
+
 
 def get_user_type(request):
     type = 'none'

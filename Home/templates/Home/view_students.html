@@ -70,7 +70,7 @@
                         <p>{{ form.max_graduation_date|as_crispy_field }}</p>
                     </div>
                     <div class="text-center">
-                        <a href='../view_students'><button class="btn btn-danger">Reset</button></a>
+                        <a href='{% url 'view_students' %}'><button class="btn btn-danger">Reset</button></a>
                         <button type="Submit" class="btn btn-primary"><b>Apply Filters</b></button>
                     </div>
                 </form>

@@ -35,16 +35,9 @@
                             </a>
                             <div id="userElements" class="float-right d-none d-sm-block">
                                 {% if not user.is_authenticated %}
-                                    <div class="dropdown">
-                                        <button id="signup" class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                                            Sign Up
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{% url 'student_registration' %}">Student Registration</a>
-                                            <a class="dropdown-item" href="{% url 'alumni_register' %}">Alumni Registration</a>
-                                            <a class="dropdown-item" href="{% url 'employer_register' %}">Employer Registration</a>
-                                        </div><!-- End of dropdown-menu -->
-                                    </div><!-- End of dropdown -->
+                                    <a href="{% url 'sign_up' %}">
+                                        <button id="signup" class="btn" type="button">Sign Up</button>
+                                    </a>
                                     <a href="{% url 'log_in' %}">
                                         <button id="login" class="btn">Login</button>
                                     </a>

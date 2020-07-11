@@ -14,14 +14,14 @@
     {% csrf_token %}
     <div id="profileBody">
         <div class="row">
-            <div class="icon col-md-4 text-center">
+            <div class="icon col-md-4 col-xs-12 text-center">
                 {% if alumni.dp %}
                     <img src="{{ student.dp.url }}" height="300.0em" width="300.0em"><br>
                 {% else %}
                     <img src="{% static 'DefaultDP.jpg' %}" height="300.0em" width="300.0em"><br>
                 {% endif %}
             </div>
-            <div class="student-profile col-md-8 text-left">
+            <div class="student-profile col-md-8 col-xs-12">
                 <h3>{{ alumni.user.first_name }} {{ alumni.user.last_name }} </h3>
                 <p><b>Email:</b> {{ alumni.user }}</p>
                 <p><b>Gender:</b> {{ alumni.gender }}</p>
