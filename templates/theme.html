@@ -95,12 +95,12 @@
                     <div id="navBottom" class="nav navbar-nav navbar-expand-md mr-auto">
                         <div id="navDrop" class="navElements collapse navbar-collapse">
                             <div class="nav nav-pills">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/">
-                                        <button class="btn">Home</button>
-                                    </a>
-                                </li>
                                 {% if user_type == 'student' or user_type == 'alumni' %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/">
+                                            <button class="btn">Home</button>
+                                        </a>
+                                    </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'view_jobs' %}">
                                             <button class="btn">Browse Jobs</button>
@@ -122,6 +122,11 @@
                                         </a>
                                     </li>
                                 {% elif user_type == 'employer' %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/">
+                                            <button class="btn">Home</button>
+                                        </a>
+                                    </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'view_students' %}">
                                             <button class="btn">Browse Students</button>
@@ -148,6 +153,11 @@
                                         </a>
                                     </li>
                                 {% elif user_type == 'admin' %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/">
+                                            <button class="btn">Home</button>
+                                        </a>
+                                    </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'create_job' %}">
                                             <button class="btn">Post a Job</button>
@@ -196,7 +206,7 @@
             <!--This is the beginning of the footer!-->
             <footer class="page-footer">
                 <div class="row">
-                    <div class="aboutus col-md-6 col-sm-6 col-xs-12">
+                    <div class="aboutus col-md-4 col-sm-4 col-xs-12">
                         <ul>
                             <span class="text-center">
                                 <h4>About Us</h4>
@@ -209,7 +219,22 @@
                         </ul>
                     </div><!-- End of aboutus -->
                     <hr class="footer-rule d-block d-sm-none">
-                    <div class="contactus col-md-6 col-sm-6 col-xs-12 text-center">
+                    <div id ="social-section" class="followus col-md-4 col-sm-4 col-xs-12 text-center">
+                        <a class="image-thumbnail" href="https://twitter.com/MurdochUniDubai?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">
+                            <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
+                        </a>
+                        <a class="image-thumbnail" href="https://www.facebook.com/murdochdubai/">
+                            <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
+                        </a>
+                        <a class="image-thumbnail" href="https://www.youtube.com/user/MurdochDubai">
+                            <i class="fa fa-youtube-play fa-3x" aria-hidden="true"></i>
+                        </a>
+                        <a class="image-thumbnail" href="https://www.instagram.com/murdochdubai/?hl=en">
+                            <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
+                        </a>
+                    </div><!-- End of aboutus -->
+                    <hr class="footer-rule d-block d-sm-none">
+                    <div class="contactus col-md-4 col-sm-4 col-xs-12 text-center">
                         <ul>
                             <h4>Contact Us</h4>
                             <li>Level 1, Block 18</li>
@@ -220,26 +245,12 @@
                     </div><!-- End of contactus -->
                 </div><!-- End of row -->
                 <br><hr class="footer-rule"><br>
-                <div id="extra-info" class="col-12 text-center">
-                    <p>Murdoch University CRICOS code: 00125J</p>
-                    <p>TEQSA number: PRV12163<p>
-                    <p>Murdoch University has partnered with Navitas Middle East FZ-LLC, for Navitas to provide administrative assistance and support to the University in respect of its Dubai Campus.</p>
-                </div><!-- End of extra-info -->
-                <br><hr class="footer-rule"><br>
-                <div id ="social-section" class="followus col-12 text-center">
-                    <a class="image-thumbnail" href="https://twitter.com/MurdochUniDubai?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">
-                        <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
-                    </a>
-                    <a class="image-thumbnail" href="https://www.facebook.com/murdochdubai/">
-                        <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
-                    </a>
-                    <a class="image-thumbnail" href="https://www.youtube.com/user/MurdochDubai">
-                        <i class="fa fa-youtube-play fa-3x" aria-hidden="true"></i>
-                    </a>
-                    <a class="image-thumbnail" href="https://www.instagram.com/murdochdubai/?hl=en">
-                        <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
-                    </a>
-                </div><!-- End of followus -->
+{#                <div id="extra-info" class="col-12 text-center">#}
+{#                    <p>Murdoch University CRICOS code: 00125J</p>#}
+{#                    <p>TEQSA number: PRV12163<p>#}
+{#                    <p>Murdoch University has partnered with Navitas Middle East FZ-LLC, for Navitas to provide administrative assistance and support to the University in respect of its Dubai Campus.</p>#}
+{#                </div><!-- End of extra-info -->#}
+{#                <br><hr class="footer-rule"><br>#}
             </footer>
         </div><!-- End of container-fluid -->
         {% block jQueryCall %}
