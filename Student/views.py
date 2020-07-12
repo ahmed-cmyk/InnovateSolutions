@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
-from DjangoUnlimited.settings import SENDGRID_API_KEY, DEFAULT_FROM_EMAIL
+from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
 from django.http import HttpResponseRedirect
 
 from Accounts.views import isValidated, get_user_type, number_symbol_exists
@@ -29,6 +29,12 @@ def student_signup(request):
                     student.user = user
                     student.save()
                     student_form.save_m2m()
+
+                    send_mail('New Job has been posted',
+                              "A new student account with username '{{ user.get_username }}' has been posted on the "
+                              "Murdoch Career Portal.",
+                              'innovatedjango123@gmail.com', ['ikramahmed398@gmail.com'],
+                              fail_silently=False)
 
                 messages.success(request, 'A student account has been created')
                 return redirect('log_in')

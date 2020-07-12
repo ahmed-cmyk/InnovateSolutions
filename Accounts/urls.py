@@ -10,23 +10,23 @@ urlpatterns = [
 
     re_path(
         r'^password_reset/$',
-        auth_views.PasswordResetView.as_view(template_name='Accounts/password_reset_form.html',
+        auth_views.PasswordResetView.as_view(template_name='registration/password_reset_form.html',
                                              subject_template_name='registration/password_reset_subject.txt'),
         name='password_reset'
     ),
     re_path(
         r'^password_reset/done/$',
-        auth_views.PasswordResetDoneView.as_view(template_name='Accounts/password_link_sent.html', ),
+        auth_views.PasswordResetDoneView.as_view(template_name='registration/password_link_sent.html', ),
         name='password_reset_done'
     ),
     re_path(
         r'^password_reset/confirm/(?P<uidb64>[\w-]+)/(?P<token>[\w-]+)/$',
-        auth_views.PasswordResetConfirmView.as_view(template_name='Accounts/password_reset_confirm.html'),
+        auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'),
         name='password_reset_confirm',
     ),
     re_path(
         r'^password_reset/complete/$',
-        auth_views.PasswordResetCompleteView.as_view(template_name='Accounts/password_reset_complete.html'),
+        auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),
         name='password_reset_complete',
     )
 

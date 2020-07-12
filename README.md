@@ -329,3 +329,10 @@ the dashboard and these majors are assigned to students
 - Modified the job cards so that the minimum and maximum salary are visible
 - Modified job filter for new fields
 - Modified footer as per client request
+
+## 07/12/20 -10:44PM
+- Added working email functionality
+- Fixed password reset forms
+- Modified look of the password reset forms
+- Modified some pages for the email functionality
+- Fixed a bug where admins couldn't create jobs (I created this)

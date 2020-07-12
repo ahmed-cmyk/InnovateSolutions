@@ -16,7 +16,7 @@ from Home.models import UserNotifications
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
-from DjangoUnlimited.settings import SENDGRID_API_KEY, DEFAULT_FROM_EMAIL
+from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
 
 import os
 import csv
@@ -56,19 +56,10 @@ def signup(request):
 
                             message = Mail(
                                 from_email=DEFAULT_FROM_EMAIL,
-                                to_emails=['ict302jan2020@gmail.com'],
+                                to_emails=['ikramahmed398@gmail.com'],
                                 subject='New User has signed up',
                                 html_content="A new Employer has registered to use the Murdoch Career Portal."
                             )
-                            sg = SendGridAPIClient(SENDGRID_API_KEY)
-                           # sg.send(message)
-
-                        #  notification = "A new Employer has registered to use the Murdoch Career Portal."
-                        # add_notif = UserNotifications(to_user_id=1, from_user_id=request.user.id,
-                        #       notification=notification,
-                        #     type='Sign Up',
-                        #     to_show=True)
-                        #  add_notif.save()
 
                         return redirect("log_in")
                     else:

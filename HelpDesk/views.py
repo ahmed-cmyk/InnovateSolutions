@@ -14,7 +14,7 @@ from .forms import HelpDeskForm
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
-from DjangoUnlimited.settings import SENDGRID_API_KEY
+from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
 
 
 class HelpDeskFormView(TemplateView):
@@ -74,12 +74,11 @@ class HelpDeskFormView(TemplateView):
                 f.name_Request = request.user
                 f.save()
                 message = Mail(
-                    from_email='info@murdochcareerportal.com',
-                    to_emails=['ict302jan2020@gmail.com'],
+                    from_email=DEFAULT_FROM_EMAIL,
+                    to_emails=['ikramahmed398@gmail.com'],
                     subject='HelpDesk Request',
                     html_content="A new helpdesk complaint has been filed by."
                 )
-                sg = SendGridAPIClient(SENDGRID_API_KEY)
              #   sg.send(message)
                 messages.success(request, "Your request has been submitted.")
                 return redirect('HelpDesk', f.id)

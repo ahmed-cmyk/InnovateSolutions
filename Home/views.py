@@ -11,13 +11,12 @@ from django.contrib import messages
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
-from DjangoUnlimited.settings import SENDGRID_API_KEY, DEFAULT_FROM_EMAIL
+# from DjangoUnlimited.settings import SENDGRID_API_KEY, DEFAULT_FROM_EMAIL
 from django.http import HttpResponse, HttpResponseRedirect
 from wsgiref.util import FileWrapper
 from django.core.files import File
 from itertools import chain
 import os
-from sendgrid.helpers.mail import To
 # Create your views here.
 
 from Employer.models import Employer
@@ -35,7 +34,7 @@ from django.core.mail import send_mail
 
 def index(request):
     user = get_user_type(request)
-    print(SENDGRID_API_KEY)
+    # print(SENDGRID_API_KEY)
     return render(request, "Home/index.html", user)
 
 
@@ -146,7 +145,8 @@ def create_job(request):
     try:
         user = get_user_type(request)
         admin = Admin.objects.get(user_id=request.user.id)
-        if request.user.id == 'admin':
+        print(user['user_type'])
+        if user['user_type'] == 'admin':
             if request.method == 'POST':
                 jobForm = CreateJobForm(request.POST)
                 companyForm = EmployerForm(request.POST, request.FILES)
@@ -165,40 +165,38 @@ def create_job(request):
                     messages.error(request, jobForm.errors)
                     messages.error(request, companyForm.errors)
                     return redirect('create_job')
-        else:
-            jobForm = CreateJobForm()
-            companyForm = EmployerForm()
-            args = {'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type']}
-            return render(request, "Home/employer_create_jobs.html", args)
+            else:
+                jobForm = CreateJobForm()
+                companyForm = EmployerForm()
+                args = {'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type']}
+                return render(request, "Home/employer_create_jobs.html", args)
     except Admin.DoesNotExist:
         pass
 
     try:
         user = get_user_type(request)
         Employer.objects.get(user_id=request.user.id)
-        if request.method == 'POST':
-            form = CreateJobForm(request.POST)
-            if form.is_valid():
-                data = form.save(commit=False)
-                data.posted_by = request.user
-                data.save()
-                form.save_m2m()
+        if user['user_type'] == 'employer':
+            if request.method == 'POST':
+                form = CreateJobForm(request.POST)
+                if form.is_valid():
+                    data = form.save(commit=False)
+                    data.posted_by = request.user
+                    data.save()
+                    form.save_m2m()
 
-                message = Mail(
-                    from_email=DEFAULT_FROM_EMAIL,
-                    to_emails=['ict302jan2020@gmail.com'],
-                    subject='New Job has been posted',
-                    html_content="A new Job has been posted on the Murdoch Career Portal."
-                )
-                sg = SendGridAPIClient(SENDGRID_API_KEY)
-                return redirect('/')
+                    send_mail('New Job has been posted',
+                              'A new Job has been posted on the Murdoch Career Portal.',
+                              'innovatedjango123@gmail.com', ['ikramahmed398@gmail.com'],
+                              fail_silently=False)
+                    return redirect('/')
+                else:
+                    messages.info(request, form.errors)
+                    return redirect('create_job')
             else:
-                messages.info(request, form.errors)
-                return redirect('create_job')
-        else:
-            form = CreateJobForm()
-            args = {'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
-            return render(request, "Home/employer_create_jobs.html", args)
+                form = CreateJobForm()
+                args = {'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
+                return render(request, "Home/employer_create_jobs.html", args)
     except Employer.DoesNotExist:
         pass
 

@@ -6,7 +6,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
-from DjangoUnlimited.settings import SENDGRID_API_KEY
+from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
 from django.utils import timezone
 from datetime import timedelta, datetime, date
 import csv
@@ -158,14 +158,10 @@ def create_job(request):
                 job.posted_by = request.user
                 job.save()
 
-                message = Mail(
-                    from_email='info@murdochcareerportal.com',
-                    to_emails=['sethshivangi1998@gmail.com'],
-                    subject='New Job has been posted',
-                    html_content="A new Job has been posted on the Murdoch Career Portal."
-                )
-                sg = SendGridAPIClient(SENDGRID_API_KEY)
-                #   sg.send(message)
+                send_mail('New Job has been posted',
+                          'A new Job has been posted on the Murdoch Career Portal.',
+                          DEFAULT_FROM_EMAIL, ['ikramahmed398@gmail.com'],
+                          fail_silently=False)
 
                 for skill in request.POST.getlist('skills'):
                     job.skills.add(skill)
@@ -173,7 +169,8 @@ def create_job(request):
                 next_page = request.POST.get('next', '/')
                 return redirect(next_page)
         else:
-            messages.info(request, jobForm.errors)
+            messages.error(request, jobForm.errors)
+            messages.error(request, companyForm.errors)
             return redirect(request.path_info)
     else:
         userForm = InitialEmployerForm()
