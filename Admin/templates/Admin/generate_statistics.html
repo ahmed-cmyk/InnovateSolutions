@@ -11,9 +11,12 @@
 
 {% block content %}
     <div id="statBody" class="col-12">
-        <form class="" method="POST">{% csrf_token %}
-            <h1>Generate Statistics</h1>
-            {{ form.as_p }}
+        <form method="POST">{% csrf_token %}
+            <h1 class="text-center">Generate Statistics</h1>
+            <br>
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
             <div class="text-center">
                 <button class="btn btn-primary" type="Submit">Submit</button>
             </div>

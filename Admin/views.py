@@ -6,6 +6,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
+
+from Alumni.models import Alumni
 from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
 from django.utils import timezone
 from datetime import timedelta, datetime, date
@@ -217,10 +219,8 @@ def generate_statistics(request):
         admins = Admin.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
         admin_users = User.objects.filter(id__in=Admin.objects.all())
         students = Student.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
-        current = Student.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]),
-                                         alumni_status=False)
-        alumni = Student.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]),
-                                        alumni_status=True)
+        current = Student.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
+        alumni = Alumni.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
         employers = Employer.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).exclude(user_id__in=admin_users)
         jobs_posted = Job.objects.filter(date_posted__range=[start_date, end_date])
         open_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Open")

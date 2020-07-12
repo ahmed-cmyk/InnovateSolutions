@@ -335,4 +335,10 @@ the dashboard and these majors are assigned to students
 - Fixed password reset forms
 - Modified look of the password reset forms
 - Modified some pages for the email functionality
-- Fixed a bug where admins couldn't create jobs (I created this)
+- Fixed a bug where admins couldn't create jobs (I created this...I mean the bug)
+
+## 07/12/20 - 11:45PM
+- Changed the index image
+- Removed the quote from Theodore Roosevelt
+- Fixed HelpDesk request page footer cutting off
+- Added alumni object to generate statistics page
