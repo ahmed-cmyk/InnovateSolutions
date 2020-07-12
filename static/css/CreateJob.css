@@ -1,13 +1,9 @@
 #createJobBody {
-    margin: 2% auto;
+  width: 60%;
+  margin: auto;
 }
 
 #createJobBody hr {
     background-color: #000000;
     width: 70%;
-}
-
-#createJobBody form {
-    margin: auto;
-    width: 80%;
 }

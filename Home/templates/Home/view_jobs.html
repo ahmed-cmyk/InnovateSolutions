@@ -37,7 +37,7 @@
                             </div><!-- End of modal-header -->
                             <form method="POST">{% csrf_token %}
                                 <div class="modal-body form-group">
-                                    <b>Duration (in months):</b><br>
+                                    <b>Duration:</b><br>
                                     {{ form.min_duration }} {{ form.max_duration }}<br><br>
                                     <b>{{ form.industry_id.label }}:</b> {{ form.industry_id }}<br><br>
                                     <b>{{ form.location.label }}:</b> {{ form.location }}<br><br>
@@ -46,7 +46,7 @@
                                     {{ form.min_salary }} {{ form.max_salary }}<br>
                                 </div><!-- End of modal-body -->
                                 <div class="modal-footer">
-                                    <button type="reset" class="btn btn-danger">Reset</button>
+                                    <a href="view_jobs.html"><button type="reset" class="btn btn-danger">Reset</button></a>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Apply</button>
                                 </div><!-- End of modal-footer -->
@@ -64,8 +64,8 @@
                                 <hr class="horizontal-rule">
                             </div>
                             <div class="form-group">
-                                <b>Duration (in months):</b><br>
-                                {{ form.min_duration }} {{ form.max_duration }}<br><br>
+                                <b>Duration:</b><br>
+                                {{ form.min_duration }} {{ form.max_duration }} {{ form.duration_type }} <br><br>
                                 <b>{{ form.industry_id.label }}:</b> {{ form.industry_id }}<br><br>
                                 <b>{{ form.location.label }}:</b> {{ form.location }}<br><br>
                                 <b>{{ form.job_type_id.label }}:</b> {{ form.job_type_id }}<br><br>
@@ -74,74 +74,62 @@
                                 <a href='../view_jobs'>View All Jobs</a>
                             </div><!-- End of modal-body -->
                             <div class="form-footer text-center">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <a href='../view_jobs'><button type="button" class="btn btn-danger">Reset</button></a>
                                 <button type="submit" class="btn btn-primary">Apply</button>
                             </div><!-- End of modal-footer -->
                         </form>
                     </div>
                 {% endif %}
-                <div id="job-list-body" class="col-md-7 col-sm-7 col-xs-12">
+                <div class="col-md-7 col-sm-7 col-xs-12">
                     {% for job in jobs %}
-                        {% if user_type == "employer" %}
-                            <div class="card job-cards">
-                                <div class="card-image-left">
-                                    {% if obj.logo %}
-                                        <img src="{{ obj.logo.url }}" height="150.0em"
-                                             width="150.0em" alt="job-pic">
-                                    {% else %}
-                                        <img src="{% static 'DefaultDP.jpg' %}" height="150.0em"
-                                             width="150.0em" alt="default-job-pic">
-                                    {% endif %}
-                                </div>
-                                <div class="card-body">
-                                    <a class="text-danger font-weight-bold" href="{% url 'job_details' job.id %}">
-                                        <h5 class="card-title">{{ job.job_title }}</h5>
-                                    </a>
-                                    <p><span class="card-text job-specs font-weight-bold">Status:</span> {{ job.status }} </p>
-                                    <p><span class="card-text job-specs font-weight-bold">Salary (AED):</span>AED {{ job.salary }}</p>
-                                    <p><span class="card-text job-specs font-weight-bold">Duration:</span>{{ job.duration }} months</p>
-                                    <p><span class="card-text job-specs font-weight-bold">Industry:</span>{{ job.industry_id }} </p>
-                                    <p><span class="card-text job-specs font-weight-bold">Job Type:</span>{{ job.job_type_id }} </p>
-                                    <p><span class="card-text job-specs font-weight-bold">Location:</span>{{ job.location }} </p>
-                                </div><!-- End of card-body -->
-                                <br>
-                            </div>
-                        {% else %}
+                        {% if user_type != "employer" %}
                             {% for company in companies %}
                                 {% if job.posted_by == company.user %}
-                                    <div class="card bg-light job-cards">
-{#                                        <div class="card-image-left">#}
-{#                                            {% if obj.logo %}#}
-{#                                                <img src="{{ obj.logo.url }}" height="150.0em"#}
-{#                                                     width="150.0em" alt="normal-pic">#}
-{#                                            {% else %}#}
-{#                                                <img src="{% static 'DefaultDP.jpg' %}" height="150.0em"#}
-{#                                                     width="150.0em" alt="default-pic">#}
-{#                                            {% endif %}#}
-{#                                        </div>#}
-                                        <a class="text-danger font-weight-bold" href="{% url 'job_details' job.id %}">
-                                            <h4 class="card-header">{{ job.job_title }}</h4>
-                                        </a>
-                                        <div class="card-body">
-                                            <h6 class="card-subtitle"><b>Company Name:</b> {{ company.company_name }}</h6>
-                                            {% if user_type == "admin" %}
-                                                <p><span class="card-text font-weight-bold">Status:</span> {{ job.status }} </p>
-                                            {% endif %}
-                                            <p class="card-text"><span class="font-weight-bold">Description:</span> {{ job.description }}</p>
-                                            <p class="card-text"><span class="font-weight-bold">Salary (AED):</span> AED {{ job.salary }} </p>
-                                            <p class="card-text"><span class="font-weight-bold">Duration:</span> {{ job.duration }} months</p>
-                                            <p class="card-text"><span class="font-weight-bold">Industry:</span> {{ job.industry_id }} </p>
-                                            <p class="card-text"><span class="font-weight-bold">Job Type:</span> {{ job.job_type_id }} </p>
-                                            <p class="card-text"><span class="font-weight-bold">Location:</span> {{ job.location }} </p>
+                                        <div class="card bg-light job-cards">
+                                            <a class="text-danger font-weight-bold" href="{% url 'job_details' job.id %}">
+                                                <h4 class="card-header">{{ job.job_title }}</h4>
+                                            </a>
+                                            <div class="card-body">
+                                                <p class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }} </p>
+                                                <p class="card-subtitle"><b>Company Name:</b> {{ company.company_name }}</p>
+                                                {% if user_type == "admin" %}
+                                                    <p><span class="card-text font-weight-bold">Status:</span> {{ job.status }} </p>
+                                                {% endif %}
+                                                <p class="card-text"><b>Description:</b> {{ job.description }}</p>
+                                                <p class="card-text"><b>Min Salary:</b> {{ job.salary_min }} | <b>Max Salary:</b> {{ job.salary_max }} </p>
+                                                <p class="card-text"><b>Duration:</b> {{ job.duration }} {{ job.duration_type }}</p>
+                                                <p class="card-text"><b>Industry:</b> {{ job.industry_id }} </p>
+                                                <p class="card-text"><b>Job Type:</b> {{ job.job_type_id }} </p>
+                                            </div>
                                         </div>
-                                    </div>
                                     <br>
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
                     {% endfor %}
-                </div><!-- End of job-list-body -->
+                </div>
             </div><!-- End of row -->
+            {% for job in jobs %}
+                {% if user_type == "employer" %}
+                    <div class="col-12">
+                        <div class="card bg-light job-cards">
+                            <a class="text-danger font-weight-bold" href="{% url 'job_details' job.id %}">
+                                <h4 class="card-header">{{ job.job_title }}</h4>
+                            </a>
+                            <div class="card-body">
+                                <p class="card-text"><span class="font-weight-bold">Status:</span> {{ job.status }} </p>
+                                <p class="card-text"><span class="font-weight-bold">Min Salary (AED):</span> {{ job.salary_min }}
+                                <span class="font-weight-bold">Max Salary (AED):</span> {{ job.salary_max }}</p>
+                                <p class="card-text"><span class="font-weight-bold">Duration:</span>{{ job.duration }} {{ job.duration_type }}</p>
+                                <p class="card-text"><span class="font-weight-bold">Industry:</span>{{ job.industry_id }} </p>
+                                <p class="card-text"><span class="font-weight-bold">Job Type:</span>{{ job.job_type_id }} </p>
+                                <p class="card-text"><span class="font-weight-bold">Location:</span>{{ job.location }} </p>
+                            </div><!-- End of card-body -->
+                        </div>
+                        <br>
+                    </div>
+                {% endif %}
+            {% endfor %}
         {% else %}
             {% if user_type != "student" and user_type != "alumni" %}
                 <h1 class="text-center">No jobs to display</h1>

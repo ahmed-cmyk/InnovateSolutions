@@ -62,22 +62,29 @@ class Job(models.Model):
         ('Ajman', 'Ajman'),
         ('Ra’s al-Khaimah', 'Ra’s al-Khaimah')
     ]
-    date_posted = models.DateField(null=False, blank=False, auto_now_add=True)
-    posted_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='job_author')
-    job_title = models.CharField(max_length=100)
-    description = models.TextField()
-    job_status = [
+    JOB_STATUS = [
         ('Open', 'Open'),
         ('Closed', 'Closed'),
         ('Deleted', 'Deleted')
     ]
-    status = models.CharField(max_length=15, choices=job_status, default='Open')
+    DURATION = [
+        ('Days', 'Days'),
+        ('Weeks', 'Weeks'),
+        ('Months', 'Months'),
+    ]
+    date_posted = models.DateField(null=False, blank=False, auto_now_add=True)
+    posted_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='job_author')
+    job_title = models.CharField(max_length=100)
+    description = models.TextField()
+    status = models.CharField(max_length=15, choices=JOB_STATUS, default='Open')
     date_closed = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=100, choices=LOCATION_CHOICES)
     job_type_id = models.ForeignKey(JobType, on_delete=models.CASCADE, related_name='job_type')
     industry_id = models.ForeignKey(Industry, on_delete=models.CASCADE, related_name='job_industry')
     duration = models.IntegerField(null=True, validators=[MinValueValidator(1)])
-    salary = models.DecimalField(max_digits=8, decimal_places=2, validators=[MinValueValidator(0.00)])
+    duration_type = models.CharField(max_length=10, choices=DURATION)
+    salary_min = models.DecimalField(max_digits=8, decimal_places=2, validators=[MinValueValidator(0.00)])
+    salary_max = models.DecimalField(max_digits=8, decimal_places=2, validators=[MinValueValidator(0.00)])
     skills = models.ManyToManyField(Skill, related_name='job_skills')
 
     def __str__(self):

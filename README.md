@@ -318,3 +318,13 @@ the dashboard and these majors are assigned to students
 
 ## 07/11/20 - 06:30PM
 - Made some minor CSS modifications.
+
+## 07/12/20 - 
+- Removed Salary field from Jobs
+- Added Minimum Salary and Maximum Salary to Jobs
+- Added Duration Type to Jobs
+- Modified Job Creation form
+- Modified job details
+- Added message regarding consent above Apply button in the job details page for students
+- Modified the job cards so that the minimum and maximum salary are visible
+- Modified job filter for new fields

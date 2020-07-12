@@ -17,6 +17,13 @@ class CreateJobForm(forms.ModelForm):
     class Meta:
         model = Job
         exclude = ['posted_by', 'date_posted', 'status', 'date_closed']
+        labels = {
+            "duration": "Duration",
+            "salary_min": "Minimum Salary",
+            "salary_max": "Maximum Salary",
+            "industry_id": "Industry ID",
+            "job_type_id": "Job Type ID"
+        }
 
 
 class EditJobForm(CreateJobForm):
@@ -35,8 +42,14 @@ class FilterJobForm(forms.ModelForm):
         ('Ajman', 'Ajman'),
         ('Ra’s al-Khaimah', 'Ra’s al-Khaimah')
     ]
+    DURATION = [
+        ('Days', 'Days'),
+        ('Weeks', 'Weeks'),
+        ('Months', 'Months'),
+    ]
     min_duration = forms.IntegerField(required=False)
     max_duration = forms.IntegerField(required=False)
+    duration_type = forms.CharField(max_length=10, widget=forms.Select(choices=DURATION))
     location = forms.CharField(max_length=100, required=True, widget=forms.Select(choices=LOCATION_CHOICES))
     job_type_id = forms.ModelChoiceField(
         widget=forms.Select(attrs={'class': 'custom-select'}),
@@ -46,7 +59,6 @@ class FilterJobForm(forms.ModelForm):
     )
     min_salary = forms.FloatField(required=False)
     max_salary = forms.FloatField(required=False)
-
     industry_id = forms.ModelChoiceField(
         widget=forms.Select(attrs={'class': 'custom-select'}),
         queryset=Industry.objects.all(),

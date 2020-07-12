@@ -65,10 +65,11 @@ def view_jobs(request):
     if request.method == 'POST':
         min_duration = request.POST.get("min_duration")
         max_duration = request.POST.get("max_duration")
+        duration_type = request.POST.get("duration_type")
         location = request.POST.get("location")
         job_type_id = request.POST.get("job_type_id")
-        min_salary = request.POST.get("min_salary")
-        max_salary = request.POST.get("max_salary")
+        salary_min = request.POST.get("salary_min")
+        salary_max = request.POST.get("salary_max")
         industry_id = request.POST.get("industry_id")
         if min_duration:
             min_duration_jobs = Job.objects.filter(duration__gte=min_duration)
@@ -80,18 +81,21 @@ def view_jobs(request):
         else:
             max_duration_jobs = Job.objects.all()
 
+        if duration_type:
+            chosen_duration_type = Job.objects.filter(duration_type=duration_type)
+
         if location:
             location_jobs = Job.objects.filter(location=location)
         else:
             location_jobs = Job.objects.all()
 
-        if min_salary:
-            min_salary_jobs = Job.objects.filter(salary__gte=min_salary)
+        if salary_min:
+            min_salary_jobs = Job.objects.filter(salary_min_gte=salary_min)
         else:
             min_salary_jobs = Job.objects.all()
 
-        if max_salary:
-            max_salary_jobs = Job.objects.filter(salary__lte=max_salary)
+        if salary_max:
+            max_salary_jobs = Job.objects.filter(salary_max_lte=salary_max)
         else:
             max_salary_jobs = Job.objects.all()
 
@@ -142,7 +146,6 @@ def create_job(request):
     try:
         user = get_user_type(request)
         admin = Admin.objects.get(user_id=request.user.id)
-        print(admin.user.id)
         if request.user.id == 'admin':
             if request.method == 'POST':
                 jobForm = CreateJobForm(request.POST)
@@ -159,8 +162,8 @@ def create_job(request):
                         jobForm.save_m2m()
                         return redirect('/')
                 else:
-                    messages.info(request, jobForm.errors)
-                    messages.info(request, companyForm.errors)
+                    messages.error(request, jobForm.errors)
+                    messages.error(request, companyForm.errors)
                     return redirect('create_job')
         else:
             jobForm = CreateJobForm()
@@ -221,16 +224,19 @@ def job_details(request, id):
                 post.job_id = job
                 id = request.user.id
                 student = Student.objects.get(user_id=id)
+                post.applied = student
+                post.date_applied = timezone.now()
+                post.save()
+                return render(request, 'Home/job_details.html', args)
             elif user['user_type'] == 'alumni':
                 post = alumniForm.save(commit=False)
                 post.job_id = job
                 id = request.user.id
                 alumni = Alumni.objects.get(user_id=id)
                 post.applied = alumni
-
-            post.date_applied = timezone.now()
-            post.save()
-            return render(request, 'Home/job_details.html', args)
+                post.date_applied = timezone.now()
+                post.save()
+                return render(request, 'Home/job_details.html', args)
 
         elif request.POST.get("viewcandidates"):
             if user['user_type'] == 'student':
@@ -263,56 +269,59 @@ def job_details(request, id):
 @login_required
 def edit_job(request, id):
     job = Job.objects.get(id=id)
+    user = get_user_type(request)
+    print(user['user_type'])
     try:
-        user = get_user_type(request)
-        Employer.objects.get(user_id=request.user.id)
-        if request.method == 'POST':
-            form = EditJobForm(request.POST, request.FILES, instance=job)
-            if form.is_valid():
-                data = form.save(commit=False)
-                data.posted_by = request.user
-                data.save()
-                form.save_m2m()
-                next = request.POST.get('next', '/')
-                return redirect(next)
+        if user['user_type'] == 'employer':
+            Employer.objects.get(user_id=request.user.id)
+            if request.method == 'POST':
+                form = EditJobForm(request.POST, request.FILES, instance=job)
+                if form.is_valid():
+                    data = form.save(commit=False)
+                    data.posted_by = request.user
+                    data.save()
+                    form.save_m2m()
+                    next = request.POST.get('next', '/')
+                    return redirect(next)
+                else:
+                    messages.info(request, form.errors)
+                    return redirect(request.path_info)
             else:
-                messages.info(request, form.errors)
-                return redirect(request.path_info)
-        else:
-            jobForm = EditJobForm(instance=job)
-            args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type']}
-            return render(request, 'Home/edit_job.html', args)
+                jobForm = EditJobForm(instance=job)
+                args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type']}
+                return render(request, 'Home/edit_job.html', args)
     except Employer.DoesNotExist:
         pass
 
     try:
-        user = get_user_type(request)
-        admin = Admin.objects.get(user_id=request.user.id)
-        if request.method == 'POST':
-            jobForm = EditJobForm(request.POST, instance=job)
-            companyForm = EmployerForm(request.POST, request.FILES, instance=admin)
+        if user['user_type'] == 'admin':
+            admin = Admin.objects.get(user_id=request.user.id)
+            if request.method == 'POST':
+                jobForm = EditJobForm(request.POST, instance=job)
+                # companyForm = EmployerForm(request.POST, request.FILES, instance=admin)
 
-            if jobForm.is_valid() and companyForm.is_valid():
-                with transaction.atomic():
-                    company = companyForm.save(commit=False)
-                    company.user_id = admin.user.id
-                    company.save()
-                    j = jobForm.save(commit=False)
-                    j.posted_by = request.user
-                    j.save()
-                    jobForm.save_m2m()
-                    next_page = request.POST.get('next', '/')
-                    return redirect(next_page)
+                # if jobForm.is_valid() and companyForm.is_valid():
+                if jobForm.is_valid():
+                    with transaction.atomic():
+                        # company = companyForm.save(commit=False)
+                        # company.user_id = admin.user.id
+                        # company.save()
+                        j = jobForm.save(commit=False)
+                        j.posted_by = request.user
+                        j.save()
+                        jobForm.save_m2m()
+                        next_page = request.POST.get('next', '/')
+                        return redirect(next_page)
+                else:
+                    messages.info(request, jobForm.errors)
+                    # messages.info(request, companyForm.errors)
+                    return redirect(request.path_info)
             else:
-                messages.info(request, jobForm.errors)
-                messages.info(request, companyForm.errors)
-                return redirect(request.path_info)
-        else:
-            jobForm = EditJobForm(instance=job)
-            # companyForm = EmployerForm(instance=admin)
-            args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type']}
-            # args = {'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type']}
-            return render(request, 'Home/edit_job.html', args)
+                jobForm = EditJobForm(instance=job)
+                # companyForm = EmployerForm(instance=admin)
+                args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type']}
+                # args = {'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type']}
+                return render(request, 'Home/edit_job.html', args)
     except Admin.DoesNotExist:
         pass
 
