@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
@@ -28,23 +28,26 @@ def signup(request):
 
         if user_form.is_valid():
             if user_form.usernameExists():
-                messages.info(request, 'Username already taken. Try a different one.') #checks if username exists in db
+                messages.info(request,
+                              'Username already taken. Try a different one.')  # checks if username exists in db
                 return redirect("employer_register")
 
             elif user_form.emailExists():
-                messages.info(request, 'Email already taken. Try a different one.') #checks if email exists in db
+                messages.info(request, 'Email already taken. Try a different one.')  # checks if email exists in db
                 return redirect("employer_register")
 
             elif not user_form.samePasswords():
-                messages.info(request, 'Passwords not matching. Try again.') #checks if password and confirm password are matching
+                messages.info(request,
+                              'Passwords not matching. Try again.')  # checks if password and confirm password are matching
                 return redirect("employer_register")
 
             elif not user_form.emailDomainExists():
-                messages.info(request, 'Email domain does not exist. Try again.') #checks if there is an exising domain for given email
+                messages.info(request,
+                              'Email domain does not exist. Try again.')  # checks if there is an exising domain for given email
                 return redirect("employer_register")
 
             else:
-                if isValidated(user_form.cleaned_data.get('password1')): #checks if password is valid
+                if isValidated(user_form.cleaned_data.get('password1')):  # checks if password is valid
                     employer_form = EmployerForm(request.POST, request.FILES)
 
                     if employer_form.is_valid():
@@ -54,11 +57,11 @@ def signup(request):
                             employer.user = user
                             employer.save()
 
-                            message = Mail(
-                                from_email=DEFAULT_FROM_EMAIL,
-                                to_emails=['ikramahmed398@gmail.com'],
-                                subject='New User has signed up',
-                                html_content="A new Employer has registered to use the Murdoch Career Portal."
+                            send_mail(
+                                'New User has signed up',
+                                "A new Employer has registered to use the Murdoch Career Portal.",
+                                'innovatedjango123@gmail.com', ['ikramahmed398@gmail.com'],
+                                fail_silently=False
                             )
 
                         return redirect("log_in")
@@ -78,6 +81,17 @@ def signup(request):
         user = get_user_type(request)
         args = {'employer_form': employer_form, 'user_form': user_form, 'user_type': user['user_type']}
         return render(request, 'Employer/employer_registration.html', args)
+
+
+def check_username(request):
+    if request.is_ajax and request.method == 'GET':
+        email = request.GET.get("username", None)
+        if User.objects.filter(username=email).exists():
+            return JsonResponse({"valid": False}, status=200)
+        else:
+            return JsonResponse({"valid": True}, status=200)
+
+    return JsonResponse({}, status=400)
 
 
 @login_required

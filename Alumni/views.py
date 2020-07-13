@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
@@ -9,61 +9,67 @@ from Accounts.views import isValidated, get_user_type
 from .models import Alumni
 from .forms import *
 
+
 def signup(request):
-	if request.method == 'POST':
-		user_form = InitialAlumniForm(request.POST)
+    if request.method == 'POST':
+        user_form = InitialAlumniForm(request.POST)
 
-		if user_form.is_valid():
-			if user_form.usernameExists():
-				messages.info(request, 'Username already taken. Try a different one.') #checks if username exists in db
-				return redirect("alumni_register")
+        if user_form.is_valid():
+            if user_form.usernameExists():
+                messages.info(request,
+                              'Username already taken. Try a different one.')  # checks if username exists in db
+                return redirect("alumni_register")
 
-			elif user_form.emailExists():
-				messages.info(request, 'Email already taken. Try a different one.') #checks if email exists in db
-				return redirect("alumni_register")
+            elif user_form.emailExists():
+                messages.info(request, 'Email already taken. Try a different one.')  # checks if email exists in db
+                return redirect("alumni_register")
 
-			elif not user_form.samePasswords():
-				messages.info(request, 'Passwords not matching. Try again.') #checks if password and confirm password are matching
-				return redirect("alumni_register")
+            elif not user_form.samePasswords():
+                messages.info(request,
+                              'Passwords not matching. Try again.')  # checks if password and confirm password are matching
+                return redirect("alumni_register")
 
-			elif not user_form.emailDomainExists():
-				messages.info(request, 'Email domain does not exist. Try again.') #checks if there is an exising domain for given email
-				return redirect("alumni_register")
+            elif not user_form.emailDomainExists():
+                messages.info(request,
+                              'Email domain does not exist. Try again.')  # checks if there is an exising domain for given email
+                return redirect("alumni_register")
 
-			else:
-				if isValidated(user_form.cleaned_data.get('password1')): #checks if password is valid
-					alumni_form = AlumniForm(request.POST, request.FILES)
+            else:
+                if isValidated(user_form.cleaned_data.get('password1')):  # checks if password is valid
+                    alumni_form = AlumniForm(request.POST, request.FILES)
 
-					if alumni_form.is_valid():
-						with transaction.atomic():
-							user = user_form.save()
-							alumni = alumni_form.save(commit=False)
-							alumni.user = user
-							alumni.save()
-							alumni_form.save_m2m()
+                    if alumni_form.is_valid():
+                        with transaction.atomic():
+                            user = user_form.save()
+                            alumni = alumni_form.save(commit=False)
+                            alumni.user = user
+                            alumni.save()
+                            alumni_form.save_m2m()
 
-						messages.success(request, 'Alumni account created')
-						return redirect("log_in")
+                        messages.success(request, 'Alumni account created')
+                        return redirect("log_in")
 
-					else:
-						messages.error(request, alumni_form.errors)
-						return redirect("alumni_register")
+                    else:
+                        messages.error(request, alumni_form.errors)
+                        return redirect("alumni_register")
 
-				else:
-					messages.info(request,'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric character and 1 letter.')
-					return redirect("alumni_register")
+                else:
+                    messages.info(request,
+                                  'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric character and 1 letter.')
+                    return redirect("alumni_register")
 
-		else:
-			messages.info(request, user_form.errors)
-			return redirect("alumni_register")
+        else:
+            messages.info(request, user_form.errors)
+            return redirect("alumni_register")
 
-	else:
-		user_form = InitialAlumniForm()
-		alumni_form = AlumniForm()
-		user = get_user_type(request)
-		args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
-		
-		return render(request, 'Alumni/alumni_registration.html', args)
+    else:
+        user_form = InitialAlumniForm()
+        alumni_form = AlumniForm()
+        user = get_user_type(request)
+        args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
+
+        return render(request, 'Alumni/alumni_registration.html', args)
+
 
 @login_required
 def edit_profile(request):
@@ -88,6 +94,17 @@ def edit_profile(request):
         alumni_form = EditAlumniProfileForm(instance=alumni)
         args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': "alumni", 'obj': alumni}
         return render(request, 'Alumni/edit_alumni_profile.html', args)
+
+
+def check_username(request):
+    if request.is_ajax and request.method == 'GET':
+        email = request.GET.get("username", None)
+        if User.objects.filter(username=email).exists():
+            return JsonResponse({"valid": False}, status=200)
+        else:
+            return JsonResponse({"valid": True}, status=200)
+
+    return JsonResponse({}, status=400)
 
 
 @login_required

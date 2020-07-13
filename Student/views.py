@@ -7,7 +7,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
 from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 
 from Accounts.views import isValidated, get_user_type, number_symbol_exists
 from .models import Student
@@ -66,7 +66,6 @@ def edit_profile(request):
                 student_form.save()
                 return redirect('view_student_profile')
         else:
-            print(student_form)
             messages.error(request, student_form.errors)
             messages.error(request, user_form.errors)
             return redirect("edit_student_profile")
@@ -75,6 +74,17 @@ def edit_profile(request):
         student_form = EditStudentProfileForm(instance=student)
         args = {'student_form': student_form, 'user_form': user_form, 'user_type': "student", 'obj': student}
         return render(request, 'Student/edit_student_profile.html', args)
+
+
+def check_username(request):
+    if request.is_ajax and request.method == 'GET':
+        email = request.GET.get("username", None)
+        if User.objects.filter(username=email).exists():
+            return JsonResponse({"valid": False}, status=200)
+        else:
+            return JsonResponse({"valid": True}, status=200)
+
+    return JsonResponse({}, status=400)
 
 
 @login_required

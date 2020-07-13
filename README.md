@@ -6,11 +6,11 @@ The purpose of this project is to redesign the existing murdoch job portal by us
 # Project Task List
 - [ ] Implement proper input validation
 - [ ] Improve Student/Employer registration page UI
-- [ ] *Update FAQ page (Optional)*
+- [X] *Update FAQ page (Optional)*
 - [ ] *Remove "Recent Actions" pane from admin dashboard (Optional)*
-- [ ] Get emails working
-- [ ] Implement password reset feature
-- [ ] Make the website responsive with mobile layouts
+- [X] Get emails working
+- [X] Implement password reset feature
+- [X] Make the website responsive with mobile layouts
 - [X] Admin can edit employer profile
 - [X] Disable close/reset buttons for closed jobs
 - [X] Employer can reopen closed jobs
@@ -342,3 +342,10 @@ the dashboard and these majors are assigned to students
 - Removed the quote from Theodore Roosevelt
 - Fixed HelpDesk request page footer cutting off
 - Added alumni object to generate statistics page
+
+## 07/13/20 - 10:59PM
+- Modified registration pages
+- Used new date widget
+- Added AJAX validation in registration pages to prevent username re-use
+- Modified live validation in registration pages
+- Prevented submission of valid registration forms

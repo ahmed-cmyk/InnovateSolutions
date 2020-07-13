@@ -5,6 +5,7 @@ import dns.exception
 import dns.resolver
 from django import forms
 from django.contrib.auth.models import User
+from django.forms import SelectDateWidget
 from upload_validator import FileTypeValidator
 
 from Accounts.views import isValidated, number_symbol_exists
@@ -15,7 +16,7 @@ from .models import Student, StudentJobApplication
 class InitialStudentForm(forms.ModelForm):
     first_name = forms.CharField(label='First Name')
     last_name = forms.CharField(label='Last Name')
-    email = forms.EmailField(label='Email Address')
+    email = forms.EmailField(label='Student Email Address')
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
@@ -115,20 +116,16 @@ class StudentForm(forms.ModelForm):
                                label='Gender',
                                required=True,
                                widget=forms.RadioSelect(attrs={'class': 'custom-select'}))
-    DOB = forms.DateField(required=True, label='Date of Birth',
-                          widget=forms.DateInput(attrs={
-                              'class': 'datepicker form-control-text',
-                              'placeholder': 'YYYY-MM-DD',
-                              'autocomplete': 'off'
-                          }))
-    student_id = forms.CharField(label='Student ID', max_length=8, min_length=8)
-    expected_graduation_date = forms.DateField(required=False,
-                                               label='Expected Graduation Date',
-                                               widget=forms.DateInput(attrs={
-                                                   'class': 'datepicker form-control-text',
-                                                   'placeholder': 'YYYY-MM-DD',
-                                                   'autocomplete': 'off'
-                                               }))
+    DOB = forms.DateField(widget=SelectDateWidget(years=range(1950, 2005),
+                                                  attrs={'placeholder': 'YYYY-MM-DD',
+                                                         'style': 'width: 33%; display: inline-block;'}),
+                          required=True, label="Date Of Birth")
+    student_id = forms.CharField(label='Student ID', max_length=8, min_length=8, required=True)
+    expected_graduation_date = forms.DateField(widget=SelectDateWidget(years=range(1950, 2005),
+                                                                       attrs={'placeholder': 'YYYY-MM-DD',
+                                                                              'style': 'width: 33%; '
+                                                                                       'display: inline-block;'}),
+                                               required=True, label="Expected Graduation Date")
     personal_email = forms.EmailField(label='Personal Email Address')
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             label='Skill',

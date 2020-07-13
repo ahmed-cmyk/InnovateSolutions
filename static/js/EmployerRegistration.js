@@ -1,6 +1,6 @@
-function testEmailValidity(email) {
+function checkFalseEmail(email) {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    return emailReg.test(email);
+    return !emailReg.test(email);
 }
 
 function isNumber(input) {
@@ -9,40 +9,20 @@ function isNumber(input) {
     return intRegex.test(input) || floatRegex.test(input);
 }
 
-function testPhoneNumValidity(number) {
+function checkFalseUAENumber(number) {
     var phoneReg = /^(?:\+971|00971|0)?(?:50|51|52|55|56|2|3|4|6|7|9)\d{7}$/;
-    return phoneReg.test(number);
+    return !phoneReg.test(number);
 }
 
 $(function () {
     $('#id_email').focusout(function () {
-        if(($(this).val() === '') || (!testEmailValidity($(this).val()))) {
+        if(($(this).val() === '') || (checkFalseEmail($(this).val()))) {
             $(this).css('border', '1px solid red');
             $('#emailError').html('Please enter a valid email address').css('color', 'red');
         }
         else {
             $(this).css('border', '');
             $('#emailError').html('').css('color', '');
-        }
-    });
-    $('#id_password1').focusout(function () {
-        if($(this).val().length < 6) {
-            $('#id_password1').css('border', '1px solid red');
-            $('#password1Error').html('Your password cannot be fewer than 6 characters').css('color', 'red');
-        }
-        else {
-            $('#id_password1').css('border', '');
-            $('#password1Error').html('').css('color', '');
-        }
-    });
-    $('#id_password2').focusout(function () {
-        if($(this).val() !== $('#id_password1').val()) {
-            $('#id_password2').css('border', '1px solid red');
-            $('#password2Error').html('Both passwords should match').css('color', 'red');
-        }
-        else {
-            $('#id_password2').css('border', '');
-            $('#password2Error').html('').css('color', '');
         }
     });
     $('#id_company_name').focusout(function () {
@@ -57,7 +37,7 @@ $(function () {
     });
     $('#id_phone_number').focusout(function () {
         $('#id_phone_number').css('border', '1px solid red');
-        if(!testPhoneNumValidity($(this).val())) {
+        if(checkFalseUAENumber($(this).val())) {
             $(this).css('border', '1px solid red');
             $('#phoneNumberError').html('Please enter a valid UAE phone number').css('color', 'red');
         }
@@ -66,4 +46,17 @@ $(function () {
             $('#phoneNumberError').html('').css('color', '');
         }
     });
+});
+
+$("#companyForm").submit(function (e) {
+    var companyname = $("#id_company_name").val();
+    var phonenumber = $("#id_phone_number").val();
+    var company_email = $("#id_email").val();
+
+    if(isNumber(companyname) || checkFalseUAENumber(phonenumber) || checkFalseEmail(company_email)) {
+        e.preventDefault();
+    }
+    else {
+        alert("Success!");
+    }
 });

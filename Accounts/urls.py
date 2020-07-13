@@ -7,6 +7,7 @@ urlpatterns = [
     path('login', views.login, name='log_in'),
     path('ForgotPassword', views.forgot_password, name='forgot_password'),
     path('logout', views.logout, name='logout'),
+    path('get/ajax/validate_username', views.check_username, name="check_username"),
 
     re_path(
         r'^password_reset/$',

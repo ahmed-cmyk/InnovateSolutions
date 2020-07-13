@@ -2,6 +2,7 @@ import dns.exception
 import dns.resolver
 from django import forms
 from django.contrib.auth.models import User
+from django.forms import SelectDateWidget
 from upload_validator import FileTypeValidator
 
 from .models import Alumni, AlumniJobApplication
@@ -23,6 +24,11 @@ class InitialAlumniForm(forms.ModelForm):
             'email',
             'password1',
             'password2'
+        )
+        labels = (
+            {'first_name': 'First Name'},
+            {'last_name': 'Last Name'},
+            {'email': 'Personal Email'}
         )
 
     def save(self, commit=True):
@@ -69,13 +75,10 @@ class AlumniForm(forms.ModelForm):
     ]
     gender = forms.ChoiceField(choices=gender_choices, label='Gender', required=True,
                                widget=forms.RadioSelect(attrs={'class': 'custom-select'}))
-    date_of_birth = forms.DateField(
-        required=True,
-        label='Date of Birth',
-        widget=forms.DateInput(attrs={
-            'class': 'datepicker form-control-text',
-            'placeholder': 'YYYY-MM-DD',
-            'autocomplete': 'off'}))
+    date_of_birth = forms.DateField(widget=SelectDateWidget(years=range(1950, 2005),
+                                                            attrs={'placeholder': 'YYYY-MM-DD',
+                                                                   'style': 'width: 33%; display: inline-block;'}),
+                                    required=True)
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             label='Skill',
                                             widget=forms.CheckboxSelectMultiple,

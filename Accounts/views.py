@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.views.generic import TemplateView
+from django.http import JsonResponse
 
 from Student.models import Student
 from Alumni.models import Alumni
@@ -36,6 +37,17 @@ def number_symbol_exists(string):
         status = True
 
     return status
+
+
+def check_username(request):
+    if request.is_ajax and request.method == 'GET':
+        email = request.GET.get("username", None)
+        if Alumni.objects.filter(username=email).exists():
+            return JsonResponse({"valid": False}, status=200)
+        else:
+            return JsonResponse({"valid": True}, status=200)
+
+    return JsonResponse({}, status=400)
 
 
 def signup(request):

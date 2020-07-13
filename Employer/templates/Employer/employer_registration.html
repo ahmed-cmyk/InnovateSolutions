@@ -8,24 +8,54 @@
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
-    <script src="{% static 'js/EmployerRegistration.js' %}" type="text/javascript"></script>
+{% endblock %}
+{% block jQueryCall %}
+        <script src="{% static 'js/EmployerRegistration.js' %}" type="text/javascript"></script>
+        <script>
+        $("#id_email").focusout(function (e) {
+              e.preventDefault();
+              var username = $(this).val();
+              $.ajax({
+                    type: 'GET',
+                    url: "{% url 'check_student_username' %}",
+                    data: {"username": username},
+                    success: function (response) {
+                          if(!response["valid"]) {
+                                $("#usernameError").css('color', 'red').html("This username is already being used");
+                            }
+                          else {
+                                $("#usernameError").css('color', '').html("");
+                          }
+                    },
+                    error: function (response) {
+                          console.log(response);
+                    }
+              });
+            });
+        </script>
 {% endblock %}
 
 {% block title %}
     Employer Account Signup - Murdoch Dubai Job Portal
 {% endblock %}
+
 {% block content %}
 <div id="form" class="row justify-content-center align-items-center">
     <div class="col-12">
         <h2 class="text-center">Employer Registration</h2>
         <hr>
-        <form action="employer_registration" method="post" onsubmit="return validatePhone()">{% csrf_token %}
+        <form id="companyForm" action="employer_registration" method="post">{% csrf_token %}
             {{ user_form.email|as_crispy_field }}
             <div id="emailError"></div>
-            {{ user_form.password1|as_crispy_field }}
-            <div id="password1Error"></div>
-            {{ user_form.password2|as_crispy_field }}
-            <div id="password2Error"></div>
+            <div id="usernameError"></div>
+            <div class="form-row">
+                <div class="form-group col-6">{{ user_form.password1|as_crispy_field }}</div>
+                <div class="form-group col-6">{{ user_form.password2|as_crispy_field }}</div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6"  id="password1Error"></div>
+                <div class="form-group col-6"  id="password2Error"></div>
+            </div>
             {{ employer_form.company_name|as_crispy_field }}
             <div id="companyNameError"></div>
             {{ employer_form.company_description|as_crispy_field }}
@@ -41,5 +71,4 @@
         </form>
     </div><!-- End of col -->
 </div><!-- End of row -->
-{% block jQueryCall %}{% endblock %}
 {% endblock %}
