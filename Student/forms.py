@@ -1,6 +1,7 @@
 from re import search
 
 # Note: we need dnspython for this to work
+import datetime
 import dns.exception
 import dns.resolver
 from django import forms
@@ -108,6 +109,7 @@ class InitialStudentForm(forms.ModelForm):
 
 
 class StudentForm(forms.ModelForm):
+    year = datetime.date.today().year
     gender_choices = [
         ('Male', 'Male'),
         ('Female', 'Female')
@@ -116,12 +118,12 @@ class StudentForm(forms.ModelForm):
                                label='Gender',
                                required=True,
                                widget=forms.RadioSelect(attrs={'class': 'custom-select'}))
-    DOB = forms.DateField(widget=SelectDateWidget(years=range(1950, 2005),
+    DOB = forms.DateField(widget=SelectDateWidget(years=range(year-50, year-20),
                                                   attrs={'placeholder': 'YYYY-MM-DD',
                                                          'style': 'width: 33%; display: inline-block;'}),
                           required=True, label="Date Of Birth")
     student_id = forms.CharField(label='Student ID', max_length=8, min_length=8, required=True)
-    expected_graduation_date = forms.DateField(widget=SelectDateWidget(years=range(2020, 2030),
+    expected_graduation_date = forms.DateField(widget=SelectDateWidget(years=range(year, year+10),
                                                                        attrs={'placeholder': 'YYYY-MM-DD',
                                                                               'style': 'width: 33%; '
                                                                                        'display: inline-block;'}),

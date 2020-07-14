@@ -3,7 +3,7 @@
 
 <!-- Additional Stylesheets -->
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/HelpDesk.css' %}"/>
 {% endblock %}
 
 {% block title %}
@@ -14,23 +14,22 @@
 {% block content %}
     {% load comments %}
     <br><br>
-    <div class="inside-container2">
+    <div class="col-12">
+        <h2 class="text-center">Make a HelpDesk Request</h2>
+        <br>
         <form method="POST">
-            <div>
+            <div class="form-control-feedback">
                 {% csrf_token %}
-                <div class="headtop"></div>
-
                 <p>Subject:</p>
                 {{ help_desk_form.subject }}
+                <br>
                 <p>Please describe the issue or concern you are facing in detail:</p>
                 {{ help_desk_form.issue }}
 
                 {% if not thread %}
                     <br><br>
-                    <div align="center">
-                        <button type="submit" name="submitbutton"
-                                style=" color: white; background-color:rgb(204,0,0); width: 140px; height:30px;"> Submit
-                        </button>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-danger" name="submitbutton"> Submit</button>
                     </div>
                 {% endif %}
             </div>
@@ -38,47 +37,39 @@
     </div>
 
     {% if thread %}
-        <body>
-        <div class="inside-container2">
-            <p> Number of Comment/s: <span
-                    class="paragraph-comment"> {{ thread.text }} </span>
+        <div id="commentSection" class="col-12">
+            <br>
+            <p> Number of Comments: {{ thread.text }}
                 {% get_comment_count for thread as comment_count %}
-                <span>
                 {% if comment_count != 0 %}
+                    <span>{{ comment_count }} comments</span>
                 {% endif %}
-                    {{ comment_count }} comment/s
-                                </span>
             </p>
+            <br>
 
             {% get_comment_list for thread as comments_list %}
             {% for comment in comments_list %}
                 {% if comment.user == user %}
-                    <p>
-                        {{ comment.user_name }}
-                    </p>
-                    <p> "{{ comment.submit_date }}"
-                        "{{ comment.submit_date|timesince }}"
-                    </p>
-
+                    <div class="card bg-light">
+                        <h6 class="card-header">
+                            <span class="text-primary">{{ comment.user }}</span>
+                            <span class="float-right"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ comment.submit_date }}</span>
+                        </h6>
+                        <div class="card-body">
+                            {% if forloop.counter != comment_count %}
+                            {% endif %}
+                            <p class="card-text">{{ comment.comment }}</p>
+                        </div>
+                    </div>
+                    <br>
+                {% else %}
                     <div>
+                    <h5 class="text-primary">{{ comment.user }}</h5>
+                        <span> "{{ comment.submit_date }}"{{ comment.submit_date|timesince }} ago</span>
                         {% if forloop.counter != comment_count %}
                         {% endif %}
                         <p>{{ comment.comment }}</p>
-                    </div>
-                {% else %}
-                    <div>
-                    <span>
-                        {{ comment.user_name }}
-                    </span>
-                        <p> "{{ comment.submit_date }}"
-                            "{{ comment.submit_date|timesince }}"
-                        </p>
-
-                        {% if forloop.counter != comment_count %}
-                        {% endif %}
-                        <p>
-                            {{ comment.comment }}
-                        </p>
+                    <br><hr><br>
                     </div>
 
                 {% endif %}
@@ -87,6 +78,7 @@
 
             <form method="post">
                 {% csrf_token %}
+                <br>
                 <div>
                     <textarea id="{{ form.comment.id_for_label }}" name="{{ form.comment.html_name }}"
                               class="form-control" required></textarea>
@@ -102,9 +94,8 @@
                 <input type="hidden" name="url" value="http://dummyurl.com"/>
                 <input type="hidden" name="next" value="{{ request.path }}"/>
                 <div class="text-center my-3"><br><br>
-                    <button type="submit" name="submit" value="Post"
-                            style="background-color: rgb(204,0,0); color:white; width: 140px; height:30px; margin: 0 auto;">
-                        Comment
+                    <button class="btn btn-primary" type="submit" name="submit" value="Post">
+                        Post Comment
                     </button>
                 </div>
             </form>

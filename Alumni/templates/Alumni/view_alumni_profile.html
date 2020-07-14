@@ -27,6 +27,9 @@
                 <p><strong>Date of Birth:</strong> {{ obj.date_of_birth }}</p>
                 <p><strong>Gender:</strong> {{ obj.gender }}</p>
                 <p><strong>Skills: </strong></p>
+                {% if obj.student_id %}
+                    {{ obj.student_id }}
+                {% endif %}
                 {% for skill in obj.skills.all %}
                     <li>{{ skill }}</li>
                 {% endfor %}

@@ -73,11 +73,10 @@ class HelpDeskFormView(TemplateView):
                 f = form.save(commit=False)
                 f.name_Request = request.user
                 f.save()
-                message = Mail(
-                    from_email=DEFAULT_FROM_EMAIL,
-                    to_emails=['ikramahmed398@gmail.com'],
-                    subject='HelpDesk Request',
-                    html_content="A new helpdesk complaint has been filed by."
+                send_mail(
+                    'HelpDesk Request',
+                    "A new helpdesk complaint has been filed by.",
+                    DEFAULT_FROM_EMAIL, ['ikramahmed398@gmail.com']
                 )
              #   sg.send(message)
                 messages.success(request, "Your request has been submitted.")

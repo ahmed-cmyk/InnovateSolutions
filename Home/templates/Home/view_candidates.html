@@ -6,34 +6,36 @@
 {% endblock %}
 
 {% block content %}
-    {% if candidates %}
-        <div id="viewBody">
-            <table class="table text-center">
-                <thead>
-                <tr class="text-center">
-                    <th>Date Applied</th>
-                    <th>Student Name</th>
-                    <th>CV</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for candidates in candidates %}
+    <div id="viewCandidateBody" class="col-12">
+        {% if candidates %}
+            <div>
+                <table class="table table-sm text-center">
+                    <thead class="thead-dark">
                     <tr class="text-center">
-                    <td>{{ candidates.date_applied }}</td>
-                    <td>{{ candidates.applied }}</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-primary">
-                            <a class="text-decoration-none text-white" href="{{ candidates.applied.cv.url }}">DOWNLOAD CV</a>
-                        </button>
-                    </td>
-                {% endfor %}
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    {% else %}
-        <div class="noApplications">
-            <h1 class="text-center">No applications received yet</h1>
-        </div>
-    {% endif %}
+                        <th>Date Applied</th>
+                        <th>Student Name</th>
+                        <th>CV</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for candidates in candidates %}
+                        <tr class="text-center">
+                        <td>{{ candidates.date_applied }}</td>
+                        <td>{{ candidates.applied }}</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-primary">
+                                <a class="text-decoration-none text-white" href="{{ candidates.applied.cv.url }}">DOWNLOAD CV</a>
+                            </button>
+                        </td>
+                    {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="noApplications">
+                <h1 class="text-center">No applications received yet</h1>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

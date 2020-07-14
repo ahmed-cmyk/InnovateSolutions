@@ -19,8 +19,8 @@ class CreateJobForm(forms.ModelForm):
         exclude = ['posted_by', 'date_posted', 'status', 'date_closed']
         labels = {
             "duration": "Duration",
-            "salary_min": "Minimum Salary",
-            "salary_max": "Maximum Salary",
+            "salary_min": "Minimum Salary (AED)",
+            "salary_max": "Maximum Salary (AED)",
             "industry_id": "Industry ID",
             "job_type_id": "Job Type ID"
         }

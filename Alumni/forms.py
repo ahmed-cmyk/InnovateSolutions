@@ -1,3 +1,4 @@
+import datetime
 import dns.exception
 import dns.resolver
 from django import forms
@@ -12,7 +13,7 @@ from Home.models import Skill, Major
 class InitialAlumniForm(forms.ModelForm):
     first_name = forms.CharField(label='First Name')
     last_name = forms.CharField(label='Last Name')
-    email = forms.EmailField(label='Email Address', required=True)
+    email = forms.EmailField(label='Personal Email Address', required=True)
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
@@ -28,7 +29,6 @@ class InitialAlumniForm(forms.ModelForm):
         labels = (
             {'first_name': 'First Name'},
             {'last_name': 'Last Name'},
-            {'email': 'Personal Email'}
         )
 
     def save(self, commit=True):
@@ -69,16 +69,18 @@ class InitialAlumniForm(forms.ModelForm):
 
 
 class AlumniForm(forms.ModelForm):
+    year = datetime.date.today().year
     gender_choices = [
         ('Male', 'Male'),
         ('Female', 'Female')
     ]
     gender = forms.ChoiceField(choices=gender_choices, label='Gender', required=True,
                                widget=forms.RadioSelect(attrs={'class': 'custom-select'}))
-    date_of_birth = forms.DateField(widget=SelectDateWidget(years=range(1950, 2005),
+    date_of_birth = forms.DateField(widget=SelectDateWidget(years=range(year-50, year-20),
                                                             attrs={'placeholder': 'YYYY-MM-DD',
                                                                    'style': 'width: 33%; display: inline-block;'}),
                                     required=True)
+    student_id = forms.CharField(label='Student ID', max_length=8, min_length=8, required=False)
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             label='Skill',
                                             widget=forms.CheckboxSelectMultiple,
