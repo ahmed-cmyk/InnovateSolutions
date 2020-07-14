@@ -90,16 +90,18 @@
                                                 <h4 class="card-header">{{ job.job_title }}</h4>
                                             </a>
                                             <div class="card-body">
-                                                <p class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }} </p>
-                                                <p class="card-subtitle"><b>Company Name:</b> {{ company.company_name }}</p>
+                                                <p class="card-text">
+                                                    <i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }}
+                                                    <i class="fa fa-briefcase pl-2" aria-hidden="true"></i> {{ company.company_name }}
+                                                    <i class="fa fa-clock-o pl-2" aria-hidden="true"></i> {{ job.duration }} {{ job.duration_type }}
+                                                    - {{ job.job_type_id }}
+                                                </p>
                                                 {% if user_type == "admin" %}
                                                     <p><span class="card-text font-weight-bold">Status:</span> {{ job.status }} </p>
                                                 {% endif %}
-                                                <p class="card-text"><b>Description:</b> {{ job.description }}</p>
+                                                <p class="card-text"><b>Job Description:</b> {{ job.description }}</p>
                                                 <p class="card-text"><b>Min Salary:</b> {{ job.salary_min }} | <b>Max Salary:</b> {{ job.salary_max }} </p>
-                                                <p class="card-text"><b>Duration:</b> {{ job.duration }} {{ job.duration_type }}</p>
                                                 <p class="card-text"><b>Industry:</b> {{ job.industry_id }} </p>
-                                                <p class="card-text"><b>Job Type:</b> {{ job.job_type_id }} </p>
                                             </div>
                                         </div>
                                     <br>
@@ -117,13 +119,15 @@
                                 <h4 class="card-header">{{ job.job_title }}</h4>
                             </a>
                             <div class="card-body">
+                                <p class="card-text">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }}
+                                    <i class="fa fa-clock-o pl-2" aria-hidden="true"></i> {{ job.duration }} {{ job.duration_type }}
+                                    - {{ job.job_type_id }}
+                                </p>
                                 <p class="card-text"><span class="font-weight-bold">Status:</span> {{ job.status }} </p>
                                 <p class="card-text"><span class="font-weight-bold">Min Salary (AED):</span> {{ job.salary_min }}
                                 <span class="font-weight-bold">Max Salary (AED):</span> {{ job.salary_max }}</p>
-                                <p class="card-text"><span class="font-weight-bold">Duration:</span>{{ job.duration }} {{ job.duration_type }}</p>
                                 <p class="card-text"><span class="font-weight-bold">Industry:</span>{{ job.industry_id }} </p>
-                                <p class="card-text"><span class="font-weight-bold">Job Type:</span>{{ job.job_type_id }} </p>
-                                <p class="card-text"><span class="font-weight-bold">Location:</span>{{ job.location }} </p>
                             </div><!-- End of card-body -->
                         </div>
                         <br>

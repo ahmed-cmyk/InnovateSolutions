@@ -7,34 +7,24 @@
 
 {% block content %}
     <div id="viewCandidateBody" class="col-12">
-        {% if candidates %}
+        {% if alumniApplicants %}
             <div>
                 <table class="table table-sm text-center">
                     <thead class="thead-dark">
                     <tr class="text-center">
-                        <th>Date Applied</th>
-                        <th>Student Name</th>
+                        <th>Name</th>
+                        <th>Email</th>
                         <th>CV</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for candidates in studentCandidates %}
+                    {% for applicants in alumniApplicants %}
                         <tr class="text-center">
-                        <td>{{ candidates.date_applied }}</td>
-                        <td>{{ candidates.applied }}</td>
+                        <td>{{ applicants.user.first_name }} {{ applicants.user.last_name }}</td>
+                        <td>{{ applicants.user }}</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-primary">
-                                <a class="text-decoration-none text-white" href="{{ candidates.applied.cv.url }}">DOWNLOAD CV</a>
-                            </button>
-                        </td>
-                    {% endfor %}
-                    {% for candidates in alumniCandidates %}
-                        <tr class="text-center">
-                        <td>{{ candidates.date_applied }}</td>
-                        <td>{{ candidates.applied }}</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-primary">
-                                <a class="text-decoration-none text-white" href="{{ candidates.applied.cv.url }}">DOWNLOAD CV</a>
+                                <a class="text-decoration-none text-white" href="{{ applicants.applied.cv.url }}">DOWNLOAD CV</a>
                             </button>
                         </td>
                     {% endfor %}

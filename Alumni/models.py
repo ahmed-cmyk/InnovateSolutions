@@ -31,3 +31,4 @@ class AlumniJobApplication(models.Model):
     job_id = models.ForeignKey(Job, null=True, on_delete=models.CASCADE, related_name='alumni_job')
     applied = models.ForeignKey(Alumni, on_delete=models.CASCADE, related_name='alumni_apply')
     date_applied = models.DateTimeField(null=True, auto_now_add=True)
+

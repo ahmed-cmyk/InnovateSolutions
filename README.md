@@ -355,9 +355,13 @@ the dashboard and these majors are assigned to students
 - Fixed the issue where View Alumni Candidates in job details would show
  an empty list
  
-## 07/14/20 -06:41PM
+## 07/14/20 - 06:41PM
 - Changed the name of the "Apply" button to "Search" in filters
 - Wrote AED besides MIN, MAX salary in Post a Job
 - Updated Sitemap
 - Added Student ID as optional field in Alumni Registration
 - Redesigned HelpDesk page
+
+## 07/14/20 - 11:07PM
+- Added a confirmation message for when jobs are created
+- Redesigned the job details and View Jobs pages

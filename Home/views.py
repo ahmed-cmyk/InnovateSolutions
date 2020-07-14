@@ -11,7 +11,7 @@ from django.contrib import messages
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
-# from DjangoUnlimited.settings import SENDGRID_API_KEY, DEFAULT_FROM_EMAIL
+from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
 from django.http import HttpResponse, HttpResponseRedirect
 from wsgiref.util import FileWrapper
 from django.core.files import File
@@ -160,7 +160,8 @@ def create_job(request):
                         job.posted_by = request.user
                         job.save()
                         jobForm.save_m2m()
-                        return redirect('/')
+                        messages.success(request, "Job successfully created")
+                        return redirect('view_jobs')
                 else:
                     messages.error(request, jobForm.errors)
                     messages.error(request, companyForm.errors)
@@ -168,7 +169,8 @@ def create_job(request):
             else:
                 jobForm = CreateJobForm()
                 companyForm = EmployerForm()
-                args = {'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type']}
+                args = {'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'],
+                        'user_type': user['user_type']}
                 return render(request, "Home/employer_create_jobs.html", args)
     except Admin.DoesNotExist:
         pass
@@ -187,9 +189,10 @@ def create_job(request):
 
                     send_mail('New Job has been posted',
                               'A new Job has been posted on the Murdoch Career Portal.',
-                              'innovatedjango123@gmail.com', ['ikramahmed398@gmail.com'],
+                              DEFAULT_FROM_EMAIL, ['ikramahmed398@gmail.com'],
                               fail_silently=False)
-                    return redirect('/')
+                    messages.success(request, "Job successfully created")
+                    return redirect('view_jobs')
                 else:
                     messages.info(request, form.errors)
                     return redirect('create_job')
@@ -209,11 +212,9 @@ def job_details(request, id):
     job = Job.objects.get(id=id)
     companies = Employer.objects.all()
 
-    print(user['user_type'])
-
-    args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies, 'applied': True}
     form = StudentJobApplicationForm()
     alumniForm = AlumniJobApplicationForm()
+    args = {'job': job, 'alumniForm': alumniForm, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies, 'applied': True}
 
     if request.method == 'POST':
         if request.POST.get("apply"):
@@ -237,29 +238,26 @@ def job_details(request, id):
                 return render(request, 'Home/job_details.html', args)
 
         elif request.POST.get("viewcandidates"):
-            if user['user_type'] == 'student':
-                candidates = StudentJobApplication.objects.filter(job_id=job)
-            elif user['user_type'] == 'alumni':
-                candidates = AlumniJobApplication.objects.filter(job_id=job)
-            else:
-                candidates = chain(AlumniJobApplication.objects.filter(job_id=job), StudentJobApplication.objects.filter(job_id=job))
-            args = {'candidates': candidates, 'obj': user['obj'], 'user_type': user['user_type']}
+            alumniCandidates = AlumniJobApplication.objects.filter(job_id=job)
+            studentCandidates = StudentJobApplication.objects.filter(job_id=job)
+            args = {'studentCandidates': studentCandidates, 'alumniCandidates': alumniCandidates, 'obj': user['obj'],
+                    'user_type': user['user_type']}
             return render(request, 'Home/view_candidates.html', args)
 
     try:
         if user['user_type'] == 'student':
             student = Student.objects.get(user_id=request.user.id)
             job = Job.objects.get(id=id)
-            StudentJobApplication.objects.get(job_id_id=job, applied=student)
+            StudentJobApplication.objects.get(job_id=job, applied=student)
         elif user['user_type'] == 'alumni':
             alumni = Alumni.objects.get(user_id=request.user.id)
             job = Job.objects.get(id=id)
-            AlumniJobApplication.objects.get(job_id_id=job, applied=student)
+            AlumniJobApplication.objects.get(job_id=job, applied=alumni)
 
         return render(request, 'Home/job_details.html', args)
 
     except:
-        args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies,
+        args = {'job': job, 'alumniForm': alumniForm, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies,
                 'applied': False}
         return render(request, 'Home/job_details.html', args)
 
@@ -461,7 +459,7 @@ def view_students(request):
 
         filtered_stds = skills_students & majors_students & alumni_status_students & min_graduation_date_students & max_graduation_date_students
         students_all = Student.objects.all()
-        students = students_all  & filtered_stds
+        students = students_all & filtered_stds
         form = FilterStudentForm()
         args = {'students': students, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, "Home/view_students.html", args)
@@ -494,7 +492,7 @@ def view_alumni(request):
 
         filtered_stds = skills_students & majors_alumni
         alumni_all = Alumni.objects.all()
-        alumnus = alumni_all  & filtered_stds
+        alumnus = alumni_all & filtered_stds
         form = FilterAlumniForm()
         args = {'alumnus': alumnus, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, "Home/view_alumni.html", args)
@@ -507,12 +505,14 @@ def view_alumni(request):
         return redirect('/')
     return render(request, 'Home/view_alumni.html', args)
 
+
 @login_required
 def student_details(request, id):
     student = Student.objects.get(user_id=id)
     user = get_user_type(request)
     args = {'student': student, 'obj': user['obj'], 'user_type': user['user_type']}
     return render(request, 'Home/student_details.html', args)
+
 
 @login_required
 def alumni_details(request, id):
@@ -521,14 +521,14 @@ def alumni_details(request, id):
     args = {'alumni': alumni, 'obj': user['obj'], 'user_type': user['user_type']}
     return render(request, 'Home/alumni_details.html', args)
 
+
 @login_required
 def job_to_student_skills(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
     print(request.user)
-    students = Student.objects.filter(skills__in=job.skills.all())
-    students = list(set(students))
-    args = {'students': students, 'form': FilterStudentForm(), 'obj': user['obj'], 'user_type': user['user_type']}
+    studentApplicants = Student.objects.filter(skills__in=job.skills.all())
+    args = {'studentApplicants': studentApplicants, 'obj': user['obj'], 'user_type': user['user_type']}
 
     # message = Mail(
     #     from_email='info@murdochcareerportal.com',
@@ -537,15 +537,15 @@ def job_to_student_skills(request, id):
     #     html_content="Student/Students having skills matching to your job have been found."
     # )
 
-    return render(request, "Home/view_students.html", args)
+    return render(request, "Home/view_student_applicants.html", args)
+
 
 @login_required
 def job_to_alumni_skills(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
-    alumnus = Alumni.objects.filter(skills__in=job.skills.all())
-    alumnus = list(set(alumnus))
-    args = {'alumnus': alumnus, 'form': FilterAlumniForm(), 'obj': user['obj'], 'user_type': user['user_type']}
+    alumniApplicants = Alumni.objects.filter(skills__in=job.skills.all())
+    args = {'alumniApplicants': alumniApplicants, 'obj': user['obj'], 'user_type': user['user_type']}
 
     # message = Mail(
     #     from_email='info@murdochcareerportal.com',
@@ -554,7 +554,7 @@ def job_to_alumni_skills(request, id):
     #     html_content="Alumni having skills matching to your job have been found."
     # )
 
-    return render(request, "Home/view_alumni.html", args)
+    return render(request, "Home/view_alumni_applicants.html", args)
 
 
 @login_required

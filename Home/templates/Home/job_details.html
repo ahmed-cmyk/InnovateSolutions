@@ -35,14 +35,20 @@
             <div class="card border-dark mb-3">
                 <h2 class="card-header">{{ job.job_title }}</h2>
                 <div class="card-body">
-                    <p class="card-text"><i class="fa fa-calendar" aria-hidden="true"></i> {{ job.date_posted }}
-                         <i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }}</p>
+                    <p class="card-text">
+                        <i class="fa fa-calendar" aria-hidden="true"></i> {{ job.date_posted }}
+                        <i class="fa fa-map-marker pl-2" aria-hidden="true"></i> {{ job.location }}
+                        {% for company in companies %}
+                            {% if job.posted_by == company.user %}
+                                <i class="fa fa-briefcase pl-2" aria-hidden="true"></i> {{ company.company_name }}
+                            {% endif %}
+                        {% endfor %}
+                    </p>
                     <hr>
                     {% for company in companies %}
                         {% if job.posted_by == company.user %}
-                                <h5 class="card-title text-capitalize"><b>Company Name: </b>{{ company.company_name }}</h5>
-                                <p><b>Company Description:</b><br>&emsp;{{ company.company_description }}</p>
-                                <hr>
+                            <p><b>Company Description:</b><br>&emsp;{{ company.company_description }}</p>
+                            <hr>
                         {% endif %}
                     {% endfor %}
                     <p class="card-text"><b>About the Job:</b><br>{{ job.description }}</p>
@@ -58,7 +64,7 @@
             </div><!-- End of card -->
             <div class="col-md-12 text-center">
                 {% if user_type == 'student' or user_type == "alumni" %}
-                    {% if applied == False %}
+                    {% if alumniForm.job_id  %}
                         <small>By clicking apply you consent to share your profile with this company</small>
                         <br>
                         <button class = "btn" type="submit" name="apply" value="Apply&Save">&nbsp;Apply To Job</button>
