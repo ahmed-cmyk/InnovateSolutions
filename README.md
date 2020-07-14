@@ -365,3 +365,6 @@ the dashboard and these majors are assigned to students
 ## 07/14/20 - 11:07PM
 - Added a confirmation message for when jobs are created
 - Redesigned the job details and View Jobs pages
+
+## 07/14/20 - 11:18PM
+- Applied HelpDesk redesign to admin view
