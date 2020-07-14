@@ -530,14 +530,12 @@ def job_to_student_skills(request, id):
     students = list(set(students))
     args = {'students': students, 'form': FilterStudentForm(), 'obj': user['obj'], 'user_type': user['user_type']}
 
-    message = Mail(
-        from_email='info@murdochcareerportal.com',
-        to_emails=['ict302jan2020@gmail.com'],
-        subject='Student Skill match',
-        html_content="Student/Students having skills matching to your job have been found."
-    )
-    sg = SendGridAPIClient(SENDGRID_API_KEY)
-    # sg.send(message)
+    # message = Mail(
+    #     from_email='info@murdochcareerportal.com',
+    #     to_emails=['ict302jan2020@gmail.com'],
+    #     subject='Student Skill match',
+    #     html_content="Student/Students having skills matching to your job have been found."
+    # )
 
     return render(request, "Home/view_students.html", args)
 
@@ -547,16 +545,14 @@ def job_to_alumni_skills(request, id):
     job = Job.objects.get(id=id)
     alumnus = Alumni.objects.filter(skills__in=job.skills.all())
     alumnus = list(set(alumnus))
-    args = {'alumni': alumnus, 'form': FilterAlumniForm(), 'obj': user['obj'], 'user_type': user['user_type']}
+    args = {'alumnus': alumnus, 'form': FilterAlumniForm(), 'obj': user['obj'], 'user_type': user['user_type']}
 
-    message = Mail(
-        from_email='info@murdochcareerportal.com',
-        to_emails=['ict302jan2020@gmail.com'],
-        subject='Alumni Skill match',
-        html_content="Alumni having skills matching to your job have been found."
-    )
-    sg = SendGridAPIClient(SENDGRID_API_KEY)
-    # sg.send(message)
+    # message = Mail(
+    #     from_email='info@murdochcareerportal.com',
+    #     to_emails=['ict302jan2020@gmail.com'],
+    #     subject='Alumni Skill match',
+    #     html_content="Alumni having skills matching to your job have been found."
+    # )
 
     return render(request, "Home/view_alumni.html", args)
 

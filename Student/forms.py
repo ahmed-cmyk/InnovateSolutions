@@ -121,7 +121,7 @@ class StudentForm(forms.ModelForm):
                                                          'style': 'width: 33%; display: inline-block;'}),
                           required=True, label="Date Of Birth")
     student_id = forms.CharField(label='Student ID', max_length=8, min_length=8, required=True)
-    expected_graduation_date = forms.DateField(widget=SelectDateWidget(years=range(1950, 2005),
+    expected_graduation_date = forms.DateField(widget=SelectDateWidget(years=range(2020, 2030),
                                                                        attrs={'placeholder': 'YYYY-MM-DD',
                                                                               'style': 'width: 33%; '
                                                                                        'display: inline-block;'}),

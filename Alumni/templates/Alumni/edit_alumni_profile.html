@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+{% endblock %}
+{% block jQueryCall %}
     <script src="{% static 'js/EditProfile.js' %}" type="text/javascript"></script>
 {% endblock %}
 
@@ -20,13 +22,21 @@
     <div id="editProfileBody">
         <h1 class="text-center">Edit Profile</h1>
         <div class="col-12">
-            <form method="post" enctype="multipart/form-data" action="edit_alumni_profile">{% csrf_token %}
-                {% for field in user_form %}
-                    <div>{{ field|as_crispy_field }}</div>
-                {% endfor %}
-                {% for field in alumni_form %}
-                    <div>{{ field|as_crispy_field }}</div>
-                {% endfor %}
+            <form id="editAlumniForm" method="post" enctype="multipart/form-data" action="edit_alumni_profile">{% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-6">{{ user_form.first_name|as_crispy_field }}</div>
+                    <div class="form-group col-6">{{ user_form.last_name|as_crispy_field }}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6" id="firstNameError"></div>
+                    <div class="form-group col-6" id="lastNameError"></div>
+                </div>
+                <div>{{ alumni_form.gender|as_crispy_field }}</div>
+                <div>{{ alumni_form.date_of_birth|as_crispy_field }}</div>
+                <div>{{ alumni_form.skills|as_crispy_field }}</div>
+                <div>{{ alumni_form.majors|as_crispy_field }}</div>
+                <div>{{ alumni_form.dp|as_crispy_field }}</div>
+                <div>{{ alumni_form.cv|as_crispy_field }}</div>
                     <div class="text-center">
                         <button class="btn btn-primary" type="submit">
                             Save Changes

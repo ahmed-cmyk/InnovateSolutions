@@ -1,7 +1,7 @@
 function isNumber(input) {
       var intRegex = /^\d+$/;
       var floatRegex = /^((\d+(\.\d *)?)|((\d*\.)?\d+))$/;
-      return !intRegex.test(input) || floatRegex.test(input);
+      return intRegex.test(input) || floatRegex.test(input);
 }
 
 function testEmailValidity(email) {
@@ -36,7 +36,7 @@ function testEmailValidity(email) {
 //             });
 
 $(document).ready(function () {
-      $('#id_first_name').focusout(function () {
+      $('#id_first_name').change(function () {
         var firstName = $(this).val();
         if(isNumber(firstName)) {
             $('#id_first_name').css('border', '1px solid red');
@@ -47,7 +47,7 @@ $(document).ready(function () {
             $('#firstNameError').html('').css('color', '');
         }
     });
-    $('#id_last_name').focusout(function () {
+    $('#id_last_name').change(function () {
         var lastName = $(this).val();
         if(isNumber(lastName)) {
             $('#id_last_name').css('border', '1px solid red');
@@ -58,7 +58,7 @@ $(document).ready(function () {
             $('#lastNameError').html('').css('color', '');
         }
     });
-    $('#id_email').focusout(function () {
+    $('#id_email').change(function () {
         if(($(this).val() === '') || (!testEmailValidity($(this).val()))) {
             $(this).css('border', '1px solid red');
             $('#personalEmailError').html('Please enter a valid email address').css('color', 'red');

@@ -349,3 +349,8 @@ the dashboard and these majors are assigned to students
 - Added AJAX validation in registration pages to prevent username re-use
 - Modified live validation in registration pages
 - Prevented submission of valid registration forms
+
+## 07/14/20 - 12:58PM
+- Added input validation to Edit Profile pages
+- Fixed the issue where View Alumni Candidates in job details would show
+ an empty list
