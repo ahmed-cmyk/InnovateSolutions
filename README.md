@@ -375,3 +375,9 @@ the dashboard and these majors are assigned to students
 
 ## 07/15/20 - 04:29PM
 - Fixed mobile layout for View Jobs and index
+
+## 07/15/20 - 08:24PM
+- Fixed bug that prevented users from editing jobs
+- Remove Sites from admin view
+- Redesigned View Students/Alumni pages
+- Changed date entry fields in Filter Students Listing to dropdown

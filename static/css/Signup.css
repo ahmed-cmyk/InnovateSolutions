@@ -1,21 +1,4 @@
-#signupBody {
-    margin: auto 5%;
-}
-
-.signupCard {
-    background-color: #F6F3F4;
-    padding: 8% 0;
-    border-radius: 10px;
-}
-
-.signupCard hr {
+hr {
     background-color: #000000;
     width: 40%;
-}
-
-/******** Mobile Devices ********/
-@media (max-width: 767px) {
-    .signupCard {
-        margin: 5% 0;
-    }
 }

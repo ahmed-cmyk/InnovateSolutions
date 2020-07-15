@@ -43,6 +43,7 @@
                                 <i class="fa fa-briefcase pl-2" aria-hidden="true"></i> {{ company.company_name }}
                             {% endif %}
                         {% endfor %}
+                        <i class="fa fa-clock-o pl-2" aria-hidden="true"></i> {{ job.duration }} {{ job.duration_type }}
                     </p>
                     <hr>
                     {% for company in companies %}
@@ -52,7 +53,6 @@
                         {% endif %}
                     {% endfor %}
                     <p class="card-text"><b>About the Job:</b><br>{{ job.description }}</p>
-                    <p class="card-text"><b>Duration:</b> {{ job.duration }} {{ job.duration_type }}</p>
                     <p class="card-text"><b>Min Salary:</b> {{ job.salary_min }} | <b>Max Salary:</b> {{ job.salary_max }}</p>
                     <b>Skills required:</b>
                     <span class="list-group">

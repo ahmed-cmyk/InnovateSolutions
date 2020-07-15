@@ -1,4 +1,7 @@
+import datetime
 from django import forms
+from django.forms import SelectDateWidget
+
 from Home.models import Job, Skill, JobType, Industry, Major
 from Student.models import Student
 from Alumni.models import Alumni
@@ -82,26 +85,19 @@ class FilterJobForm(forms.ModelForm):
 
 
 class FilterStudentForm(forms.ModelForm):
+    year = datetime.date.today().year
     choices = [
         ('Current', 'Current'),
         ('Alumni', 'Alumni')
     ]
     alumni_status = forms.ChoiceField(required=False, label='Student Status', choices=choices,
                                       widget=forms.RadioSelect(attrs={'class': 'custom-select'}))
-    min_graduation_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, required=False,
-                                          label='Minimum Graduation Date',
-                                          widget=forms.DateInput(attrs={
-                                              'class': 'datepicker form-control-text',
-                                              'placeholder': 'YYYY-MM-DD',
-                                              'autocomplete': 'off'
-                                          }))
-    max_graduation_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, required=False,
-                                          label='Maximum Graduation Date',
-                                          widget=forms.DateInput(attrs={
-                                              'class': 'datepicker form-control-text',
-                                              'placeholder': 'YYYY-MM-DD',
-                                              'autocomplete': 'off'
-                                          }))
+    min_graduation_date = forms.DateField(required=False, label="Min Graduation Date", widget=SelectDateWidget(years=range(year, year+10),
+                                                            attrs={'placeholder': 'YYYY-MM-DD',
+                                                                   'style': 'width: 33%; display: inline-block;'}))
+    max_graduation_date = forms.DateField(required=False, label="Max Graduation Date", widget=SelectDateWidget(years=range(year, year+10),
+                                                            attrs={'placeholder': 'YYYY-MM-DD',
+                                                                   'style': 'width: 33%; display: inline-block;'}))
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             widget=forms.CheckboxSelectMultiple,
                                             required=True)

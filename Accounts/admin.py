@@ -5,4 +5,4 @@ from django.contrib.sites.models import Site
 
 # Register your models here.
 
-admin.site.register(Site)
+# admin.site.register(Site)
