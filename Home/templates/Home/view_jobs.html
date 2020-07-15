@@ -58,7 +58,7 @@
             <div class="row">
                 {% if user_type != "employer" %}
                     <div id="filterForm" class="col-md-4 col-sm-4 col-xs-12 d-none d-sm-block">
-                        <form method="POST">{% csrf_token %}
+                        <form class="pr-2 pl-2" method="POST">{% csrf_token %}
                             <div id="formHeader" class="text-center">
                                 <h4 class="font-weight-bold">Filter Job Listings</h4>
                                 <hr class="horizontal-rule">
@@ -71,7 +71,6 @@
                                 <b>{{ form.job_type_id.label }}:</b> {{ form.job_type_id }}<br><br>
                                 <b>Salary (AED/month):</b><br>
                                 {{ form.min_salary }} {{ form.max_salary }}<br>
-                                <a href='../view_jobs'>View All Jobs</a>
                             </div><!-- End of modal-body -->
                             <div class="form-footer text-center">
                                 <a href='../view_jobs'><button type="button" class="btn btn-danger">Reset</button></a>
@@ -85,25 +84,42 @@
                         {% if user_type != "employer" %}
                             {% for company in companies %}
                                 {% if job.posted_by == company.user %}
-                                        <div class="card bg-light job-cards">
-                                            <a class="text-danger font-weight-bold" href="{% url 'job_details' job.id %}">
-                                                <h4 class="card-header">{{ job.job_title }}</h4>
-                                            </a>
-                                            <div class="card-body">
-                                                <p class="card-text">
-                                                    <i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }}
-                                                    <i class="fa fa-briefcase pl-2" aria-hidden="true"></i> {{ company.company_name }}
-                                                    <i class="fa fa-clock-o pl-2" aria-hidden="true"></i> {{ job.duration }} {{ job.duration_type }}
-                                                    - {{ job.job_type_id }}
-                                                </p>
-                                                {% if user_type == "admin" %}
-                                                    <p><span class="card-text font-weight-bold">Status:</span> {{ job.status }} </p>
-                                                {% endif %}
-                                                <p class="card-text"><b>Job Description:</b> {{ job.description }}</p>
-                                                <p class="card-text"><b>Min Salary:</b> {{ job.salary_min }} | <b>Max Salary:</b> {{ job.salary_max }} </p>
-                                                <p class="card-text"><b>Industry:</b> {{ job.industry_id }} </p>
+                                    <div class="row">
+                                        <div class="card-group col-12">
+                                            <div class="card bg-light col-9">
+                                                <div class="card-body">
+                                                    <h4 class="card-title">{{ job.job_title }}</h4>
+                                                    <hr>
+                                                    <b>Job Description:</b>
+                                                    <p class="card-text">
+                                                        {{ job.description }}
+                                                    </p>
+                                                </div><!-- End of card-body -->
+                                            </div>
+                                            <div class="card bg-light col-3">
+                                                <div class="card-body">
+                                                    <p class="card-text">
+                                                        <i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }}
+                                                    </p>
+                                                    <p class="card-text">
+                                                        <i class="fa fa-clock-o" aria-hidden="true"></i> {{ job.duration }} {{ job.duration_type }}
+                                                        - {{ job.job_type_id }}
+                                                    </p>
+                                                    <p class="card-text">
+                                                        <i class="fa fa-industry" aria-hidden="true"></i> {{ job.industry_id }}
+                                                    </p>
+                                                    <p class="card-text">
+                                                        <i class="fa fa-money" aria-hidden="true"></i> {{ job.salary_min }} - {{ job.salary_max }} AED/Month
+                                                    </p>
+                                                </div><!-- End of card-body -->
+                                                <div class="card-footer">
+                                                    <a class="card-link" href="{% url 'job_details' job.id %}">
+                                                        <button class="btn btn-primary">View more Details</button>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
                                     <br>
                                 {% endif %}
                             {% endfor %}
