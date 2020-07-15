@@ -372,3 +372,6 @@ the dashboard and these majors are assigned to students
 ## 07/15/20 - 03:16PM
 - Redesigned some pages
 - Added recent jobs to index
+
+## 07/15/20 - 04:29PM
+- Fixed mobile layout for View Jobs and index

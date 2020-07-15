@@ -53,7 +53,7 @@
                 {% for job in job_list %}
                     <div class="row">
                         <div class="card-group col-12">
-                            <div class="card bg-light col-9">
+                            <div class="card bg-light col-md-9 col-xs-7">
                                 <div class="card-body">
                                     <h4 class="card-title">{{ job.job_title }}</h4>
                                     <hr>
@@ -63,7 +63,7 @@
                                     </p>
                                 </div><!-- End of card-body -->
                             </div>
-                            <div class="card bg-light col-3">
+                            <div class="card bg-light col-md-3 col-xs-5">
                                 <div class="card-body">
                                     <p class="card-text">
                                         <i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }}
