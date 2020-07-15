@@ -17,7 +17,7 @@
                 <h2 class="text-center">My Jobs</h2>
                 <br>
             {% else %}
-                <h2 class="text-center">Browse Jobs</h2>
+                <p class="text-center display-4">Browse Jobs</p>
                 <br>
             {% endif %}
             {% if user_type != "employer" %}
@@ -141,8 +141,10 @@
                                         <i class="fa fa-money" aria-hidden="true"></i> {{ job.salary_min }} - {{ job.salary_max }} AED/Month
                                     </p>
                                 </div><!-- End of card-body -->
-                                <div class="card-footer">
-                                    <a class="card-link" href="{% url 'job_details' job.id %}">View more Details</a>
+                                <div class="card-footer text-center">
+                                    <a class="card-link" href="{% url 'job_details' job.id %}">
+                                        <button class="btn btn-primary">View more Details</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
