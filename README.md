@@ -368,3 +368,7 @@ the dashboard and these majors are assigned to students
 
 ## 07/14/20 - 11:18PM
 - Applied HelpDesk redesign to admin view
+
+## 07/15/20 - 03:16PM
+- Redesigned some pages
+- Added recent jobs to index

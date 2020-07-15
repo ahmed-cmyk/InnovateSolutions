@@ -16,6 +16,11 @@ body .container-fluid {
     padding-right: 0;
 }
 
+.dark-mode {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
 header {
     position: relative;
     width: 100%;
@@ -91,6 +96,10 @@ main {
 #jobDetBody {
     width: 90%;
     margin: auto;
+}
+
+.job-cards-index .card {
+    padding: 0;
 }
 
 footer{

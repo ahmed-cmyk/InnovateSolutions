@@ -113,24 +113,39 @@
             </div><!-- End of row -->
             {% for job in jobs %}
                 {% if user_type == "employer" %}
-                    <div class="col-12">
-                        <div class="card bg-light job-cards">
-                            <a class="text-danger font-weight-bold" href="{% url 'job_details' job.id %}">
-                                <h4 class="card-header">{{ job.job_title }}</h4>
-                            </a>
-                            <div class="card-body">
-                                <p class="card-text">
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }}
-                                    <i class="fa fa-clock-o pl-2" aria-hidden="true"></i> {{ job.duration }} {{ job.duration_type }}
-                                    - {{ job.job_type_id }}
-                                </p>
-                                <p class="card-text"><span class="font-weight-bold">Status:</span> {{ job.status }} </p>
-                                <p class="card-text"><span class="font-weight-bold">Min Salary (AED):</span> {{ job.salary_min }}
-                                <span class="font-weight-bold">Max Salary (AED):</span> {{ job.salary_max }}</p>
-                                <p class="card-text"><span class="font-weight-bold">Industry:</span>{{ job.industry_id }} </p>
-                            </div><!-- End of card-body -->
+                    <div class="row w-75 mx-auto">
+                        <div class="card-group col-12">
+                            <div class="card bg-light col-9 mb-4">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ job.job_title }}</h4>
+                                    <hr>
+                                    <b>Job Description:</b>
+                                    <p class="card-text">
+                                        {{ job.description }}
+                                    </p>
+                                </div><!-- End of card-body -->
+                            </div>
+                            <div class="card bg-light col-3 mb-4">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }}
+                                    </p>
+                                    <p class="card-text">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i> {{ job.duration }} {{ job.duration_type }}
+                                        - {{ job.job_type_id }}
+                                    </p>
+                                    <p class="card-text">
+                                        <i class="fa fa-industry" aria-hidden="true"></i> {{ job.industry_id }}
+                                    </p>
+                                    <p class="card-text">
+                                        <i class="fa fa-money" aria-hidden="true"></i> {{ job.salary_min }} - {{ job.salary_max }} AED/Month
+                                    </p>
+                                </div><!-- End of card-body -->
+                                <div class="card-footer">
+                                    <a class="card-link" href="{% url 'job_details' job.id %}">View more Details</a>
+                                </div>
+                            </div>
                         </div>
-                        <br>
                     </div>
                 {% endif %}
             {% endfor %}

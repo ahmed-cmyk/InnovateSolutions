@@ -23,5 +23,6 @@ urlpatterns = [
     path('faq', views.faq, name='faq'),
     path('anti_scam', views.anti_scam, name='anti_scam'),
     path('privacy', views.privacy, name='privacy'),
-    path('sitemap', views.sitemap, name='sitemap')
+    path('sitemap', views.sitemap, name='sitemap'),
+    # path('view_recent_jobs', views.view_recent_jobs, name="recent_job_list"),
 ]

@@ -22,15 +22,10 @@
             <a href="{% url 'log_in' %}">
                 <button class="btn btn-danger">Login</button>
             </a>
+            <br><hr><br>
         {% endif %}
     </div>
-{#    <br>#}
-{#    <div id="quoteBody" class="blockquote text-center text-black">#}
-{#        <p>“Far and away the best prize that life has to offer is the chance to work hard at work worth doing.”</p>#}
-{#        <div class="blockquote-footer font-italic">Theodore Roosevelt</div>#}
-{#    </div>#}
-{#    <br><br>#}
-    <div id="jobDetBody" class="row text-center">
+    <div id="jobDetBody" class="row text-center w-75">
         <div class="jobDetCard col-md-4 col-sm-4 col-xs-12">
             <i class="fa fa-envelope fa-3x" aria-hidden="true"></i>
             <h5>Post a Job</h5>
@@ -49,4 +44,58 @@
             <p>Are you looking for a job in the UAE? Create an account and register your CV to be a candidate.</p>
         </div>
     </div>
+    <div class="col-12 job-cards-index w-75 mx-auto">
+        {% if user.is_authenticated %}
+            <br><hr><br>
+            <h3 class="text-secondary">Recent Jobs</h3>
+            <br>
+            {% if job_list %}
+                {% for job in job_list %}
+                    <div class="row">
+                        <div class="card-group col-12">
+                            <div class="card bg-light col-9">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ job.job_title }}</h4>
+                                    <hr>
+                                    <b>Job Description:</b>
+                                    <p class="card-text">
+                                        {{ job.description }}
+                                    </p>
+                                </div><!-- End of card-body -->
+                            </div>
+                            <div class="card bg-light col-3">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }}
+                                    </p>
+                                    <p class="card-text">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i> {{ job.duration }} {{ job.duration_type }}
+                                        - {{ job.job_type_id }}
+                                    </p>
+                                    <p class="card-text">
+                                        <i class="fa fa-industry" aria-hidden="true"></i> {{ job.industry_id }}
+                                    </p>
+                                    <p class="card-text">
+                                        <i class="fa fa-money" aria-hidden="true"></i> {{ job.salary_min }} - {{ job.salary_max }} AED/Month
+                                    </p>
+                                </div><!-- End of card-body -->
+                                <div class="card-footer">
+                                    <a class="card-link" href="{% url 'job_details' job.id %}">View more Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h3 class="text-secondary text-center">No Jobs to show</h3>
+            {% endif %}
+            <br><hr><br>
+        {% endif %}
+    </div>
+{#    <br>#}
+{#    <div id="quoteBody" class="blockquote text-center text-black">#}
+{#        <p>“Far and away the best prize that life has to offer is the chance to work hard at work worth doing.”</p>#}
+{#        <div class="blockquote-footer font-italic">Theodore Roosevelt</div>#}
+{#    </div>#}
+{#    <br><br>#}
 {% endblock %}

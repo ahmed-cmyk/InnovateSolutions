@@ -39,13 +39,17 @@
     {% if thread %}
         <div id="commentSection" class="col-12">
             <br>
-            <p> Number of Comments: {{ thread.text }}
-                {% get_comment_count for thread as comment_count %}
-                {% if comment_count != 0 %}
-                    <span>{{ comment_count }} comments</span>
-                {% endif %}
-            </p>
-            <br>
+            {% get_comment_count for thread as comment_count %}
+            <button type="button" class="btn btn-primary float-right">
+                Comments <span class="badge badge-light">{{ comment_count }}</span>
+            </button>
+{#            <p> Number of Comments: {{ thread.text }}#}
+{#                {% get_comment_count for thread as comment_count %}#}
+{#                {% if comment_count != 0 %}#}
+{#                    <span>{{ comment_count }} comments</span>#}
+{#                {% endif %}#}
+{#            </p>#}
+            <br><br>
 
             {% get_comment_list for thread as comments_list %}
             {% for comment in comments_list %}
@@ -85,7 +89,7 @@
                 <br>
                 <div>
                     <textarea id="{{ form.comment.id_for_label }}" name="{{ form.comment.html_name }}"
-                              class="form-control" required></textarea>
+                              class="form-control" placeholder="Enter comment here..." required></textarea>
                 </div>
 
                 {% for field in form %}

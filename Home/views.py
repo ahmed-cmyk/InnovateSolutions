@@ -12,11 +12,12 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
 from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from wsgiref.util import FileWrapper
 from django.core.files import File
 from itertools import chain
 import os
+from datetime import date, timedelta
 # Create your views here.
 
 from Employer.models import Employer
@@ -34,7 +35,12 @@ from django.core.mail import send_mail
 
 def index(request):
     user = get_user_type(request)
-    # print(SENDGRID_API_KEY)
+    if request.user.is_authenticated:
+        if Job.objects.filter(date_posted=date.today() - timedelta(1)).exists():
+            job_list = Job.objects.filter(date_posted=date.today() - timedelta(1))
+            args = {'job_list': job_list, 'obj': user['obj'], 'user_type': user['user_type']}
+            return render(request, "Home/index.html", args)
+
     return render(request, "Home/index.html", user)
 
 
@@ -56,6 +62,12 @@ def privacy(request):
 
 def sitemap(request):
     return render(request, "Home/sitemap.html", get_user_type(request))
+
+
+# @login_required
+# def view_recent_jobs(request):
+#     data = []
+#     job_list = Job.objects.get(date_posted=date.today())
 
 
 @login_required
@@ -214,7 +226,8 @@ def job_details(request, id):
 
     form = StudentJobApplicationForm()
     alumniForm = AlumniJobApplicationForm()
-    args = {'job': job, 'alumniForm': alumniForm, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies, 'applied': True}
+    args = {'job': job, 'alumniForm': alumniForm, 'obj': user['obj'], 'user_type': user['user_type'],
+            'companies': companies, 'applied': True}
 
     if request.method == 'POST':
         if request.POST.get("apply"):
@@ -257,7 +270,8 @@ def job_details(request, id):
         return render(request, 'Home/job_details.html', args)
 
     except:
-        args = {'job': job, 'alumniForm': alumniForm, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies,
+        args = {'job': job, 'alumniForm': alumniForm, 'obj': user['obj'], 'user_type': user['user_type'],
+                'companies': companies,
                 'applied': False}
         return render(request, 'Home/job_details.html', args)
 

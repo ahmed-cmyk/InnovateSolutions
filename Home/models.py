@@ -42,7 +42,7 @@ class Major(models.Model):
 
 
 class JobType(models.Model):
-    type_name = models.CharField(max_length=50, unique=True)
+    type_name = models.SlugField(max_length=50, unique=True)
 
     def clean(self):
         self.type_name = self.type_name.capitalize()
@@ -90,6 +90,17 @@ class Job(models.Model):
     def __str__(self):
         title = self.job_title
         return title
+
+    def __iter__(self):
+        return [
+            self.job_title,
+            self.location,
+            self.duration,
+            self.duration_type,
+            self.salary_min,
+            self.salary_max,
+            self.skills
+        ]
 
 
 class HelpDeskComplaints(models.Model):
