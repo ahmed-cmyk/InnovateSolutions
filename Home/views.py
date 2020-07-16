@@ -241,11 +241,10 @@ def job_details(request, id):
     job = Job.objects.get(id=id)
     companies = Employer.objects.all()
 
+    args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'],
+            'companies': companies, 'applied': True}
     form = StudentJobApplicationForm()
     alumniForm = AlumniJobApplicationForm()
-    args = {'job': job, 'alumniForm': alumniForm, 'obj': user['obj'], 'user_type': user['user_type'],
-            'companies': companies, 'applied': True}
-
     if request.method == 'POST':
         if request.POST.get("apply"):
             if user['user_type'] == 'student':
@@ -258,13 +257,13 @@ def job_details(request, id):
                 post.save()
                 return render(request, 'Home/job_details.html', args)
             elif user['user_type'] == 'alumni':
-                post = alumniForm.save(commit=False)
-                post.job_id = job
+                postAlumni = alumniForm.save(commit=False)
+                postAlumni.job_id = job
                 id = request.user.id
                 alumni = Alumni.objects.get(user_id=id)
-                post.applied = alumni
-                post.date_applied = timezone.now()
-                post.save()
+                postAlumni.alumni_applied = alumni
+                postAlumni.date_applied = timezone.now()
+                postAlumni.save()
                 return render(request, 'Home/job_details.html', args)
 
         elif request.POST.get("viewcandidates"):
@@ -277,19 +276,20 @@ def job_details(request, id):
     try:
         if user['user_type'] == 'student':
             student = Student.objects.get(user_id=request.user.id)
+            print('I go past student')
             job = Job.objects.get(id=id)
-            StudentJobApplication.objects.get(job_id=job, applied=student)
+            print('I go past job')
+            StudentJobApplication.objects.get(job_id_id=job, applied=student)
         elif user['user_type'] == 'alumni':
             alumni = Alumni.objects.get(user_id=request.user.id)
             job = Job.objects.get(id=id)
-            AlumniJobApplication.objects.get(job_id=job, applied=alumni)
-
+            AlumniJobApplication.objects.get(job_id_id=job, applied=alumni)
         return render(request, 'Home/job_details.html', args)
 
     except:
-        args = {'job': job, 'alumniForm': alumniForm, 'obj': user['obj'], 'user_type': user['user_type'],
-                'companies': companies,
-                'applied': False}
+        print('I find these errors disturbing')
+        args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'],
+                'companies': companies, 'applied': False}
         return render(request, 'Home/job_details.html', args)
 
 

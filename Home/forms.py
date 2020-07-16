@@ -86,12 +86,6 @@ class FilterJobForm(forms.ModelForm):
 
 class FilterStudentForm(forms.ModelForm):
     year = datetime.date.today().year
-    choices = [
-        ('Current', 'Current'),
-        ('Alumni', 'Alumni')
-    ]
-    alumni_status = forms.ChoiceField(required=False, label='Student Status', choices=choices,
-                                      widget=forms.RadioSelect(attrs={'class': 'custom-select'}))
     min_graduation_date = forms.DateField(required=False, label="Min Graduation Date", widget=SelectDateWidget(years=range(year, year+10),
                                                             attrs={'placeholder': 'YYYY-MM-DD',
                                                                    'style': 'width: 33%; display: inline-block;'}))
@@ -107,7 +101,7 @@ class FilterStudentForm(forms.ModelForm):
 
     class Meta:
         model = Student
-        fields = ['alumni_status', 'skills', 'majors']
+        fields = ['skills', 'majors']
 
     def __init__(self, *args, **kwargs):
         super(FilterStudentForm, self).__init__(*args, **kwargs)

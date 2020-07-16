@@ -64,7 +64,7 @@
             </div><!-- End of card -->
             <div class="col-md-12 text-center">
                 {% if user_type == 'student' or user_type == "alumni" %}
-                    {% if alumniForm.job_id  %}
+                    {% if applied == False  %}
                         <small>By clicking apply you consent to share your profile with this company</small>
                         <br>
                         <button class = "btn" type="submit" name="apply" value="Apply&Save">&nbsp;Apply To Job</button>

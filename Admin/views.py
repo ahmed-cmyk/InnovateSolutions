@@ -230,7 +230,7 @@ def generate_statistics(request):
 
         users = len(list(set(users)))
         admins = len(list(set(admins)))
-        students = len(list(set(students)))
+        students = len(list(set(students))) + len(list(set(alumni)))
         current = len(list(set(current)))
         alumni = len(list(set(alumni)))
         employers = len(list(set(employers)))

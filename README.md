@@ -386,3 +386,9 @@ the dashboard and these majors are assigned to students
 - Added details of murdoch career portal email
 - Modified various functions to send emails
 - Fixed an issue with live validation in alumni registration
+
+## 07/15/20 - 11:39PM
+- Fixed statistics page
+- Fixed Apply button not disappearing
+### Goofs
+ - Spend the whole day trying to fix a bug that doesn't exist
