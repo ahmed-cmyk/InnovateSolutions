@@ -27,13 +27,14 @@ def student_signup(request):
                     user = user_form.save()
                     student = student_form.save(commit=False)
                     student.user = user
+                    email = str(student.user)
                     student.save()
                     student_form.save_m2m()
 
                     send_mail('New Job has been posted',
                               "A new student account with username '{{ user.get_username }}' has been posted on the "
                               "Murdoch Career Portal.",
-                              'innovatedjango123@gmail.com', ['ikramahmed398@gmail.com'],
+                              DEFAULT_FROM_EMAIL, [email],
                               fail_silently=False)
 
                 messages.success(request, 'A student account has been created')

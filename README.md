@@ -381,3 +381,8 @@ the dashboard and these majors are assigned to students
 - Remove Sites from admin view
 - Redesigned View Students/Alumni pages
 - Changed date entry fields in Filter Students Listing to dropdown
+
+## 07/15/20 - 05:39PM
+- Added details of murdoch career portal email
+- Modified various functions to send emails
+- Fixed an issue with live validation in alumni registration

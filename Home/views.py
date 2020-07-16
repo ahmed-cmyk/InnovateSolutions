@@ -157,7 +157,7 @@ def create_job(request):
     try:
         user = get_user_type(request)
         admin = Admin.objects.get(user_id=request.user.id)
-        print(user['user_type'])
+        email = str(request.user)
         if user['user_type'] == 'admin':
             if request.method == 'POST':
                 jobForm = CreateJobForm(request.POST)
@@ -172,8 +172,20 @@ def create_job(request):
                         job.posted_by = request.user
                         job.save()
                         jobForm.save_m2m()
+
+                        send_mail('New Job has been posted',
+                                  "Your job has been posted on the Murdoch Career Portal.",
+                                  DEFAULT_FROM_EMAIL, [email],
+                                  fail_silently=False)
+
+                        send_mail('New Job has been posted',
+                                  "A new job has been posted on the Murdoch Career Portal.",
+                                  DEFAULT_FROM_EMAIL, DEFAULT_FROM_EMAIL,
+                                  fail_silently=False)
+
                         messages.success(request, "Job successfully created")
                         return redirect('view_jobs')
+
                 else:
                     messages.error(request, jobForm.errors)
                     messages.error(request, companyForm.errors)
@@ -190,6 +202,7 @@ def create_job(request):
     try:
         user = get_user_type(request)
         Employer.objects.get(user_id=request.user.id)
+        email = str(request.user)
         if user['user_type'] == 'employer':
             if request.method == 'POST':
                 form = CreateJobForm(request.POST)
@@ -201,7 +214,11 @@ def create_job(request):
 
                     send_mail('New Job has been posted',
                               'A new Job has been posted on the Murdoch Career Portal.',
-                              DEFAULT_FROM_EMAIL, ['ikramahmed398@gmail.com'],
+                              DEFAULT_FROM_EMAIL, [email],
+                              fail_silently=False)
+                    send_mail('New Job has been posted',
+                              "A new job has been posted on the Murdoch Career Portal.",
+                              DEFAULT_FROM_EMAIL, DEFAULT_FROM_EMAIL,
                               fail_silently=False)
                     messages.success(request, "Job successfully created")
                     return redirect('view_jobs')
@@ -280,7 +297,7 @@ def job_details(request, id):
 def edit_job(request, id):
     job = Job.objects.get(id=id)
     user = get_user_type(request)
-    print(user['user_type'])
+    email = str(request.user)
     try:
         if user['user_type'] == 'employer':
             Employer.objects.get(user_id=request.user.id)
@@ -292,6 +309,10 @@ def edit_job(request, id):
                     data.save()
                     form.save_m2m()
                     next = request.POST.get('next', '/')
+                    send_mail('Job Edit Successful',
+                              'You have successfully edited your job.',
+                              DEFAULT_FROM_EMAIL, [email],
+                              fail_silently=False)
                     return redirect(next)
                 else:
                     messages.info(request, form.errors)
@@ -321,6 +342,10 @@ def edit_job(request, id):
                         j.save()
                         jobForm.save_m2m()
                         next_page = request.POST.get('next', '/')
+                        send_mail('Job Edit Successful',
+                                  'You have successfully edited your job.',
+                                  DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL],
+                                  fail_silently=False)
                         return redirect(next_page)
                 else:
                     messages.info(request, jobForm.errors)
@@ -399,11 +424,16 @@ def delete_job(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
     companies = Employer.objects.all()
+    email = str(request.user)
 
     args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies, 'applied': True}
     if request.method == 'POST':
         job.status = 'Deleted'
         job.save()
+        send_mail('Job has been deleted',
+                  "You have deleted a job from the Murdoch Career Portal.",
+                  DEFAULT_FROM_EMAIL, [email],
+                  fail_silently=False)
         messages.success(request, "You have successfully deleted the job")
         # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Home/job_details.html', args)
@@ -418,12 +448,17 @@ def close_job(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
     companies = Employer.objects.all()
+    email = str(request.user)
 
     args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'], 'companies': companies, 'applied': True}
     if request.method == 'POST':
         job.status = 'Closed'
         job.date_closed = timezone.now()
         job.save()
+        send_mail('Job has been closed',
+                  "You have successfully closed a job on the Murdoch career portal.",
+                  DEFAULT_FROM_EMAIL, [email],
+                  fail_silently=False)
         messages.success(request, "You have successfully closed the job")
         # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
         return redirect('job_details', job.id)

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
 # from .api_key import SENDGRID_API_KEY, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 
 
@@ -27,7 +28,6 @@ SECRET_KEY = 'p-y$&3u8l04=z-*r#2t&+ff2#&c2)+6$$tmpqf#vo8s3n57dxt'
 DEBUG = True
 
 ALLOWED_HOSTS = ['ec2-18-216-115-206.us-east-2.compute.amazonaws.com', '127.0.0.1']
-SITE_ID = 2
 # Application definition
 
 INSTALLED_APPS = [
@@ -62,14 +62,20 @@ INSTALLED_APPS = [
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # SENDGRID_API_KEY = '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'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'innovateDjango123@gmail.com'
-EMAIL_HOST_PASSWORD = 'innovatePassword123'
-EMAIL_PORT = 587
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'innovateDjango123@gmail.com'
+# EMAIL_HOST_PASSWORD = 'innovatePassword123'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False
+# DEFAULT_FROM_EMAIL = 'ikramahmed398@gmail.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-DEFAULT_FROM_EMAIL = 'ikramahmed398@gmail.com'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.office365.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'careerportal@murdoch.edu.au'
+EMAIL_HOST_PASSWORD = "xE95zt*s/rfL'k^5Z:1B"
+DEFAULT_FROM_EMAIL = 'careerportal@murdoch.edu.au'
 
 SITE_ID = 1  # needed for 'django.contrib.sites' to work for admin site
 

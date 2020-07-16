@@ -1,9 +1,11 @@
+from django.core.mail import send_mail
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
+from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
 
 from Accounts.views import isValidated, get_user_type
 from .models import Alumni
@@ -43,8 +45,15 @@ def signup(request):
                             user = user_form.save()
                             alumni = alumni_form.save(commit=False)
                             alumni.user = user
+                            email = str(alumni.user)
                             alumni.save()
                             alumni_form.save_m2m()
+
+                            send_mail('New Job has been posted',
+                                      "A new student account with username '{{ user.get_username }}' has been posted on the "
+                                      "Murdoch Career Portal.",
+                                      DEFAULT_FROM_EMAIL, [email],
+                                      fail_silently=False)
 
                         messages.success(request, 'Alumni account created')
                         return redirect("log_in")
@@ -85,7 +94,6 @@ def edit_profile(request):
                 alumni_form.save()
                 return redirect('view_alumni_profile')
         else:
-            print(alumni_form)
             messages.error(request, alumni_form.errors)
             messages.error(request, user_form.errors)
             return redirect("edit_alumni_profile")

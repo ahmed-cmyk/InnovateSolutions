@@ -59,7 +59,7 @@ $(document).ready(function () {
         }
     });
     $('#id_email').change(function () {
-        if(($(this).val() === '') || (!testEmailValidity($(this).val()))) {
+        if(testEmailValidity($(this).val())) {
             $(this).css('border', '1px solid red');
             $('#personalEmailError').html('Please enter a valid email address').css('color', 'red');
         }

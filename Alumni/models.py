@@ -15,7 +15,7 @@ class Alumni(models.Model):
     phone_number = PhoneField(blank=True)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     date_of_birth = models.DateField(null=True)
-    student_id = models.CharField(max_length=8, null=True, blank=True, unique=True)
+    student_id = models.CharField(max_length=8, null=True, blank=True)
     skills = models.ManyToManyField(Skill, related_name='alumni_skills')
     majors = models.ManyToManyField(Major, related_name='alumni_majors')
     jobs_applied = models.ManyToManyField(Job, through='AlumniJobApplication')
