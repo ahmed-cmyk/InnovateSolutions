@@ -472,19 +472,10 @@ def close_job(request, id):
 def view_students(request):
     user = get_user_type(request)
     if request.method == 'POST':
-        alumni_status = request.POST.get("alumni_status")
         skills = request.POST.get("skills")
         majors = request.POST.get("majors")
         min_graduation_date = request.POST.get('min_graduation_date')
         max_graduation_date = request.POST.get('max_graduation_date')
-
-        if alumni_status:
-            if alumni_status == "Alumni":
-                alumni_status_students = Student.objects.all()
-            elif alumni_status == "Current":
-                alumni_status_students = Student.objects.all()
-        else:
-            alumni_status_students = Student.objects.all()
 
         if skills:
             skills_students = Student.objects.filter(skills=skills)
@@ -506,7 +497,7 @@ def view_students(request):
         else:
             majors_students = Student.objects.filter(majors=majors)
 
-        filtered_stds = skills_students & majors_students & alumni_status_students & min_graduation_date_students & max_graduation_date_students
+        filtered_stds = skills_students & majors_students & min_graduation_date_students & max_graduation_date_students
         students_all = Student.objects.all()
         students = students_all & filtered_stds
         form = FilterStudentForm()

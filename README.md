@@ -390,5 +390,11 @@ the dashboard and these majors are assigned to students
 ## 07/15/20 - 11:39PM
 - Fixed statistics page
 - Fixed Apply button not disappearing
-### Goofs
+    ### Goofs
  - Spend the whole day trying to fix a bug that doesn't exist
+ 
+## 07/18/20 - 08:06PM
+- Fixed the issue with View Students not running.
+    ### Failed
+    - Failed to fix the issue mentioned regarding reapplication of jobs because I don't know how
+    to replicate that issue and as far as I can see it's working fine.

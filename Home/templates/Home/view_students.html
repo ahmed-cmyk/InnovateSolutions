@@ -39,7 +39,6 @@
                   </div>
                     <form method="POST">
                         <div class="modal-body">{% csrf_token %}
-                            <!-- <p>{{ form.alumni_status|as_crispy_field }}</p> -->
                             <p>{{ form.skills|as_crispy_field }}</p>
                             <p>{{ form.majors|as_crispy_field }}</p>
                             <p>{{ form.min_graduation_date|as_crispy_field }}</p>
