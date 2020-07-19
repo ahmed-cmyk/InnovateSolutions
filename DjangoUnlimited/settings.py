@@ -69,13 +69,14 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False
 # DEFAULT_FROM_EMAIL = 'ikramahmed398@gmail.com'
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.office365.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'careerportal@murdoch.edu.au'
 EMAIL_HOST_PASSWORD = "xE95zt*s/rfL'k^5Z:1B"
 DEFAULT_FROM_EMAIL = 'careerportal@murdoch.edu.au'
+EMAIL_USE_SSL = False
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 SITE_ID = 1  # needed for 'django.contrib.sites' to work for admin site
 
