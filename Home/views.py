@@ -176,12 +176,12 @@ def create_job(request):
                         send_mail('New Job has been posted',
                                   "Your job has been posted on the Murdoch Career Portal.",
                                   DEFAULT_FROM_EMAIL, [email],
-                                  fail_silently=False)
+                                  fail_silently=True)
 
                         send_mail('New Job has been posted',
                                   "A new job has been posted on the Murdoch Career Portal.",
                                   DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL],
-                                  fail_silently=False)
+                                  fail_silently=True)
 
                         messages.success(request, "Job successfully created")
                         return redirect('view_jobs')
@@ -215,11 +215,11 @@ def create_job(request):
                     send_mail('New Job has been posted',
                               'A new Job has been posted on the Murdoch Career Portal.',
                               DEFAULT_FROM_EMAIL, [email],
-                              fail_silently=False)
+                              fail_silently=True)
                     send_mail('New Job has been posted',
                               "A new job has been posted on the Murdoch Career Portal.",
-                              DEFAULT_FROM_EMAIL, DEFAULT_FROM_EMAIL,
-                              fail_silently=False)
+                              DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL],
+                              fail_silently=True)
                     messages.success(request, "Job successfully created")
                     return redirect('view_jobs')
                 else:
@@ -312,7 +312,7 @@ def edit_job(request, id):
                     send_mail('Job Edit Successful',
                               'You have successfully edited your job.',
                               DEFAULT_FROM_EMAIL, [email],
-                              fail_silently=False)
+                              fail_silently=True)
                     return redirect(next)
                 else:
                     messages.info(request, form.errors)
@@ -345,7 +345,7 @@ def edit_job(request, id):
                         send_mail('Job Edit Successful',
                                   'You have successfully edited your job.',
                                   DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL],
-                                  fail_silently=False)
+                                  fail_silently=True)
                         return redirect(next_page)
                 else:
                     messages.info(request, jobForm.errors)
@@ -433,7 +433,7 @@ def delete_job(request, id):
         send_mail('Job has been deleted',
                   "You have deleted a job from the Murdoch Career Portal.",
                   DEFAULT_FROM_EMAIL, [email],
-                  fail_silently=False)
+                  fail_silently=True)
         messages.success(request, "You have successfully deleted the job")
         # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Home/job_details.html', args)
@@ -458,7 +458,7 @@ def close_job(request, id):
         send_mail('Job has been closed',
                   "You have successfully closed a job on the Murdoch career portal.",
                   DEFAULT_FROM_EMAIL, [email],
-                  fail_silently=False)
+                  fail_silently=True)
         messages.success(request, "You have successfully closed the job")
         # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
         return redirect('job_details', job.id)

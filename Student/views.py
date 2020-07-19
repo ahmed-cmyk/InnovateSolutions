@@ -35,7 +35,7 @@ def student_signup(request):
                               "A new student account with username '{{ user.get_username }}' has been posted on the "
                               "Murdoch Career Portal.",
                               DEFAULT_FROM_EMAIL, [email],
-                              fail_silently=False)
+                              fail_silently=True)
 
                 messages.success(request, 'A student account has been created')
                 return redirect('log_in')

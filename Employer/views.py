@@ -55,13 +55,14 @@ def signup(request):
                             user = user_form.save()
                             employer = employer_form.save(commit=False)
                             employer.user = user
+                            email = str(request.user)
                             employer.save()
 
                             send_mail(
                                 'New User has signed up',
                                 "A new Employer has registered to use the Murdoch Career Portal.",
-                                'innovatedjango123@gmail.com', ['ikramahmed398@gmail.com'],
-                                fail_silently=False
+                                DEFAULT_FROM_EMAIL, [email],
+                                fail_silently=True
                             )
 
                         return redirect("log_in")
