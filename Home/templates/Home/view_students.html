@@ -64,9 +64,9 @@
                         </div>
                         <p>{{ form.skills|as_crispy_field }}</p>
                         <p>{{ form.majors|as_crispy_field }}</p>
-                        <div class="form-group">
-                            <p class="form-row col-6">{{ form.min_graduation_date|as_crispy_field }}</p>
-                            <p class="form-row col-6">{{ form.max_graduation_date|as_crispy_field }}</p>
+                        <div>
+                            <p>{{ form.min_graduation_date|as_crispy_field }}</p>
+                            <p>{{ form.max_graduation_date|as_crispy_field }}</p>
                         </div>
                         <div class="text-center">
                             <a href='{% url 'view_students' %}'><button class="btn btn-danger">Reset</button></a>

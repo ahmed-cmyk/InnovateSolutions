@@ -86,12 +86,10 @@ class FilterJobForm(forms.ModelForm):
 
 class FilterStudentForm(forms.ModelForm):
     year = datetime.date.today().year
-    min_graduation_date = forms.DateField(required=False, label="Min Graduation Date", widget=SelectDateWidget(years=range(year, year+10),
-                                                            attrs={'placeholder': 'YYYY-MM-DD',
-                                                                   'style': 'width: 33%; display: inline-block;'}))
-    max_graduation_date = forms.DateField(required=False, label="Max Graduation Date", widget=SelectDateWidget(years=range(year, year+10),
-                                                            attrs={'placeholder': 'YYYY-MM-DD',
-                                                                   'style': 'width: 33%; display: inline-block;'}))
+    min_graduation_date = forms.DateField(label="Min Graduation Date", widget=forms.TextInput(attrs={'type': 'date'}),
+                                          required=False)
+    max_graduation_date = forms.DateField(label="Max Graduation Date", widget=forms.TextInput(attrs={'type': 'date'}),
+                                          required=False)
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             widget=forms.CheckboxSelectMultiple,
                                             required=True)
