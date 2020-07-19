@@ -180,7 +180,7 @@ def create_job(request):
 
                         send_mail('New Job has been posted',
                                   "A new job has been posted on the Murdoch Career Portal.",
-                                  DEFAULT_FROM_EMAIL, DEFAULT_FROM_EMAIL,
+                                  DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL],
                                   fail_silently=False)
 
                         messages.success(request, "Job successfully created")
