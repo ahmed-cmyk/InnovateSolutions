@@ -1,3 +1,4 @@
+from django.db.models import Max
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib.auth.models import User, auth
@@ -36,10 +37,9 @@ from django.core.mail import send_mail
 def index(request):
     user = get_user_type(request)
     if request.user.is_authenticated:
-        if Job.objects.filter(date_posted=date.today() - timedelta(1)).exists():
-            job_list = Job.objects.filter(date_posted=date.today() - timedelta(1))
-            args = {'job_list': job_list, 'obj': user['obj'], 'user_type': user['user_type']}
-            return render(request, "Home/index.html", args)
+        latest_jobs = Job.objects.order_by('-date_posted')[:3]
+        args = {'job_list': latest_jobs, 'obj': user['obj'], 'user_type': user['user_type']}
+        return render(request, "Home/index.html", args)
 
     return render(request, "Home/index.html", user)
 

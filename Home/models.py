@@ -102,6 +102,9 @@ class Job(models.Model):
             self.skills
         ]
 
+    class Meta:
+        get_latest_by = 'date_posted'
+
 
 class HelpDeskComplaints(models.Model):
     user_no = models.ForeignKey(User, on_delete=models.CASCADE, related_name='complainant')
