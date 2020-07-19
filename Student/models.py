@@ -13,7 +13,7 @@ class Student(models.Model):
         ('Female', 'Female')
     ]
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
-    DOB = models.DateField(null=True)
+    date_of_birth = models.DateField(null=True)
     skills = models.ManyToManyField(Skill, related_name='student_skills')
     student_id = models.CharField(max_length=8, null=False, unique=True)
     personal_email = models.EmailField(max_length=100)

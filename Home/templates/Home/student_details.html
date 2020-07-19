@@ -25,7 +25,7 @@
                 <h3>{{ student.user.first_name }} {{ student.user.last_name }} </h3>
                 <p><b>Email:</b> {{ student.user }}</p>
                 <p><b>Gender:</b> {{ student.gender }}</p>
-                <p><b>Date of Birth:</b> {{ student.DOB }}</p>
+                <p><b>Date of Birth:</b> {{ student.date_of_birth }}</p>
 
                 <b>Skills:</b>
                 {% for skill in student.skills.all %}

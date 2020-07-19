@@ -10,33 +10,33 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/Register.css' %}"/>
 {% endblock %}
 {% block jQueryCall %}
-        <script src="{% static 'js/AlumniRegistration.js' %}" type="text/javascript"></script>
-        <script>
-        $("#id_email").focusout(function (e) {
-              e.preventDefault();
-              var username = $(this).val();
-              $.ajax({
-                    type: 'GET',
-                    url: "{% url 'check_username' %}",
-                    data: {"username": username},
-                    success: function (response) {
-                          if(!response["valid"]) {
-                                $("#usernameError").css('color', 'red').html("This username is already being used");
-                            }
-                          else {
-                                $("#usernameError").css('color', '').html("");
-                          }
-                    },
-                    error: function (response) {
-                          console.log(response);
-                    }
-              });
-            });
-        </script>
+    <script src="{% static 'js/AlumniRegistration.js' %}" type="text/javascript"></script>
+    <script>
+    $("#id_email").focusout(function (e) {
+          e.preventDefault();
+          var username = $(this).val();
+          $.ajax({
+                type: 'GET',
+                url: "{% url 'check_alumni_username' %}",
+                data: {"username": username},
+                success: function (response) {
+                      if(!response["valid"]) {
+                            $("#usernameError").css('color', 'red').html("This username is already being used");
+                        }
+                      else {
+                            $("#usernameError").css('color', '').html("");
+                      }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+          });
+        });
+    </script>
 {% endblock %}
 
 {% block title %}
-    Student Account Signup - Murdoch Dubai Job Portal
+    Alumni Account Signup - Murdoch Dubai Job Portal
 {% endblock %}
 
 {% block content %}

@@ -36,7 +36,7 @@ function testEmailValidity(email) {
 //             });
 
 $(document).ready(function () {
-      $('#id_first_name').change(function () {
+    $('#id_first_name').change(function () {
         var firstName = $(this).val();
         if(isNumber(firstName)) {
             $('#id_first_name').css('border', '1px solid red');

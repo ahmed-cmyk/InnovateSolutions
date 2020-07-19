@@ -403,3 +403,10 @@ the dashboard and these majors are assigned to students
 - Changed text for View Student Candidates and View Alumni Applicants.
 - Modified recent jobs pane on index page to show recent 3 jobs.
 - Changed behavior of send_email functions to fail silently.
+
+## 07/19/20 - 02:53PM
+- Changed date of birth fields in Student, Alumni registration to DatePicker
+fields
+    ### Note
+    - Run "python manage.py makemigrations"
+    - Run "python manage.py migrate"

@@ -76,10 +76,7 @@ class AlumniForm(forms.ModelForm):
     ]
     gender = forms.ChoiceField(choices=gender_choices, label='Gender', required=True,
                                widget=forms.RadioSelect(attrs={'class': 'custom-select'}))
-    date_of_birth = forms.DateField(widget=SelectDateWidget(years=range(year-50, year-20),
-                                                            attrs={'placeholder': 'YYYY-MM-DD',
-                                                                   'style': 'width: 33%; display: inline-block;'}),
-                                    required=True)
+    date_of_birth = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=True)
     student_id = forms.CharField(label='Student ID', max_length=8, min_length=8, required=False)
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             label='Skill',
