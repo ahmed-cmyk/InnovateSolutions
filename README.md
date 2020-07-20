@@ -410,3 +410,10 @@ fields
     ### Note
     - Run "python manage.py makemigrations"
     - Run "python manage.py migrate"
+    
+## 07/20/20 - 02:12PM
+- Removed email password from settings.py
+- Email password is retrieved from host system as an environment variable
+    ### Setting host password as environment variable
+    - Go to command line
+    - Run "set EMAIL_HOST_PASSWORD='password in quotations''"
