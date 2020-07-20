@@ -416,4 +416,8 @@ fields
 - Email password is retrieved from host system as an environment variable
     ### Setting host password as environment variable
     - Go to command line
-    - Run "set EMAIL_HOST_PASSWORD='password in quotations''"
+    - Run "set EMAIL_HOST_PASSWORD='password in quotations'"
+    
+## 07/20/20 - 04:11PM
+- Hid recent actions pane
+- Changed colors in django admin
