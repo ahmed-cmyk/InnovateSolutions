@@ -3,11 +3,12 @@
 }
 
 #filterForm {
-  border: 1px solid black;
-  border-radius: 12px;
   height: 50%;
-  background-color: #F9F9F9;
-  padding: 1% 0;
+}
+
+#filterForm form {
+  border-radius: 12px;
+  width: 90%;
 }
 
 .horizontal-rule {

@@ -58,20 +58,27 @@
             <div class="row">
                 {% if user_type != "employer" %}
                     <div id="filterForm" class="col-md-4 col-sm-4 col-xs-12 d-none d-sm-block">
-                        <form class="pr-2 pl-2" method="POST" action="{% url 'view_jobs' %}">{% csrf_token %}
+                        <form class="p-4 bg-light border border-secondary mx-auto" method="POST" action="{% url 'view_jobs' %}">{% csrf_token %}
                             <div id="formHeader" class="text-center">
                                 <h4 class="font-weight-bold">Filter Job Listings</h4>
                                 <hr class="horizontal-rule">
                             </div>
+                            <div class="form-row">
+                                <div class="form-group">{{ form.min_duration|as_crispy_field }}</div>
+                                <div class="form-group">{{ form.max_duration|as_crispy_field }}</div>
+                                <div class="form-group">{{ form.duration_type|as_crispy_field }}</div>
+                            </div>
                             <div class="form-group">
-                                <b>Duration:</b><br>
-                                {{ form.min_duration }} {{ form.max_duration }} {{ form.duration_type }} <br><br>
-                                <b>{{ form.industry_id.label }}:</b> {{ form.industry_id }}<br><br>
-                                <b>{{ form.location.label }}:</b> {{ form.location }}<br><br>
-                                <b>{{ form.job_type_id.label }}:</b> {{ form.job_type_id }}<br><br>
-                                <b>Salary (AED/month):</b><br>
-                                {{ form.min_salary }} {{ form.max_salary }}<br>
-                            </div><!-- End of modal-body -->
+                                <div>{{ form.industry_id|as_crispy_field }}</div>
+                            </div>
+                            <div class="form-group">
+                                <div>{{ form.location|as_crispy_field }}</div>
+                            </div>
+                            <div class="form-group">{{ form.job_type_id|as_crispy_field }}</div>
+                            <div class="form-row">
+                                <div class="form-group">{{ form.min_salary|as_crispy_field }}</div>
+                                <div class="form-group">{{ form.max_salary|as_crispy_field }}</div>
+                            </div>
                             <div class="form-footer text-center">
                                 <a href='../view_jobs'><button type="button" class="btn btn-danger">Reset</button></a>
                                 <button type="submit" class="btn btn-primary">Search</button>

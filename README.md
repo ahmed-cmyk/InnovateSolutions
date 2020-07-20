@@ -453,3 +453,6 @@ other
 
 ## 07/20/20 - 10:55PM
 - Placed search bar in center of body image
+
+## 07/20/20 - 11:22PM
+- Improved look of job filter in View Jobs page
