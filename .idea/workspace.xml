@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4c6a0409-4c48-417e-8521-92d8a146e5b1" name="Default Changelist" comment="">
+    <list default="true" id="4c6a0409-4c48-417e-8521-92d8a146e5b1" name="Default Changelist" comment="- Center aligned #jobDetBody in Base.css&#10;- Added &quot;--Select--&quot; choice in duration_type and location fields in job filter&#10;- Added chosen_duration_type in filtered_jobs in the view view_jobs&#10;- Added search bar on homepage with related css in Base.css&#10;- Reduced width of login form&#10;- Increased left margin on Browse Jobs page&#10;- Realigned dropdown menu button&#10;- Updated README.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoUnlimited/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoUnlimited/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Home/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Home/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Home/templates/Home/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Home/templates/Home/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Home/templates/Home/view_jobs.html" beforeDir="false" afterPath="$PROJECT_DIR$/Home/templates/Home/view_jobs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Home/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/Base.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/Base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/Login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/View.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/View.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/theme.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/theme.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,13 +59,13 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Documents\ICT302_Public\InnovateSolutions\HelpDesk\templates" />
-      <recent name="D:\Documents\ICT302_Public\InnovateSolutions\static\js" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Documents\ICT302_Public\InnovateSolutionsTest" />
       <recent name="D:\Documents\ICT302_Public" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Documents\ICT302_Public\InnovateSolutions\HelpDesk\templates" />
+      <recent name="D:\Documents\ICT302_Public\InnovateSolutions\static\js" />
     </key>
   </component>
   <component name="RunManager">
@@ -196,6 +203,17 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
@@ -212,10 +230,11 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="361" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1592840767753" />
-    <state x="0" y="0" key="CommitChangelistDialog2" timestamp="1592824820058">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="223" y="0" key="CommitChangelistDialog2" timestamp="1595247177008">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.738@0.0.1366.738" timestamp="1591571146163" />
+    <state x="223" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1595247177008" />
     <state x="0" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1592824820058" />
     <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1594836854873">
       <screen x="0" y="0" width="1536" height="864" />
@@ -269,9 +288,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1592824883600" />
-    <state x="578" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592730627655">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="514" y="310" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1595246670730">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
+    <state x="514" y="310" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.768@0.0.1366.768" timestamp="1595246670730" />
     <state x="578" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1592730627655" />
     <state x="463" y="30" width="611" height="804" key="find.popup" timestamp="1595157414033">
       <screen x="0" y="0" width="1536" height="864" />

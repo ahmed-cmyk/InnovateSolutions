@@ -96,10 +96,46 @@ main {
 #jobDetBody {
     width: 90%;
     margin: auto;
+    align: center;
 }
 
 .job-cards-index .card {
     padding: 0;
+}
+
+.wrap {
+    width: 75%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.search {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.searchTerm {
+    width: 100%;
+    border: 15px solid #CC0000;
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+.searchButton {
+    border: 1px solid #CC0000;
+    background: #CC0000;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 9px;
+    padding-right: 10px;
+    padding-left: 8px;
 }
 
 footer{

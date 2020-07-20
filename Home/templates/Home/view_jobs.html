@@ -35,7 +35,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div><!-- End of modal-header -->
-                            <form method="POST">{% csrf_token %}
+                            <form method="POST" action="{% url 'view_jobs' %}">{% csrf_token %}
                                 <div class="modal-body form-group">
                                     <b>Duration:</b><br>
                                     {{ form.min_duration }} {{ form.max_duration }}<br><br>
@@ -58,7 +58,7 @@
             <div class="row">
                 {% if user_type != "employer" %}
                     <div id="filterForm" class="col-md-4 col-sm-4 col-xs-12 d-none d-sm-block">
-                        <form class="pr-2 pl-2" method="POST">{% csrf_token %}
+                        <form class="pr-2 pl-2" method="POST" action="{% url 'view_jobs' %}">{% csrf_token %}
                             <div id="formHeader" class="text-center">
                                 <h4 class="font-weight-bold">Filter Job Listings</h4>
                                 <hr class="horizontal-rule">

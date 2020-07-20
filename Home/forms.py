@@ -34,9 +34,9 @@ class EditJobForm(CreateJobForm):
         model = Job
         exclude = ['posted_by', 'date_posted', 'date_closed', 'status']
 
-
 class FilterJobForm(forms.ModelForm):
     LOCATION_CHOICES = [
+        ('--Select--','--Select--'),
         ('Abu Dhabi', 'Abu Dhabi'),
         ('Dubai', 'Dubai'),
         ('Sharjah', 'Sharjah'),
@@ -46,6 +46,7 @@ class FilterJobForm(forms.ModelForm):
         ('Ra’s al-Khaimah', 'Ra’s al-Khaimah')
     ]
     DURATION = [
+        ('--Select--', '--Select--'),
         ('Days', 'Days'),
         ('Weeks', 'Weeks'),
         ('Months', 'Months'),

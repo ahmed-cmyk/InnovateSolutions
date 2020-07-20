@@ -2,17 +2,21 @@
   margin: auto;
   border: 1px solid black;
   border-radius: 8px;
-  width: 80%;
+  width: 50%;
 }
 
 #topContent {
-  padding: 3%;
+  padding: 1%;
   background-color: #CC0000;
   color: #FFFFFF;
 }
 
+#topContent img{
+  height: 75px;
+}
+
 #formbox {
-  padding: 4%;
+  padding: 2.5%;
   background-color: #F9F9F9;
 }
 

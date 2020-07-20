@@ -410,6 +410,14 @@ fields
     ### Note
     - Run "python manage.py makemigrations"
     - Run "python manage.py migrate"
+
+## 07/20/20 - 01:14AM
+- Center aligned #jobDetBody in Base.css
+- Added "--Select--" choice in duration_type and location fields in job filter
+- Added chosen_duration_type in filtered_jobs in the view view_jobs
+- Added search bar on homepage with related css in Base.css
+    ### Note
+    - Run "python manage.py collectstatic"
     
 ## 07/20/20 - 02:12PM
 - Removed email password from settings.py
@@ -417,3 +425,8 @@ fields
     ### Setting host password as environment variable
     - Go to command line
     - Run "set EMAIL_HOST_PASSWORD='password in quotations''"
+    
+## 07/20/20 - 02:58PM
+- Reduced width of login form from 80% to 50%
+- Increased left margin on Browse Jobs page
+- Moved navbar dropdown button to fit dropdown items within page width

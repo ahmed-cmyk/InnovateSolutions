@@ -19,6 +19,8 @@ from django.core.files import File
 from itertools import chain
 import os
 from datetime import date, timedelta
+import psycopg2
+from django.contrib.postgres.search import SearchVector
 # Create your views here.
 
 from Employer.models import Employer
@@ -37,9 +39,20 @@ from django.core.mail import send_mail
 def index(request):
     user = get_user_type(request)
     if request.user.is_authenticated:
-        latest_jobs = Job.objects.order_by('-date_posted')[:3]
-        args = {'job_list': latest_jobs, 'obj': user['obj'], 'user_type': user['user_type']}
-        return render(request, "Home/index.html", args)
+        if request.method == 'POST':
+            text = request.POST.get("search_item")
+            if text:
+                jobs = Job.objects.annotate(search=SearchVector('job_title', 'description'),).filter(search=text)
+                form = FilterJobForm()
+                companies = Employer.objects.all()
+
+                args = {'companies': companies, 'jobs': jobs, 'obj': user['obj'], 'user_type': user['user_type'],
+                        'form': form}
+                return render(request, "Home/view_jobs.html", args)
+        else:
+            latest_jobs = Job.objects.order_by('-date_posted')[:3]
+            args = {'job_list': latest_jobs, 'obj': user['obj'], 'user_type': user['user_type']}
+            return render(request, "Home/index.html", args)
 
     return render(request, "Home/index.html", user)
 
@@ -92,10 +105,12 @@ def view_jobs(request):
         else:
             max_duration_jobs = Job.objects.all()
 
-        if duration_type:
+        if duration_type and duration_type != "--Select--":
             chosen_duration_type = Job.objects.filter(duration_type=duration_type)
+        else:
+            chosen_duration_type = Job.objects.all()
 
-        if location:
+        if location and location != "--Select--":
             location_jobs = Job.objects.filter(location=location)
         else:
             location_jobs = Job.objects.all()
@@ -120,7 +135,7 @@ def view_jobs(request):
         else:
             industry_id_jobs = Job.objects.all()
 
-        filtered_jobs = min_duration_jobs & max_duration_jobs & location_jobs & max_salary_jobs & min_salary_jobs & job_type_id_jobs & industry_id_jobs
+        filtered_jobs = min_duration_jobs & max_duration_jobs & chosen_duration_type & location_jobs & max_salary_jobs & min_salary_jobs & job_type_id_jobs & industry_id_jobs
         jobs_all = Job.objects.filter(status="Open").order_by('-date_posted')
         jobs = jobs_all & filtered_jobs
         form = FilterJobForm()
