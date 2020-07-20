@@ -108,7 +108,7 @@
                     <div class="card w-75 mx-auto">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                <div class="col-md-8 col-sm-8 col-xs-12 pt-1 pl-2">
                                     <h4 class="text-primary">{{ job.job_title }}</h4>
                                 </div>
                                 <div id="admin-box" class="col-md-4 col-sm-4 col-xs-12 text-right d-none d-sm-block">
@@ -132,6 +132,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xs-12 d-block d-sm-none">
+                            {% if company.logo %}
+                                <img class="img-fluid" src="{{ company.logo.url }}" height="auto" width="auto">
+                            {% else %}
+                                <img class="img-fluid" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
+                            {% endif %}
+                        </div>
                         <div class="card-body row">
                             <div class="col-10 px-2">
                                 <p class="text-secondary">
@@ -144,9 +151,9 @@
                                 {% endfor %}
                             </div>
                             {% if company.logo %}
-                                <img class="col-2" src="{{ company.logo.url }}" height="auto" width="auto">
+                                <img class="col-2 d-none d-sm-block" src="{{ company.logo.url }}" height="auto" width="auto">
                             {% else %}
-                                <img class="col-2" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
+                                <img class="col-2 d-none d-sm-block" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
                             {% endif %}
                         </div>
                     </div>

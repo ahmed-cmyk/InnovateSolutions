@@ -445,3 +445,8 @@ fields
 
 ## 07/20/20 - 09:51PM
 - Added skills in a scroll box
+
+## 07/20/20 - 10:39PM
+- Fixed mobile layout on Job Details page
+- Fixed cards on Job Details page so that they are more in line with each
+other
