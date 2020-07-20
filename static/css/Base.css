@@ -99,6 +99,17 @@ main {
     align: center;
 }
 
+#body-image {
+    position: relative;
+}
+
+#body-image .centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .job-cards-index .card {
     padding: 0;
 }

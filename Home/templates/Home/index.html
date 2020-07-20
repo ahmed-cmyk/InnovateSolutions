@@ -11,6 +11,19 @@
     {% block image %}
         <div id="body-image" class="text-center">
             <img src="{% static 'images/logHead.jpg' %}" alt="Home page image">
+            {% if user.is_authenticated %}
+                <div class="col-12 w-75 mx-auto centered">
+                    <form class="search" method="POST">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input class="searchTerm form-control" id="search_item" type="text" name="search_item"  placeholder="What job are you looking for?" >
+                            <div class="input-group-append">
+                                <button class="searchButton input-group-text" type="submit"><i class="fa fa-search fa-3x"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
         </div>
     {% endblock %}
 {% block content %}
@@ -44,21 +57,21 @@
             <p>Are you looking for a job in the UAE? Create an account and register your CV to be a candidate.</p>
         </div>
     </div>
-    {% if user.is_authenticated %}
-        <div class="col-12 w-75 mx-auto">
-            <form class="search" method="POST">
-                {% csrf_token %}
-                <div class="input-group">
-                    <input class="searchTerm form-control" id="search_item" type="text" name="search_item"  placeholder="What job are you looking for?" >
-                    <div class="input-group-append">
+{#    {% if user.is_authenticated %}#}
+{#        <div class="col-12 w-75 mx-auto">#}
+{#            <form class="search" method="POST">#}
+{#                {% csrf_token %}#}
+{#                <div class="input-group">#}
+{#                    <input class="searchTerm form-control" id="search_item" type="text" name="search_item"  placeholder="What job are you looking for?" >#}
+{#                    <div class="input-group-append">#}
 {#                        <i class="fa fa-search fa-3x searchButton input-group-text" type="submit"></i>#}
-                        <button class="searchButton input-group-text" type="submit"><i class="fa fa-search fa-3x"></i></button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <br>
-    {% endif %}
+{#                        <button class="searchButton input-group-text" type="submit"><i class="fa fa-search fa-3x"></i></button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </form>#}
+{#        </div>#}
+{#        <br>#}
+{#    {% endif %}#}
 
     <div class="col-12 job-cards-index w-75 mx-auto">
         {% if user.is_authenticated %}

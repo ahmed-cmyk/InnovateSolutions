@@ -450,3 +450,6 @@ fields
 - Fixed mobile layout on Job Details page
 - Fixed cards on Job Details page so that they are more in line with each
 other
+
+## 07/20/20 - 10:55PM
+- Placed search bar in center of body image
