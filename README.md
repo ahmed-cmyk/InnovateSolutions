@@ -437,3 +437,8 @@ fields
 
 ## 07/20/20 - 04:49PM
 - Redesigned index page
+
+## 07/20/20 - 09:16PM
+- Changed index page again
+- Redesigned View Jobs page
+- Added bootstrap source files to project because chrome blocked the CDN
