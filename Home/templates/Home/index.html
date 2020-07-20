@@ -27,35 +27,21 @@
     </div>
 
     {% if user.is_authenticated %}
-        <div class="wrap">
+        <div class="wrap mb-1">
             <form class="search" method="POST">
                 {% csrf_token %}
-                <input class="searchTerm" id="search_item" type="text" name="search_item"  placeholder="What job are you looking for?" >
-                <button class="searchButton" type="submit"><i class="fa fa-search fa-3x"></i></button>
+                <div class="input-group">
+                    <input class="searchTerm form-control" id="search_item" type="text" name="search_item"  placeholder="What job are you looking for?" >
+                    <div class="input-group-append">
+{#                        <i class="fa fa-search fa-3x searchButton input-group-text" type="submit"></i>#}
+                        <button class="searchButton input-group-text" type="submit"><i class="fa fa-search fa-3x"></i></button>
+                    </div>
+                </div>
             </form>
         </div>
         <br>
     {% endif %}
 
-    <div id="jobDetBody" class="row text-center w-75">
-        <div class="jobDetCard col-md-4 col-sm-4 col-xs-12">
-            <i class="fa fa-envelope fa-3x" aria-hidden="true"></i>
-            <h5>Post a Job</h5>
-            <p>Do you have a post to be filled within your company? Find the right candidate in a few clicks using the Career Portal.</p>
-        </div>
-        <br class="d-block d-sm-none">
-        <div class="jobDetCard col-md-4 col-sm-4 col-xs-12">
-            <i class="fa fa-briefcase fa-3x" aria-hidden="true"></i>
-            <h5>Create and Manage Jobs</h5>
-            <p>Create and Manage your jobs. Repost your old jobs, etc.</p>
-        </div>
-        <br class="d-block d-sm-none">
-        <div class="jobDetCard col-md-4 col-sm-4 col-xs-12">
-            <i class="fa fa-search fa-3x" aria-hidden="true"></i>
-            <h5>Find a Job</h5>
-            <p>Are you looking for a job in the UAE? Create an account and register your CV to be a candidate.</p>
-        </div>
-    </div>
     <div class="col-12 job-cards-index w-75 mx-auto">
         {% if user.is_authenticated %}
             <br><hr><br>
@@ -103,6 +89,25 @@
             {% endif %}
             <br><hr><br>
         {% endif %}
+    </div>
+    <div id="jobDetBody" class="row text-center w-75">
+        <div class="jobDetCard col-md-4 col-sm-4 col-xs-12">
+            <i class="fa fa-envelope fa-3x" aria-hidden="true"></i>
+            <h5>Post a Job</h5>
+            <p>Do you have a post to be filled within your company? Find the right candidate in a few clicks using the Career Portal.</p>
+        </div>
+        <br class="d-block d-sm-none">
+        <div class="jobDetCard col-md-4 col-sm-4 col-xs-12">
+            <i class="fa fa-briefcase fa-3x" aria-hidden="true"></i>
+            <h5>Create and Manage Jobs</h5>
+            <p>Create and Manage your jobs. Repost your old jobs, etc.</p>
+        </div>
+        <br class="d-block d-sm-none">
+        <div class="jobDetCard col-md-4 col-sm-4 col-xs-12">
+            <i class="fa fa-search fa-3x" aria-hidden="true"></i>
+            <h5>Find a Job</h5>
+            <p>Are you looking for a job in the UAE? Create an account and register your CV to be a candidate.</p>
+        </div>
     </div>
 {#    <br>#}
 {#    <div id="quoteBody" class="blockquote text-center text-black">#}

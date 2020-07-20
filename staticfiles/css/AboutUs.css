@@ -1,46 +1,21 @@
-body h1 {
-    text-align: center;
-    color: black;
-    padding: 0;
-}
-
-.container h2 {
-    color: black;
-}
-
-.container h3 {
-    text-align: left;
-    color: black;
-}
-
-.container p {
-    text-align: left;
-    color: black;
-}
-
-.container ul {
-    text-align: left;
-    color: black;
-    list-style-type: circle;
-}
-
-.container ol {
-    text-align: left;
-    color: black;
-
-}
-
-.container {
-    background-color: #E8E8E8;
-    padding: 0;
+#faqBody {
     margin: 2% auto;
-    padding-left: 0.5%;
-    height: auto;
-
-    width: 70%;
-
-    padding-top: 0px;
-    padding-bottom: 2em;
-    text-align: center;
-    border: 0.05em solid grey;
 }
+
+#faqBody .card {
+    margin: 2% auto;
+    width: 80vw;
+}
+
+#privacyBody {
+    padding: 0 3%;
+    background-color: #F5F5F5;
+    border: 1px solid #000000;
+}
+
+#termsBody {
+    padding: 0 3%;
+    background-color: #F5F5F5;
+    border: 1px solid #000000;
+}
+

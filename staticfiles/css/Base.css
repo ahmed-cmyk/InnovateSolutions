@@ -1,17 +1,24 @@
 * {
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
+    /*border: 1px solid #f00 !important;*/
 }
 
 html, body {
     width: 100%;
     height: 100%;
+    overflow-x: -moz-hidden-unscrollable;
 }
 
 body .container-fluid {
     position: relative;
     padding-left: 0;
     padding-right: 0;
+}
+
+.dark-mode {
+    background-color: #000000;
+    color: #FFFFFF;
 }
 
 header {
@@ -77,37 +84,31 @@ main {
     margin: 5% 0;
 }
 
+#mobileButtons {
+    margin: auto;
+}
+
 #quoteBody {
     width: 80%;
-    height: 10vh;
     margin: auto;
 }
 
-#regCardBody {
-    background-color: #F6F3F4;
-    height: 50vh;
-}
-
-.registrationCard {
-    background-color: #FFFFFF;
-    position: relative;
+#jobDetBody {
+    width: 90%;
     margin: auto;
-    height: 30vh;
-    padding: 1%;
-    border: 1px solid black;
-    border-radius: 15px;
 }
 
-.registrationCard button {
-    width: 100%;
+.job-cards-index .card {
+    padding: 0;
 }
 
 footer{
+    clear: both;
     background-color: #1D1A1A;
     color: white;
     font-size: 0.85em;
     height:auto;
-    padding-top: 5px;
+    padding-top: 1%;
     width: 100%;
 }
 
@@ -118,11 +119,6 @@ footer .row hr {
 footer .footer-rule {
     background-color: #FFFFFF;
     width: 70%;
-}
-
-#extra-info {
-    margin-left: 15px;
-    margin-right: 15px;
 }
 
 #extra-info p {
@@ -151,6 +147,22 @@ footer h3 {
 footer #social-section img {
     width: 40px;
     height: 40px;
+}
+
+.fa-twitter {
+    color: #00ACED;
+}
+
+.fa-facebook {
+    color: #355DA8;
+}
+
+.fa-youtube-play {
+    color: #FF0000;
+}
+
+.fa-instagram {
+    color: #DD2A7B;
 }
 
 /******** Mobile Devices ********/
@@ -209,8 +221,6 @@ footer #social-section img {
         padding: 0.05vw 0.7vw;
     }
     #body-image img {
-        /*height: 70vh;*/
-        /*width: 85vw;*/
         width: 100%;
         height: auto;
     }

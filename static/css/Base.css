@@ -116,9 +116,9 @@ main {
     display: flex;
 }
 
-.searchTerm {
+.input-group .searchTerm {
     width: 100%;
-    border: 15px solid #CC0000;
+    border: 2px solid #CC0000;
     border-right: none;
     border-radius: 5px 0 0 5px;
     outline: none;
@@ -126,7 +126,7 @@ main {
     padding-left: 10px;
 }
 
-.searchButton {
+.input-group .searchButton {
     border: 1px solid #CC0000;
     background: #CC0000;
     text-align: center;

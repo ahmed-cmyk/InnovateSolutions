@@ -1,9 +1,18 @@
-#formbox {
-  height: 60%;
-  margin: 10% 0;
-  padding: 8px;
-  border: 1px solid #CC0000;
+#logForm {
+  margin: auto;
+  border: 1px solid black;
   border-radius: 8px;
+  width: 80%;
+}
+
+#topContent {
+  padding: 3%;
+  background-color: #CC0000;
+  color: #FFFFFF;
+}
+
+#formbox {
+  padding: 4%;
   background-color: #F9F9F9;
 }
 
@@ -15,13 +24,12 @@
 #formbox button {
   color: #FFF;
   background-color: #CC0000;
-  border: 2px solid #FFF;
-  border-radius: 4px;
-  padding: 10px;
+  border: 1px solid #FFF;
+  border-radius: 8px;
   margin: 0 3px;
 }
 
 #formbox .form-group {
-  width: 70%;
+  width: 90%;
   margin: auto;
 }

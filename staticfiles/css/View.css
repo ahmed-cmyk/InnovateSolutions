@@ -1,5 +1,5 @@
-.row {
-  margin: 0;
+#viewBody {
+  margin: 0 1%;
 }
 
 #filterForm {
@@ -7,22 +7,17 @@
   border-radius: 12px;
   height: 50%;
   background-color: #F9F9F9;
-}
-
-#filterForm #formHeader {
-  background-color: #CC0000;
+  padding: 1% 0;
 }
 
 .horizontal-rule {
   background-color: #000000;
-  width: 60%;
+  width: 80%;
 }
 
 .job-cards {
   border: 1px solid #000;
   border-radius: 8px;
-  background-color: #F9F9F9;
-  margin: 2vh auto;
 }
 
 #filter button {
@@ -32,12 +27,8 @@
   border-radius: 12px;
 }
 
-.padding {
-  margin: 10px 0;
-}
-
-.noApplications {
-  margin: 5% 0;
+table {
+  width: auto;
 }
 
 /******** Mobile Devices ********/

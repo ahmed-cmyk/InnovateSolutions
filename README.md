@@ -426,11 +426,14 @@ fields
     - Go to command line
     - Run "set EMAIL_HOST_PASSWORD='password in quotations'"
 
-## 07/20/20 - 02:58PM
+## 07/20/20 - 04:11PM
+- Hid recent actions pane
+- Changed colors in django admin
+
+## 07/20/20 - 04:14PM
 - Reduced width of login form from 80% to 50%
 - Increased left margin on Browse Jobs page
 - Moved navbar dropdown button to fit dropdown items within page width
 
-## 07/20/20 - 04:11PM
-- Hid recent actions pane
-- Changed colors in django admin
+## 07/20/20 - 04:49PM
+- Redesigned index page
