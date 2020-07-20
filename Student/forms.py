@@ -125,7 +125,7 @@ class StudentForm(forms.ModelForm):
                                                label="Expected Graduation Date")
     personal_email = forms.EmailField(label='Personal Email Address')
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
-                                            label='Skill',
+                                            label='Skills*',
                                             widget=forms.CheckboxSelectMultiple,
                                             required=True)
     majors = forms.ModelMultipleChoiceField(queryset=Major.objects.all(),

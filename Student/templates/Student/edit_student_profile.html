@@ -36,7 +36,8 @@
                     <div>{{ student_form.expected_graduation_date|as_crispy_field }}</div>
                     <div>{{ student_form.personal_email|as_crispy_field }}</div>
                     <div id="personalEmailError"></div>
-                    <div>{{ student_form.skills|as_crispy_field }}</div>
+                    {{ student_form.skills.label }}
+                    <div class="skills-container">{{ student_form.skills }}</div><br>
                     <div>{{ student_form.majors|as_crispy_field }}</div>
                     <div>{{ student_form.dp|as_crispy_field }}</div>
                     <div>{{ student_form.cv|as_crispy_field }}</div>

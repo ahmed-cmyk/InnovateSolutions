@@ -64,7 +64,8 @@
                 <div id="personalEmailError"></div>
                 <div id="usernameError"></div>
                 <div>{{ alumni_form.student_id|as_crispy_field }}</div>
-                <div>{{ alumni_form.skills|as_crispy_field }}</div>
+                {{ alumni_form.skills.label }}
+                <div class="skills-container">{{ alumni_form.skills }}</div><br>
                 <div>{{ alumni_form.majors|as_crispy_field }}</div>
                 <div>{{ alumni_form.dp|as_crispy_field }}</div>
                 <div>{{ alumni_form.cv|as_crispy_field }}</div>

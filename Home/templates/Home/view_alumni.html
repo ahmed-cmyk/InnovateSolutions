@@ -39,7 +39,8 @@
                   </div>
                     <form method="POST">
                         <div class="modal-body">{% csrf_token %}
-                            <p>{{ form.skills|as_crispy_field }}</p>
+                            {{ form.skills.label }}
+                            <div class="skills-container">{{ form.skills }}</div>
                             <p>{{ form.majors|as_crispy_field }}</p>
                             <a href='../view_alumni'>View All Alumni</a>
                         </div>
@@ -62,7 +63,8 @@
                             <hr class="horizontal-rule">
                         </div>
                         <div class="form-group">
-                            <p>{{ form.skills|as_crispy_field }}</p>
+                            {{ form.skills.label }}
+                            <div class="skills-container">{{ form.skills }}</div>
                             <p>{{ form.majors|as_crispy_field }}</p>
                         </div>
                         <div class="text-center">

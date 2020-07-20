@@ -442,3 +442,6 @@ fields
 - Changed index page again
 - Redesigned View Jobs page
 - Added bootstrap source files to project because chrome blocked the CDN
+
+## 07/20/20 - 09:51PM
+- Added skills in a scroll box

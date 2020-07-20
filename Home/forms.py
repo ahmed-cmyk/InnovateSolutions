@@ -11,7 +11,7 @@ from DjangoUnlimited import settings
 
 class CreateJobForm(forms.ModelForm):
     skills = forms.ModelMultipleChoiceField(
-        label='*Skill',
+        label='Skills Required*',
         widget=forms.CheckboxSelectMultiple,
         queryset=Skill.objects.all(),
         required=True

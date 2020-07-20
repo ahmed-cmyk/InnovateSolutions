@@ -39,7 +39,8 @@
                   </div>
                     <form method="POST">
                         <div class="modal-body">{% csrf_token %}
-                            <p>{{ form.skills|as_crispy_field }}</p>
+                            {{ form.skills.label }}
+                            <div class="skills-container">{{ form.skills }}</div><br>
                             <p>{{ form.majors|as_crispy_field }}</p>
                             <p>{{ form.min_graduation_date|as_crispy_field }}</p>
                             <p>{{ form.max_graduation_date|as_crispy_field }}</p>
@@ -62,7 +63,8 @@
                             <h4 class="font-weight-bold">Filter Students Listings</h4>
                             <hr class="horizontal-rule">
                         </div>
-                        <p>{{ form.skills|as_crispy_field }}</p>
+                        {{ form.skills.label }}
+                        <div class="skills-container">{{ form.skills }}</div>
                         <p>{{ form.majors|as_crispy_field }}</p>
                         <div>
                             <p>{{ form.min_graduation_date|as_crispy_field }}</p>
