@@ -12,7 +12,7 @@ from django.contrib import messages
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
-from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
+from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL, EMAIL_HOST_PASSWORD
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from wsgiref.util import FileWrapper
 from django.core.files import File
@@ -28,7 +28,7 @@ from Admin.models import Admin
 from Student.models import Student, StudentJobApplication
 from Alumni.models import Alumni, AlumniJobApplication
 from Accounts.views import get_user_type
-from .models import Job, Skill, UserNotifications
+from .models import Job, Skill, UserNotifications, send_html_mail
 from .forms import CreateJobForm, EditJobForm, FilterJobForm, FilterStudentForm, FilterAlumniForm
 from Employer.forms import EmployerForm
 from Student.forms import StudentJobApplicationForm
@@ -42,7 +42,7 @@ def index(request):
         if request.method == 'POST':
             text = request.POST.get("search_item")
             if text:
-                jobs = Job.objects.annotate(search=SearchVector('job_title', 'description'),).filter(search=text)
+                jobs = Job.objects.annotate(search=SearchVector('job_title', 'description'), ).filter(search=text)
                 form = FilterJobForm()
                 companies = Employer.objects.all()
 
@@ -188,15 +188,20 @@ def create_job(request):
                         job.save()
                         jobForm.save_m2m()
 
-                        send_mail('New Job has been posted',
-                                  "Your job has been posted on the Murdoch Career Portal.",
-                                  DEFAULT_FROM_EMAIL, [email],
-                                  fail_silently=True)
-
-                        send_mail('New Job has been posted',
-                                  "A new job has been posted on the Murdoch Career Portal.",
-                                  DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL],
-                                  fail_silently=True)
+                        # send_mail('New Job has been posted',
+                        #           "Your job has been posted on the Murdoch Career Portal.",
+                        #           DEFAULT_FROM_EMAIL, [email],
+                        #           fail_silently=True)
+                        subject = 'New Job has been posted'
+                        htmlText = "Your job has been posted on the Murdoch Career Portal."
+                        send_html_mail(subject, htmlText, [email])
+                        # send_mail('New Job has been posted',
+                        #           "A new job has been posted on the Murdoch Career Portal.",
+                        #           DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL],
+                        #           fail_silently=True)
+                        subject = 'New Job has been posted'
+                        htmlText = "A new job has been posted on the Murdoch Career Portal."
+                        send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
                         messages.success(request, "Job successfully created")
                         return redirect('view_jobs')
@@ -227,14 +232,22 @@ def create_job(request):
                     data.save()
                     form.save_m2m()
 
-                    send_mail('New Job has been posted',
-                              'A new Job has been posted on the Murdoch Career Portal.',
-                              DEFAULT_FROM_EMAIL, [email],
-                              fail_silently=True)
-                    send_mail('New Job has been posted',
-                              "A new job has been posted on the Murdoch Career Portal.",
-                              DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL],
-                              fail_silently=True)
+                    # send_mail('New Job has been posted',
+                    #           'A new Job has been posted on the Murdoch Career Portal.',
+                    #           DEFAULT_FROM_EMAIL, [email],
+                    #           fail_silently=True)
+                    # send_mail('New Job has been posted',
+                    #           "A new job has been posted on the Murdoch Career Portal.",
+                    #           DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL],
+                    #           fail_silently=True)
+                    subject = 'New Job has been posted'
+                    htmlText = "Your job has been posted on the Murdoch Career Portal."
+                    send_html_mail(subject, htmlText, [email])
+
+                    subject = 'New Job has been posted'
+                    htmlText = "A new job has been posted on the Murdoch Career Portal."
+                    send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
+
                     messages.success(request, "Job successfully created")
                     return redirect('view_jobs')
                 else:
@@ -324,10 +337,13 @@ def edit_job(request, id):
                     data.save()
                     form.save_m2m()
                     next = request.POST.get('next', '/')
-                    send_mail('Job Edit Successful',
-                              'You have successfully edited your job.',
-                              DEFAULT_FROM_EMAIL, [email],
-                              fail_silently=True)
+                    # send_mail('Job Edit Successful',
+                    #           'You have successfully edited your job.',
+                    #           DEFAULT_FROM_EMAIL, [email],
+                    #           fail_silently=True)
+                    subject = 'Job Edit Successful'
+                    htmlText = 'You have successfully edited your job.'
+                    send_html_mail(subject, htmlText, [email])
                     return redirect(next)
                 else:
                     messages.info(request, form.errors)
@@ -357,10 +373,14 @@ def edit_job(request, id):
                         j.save()
                         jobForm.save_m2m()
                         next_page = request.POST.get('next', '/')
-                        send_mail('Job Edit Successful',
-                                  'You have successfully edited your job.',
-                                  DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL],
-                                  fail_silently=True)
+                        subject = 'Job Edit Successful'
+                        htmlText = 'You have successfully edited your job.'
+                        send_html_mail(subject, htmlText, [email])
+                        # send_mail('Job Edit Successful',
+                        #           'You have successfully edited your job.',
+                        #           DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL],
+                        #           fail_silently=True)
+
                         return redirect(next_page)
                 else:
                     messages.info(request, jobForm.errors)
@@ -445,10 +465,13 @@ def delete_job(request, id):
     if request.method == 'POST':
         job.status = 'Deleted'
         job.save()
-        send_mail('Job has been deleted',
-                  "You have deleted a job from the Murdoch Career Portal.",
-                  DEFAULT_FROM_EMAIL, [email],
-                  fail_silently=True)
+        # send_mail('Job has been deleted',
+        #           "You have deleted a job from the Murdoch Career Portal.",
+        #           DEFAULT_FROM_EMAIL, [email],
+        #           fail_silently=True)
+        subject = 'Job has been deleted'
+        htmlText = "You have deleted a job from the Murdoch Career Portal."
+        send_html_mail(subject, htmlText, [email])
         messages.success(request, "You have successfully deleted the job")
         # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Home/job_details.html', args)
@@ -470,10 +493,13 @@ def close_job(request, id):
         job.status = 'Closed'
         job.date_closed = timezone.now()
         job.save()
-        send_mail('Job has been closed',
-                  "You have successfully closed a job on the Murdoch career portal.",
-                  DEFAULT_FROM_EMAIL, [email],
-                  fail_silently=True)
+        # send_mail('Job has been closed',
+        #           "You have successfully closed a job on the Murdoch career portal.",
+        #           DEFAULT_FROM_EMAIL, [email],
+        #           fail_silently=True)
+        subject = 'Job has been closed'
+        htmlText = "You have successfully closed a job on the Murdoch career portal."
+        send_html_mail(subject, htmlText, [email])
         messages.success(request, "You have successfully closed the job")
         # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
         return redirect('job_details', job.id)

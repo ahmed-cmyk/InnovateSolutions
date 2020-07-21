@@ -469,3 +469,9 @@ student registration form.
     - pip install boto
     ### Backup Instructions
     - run the command 'python backup.py -t daily' inside the project folder
+    
+## 07/21/20 - 09:06PM
+- Fixed email.
+- Defined a function that executes the send mail function in another thread.
+    ### NOTE
+    - There is a file called .env please DO NOT commit that into the repository

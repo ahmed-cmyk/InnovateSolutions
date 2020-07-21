@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
 
 from Accounts.views import isValidated, get_user_type
+from Home.models import send_html_mail
 from .models import Alumni
 from .forms import *
 
@@ -49,11 +50,15 @@ def signup(request):
                             alumni.save()
                             alumni_form.save_m2m()
 
-                            send_mail('New Job has been posted',
-                                      "A new student account with username '{{ user.get_username }}' has been posted on the "
-                                      "Murdoch Career Portal.",
-                                      DEFAULT_FROM_EMAIL, [email],
-                                      fail_silently=True)
+                            # send_mail('New Job has been posted',
+                            #           "A new student account with username '{{ user.get_username }}' has been posted on the "
+                            #           "Murdoch Career Portal.",
+                            #           DEFAULT_FROM_EMAIL, [email],
+                            #           fail_silently=True)
+                            subject = 'New Alumni'
+                            htmlText = "A new alumni account with username '{{ user.get_username }}' has been posted " \
+                                       "on the Murdoch Career Portal. "
+                            send_html_mail(subject, htmlText, [email])
 
                         messages.success(request, 'Alumni account created')
                         return redirect("log_in")

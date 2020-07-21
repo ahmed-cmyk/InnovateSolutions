@@ -12,13 +12,14 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from django.contrib import messages
+from dotenv import load_dotenv
 
 # from .api_key import SENDGRID_API_KEY, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+load_dotenv('.env')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -58,7 +59,7 @@ INSTALLED_APPS = [
     'Accounts',
     'Alumni',
     'Bulletin',
-    'boto'
+    'boto',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -74,8 +75,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.office365.com'
 EMAIL_PORT = 587
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+print(EMAIL_HOST_PASSWORD)
 EMAIL_HOST_USER = 'careerportal@murdoch.edu.au'
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = 'careerportal@murdoch.edu.au'
 EMAIL_USE_SSL = False
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -109,12 +111,6 @@ TEMPLATES = [
         },
     },
 ]
-
-MESSAGE_TAGS = {
-    messages.SUCCESS: 'alert-success success',
-    messages.WARNING: 'alert-warning warning',
-    messages.ERROR: 'alert-danger error'
-}
 
 WSGI_APPLICATION = 'DjangoUnlimited.wsgi.application'
 

@@ -28,3 +28,5 @@ django-countries
 django-crispy-forms
 newsapi-python
 dnspython==1.16.0
+boto
+python-dotenv

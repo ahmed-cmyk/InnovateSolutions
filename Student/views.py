@@ -12,7 +12,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from Accounts.views import isValidated, get_user_type, number_symbol_exists
 from .models import Student
 from .forms import *
-from Home.models import UserNotifications
+from Home.models import UserNotifications, send_html_mail
 from re import search
 
 
@@ -21,7 +21,7 @@ def student_signup(request):
         user_form = InitialStudentForm(request.POST)
         if user_form.is_valid():
             student_form = StudentForm(request.POST, request.FILES)
-            
+
             if student_form.is_valid():
                 with transaction.atomic():
                     user = user_form.save()
@@ -31,11 +31,15 @@ def student_signup(request):
                     student.save()
                     student_form.save_m2m()
 
-                    send_mail('New Job has been posted',
-                              "A new student account with username '{{ user.get_username }}' has been posted on the "
-                              "Murdoch Career Portal.",
-                              DEFAULT_FROM_EMAIL, [email],
-                              fail_silently=True)
+                    # send_mail('New Job has been posted',
+                    #           "A new student account with username '{{ user.get_username }}' has been posted on the "
+                    #           "Murdoch Career Portal.",
+                    #           DEFAULT_FROM_EMAIL, [email],
+                    #           fail_silently=True)
+                    subject = 'Student account created'
+                    htmlText = "A new student account with username '{{ user.get_username }}' has been posted on the " \
+                               "Murdoch Career Portal."
+                    send_html_mail(subject, htmlText, [email])
 
                 messages.success(request, 'A student account has been created')
                 return redirect('log_in')

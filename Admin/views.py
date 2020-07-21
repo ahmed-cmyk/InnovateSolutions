@@ -24,7 +24,7 @@ from .models import Admin
 from .forms import EditAdminProfileForm
 from Student.forms import EditStudentProfileForm
 from Student.models import Student, StudentJobApplication
-from Home.models import Job
+from Home.models import Job, send_html_mail
 from Employer.models import Employer
 
 
@@ -160,10 +160,13 @@ def create_job(request):
                 job.posted_by = request.user
                 job.save()
 
-                send_mail('New Job has been posted',
-                          'A new Job has been posted on the Murdoch Career Portal.',
-                          DEFAULT_FROM_EMAIL, ['ikramahmed398@gmail.com'],
-                          fail_silently=False)
+                # send_mail('New Job has been posted',
+                #           'A new Job has been posted on the Murdoch Career Portal.',
+                #           DEFAULT_FROM_EMAIL, ['ikramahmed398@gmail.com'],
+                #           fail_silently=False)
+                subject = 'New Job has been posted'
+                htmlText = 'A new Job has been posted on the Murdoch Career Portal.'
+                send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
                 for skill in request.POST.getlist('skills'):
                     job.skills.add(skill)
