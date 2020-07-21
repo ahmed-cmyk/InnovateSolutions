@@ -456,3 +456,8 @@ other
 
 ## 07/20/20 - 11:22PM
 - Improved look of job filter in View Jobs page
+
+## 07/21/20 - 03:00PM
+- Added validation for date of birth and expected graduation date in
+student registration form.
+- Added validation for date of birth in alumni registration form.
