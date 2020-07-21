@@ -4,10 +4,10 @@
 The purpose of this project is to redesign the existing murdoch job portal by using the portal created by the previous group as a base.
 
 # Project Task List
-- [ ] Implement proper input validation
-- [ ] Improve Student/Employer registration page UI
+- [X] Implement proper input validation
+- [X] Improve Student/Employer registration page UI
 - [X] *Update FAQ page (Optional)*
-- [ ] *Remove "Recent Actions" pane from admin dashboard (Optional)*
+- [X] *Remove "Recent Actions" pane from admin dashboard (Optional)*
 - [X] Get emails working
 - [X] Implement password reset feature
 - [X] Make the website responsive with mobile layouts
