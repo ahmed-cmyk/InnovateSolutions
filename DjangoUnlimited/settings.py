@@ -57,7 +57,8 @@ INSTALLED_APPS = [
     'HelpDesk',
     'Accounts',
     'Alumni',
-    'Bulletin'
+    'Bulletin',
+    'boto'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

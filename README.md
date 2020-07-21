@@ -461,3 +461,11 @@ other
 - Added validation for date of birth and expected graduation date in
 student registration form.
 - Added validation for date of birth in alumni registration form.
+
+## 07/21/20 - 06:02PM
+- Added a new script that enables S3 backups
+- Added boto as a project dependency
+    ### Installations
+    - pip install boto
+    ### Backup Instructions
+    - run the command 'python backup.py -t daily' inside the project folder
