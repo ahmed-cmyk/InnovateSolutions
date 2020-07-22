@@ -490,3 +490,7 @@ student registration form.
 - Added missing validation checks to registration forms.
 - Added more messages throughout the program.
 - Fixed broken validation checks.
+
+## 07/22/20 - 03:16PM
+- Removed search bar from all views besides student and alumni.
+- Removed recent jobs list from employer view.

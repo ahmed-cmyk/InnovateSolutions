@@ -11,7 +11,7 @@
     {% block image %}
         <div id="body-image" class="text-center">
             <img src="{% static 'images/logHead.jpg' %}" alt="Home page image">
-            {% if user.is_authenticated %}
+            {% if user_type == 'student' or user_type == 'alumni' %}
                 <div class="col-12 w-75 mx-auto centered">
                     <form class="search" method="POST">
                         {% csrf_token %}
@@ -57,24 +57,8 @@
             <p>Are you looking for a job in the UAE? Create an account and register your CV to be a candidate.</p>
         </div>
     </div>
-{#    {% if user.is_authenticated %}#}
-{#        <div class="col-12 w-75 mx-auto">#}
-{#            <form class="search" method="POST">#}
-{#                {% csrf_token %}#}
-{#                <div class="input-group">#}
-{#                    <input class="searchTerm form-control" id="search_item" type="text" name="search_item"  placeholder="What job are you looking for?" >#}
-{#                    <div class="input-group-append">#}
-{#                        <i class="fa fa-search fa-3x searchButton input-group-text" type="submit"></i>#}
-{#                        <button class="searchButton input-group-text" type="submit"><i class="fa fa-search fa-3x"></i></button>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </form>#}
-{#        </div>#}
-{#        <br>#}
-{#    {% endif %}#}
-
-    <div class="col-12 job-cards-index w-75 mx-auto">
-        {% if user.is_authenticated %}
+    {% if user.is_authenticated and user_type != 'employer' %}
+        <div class="col-12 job-cards-index w-75 mx-auto">
             <br><hr><br>
             <h3 class="text-secondary">Recent Jobs</h3>
             <br>
@@ -119,12 +103,6 @@
                 <h3 class="text-secondary text-center">No Jobs to show</h3>
             {% endif %}
             <br><hr><br>
-        {% endif %}
-    </div>
-{#    <br>#}
-{#    <div id="quoteBody" class="blockquote text-center text-black">#}
-{#        <p>“Far and away the best prize that life has to offer is the chance to work hard at work worth doing.”</p>#}
-{#        <div class="blockquote-footer font-italic">Theodore Roosevelt</div>#}
-{#    </div>#}
-{#    <br><br>#}
+        </div>
+    {% endif %}
 {% endblock %}
