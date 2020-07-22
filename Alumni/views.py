@@ -19,22 +19,22 @@ def signup(request):
 
         if user_form.is_valid():
             if user_form.usernameExists():
-                messages.info(request,
-                              'Username already taken. Try a different one.')  # checks if username exists in db
+                messages.error(request, 'Username already taken. Try a different one.')  # checks if username exists
+                # in db
                 return redirect("alumni_register")
 
-            elif user_form.emailExists():
-                messages.info(request, 'Email already taken. Try a different one.')  # checks if email exists in db
+            if user_form.emailExists():
+                messages.error(request, 'Email already taken. Try a different one.')  # checks if email exists in db
                 return redirect("alumni_register")
 
-            elif not user_form.samePasswords():
-                messages.info(request,
-                              'Passwords not matching. Try again.')  # checks if password and confirm password are matching
+            if not user_form.samePasswords():
+                messages.error(request, 'Passwords not matching. Try again.') # checks if password and confirm
+                # password are matching
                 return redirect("alumni_register")
 
-            elif not user_form.emailDomainExists():
-                messages.info(request,
-                              'Email domain does not exist. Try again.')  # checks if there is an exising domain for given email
+            if not user_form.emailDomainExists():
+                messages.error(request, 'Email domain does not exist. Try again.')  # checks if there is an exising
+                # domain for given email
                 return redirect("alumni_register")
 
             else:
@@ -50,11 +50,6 @@ def signup(request):
                             alumni.save()
                             alumni_form.save_m2m()
 
-                            # send_mail('New Job has been posted',
-                            #           "A new student account with username '{{ user.get_username }}' has been posted on the "
-                            #           "Murdoch Career Portal.",
-                            #           DEFAULT_FROM_EMAIL, [email],
-                            #           fail_silently=True)
                             subject = 'New Alumni'
                             htmlText = "A new alumni account with username '{{ user.get_username }}' has been posted " \
                                        "on the Murdoch Career Portal. "
@@ -68,12 +63,12 @@ def signup(request):
                         return redirect("alumni_register")
 
                 else:
-                    messages.info(request,
+                    messages.error(request,
                                   'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric character and 1 letter.')
                     return redirect("alumni_register")
 
         else:
-            messages.info(request, user_form.errors)
+            messages.error(request, user_form.errors)
             return redirect("alumni_register")
 
     else:
@@ -97,6 +92,8 @@ def edit_profile(request):
             with transaction.atomic():
                 user_form.save()
                 alumni_form.save()
+
+                messages.success(request, 'Profile edit was successful')
                 return redirect('view_alumni_profile')
         else:
             messages.error(request, alumni_form.errors)

@@ -67,6 +67,7 @@ def signup(request):
                             htmlText = "A new Employer has registered to use the Murdoch Career Portal."
                             send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
+                        messages.success(request, 'Employer account created')
                         return redirect("log_in")
                     else:
                         messages.error(request, employer_form.errors)

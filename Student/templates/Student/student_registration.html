@@ -59,6 +59,10 @@
                         <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ user_form.password1|as_crispy_field }}</div>
                         <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ user_form.password2|as_crispy_field }}</div>
                     </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12" id="password1Error"></div>
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12" id="password2Error"></div>
+                    </div>
                     <div>{{ student_form.gender|as_crispy_field }}</div>
                     <div>{{ student_form.date_of_birth|as_crispy_field }}</div>
                     <div id="dobError"></div>

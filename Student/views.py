@@ -20,31 +20,51 @@ def student_signup(request):
     if request.method == 'POST':
         user_form = InitialStudentForm(request.POST)
         if user_form.is_valid():
-            student_form = StudentForm(request.POST, request.FILES)
+            if user_form.usernameExists():
+                messages.error(request, 'Username already taken. Try a different one.')  # checks if username exists
+                # in db
+                return redirect("student_registration")
 
-            if student_form.is_valid():
-                with transaction.atomic():
-                    user = user_form.save()
-                    student = student_form.save(commit=False)
-                    student.user = user
-                    email = str(student.user)
-                    student.save()
-                    student_form.save_m2m()
+            if user_form.emailExists():
+                messages.error(request, 'Email already taken. Try a different one.')  # checks if email exists in db
+                return redirect("student_registration")
 
-                    # send_mail('New Job has been posted',
-                    #           "A new student account with username '{{ user.get_username }}' has been posted on the "
-                    #           "Murdoch Career Portal.",
-                    #           DEFAULT_FROM_EMAIL, [email],
-                    #           fail_silently=True)
-                    subject = 'Student account created'
-                    htmlText = "A new student account with username '{{ user.get_username }}' has been posted on the " \
-                               "Murdoch Career Portal."
-                    send_html_mail(subject, htmlText, [email])
+            if not user_form.same_passwords():
+                messages.error(request, 'Passwords not matching. Try again.')  # checks if password and confirm
+                # password are matching
+                return redirect("student_registration")
 
-                messages.success(request, 'A student account has been created')
-                return redirect('log_in')
+            if not user_form.email_domain_exists():
+                messages.error(request, 'Email domain does not exist. Try again.')  # checks if there is an existing
+                # domain for given email
+                return redirect("student_registration")
+
             else:
-                return redirect('student_registration')
+                student_form = StudentForm(request.POST, request.FILES)
+
+                if student_form.is_valid():
+                    with transaction.atomic():
+                        user = user_form.save()
+                        student = student_form.save(commit=False)
+                        student.user = user
+                        email = str(student.user)
+                        student.save()
+                        student_form.save_m2m()
+
+                        subject = 'Student account created'
+                        htmlText = "Your account has been created."
+                        send_html_mail(subject, htmlText, [email])
+
+                        subject = 'Student account created'
+                        htmlText = "A new student account with username '{{ user.get_username }}' has been posted on " \
+                                   "the Murdoch Career Portal."
+                        send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
+
+                    messages.success(request, 'A student account has been created')
+                    return redirect('log_in')
+                else:
+                    messages.error(request, student_form.errors)
+                    return redirect('student_registration')
         else:
             messages.error(request, user_form.errors)
             return redirect("student_registration")

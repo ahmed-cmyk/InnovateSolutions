@@ -77,12 +77,6 @@ def sitemap(request):
     return render(request, "Home/sitemap.html", get_user_type(request))
 
 
-# @login_required
-# def view_recent_jobs(request):
-#     data = []
-#     job_list = Job.objects.get(date_posted=date.today())
-
-
 @login_required
 def view_jobs(request):
     user = get_user_type(request)
@@ -188,17 +182,10 @@ def create_job(request):
                         job.save()
                         jobForm.save_m2m()
 
-                        # send_mail('New Job has been posted',
-                        #           "Your job has been posted on the Murdoch Career Portal.",
-                        #           DEFAULT_FROM_EMAIL, [email],
-                        #           fail_silently=True)
                         subject = 'New Job has been posted'
                         htmlText = "Your job has been posted on the Murdoch Career Portal."
                         send_html_mail(subject, htmlText, [email])
-                        # send_mail('New Job has been posted',
-                        #           "A new job has been posted on the Murdoch Career Portal.",
-                        #           DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL],
-                        #           fail_silently=True)
+
                         subject = 'New Job has been posted'
                         htmlText = "A new job has been posted on the Murdoch Career Portal."
                         send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
@@ -410,32 +397,6 @@ def my_applications(request):
 
 
 @login_required
-def news(request):
-    # news API to show the latest news
-    newsapi = NewsApiClient(api_key='1aab8f2e782a4a588fc28a3292a57979')
-    top = newsapi.get_top_headlines(sources='cnn')
-
-    l = top['articles']
-    desc = []
-    news = []
-    img = []
-    urllink = []
-
-    for i in range(len(l)):
-        f = l[i]
-        news.append(f['title'])
-        desc.append(f['description'])
-        img.append(f['urlToImage'])
-        urllink.append(f['url'])
-
-    mylist = list(zip(news, desc, img, urllink))
-    user = get_user_type(request)
-    args = {'mylist': mylist, 'obj': user['obj'], 'user_type': user['user_type']}
-
-    return render(request, 'Home/news.html', args)
-
-
-@login_required
 def reopen_job(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
@@ -465,15 +426,11 @@ def delete_job(request, id):
     if request.method == 'POST':
         job.status = 'Deleted'
         job.save()
-        # send_mail('Job has been deleted',
-        #           "You have deleted a job from the Murdoch Career Portal.",
-        #           DEFAULT_FROM_EMAIL, [email],
-        #           fail_silently=True)
+
         subject = 'Job has been deleted'
         htmlText = "You have deleted a job from the Murdoch Career Portal."
         send_html_mail(subject, htmlText, [email])
         messages.success(request, "You have successfully deleted the job")
-        # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Home/job_details.html', args)
     else:
         form = EditJobForm()
@@ -493,13 +450,11 @@ def close_job(request, id):
         job.status = 'Closed'
         job.date_closed = timezone.now()
         job.save()
-        # send_mail('Job has been closed',
-        #           "You have successfully closed a job on the Murdoch career portal.",
-        #           DEFAULT_FROM_EMAIL, [email],
-        #           fail_silently=True)
+
         subject = 'Job has been closed'
         htmlText = "You have successfully closed a job on the Murdoch career portal."
         send_html_mail(subject, htmlText, [email])
+
         messages.success(request, "You have successfully closed the job")
         # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
         return redirect('job_details', job.id)
@@ -607,16 +562,13 @@ def alumni_details(request, id):
 def job_to_student_skills(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
-    print(request.user)
+    email = request.user
     studentApplicants = Student.objects.filter(skills__in=job.skills.all())
     args = {'studentApplicants': studentApplicants, 'obj': user['obj'], 'user_type': user['user_type']}
 
-    # message = Mail(
-    #     from_email='info@murdochcareerportal.com',
-    #     to_emails=['ict302jan2020@gmail.com'],
-    #     subject='Student Skill match',
-    #     html_content="Student/Students having skills matching to your job have been found."
-    # )
+    subject = 'Student Skill match'
+    htmlText = "Student/Students having skills matching to your job have been found."
+    send_html_mail(subject, htmlText, [email])
 
     return render(request, "Home/view_student_applicants.html", args)
 
@@ -643,18 +595,7 @@ def get_cv_file(request, id):
     student = Student.objects.get(user_id=id)
     cv = student.cv
     file_name = os.path.basename(cv.file.name)
-    # extension = cv.file.name.split(".")
-    # if extension[1] != "pdf":
-    #    input_filename = cv.file.name
-    #    output_filename = extension[0] + ".pdf"
-    #    pythoncom.CoInitialize()
-    #    word = win32com.client.Dispatch('Word.Application')
-    #    doc = word.Documents.Open(input_filename)
-    #    doc.SaveAs(output_filename, FileFormat=17)
-    #    doc.Close()
-    #    word.Quit()
-    #    file_name = os.path.split(output_filename)[1]
-    #    cv = open(output_filename, 'rb')
+
     wrapper = FileWrapper(File(cv, 'rb'))
     response = HttpResponse(wrapper, content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename=' + file_name

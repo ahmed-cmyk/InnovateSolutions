@@ -484,3 +484,9 @@ student registration form.
 ## 07/22/20 - 12:31PM
 - Fixed mobile layout in job creation page
 - Fixed mobile layout in edit job page
+
+## 07/22/20 - 02:37PM
+- Added missing functionality to registration forms i.e. more error fields.
+- Added missing validation checks to registration forms.
+- Added more messages throughout the program.
+- Fixed broken validation checks.

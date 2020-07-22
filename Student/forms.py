@@ -40,72 +40,35 @@ class InitialStudentForm(forms.ModelForm):
             user.save()
         return user
 
-    # def clean_first_name(self):
-    #     first_name = self.cleaned_data.get('first_name')
-    #     if number_symbol_exists(first_name):  # checks if number/symbol exists in string
-    #         raise forms.ValidationError("You cannot have numbers in your first name.")
-    #
-    #     return first_name
-    #
-    # def clean_last_name(self):
-    #     last_name = self.cleaned_data.get('last_name')
-    #     if number_symbol_exists(last_name):  # checks if number/symbol exists in string
-    #         raise forms.ValidationError('You cannot have numbers in your last name.')
-    #
-    #     return last_name
-    #
-    # def clean_email(self):
-    #     email = self.cleaned_data.get('email')
-    #     if User.objects.filter(username=email).exists():
-    #         raise forms.ValidationError("This email is already being used.")
-    #     elif not search("@student.murdoch.edu.au", email):
-    #         raise forms.ValidationError("This is not a valid student email.")
-    #
-    #     return email
-    #
-    # def clean_password1(self):
-    #     password1 = self.cleaned_data.get('password1')
-    #     if not isValidated(password1):
-    #         raise forms.ValidationError('Password is not valid.')
-    #
-    #     return password1
-    #
-    # def clean_password2(self):
-    #     password2 = self.cleaned_data.get('password2')
-    #     if not isValidated(password2):
-    #         raise forms.ValidationError('Password is not valid.')
-    #
-    #     return password2
-    #
-    # # def usernameExists(self):
-    # #     email = self.cleaned_data.get("email")
-    # #     if User.objects.filter(username=email).exists():
-    # #         raise forms.ValidationError("Please enter an email.")
-    # #     return False
-    # #
-    # # def emailExists(self):
-    # #     email = self.cleaned_data.get("email")
-    # #     if User.objects.filter(email=email).exists():
-    # #         return True
-    # #     return False
-    #
-    # def email_domain_exists(self):
-    #     email = self.cleaned_data.get("email")
-    #     domain = email.split('@')[1]
-    #     try:
-    #         dns.resolver.query(domain, 'MX')
-    #         return True
-    #
-    #     except dns.exception.DNSException:
-    #         return False
-    #
-    # def same_passwords(self):
-    #     p1 = self.cleaned_data.get("password1")
-    #     p2 = self.cleaned_data.get("password2")
-    #
-    #     if p1 != p2:
-    #         return False
-    #     return True
+    def usernameExists(self):
+        email = self.cleaned_data.get("email")
+        if User.objects.filter(username=email).exists():
+            raise forms.ValidationError("Please enter an email.")
+        return False
+
+    def emailExists(self):
+        email = self.cleaned_data.get("email")
+        if User.objects.filter(email=email).exists():
+            return True
+        return False
+
+    def email_domain_exists(self):
+        email = self.cleaned_data.get("email")
+        domain = email.split('@')[1]
+        try:
+            dns.resolver.query(domain, 'MX')
+            return True
+
+        except dns.exception.DNSException:
+            return False
+
+    def same_passwords(self):
+        p1 = self.cleaned_data.get("password1")
+        p2 = self.cleaned_data.get("password2")
+
+        if p1 != p2:
+            return False
+        return True
 
 
 class StudentForm(forms.ModelForm):

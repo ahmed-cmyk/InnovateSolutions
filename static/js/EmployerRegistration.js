@@ -14,6 +14,13 @@ function checkFalseUAENumber(number) {
     return !phoneReg.test(number);
 }
 
+function checkUnmatchedPasswords(password1, password2) {
+    if (password1 !== password2) {
+        return true;
+    }
+    return false;
+}
+
 $(function () {
     $('#id_email').focusout(function () {
         if(($(this).val() === '') || (checkFalseEmail($(this).val()))) {
@@ -35,25 +42,38 @@ $(function () {
             $('#companyNameError').html('').css('color', '')
         }
     });
-    $('#id_phone_number').focusout(function () {
-        $('#id_phone_number').css('border', '1px solid red');
-        if(checkFalseUAENumber($(this).val())) {
-            $(this).css('border', '1px solid red');
-            $('#phoneNumberError').html('Please enter a valid UAE phone number').css('color', 'red');
+    $('#id_password1').focusout(function () {
+        if($(this).val().length < 6) {
+            $('#id_password1').css('border', '1px solid red');
+            $('#password1Error').html('Your password cannot be fewer than 6 characters').css('color', 'red');
         }
         else {
-            $(this).css('border', '');
-            $('#phoneNumberError').html('').css('color', '');
+            $('#id_password1').css('border', '');
+            $('#password1Error').html('').css('color', '');
+        }
+    });
+    $('#id_password2').focusout(function () {
+        if($(this).val() !== $('#id_password1').val()) {
+            $('#id_password1').css('border', '1px solid red');
+            $('#password1Error').html('Both passwords should match').css('color', 'red');
+            $('#id_password2').css('border', '1px solid red');
+            $('#password2Error').html('Both passwords should match').css('color', 'red');
+        }
+        else {
+            $('#id_password1').css('border', '');
+            $('#password1Error').html('').css('color', '');
+            $('#id_password2').css('border', '');
+            $('#password2Error').html('').css('color', '');
         }
     });
 });
 
 $("#companyForm").submit(function (e) {
-    var companyname = $("#id_company_name").val();
-    var phonenumber = $("#id_phone_number").val();
     var company_email = $("#id_email").val();
+    var password1 = $('#id_password1').val();
+    var password2 = $('#id_password2').val();
 
-    if(checkFalseEmail(company_email)) {
+    if(checkFalseEmail(company_email)  || checkUnmatchedPasswords(password1, password2)) {
         e.preventDefault();
     }
     else {

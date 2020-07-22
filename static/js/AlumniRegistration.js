@@ -14,36 +14,17 @@ function checkFalseDob(date) {
     var parts = dateString.split("-");
     var year = parseInt(parts[0], 10);
     if (year > 2005) {
-        return false;
+        return true;
     }
-    return true;
+    return false;
 }
 
-// $("#id_email").focusout(function (e) {
-//               e.preventDefault();
-//               var username = $(this).val();
-//               $.ajax({
-//                     type: 'GET',
-//                     url: "{% url 'check_alumni_username' %}",
-//                     data: {"username": username},
-//                     success: function (response) {
-//                           console.log("I'm going in");
-//                           if(!response["valid"]){
-//                                 $("#personalEmailError").css('color', 'red');
-//                                 $("#personalEmailError").html("This username is already being used");
-//                                 var username = $("#id_email");
-//                                 username.focus();
-//                             }
-//                           else {
-//                                 $("#personalEmailError").css('color', '');
-//                                 $("#personalEmailError").html("");
-//                           }
-//                     },
-//                     error: function (response) {
-//                           console.log(response);
-//                     }
-//               });
-//             });
+function checkUnmatchedPasswords(password1, password2) {
+    if (password1 !== password2) {
+        return true;
+    }
+    return false;
+}
 
 $(document).ready(function () {
     $('#id_first_name').change(function () {
@@ -68,6 +49,30 @@ $(document).ready(function () {
             $('#lastNameError').html('').css('color', '');
         }
     });
+    $('#id_password1').focusout(function () {
+        if($(this).val().length < 6) {
+            $('#id_password1').css('border', '1px solid red');
+            $('#password1Error').html('Your password cannot be fewer than 6 characters').css('color', 'red');
+        }
+        else {
+            $('#id_password1').css('border', '');
+            $('#password1Error').html('').css('color', '');
+        }
+    });
+    $('#id_password2').focusout(function () {
+        if($(this).val() !== $('#id_password1').val()) {
+            $('#id_password1').css('border', '1px solid red');
+            $('#password1Error').html('Both passwords should match').css('color', 'red');
+            $('#id_password2').css('border', '1px solid red');
+            $('#password2Error').html('Both passwords should match').css('color', 'red');
+        }
+        else {
+            $('#id_password1').css('border', '');
+            $('#password1Error').html('').css('color', '');
+            $('#id_password2').css('border', '');
+            $('#password2Error').html('').css('color', '');
+        }
+    });
     $('#id_email').change(function () {
         if(testEmailValidity($(this).val())) {
             $(this).css('border', '1px solid red');
@@ -80,12 +85,12 @@ $(document).ready(function () {
     });
     $('#id_date_of_birth').focusout(function () {
         if(checkFalseDob($(this).val())) {
-            $(this).css('border', '');
-            $('#dobError').html('').css('color', '');
-        }
-        else {
             $(this).css('border', '1px solid red');
             $('#dobError').html('Please enter a valid date of birth').css('color', 'red');
+        }
+        else {
+            $(this).css('border', '');
+            $('#dobError').html('').css('color', '');
         }
     });
 });
@@ -95,8 +100,11 @@ $("#alumniForm").submit(function (e) {
     var lastname = $("#id_last_name").val();
     var email = $("#id_email").val();
     var dob = $('#id_date_of_birth').val();
+    var password1 = $('#id_password1').val();
+    var password2 = $('#id_password2').val();
 
-    if(isNumber(firstname) || isNumber(lastname) || testEmailValidity(email)) {
+    if(isNumber(firstname) || isNumber(lastname) || testEmailValidity(email) || checkUnmatchedPasswords(password1, password2)) {
+        alert('There are errors present in the form');
         e.preventDefault();
     }
     else {

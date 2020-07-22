@@ -15,7 +15,6 @@ urlpatterns = [
     path('view_alumni', views.view_alumni, name='view_alumni'),
     path('student_details/<int:id>', views.student_details, name='student_details'),
     path('alumni_details/<int:id>', views.alumni_details, name='alumni_details'),
-    path('news', views.news, name='news'),
     path('job_to_student_skills/<int:id>', views.job_to_student_skills, name='job_to_student_skills'),
     path('job_to_alumni_skills/<int:id>', views.job_to_alumni_skills, name='job_to_alumni_skills'),
     path('get_cv_file/<int:id>', views.get_cv_file, name='get_cv_file'),
@@ -24,5 +23,4 @@ urlpatterns = [
     path('anti_scam', views.anti_scam, name='anti_scam'),
     path('privacy', views.privacy, name='privacy'),
     path('sitemap', views.sitemap, name='sitemap'),
-    # path('view_recent_jobs', views.view_recent_jobs, name="recent_job_list"),
 ]
