@@ -53,7 +53,7 @@ $("#companyForm").submit(function (e) {
     var phonenumber = $("#id_phone_number").val();
     var company_email = $("#id_email").val();
 
-    if(isNumber(companyname) || checkFalseUAENumber(phonenumber) || checkFalseEmail(company_email)) {
+    if(checkFalseEmail(company_email)) {
         e.preventDefault();
     }
     else {

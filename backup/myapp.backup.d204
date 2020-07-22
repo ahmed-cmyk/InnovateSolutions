@@ -1,0 +1,3844 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.3
+-- Dumped by pg_dump version 12.3
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: Admin_admin; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Admin_admin" (
+    user_id integer NOT NULL,
+    gender character varying(10) NOT NULL,
+    dp character varying(100)
+);
+
+
+ALTER TABLE public."Admin_admin" OWNER TO postgres;
+
+--
+-- Name: Alumni_alumni; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Alumni_alumni" (
+    user_id integer NOT NULL,
+    phone_number character varying(31) NOT NULL,
+    cv character varying(100) NOT NULL,
+    date_of_birth date,
+    dp character varying(100),
+    gender character varying(10) NOT NULL,
+    student_id character varying(8)
+);
+
+
+ALTER TABLE public."Alumni_alumni" OWNER TO postgres;
+
+--
+-- Name: Alumni_alumni_majors; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Alumni_alumni_majors" (
+    id integer NOT NULL,
+    alumni_id integer NOT NULL,
+    major_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Alumni_alumni_majors" OWNER TO postgres;
+
+--
+-- Name: Alumni_alumni_majors_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Alumni_alumni_majors_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Alumni_alumni_majors_id_seq" OWNER TO postgres;
+
+--
+-- Name: Alumni_alumni_majors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Alumni_alumni_majors_id_seq" OWNED BY public."Alumni_alumni_majors".id;
+
+
+--
+-- Name: Alumni_alumni_skills; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Alumni_alumni_skills" (
+    id integer NOT NULL,
+    alumni_id integer NOT NULL,
+    skill_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Alumni_alumni_skills" OWNER TO postgres;
+
+--
+-- Name: Alumni_alumni_skills_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Alumni_alumni_skills_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Alumni_alumni_skills_id_seq" OWNER TO postgres;
+
+--
+-- Name: Alumni_alumni_skills_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Alumni_alumni_skills_id_seq" OWNED BY public."Alumni_alumni_skills".id;
+
+
+--
+-- Name: Alumni_alumnijobapplication; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Alumni_alumnijobapplication" (
+    id integer NOT NULL,
+    date_applied timestamp with time zone,
+    applied_id integer NOT NULL,
+    job_id_id integer
+);
+
+
+ALTER TABLE public."Alumni_alumnijobapplication" OWNER TO postgres;
+
+--
+-- Name: Alumni_alumnijobapplication_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Alumni_alumnijobapplication_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Alumni_alumnijobapplication_id_seq" OWNER TO postgres;
+
+--
+-- Name: Alumni_alumnijobapplication_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Alumni_alumnijobapplication_id_seq" OWNED BY public."Alumni_alumnijobapplication".id;
+
+
+--
+-- Name: Bulletin_post; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Bulletin_post" (
+    id integer NOT NULL,
+    title character varying(100) NOT NULL,
+    feed text NOT NULL,
+    release_date timestamp with time zone,
+    update_date timestamp with time zone,
+    status boolean NOT NULL,
+    author_id integer,
+    author_updated_id integer
+);
+
+
+ALTER TABLE public."Bulletin_post" OWNER TO postgres;
+
+--
+-- Name: Bulletin_post_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Bulletin_post_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Bulletin_post_id_seq" OWNER TO postgres;
+
+--
+-- Name: Bulletin_post_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Bulletin_post_id_seq" OWNED BY public."Bulletin_post".id;
+
+
+--
+-- Name: Employer_employer; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Employer_employer" (
+    user_id integer NOT NULL,
+    company_name character varying(50) NOT NULL,
+    company_description text NOT NULL,
+    phone_number character varying(31) NOT NULL,
+    logo character varying(100)
+);
+
+
+ALTER TABLE public."Employer_employer" OWNER TO postgres;
+
+--
+-- Name: HelpDesk_helpdeskmodel; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."HelpDesk_helpdeskmodel" (
+    id integer NOT NULL,
+    subject character varying(255) NOT NULL,
+    issue text NOT NULL,
+    issue_date timestamp with time zone NOT NULL,
+    completed boolean NOT NULL,
+    completed_date timestamp with time zone,
+    "name_Request_id" integer NOT NULL
+);
+
+
+ALTER TABLE public."HelpDesk_helpdeskmodel" OWNER TO postgres;
+
+--
+-- Name: HelpDesk_helpdeskmodel_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."HelpDesk_helpdeskmodel_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."HelpDesk_helpdeskmodel_id_seq" OWNER TO postgres;
+
+--
+-- Name: HelpDesk_helpdeskmodel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."HelpDesk_helpdeskmodel_id_seq" OWNED BY public."HelpDesk_helpdeskmodel".id;
+
+
+--
+-- Name: Home_helpdeskcomplaints; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Home_helpdeskcomplaints" (
+    id integer NOT NULL,
+    subject character varying(100) NOT NULL,
+    details text NOT NULL,
+    admin_id_id integer NOT NULL,
+    user_no_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Home_helpdeskcomplaints" OWNER TO postgres;
+
+--
+-- Name: Home_helpdeskcomplaints_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Home_helpdeskcomplaints_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Home_helpdeskcomplaints_id_seq" OWNER TO postgres;
+
+--
+-- Name: Home_helpdeskcomplaints_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Home_helpdeskcomplaints_id_seq" OWNED BY public."Home_helpdeskcomplaints".id;
+
+
+--
+-- Name: Home_industry; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Home_industry" (
+    id integer NOT NULL,
+    industry_name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public."Home_industry" OWNER TO postgres;
+
+--
+-- Name: Home_industry_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Home_industry_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Home_industry_id_seq" OWNER TO postgres;
+
+--
+-- Name: Home_industry_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Home_industry_id_seq" OWNED BY public."Home_industry".id;
+
+
+--
+-- Name: Home_job; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Home_job" (
+    id integer NOT NULL,
+    date_posted date NOT NULL,
+    job_title character varying(100) NOT NULL,
+    description text NOT NULL,
+    status character varying(15) NOT NULL,
+    date_closed date,
+    location character varying(100) NOT NULL,
+    duration integer,
+    salary_max numeric(8,2) NOT NULL,
+    industry_id_id integer NOT NULL,
+    job_type_id_id integer NOT NULL,
+    posted_by_id integer NOT NULL,
+    salary_min numeric(8,2) NOT NULL,
+    duration_type character varying(10) NOT NULL
+);
+
+
+ALTER TABLE public."Home_job" OWNER TO postgres;
+
+--
+-- Name: Home_job_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Home_job_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Home_job_id_seq" OWNER TO postgres;
+
+--
+-- Name: Home_job_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Home_job_id_seq" OWNED BY public."Home_job".id;
+
+
+--
+-- Name: Home_job_skills; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Home_job_skills" (
+    id integer NOT NULL,
+    job_id integer NOT NULL,
+    skill_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Home_job_skills" OWNER TO postgres;
+
+--
+-- Name: Home_job_skills_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Home_job_skills_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Home_job_skills_id_seq" OWNER TO postgres;
+
+--
+-- Name: Home_job_skills_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Home_job_skills_id_seq" OWNED BY public."Home_job_skills".id;
+
+
+--
+-- Name: Home_jobtype; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Home_jobtype" (
+    id integer NOT NULL,
+    type_name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public."Home_jobtype" OWNER TO postgres;
+
+--
+-- Name: Home_jobtype_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Home_jobtype_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Home_jobtype_id_seq" OWNER TO postgres;
+
+--
+-- Name: Home_jobtype_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Home_jobtype_id_seq" OWNED BY public."Home_jobtype".id;
+
+
+--
+-- Name: Home_major; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Home_major" (
+    id integer NOT NULL,
+    major_name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public."Home_major" OWNER TO postgres;
+
+--
+-- Name: Home_major_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Home_major_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Home_major_id_seq" OWNER TO postgres;
+
+--
+-- Name: Home_major_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Home_major_id_seq" OWNED BY public."Home_major".id;
+
+
+--
+-- Name: Home_skill; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Home_skill" (
+    id integer NOT NULL,
+    skill_name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public."Home_skill" OWNER TO postgres;
+
+--
+-- Name: Home_skill_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Home_skill_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Home_skill_id_seq" OWNER TO postgres;
+
+--
+-- Name: Home_skill_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Home_skill_id_seq" OWNED BY public."Home_skill".id;
+
+
+--
+-- Name: Home_usernotifications; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Home_usernotifications" (
+    id integer NOT NULL,
+    notification text NOT NULL,
+    type character varying(100) NOT NULL,
+    to_show boolean NOT NULL,
+    date_time timestamp with time zone NOT NULL,
+    from_user_id integer NOT NULL,
+    to_user_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Home_usernotifications" OWNER TO postgres;
+
+--
+-- Name: Home_usernotifications_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Home_usernotifications_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Home_usernotifications_id_seq" OWNER TO postgres;
+
+--
+-- Name: Home_usernotifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Home_usernotifications_id_seq" OWNED BY public."Home_usernotifications".id;
+
+
+--
+-- Name: Resume_education; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Resume_education" (
+    id integer NOT NULL,
+    degree character varying(50) NOT NULL,
+    graduated_year date NOT NULL,
+    person_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Resume_education" OWNER TO postgres;
+
+--
+-- Name: Resume_education_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Resume_education_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Resume_education_id_seq" OWNER TO postgres;
+
+--
+-- Name: Resume_education_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Resume_education_id_seq" OWNED BY public."Resume_education".id;
+
+
+--
+-- Name: Resume_person; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Resume_person" (
+    id integer NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    gender character varying(10) NOT NULL,
+    phone_number character varying(30) NOT NULL,
+    email character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public."Resume_person" OWNER TO postgres;
+
+--
+-- Name: Resume_person_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Resume_person_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Resume_person_id_seq" OWNER TO postgres;
+
+--
+-- Name: Resume_person_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Resume_person_id_seq" OWNED BY public."Resume_person".id;
+
+
+--
+-- Name: Resume_personallinks; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Resume_personallinks" (
+    id integer NOT NULL,
+    github character varying(200) NOT NULL,
+    "linkedIn" character varying(200) NOT NULL,
+    personal_website character varying(200) NOT NULL,
+    person_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Resume_personallinks" OWNER TO postgres;
+
+--
+-- Name: Resume_personallinks_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Resume_personallinks_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Resume_personallinks_id_seq" OWNER TO postgres;
+
+--
+-- Name: Resume_personallinks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Resume_personallinks_id_seq" OWNED BY public."Resume_personallinks".id;
+
+
+--
+-- Name: Resume_skills; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Resume_skills" (
+    id integer NOT NULL,
+    person_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Resume_skills" OWNER TO postgres;
+
+--
+-- Name: Resume_skills_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Resume_skills_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Resume_skills_id_seq" OWNER TO postgres;
+
+--
+-- Name: Resume_skills_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Resume_skills_id_seq" OWNED BY public."Resume_skills".id;
+
+
+--
+-- Name: Resume_skills_skills; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Resume_skills_skills" (
+    id integer NOT NULL,
+    skills_id integer NOT NULL,
+    skill_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Resume_skills_skills" OWNER TO postgres;
+
+--
+-- Name: Resume_skills_skills_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Resume_skills_skills_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Resume_skills_skills_id_seq" OWNER TO postgres;
+
+--
+-- Name: Resume_skills_skills_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Resume_skills_skills_id_seq" OWNED BY public."Resume_skills_skills".id;
+
+
+--
+-- Name: Student_student; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Student_student" (
+    user_id integer NOT NULL,
+    gender character varying(10) NOT NULL,
+    date_of_birth date,
+    student_id character varying(8) NOT NULL,
+    personal_email character varying(100) NOT NULL,
+    expected_graduation_date date,
+    dp character varying(100),
+    cv character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public."Student_student" OWNER TO postgres;
+
+--
+-- Name: Student_student_majors; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Student_student_majors" (
+    id integer NOT NULL,
+    student_id integer NOT NULL,
+    major_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Student_student_majors" OWNER TO postgres;
+
+--
+-- Name: Student_student_majors_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Student_student_majors_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Student_student_majors_id_seq" OWNER TO postgres;
+
+--
+-- Name: Student_student_majors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Student_student_majors_id_seq" OWNED BY public."Student_student_majors".id;
+
+
+--
+-- Name: Student_student_skills; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Student_student_skills" (
+    id integer NOT NULL,
+    student_id integer NOT NULL,
+    skill_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Student_student_skills" OWNER TO postgres;
+
+--
+-- Name: Student_student_skills_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Student_student_skills_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Student_student_skills_id_seq" OWNER TO postgres;
+
+--
+-- Name: Student_student_skills_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Student_student_skills_id_seq" OWNED BY public."Student_student_skills".id;
+
+
+--
+-- Name: Student_studentjobapplication; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Student_studentjobapplication" (
+    id integer NOT NULL,
+    date_applied timestamp with time zone,
+    applied_id integer NOT NULL,
+    job_id_id integer
+);
+
+
+ALTER TABLE public."Student_studentjobapplication" OWNER TO postgres;
+
+--
+-- Name: Student_studentjobapplication_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Student_studentjobapplication_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Student_studentjobapplication_id_seq" OWNER TO postgres;
+
+--
+-- Name: Student_studentjobapplication_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Student_studentjobapplication_id_seq" OWNED BY public."Student_studentjobapplication".id;
+
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO postgres;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO postgres;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_groups_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_groups_id_seq OWNED BY public.auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_id_seq OWNED BY public.auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO postgres;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_user_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_user_permissions_id_seq OWNED BY public.auth_user_user_permissions.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_comment_flags; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_comment_flags (
+    id integer NOT NULL,
+    flag character varying(30) NOT NULL,
+    flag_date timestamp with time zone NOT NULL,
+    comment_id integer NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE public.django_comment_flags OWNER TO postgres;
+
+--
+-- Name: django_comment_flags_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_comment_flags_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_comment_flags_id_seq OWNER TO postgres;
+
+--
+-- Name: django_comment_flags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_comment_flags_id_seq OWNED BY public.django_comment_flags.id;
+
+
+--
+-- Name: django_comments; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_comments (
+    id integer NOT NULL,
+    object_pk text NOT NULL,
+    user_name character varying(50) NOT NULL,
+    user_email character varying(254) NOT NULL,
+    user_url character varying(200) NOT NULL,
+    comment text NOT NULL,
+    submit_date timestamp with time zone NOT NULL,
+    ip_address inet,
+    is_public boolean NOT NULL,
+    is_removed boolean NOT NULL,
+    content_type_id integer NOT NULL,
+    site_id integer NOT NULL,
+    user_id integer
+);
+
+
+ALTER TABLE public.django_comments OWNER TO postgres;
+
+--
+-- Name: django_comments_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_comments_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_comments_id_seq OWNER TO postgres;
+
+--
+-- Name: django_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_comments_id_seq OWNED BY public.django_comments.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- Name: django_site; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_site (
+    id integer NOT NULL,
+    domain character varying(100) NOT NULL,
+    name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.django_site OWNER TO postgres;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_site_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_site_id_seq OWNER TO postgres;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_site_id_seq OWNED BY public.django_site.id;
+
+
+--
+-- Name: Alumni_alumni_majors id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumni_majors" ALTER COLUMN id SET DEFAULT nextval('public."Alumni_alumni_majors_id_seq"'::regclass);
+
+
+--
+-- Name: Alumni_alumni_skills id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumni_skills" ALTER COLUMN id SET DEFAULT nextval('public."Alumni_alumni_skills_id_seq"'::regclass);
+
+
+--
+-- Name: Alumni_alumnijobapplication id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumnijobapplication" ALTER COLUMN id SET DEFAULT nextval('public."Alumni_alumnijobapplication_id_seq"'::regclass);
+
+
+--
+-- Name: Bulletin_post id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Bulletin_post" ALTER COLUMN id SET DEFAULT nextval('public."Bulletin_post_id_seq"'::regclass);
+
+
+--
+-- Name: HelpDesk_helpdeskmodel id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."HelpDesk_helpdeskmodel" ALTER COLUMN id SET DEFAULT nextval('public."HelpDesk_helpdeskmodel_id_seq"'::regclass);
+
+
+--
+-- Name: Home_helpdeskcomplaints id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_helpdeskcomplaints" ALTER COLUMN id SET DEFAULT nextval('public."Home_helpdeskcomplaints_id_seq"'::regclass);
+
+
+--
+-- Name: Home_industry id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_industry" ALTER COLUMN id SET DEFAULT nextval('public."Home_industry_id_seq"'::regclass);
+
+
+--
+-- Name: Home_job id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_job" ALTER COLUMN id SET DEFAULT nextval('public."Home_job_id_seq"'::regclass);
+
+
+--
+-- Name: Home_job_skills id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_job_skills" ALTER COLUMN id SET DEFAULT nextval('public."Home_job_skills_id_seq"'::regclass);
+
+
+--
+-- Name: Home_jobtype id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_jobtype" ALTER COLUMN id SET DEFAULT nextval('public."Home_jobtype_id_seq"'::regclass);
+
+
+--
+-- Name: Home_major id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_major" ALTER COLUMN id SET DEFAULT nextval('public."Home_major_id_seq"'::regclass);
+
+
+--
+-- Name: Home_skill id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_skill" ALTER COLUMN id SET DEFAULT nextval('public."Home_skill_id_seq"'::regclass);
+
+
+--
+-- Name: Home_usernotifications id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_usernotifications" ALTER COLUMN id SET DEFAULT nextval('public."Home_usernotifications_id_seq"'::regclass);
+
+
+--
+-- Name: Resume_education id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_education" ALTER COLUMN id SET DEFAULT nextval('public."Resume_education_id_seq"'::regclass);
+
+
+--
+-- Name: Resume_person id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_person" ALTER COLUMN id SET DEFAULT nextval('public."Resume_person_id_seq"'::regclass);
+
+
+--
+-- Name: Resume_personallinks id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_personallinks" ALTER COLUMN id SET DEFAULT nextval('public."Resume_personallinks_id_seq"'::regclass);
+
+
+--
+-- Name: Resume_skills id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_skills" ALTER COLUMN id SET DEFAULT nextval('public."Resume_skills_id_seq"'::regclass);
+
+
+--
+-- Name: Resume_skills_skills id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_skills_skills" ALTER COLUMN id SET DEFAULT nextval('public."Resume_skills_skills_id_seq"'::regclass);
+
+
+--
+-- Name: Student_student_majors id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_student_majors" ALTER COLUMN id SET DEFAULT nextval('public."Student_student_majors_id_seq"'::regclass);
+
+
+--
+-- Name: Student_student_skills id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_student_skills" ALTER COLUMN id SET DEFAULT nextval('public."Student_student_skills_id_seq"'::regclass);
+
+
+--
+-- Name: Student_studentjobapplication id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_studentjobapplication" ALTER COLUMN id SET DEFAULT nextval('public."Student_studentjobapplication_id_seq"'::regclass);
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user ALTER COLUMN id SET DEFAULT nextval('public.auth_user_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups ALTER COLUMN id SET DEFAULT nextval('public.auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_comment_flags id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_comment_flags ALTER COLUMN id SET DEFAULT nextval('public.django_comment_flags_id_seq'::regclass);
+
+
+--
+-- Name: django_comments id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_comments ALTER COLUMN id SET DEFAULT nextval('public.django_comments_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: django_site id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_site ALTER COLUMN id SET DEFAULT nextval('public.django_site_id_seq'::regclass);
+
+
+--
+-- Data for Name: Admin_admin; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Admin_admin" (user_id, gender, dp) FROM stdin;
+1	Male	
+3	Male	profile_pictures/main-thumb-157577027-200-liqenzcelmyzjwoeyfbxwqkoliaslxrf.jpeg
+\.
+
+
+--
+-- Data for Name: Alumni_alumni; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Alumni_alumni" (user_id, phone_number, cv, date_of_birth, dp, gender, student_id) FROM stdin;
+41		../staticfiles/DefaultCV.txt	\N	\N	Male	\N
+42		../staticfiles/DefaultCV.txt	\N	\N	Male	\N
+43		documents/ICT108_Assignment_lLHO6ra.pdf	1998-10-12		Male	\N
+44		documents/ICT108_Assignment_Itxput0.pdf	1987-12-12		Male	\N
+47		documents/ICT108_Assignment_VmSBKZd.pdf	1998-10-02		Male	\N
+49		documents/ICT108_Assignment_v0AJgoH.pdf	1998-10-03		Female	\N
+50		documents/ICT108_Assignment_mGS8LpX.pdf	1980-10-21		Male	\N
+51		documents/ICT108_Assignment_kD7c1cI.pdf	1998-10-12		Male	\N
+52		documents/ICT108_Assignment_icvINn0.pdf	1996-08-09		Male	\N
+53		documents/ICT108_Assignment_9A1InwL.pdf	1998-09-17		Male	\N
+48		documents/ICT108_Assignment_u1k4prF.pdf	1998-10-12		Male	\N
+64		documents/ICT108_Assignment_156mrcF.pdf	1989-08-14		Male	
+65		documents/ICT108_Assignment_3MC4jPR.pdf	1987-09-18		Male	
+\.
+
+
+--
+-- Data for Name: Alumni_alumni_majors; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Alumni_alumni_majors" (id, alumni_id, major_id) FROM stdin;
+1	47	1
+2	48	2
+3	49	2
+4	50	2
+5	51	1
+6	52	1
+7	53	1
+9	64	2
+10	65	2
+\.
+
+
+--
+-- Data for Name: Alumni_alumni_skills; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Alumni_alumni_skills" (id, alumni_id, skill_id) FROM stdin;
+1	44	1
+2	47	1
+3	48	1
+4	49	1
+5	49	2
+6	50	1
+7	51	1
+8	52	1
+9	53	1
+11	64	1
+12	65	2
+\.
+
+
+--
+-- Data for Name: Alumni_alumnijobapplication; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Alumni_alumnijobapplication" (id, date_applied, applied_id, job_id_id) FROM stdin;
+1	2020-07-10 22:57:34.987498+04	44	6
+2	2020-07-14 22:04:37.45441+04	48	33
+3	2020-07-14 22:04:43.25198+04	48	33
+4	2020-07-14 22:11:36.26918+04	48	33
+5	2020-07-14 22:13:35.177579+04	48	33
+6	2020-07-14 22:15:53.454322+04	48	33
+7	2020-07-14 22:16:06.160435+04	48	10
+8	2020-07-14 22:19:38.137895+04	48	10
+9	2020-07-14 22:23:06.715344+04	48	11
+10	2020-07-14 22:32:09.725815+04	48	33
+11	2020-07-14 22:33:09.176448+04	48	33
+12	2020-07-14 22:38:13.566495+04	48	33
+13	2020-07-14 22:47:02.878078+04	48	33
+14	2020-07-14 22:47:04.037094+04	48	33
+15	2020-07-14 22:47:05.054409+04	48	33
+16	2020-07-14 22:47:05.859425+04	48	33
+17	2020-07-14 22:47:06.70845+04	48	33
+18	2020-07-14 22:47:27.664099+04	48	33
+\.
+
+
+--
+-- Data for Name: Bulletin_post; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Bulletin_post" (id, title, feed, release_date, update_date, status, author_id, author_updated_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: Employer_employer; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Employer_employer" (user_id, company_name, company_description, phone_number, logo) FROM stdin;
+4	the newer one	beautiful description	2899372293	
+5	that company	What description?	+12090913330	
+6	the even newer company	the	0382749273	
+12	the company of companies	description	0507738361	
+20	Jones Company	The company	0382749273	
+3	Evil Inc	The description	0382749273	
+55	1333	usbbbee	0382749273	
+56	123333	sjeebbbe	0382749273	
+57	19192	sbbebe	0382749273	
+58	128822	subbee	0382749273	
+59	18282	eybbsb	0382749273	
+60	19982	sibbee	0382749273	
+61	167822	jebebe	0382749273	
+62	229822	shwebebe	0382749273	
+\.
+
+
+--
+-- Data for Name: HelpDesk_helpdeskmodel; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."HelpDesk_helpdeskmodel" (id, subject, issue, issue_date, completed, completed_date, "name_Request_id") FROM stdin;
+1	Toilets are broken	Read Title	2020-07-06 12:11:42.354018+04	f	\N	20
+2	Teacher is dead	My teacher died  ;-:	2020-07-14 17:19:29.474823+04	f	\N	20
+3	Teacher is dead	My teacher died  ;-:	2020-07-14 17:22:44.316556+04	f	\N	20
+4	The pizza oven is broken	It broke	2020-07-21 23:21:24.479851+04	f	\N	62
+\.
+
+
+--
+-- Data for Name: Home_helpdeskcomplaints; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Home_helpdeskcomplaints" (id, subject, details, admin_id_id, user_no_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: Home_industry; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Home_industry" (id, industry_name) FROM stdin;
+1	Mining
+\.
+
+
+--
+-- Data for Name: Home_job; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Home_job" (id, date_posted, job_title, description, status, date_closed, location, duration, salary_max, industry_id_id, job_type_id_id, posted_by_id, salary_min, duration_type) FROM stdin;
+3	2020-06-22	Another one	And another one	Deleted	\N	Sharjah	3	438279.00	1	1	6	10000.00	In Months
+2	2020-06-21	James the Job	I dunno	Open	2020-07-08	Umm al-Qaiwain	2	279192.00	1	1	5	10000.00	In Months
+1	2020-06-21	Pizza Handler	You handle pizza	Open	\N	Dubai	2	8829.00	1	1	3	10000.00	In Months
+10	2020-07-12	Java Developer	Description of the gods	Open	\N	Umm al-Qaiwain	3	20000.00	1	1	3	10000.00	Weeks
+11	2020-07-12	Ruby Dev	A ruby	Open	\N	Sharjah	7	20000.00	1	1	20	18000.00	Weeks
+6	2020-07-05	Jimmy the Job	Description 23	Open	\N	Ajman	4	10000.00	1	1	3	10000.00	Months
+12	2020-07-12	Web Development	You develop websites.	Open	\N	Fujairah	2	2000.00	1	1	20	1000.00	Months
+13	2020-07-12	Game Developer	You develop games!!!	Open	\N	Abu Dhabi	12	20000.00	1	1	20	10000.00	Days
+14	2020-07-12	Waiter	You wait, ok?	Open	\N	Ra’s al-Khaimah	4	1000.00	1	1	20	300.00	Weeks
+15	2020-07-12	Waiter	You wait, ok?	Open	\N	Ra’s al-Khaimah	4	1000.00	1	1	20	300.00	Weeks
+16	2020-07-12	Waiter	You wait, ok?	Open	\N	Ra’s al-Khaimah	4	1000.00	1	1	20	300.00	Weeks
+17	2020-07-12	Waiter	You wait, ok?	Open	\N	Ra’s al-Khaimah	4	1000.00	1	1	20	300.00	Weeks
+18	2020-07-12	Waiter	You wait, ok?	Open	\N	Ra’s al-Khaimah	4	1000.00	1	1	20	300.00	Weeks
+19	2020-07-12	Waiter	You wait, ok?	Open	\N	Ra’s al-Khaimah	4	1000.00	1	1	20	300.00	Weeks
+20	2020-07-12	Waiter	You wait, ok?	Open	\N	Ra’s al-Khaimah	4	1000.00	1	1	20	300.00	Weeks
+21	2020-07-12	Waiter	You wait, ok?	Open	\N	Ra’s al-Khaimah	4	1000.00	1	1	20	300.00	Weeks
+22	2020-07-12	Waiter	You wait, ok?	Open	\N	Ra’s al-Khaimah	4	1000.00	1	1	20	300.00	Weeks
+23	2020-07-12	Dancer	You dance	Open	\N	Dubai	4	20000.00	1	1	20	1000.00	Weeks
+24	2020-07-12	Janitor	descripting	Open	\N	Sharjah	4	4000.00	1	1	20	2000.00	Weeks
+25	2020-07-12	Snake Whisperer	Pssssssst	Open	\N	Dubai	10	4000.00	1	1	20	2000.00	Months
+26	2020-07-12	Snake Whisperer	Pssssssst	Open	\N	Dubai	10	4000.00	1	1	20	2000.00	Months
+27	2020-07-12	Snake Whisperer	Pssssssst	Open	\N	Dubai	10	4000.00	1	1	20	2000.00	Months
+28	2020-07-12	Snake Whisperer	Pssssssst	Open	\N	Dubai	10	4000.00	1	1	20	2000.00	Months
+29	2020-07-12	Snake Whisperer	Pssssssst	Open	\N	Dubai	10	4000.00	1	1	20	2000.00	Months
+30	2020-07-12	Snake Whisperer	Pssssssst	Open	\N	Dubai	10	4000.00	1	1	20	2000.00	Months
+31	2020-07-12	Snake Whisperer	Pssssssst	Open	\N	Dubai	10	4000.00	1	1	20	2000.00	Months
+32	2020-07-12	Waiter	You wait a lot	Open	\N	Abu Dhabi	3	20000.00	1	1	3	1020.00	Weeks
+33	2020-07-14	Dance Instructor	You teach dance, ya?	Closed	2020-07-21	Umm al-Qaiwain	6	2000.00	1	1	20	1000.00	Days
+34	2020-07-16	Boxer	You box like a champ.	Closed	2020-07-21	Sharjah	4	4000.00	1	1	62	2000.00	Weeks
+35	2020-07-16	Boxer	You box like a champ.	Open	2020-07-21	Sharjah	3	4000.00	1	1	62	2000.00	Weeks
+\.
+
+
+--
+-- Data for Name: Home_job_skills; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Home_job_skills" (id, job_id, skill_id) FROM stdin;
+1	1	1
+2	1	2
+3	2	1
+4	3	1
+7	6	1
+10	10	1
+11	11	1
+12	12	1
+13	13	1
+14	13	2
+15	14	2
+16	15	2
+17	16	2
+18	17	2
+19	18	2
+20	19	2
+21	20	2
+22	21	2
+23	22	2
+24	23	1
+25	23	2
+26	24	1
+27	25	1
+28	25	2
+29	26	1
+30	26	2
+31	27	1
+32	27	2
+33	28	1
+34	28	2
+35	29	1
+36	29	2
+37	30	1
+38	30	2
+39	31	1
+40	31	2
+41	32	1
+42	32	2
+43	33	2
+44	34	1
+45	35	1
+\.
+
+
+--
+-- Data for Name: Home_jobtype; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Home_jobtype" (id, type_name) FROM stdin;
+1	Internship
+2	Full-time
+\.
+
+
+--
+-- Data for Name: Home_major; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Home_major" (id, major_name) FROM stdin;
+1	Computer science
+2	Business information systems
+\.
+
+
+--
+-- Data for Name: Home_skill; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Home_skill" (id, skill_name) FROM stdin;
+1	Eating
+2	Sleeping
+\.
+
+
+--
+-- Data for Name: Home_usernotifications; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Home_usernotifications" (id, notification, type, to_show, date_time, from_user_id, to_user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: Resume_education; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Resume_education" (id, degree, graduated_year, person_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: Resume_person; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Resume_person" (id, first_name, last_name, gender, phone_number, email) FROM stdin;
+\.
+
+
+--
+-- Data for Name: Resume_personallinks; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Resume_personallinks" (id, github, "linkedIn", personal_website, person_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: Resume_skills; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Resume_skills" (id, person_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: Resume_skills_skills; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Resume_skills_skills" (id, skills_id, skill_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: Student_student; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Student_student" (user_id, gender, date_of_birth, student_id, personal_email, expected_graduation_date, dp, cv) FROM stdin;
+2	Male	2020-05-15	33416692	ikramahmed398@gmail.com	2020-07-24	profile_pictures/unnamed.jpg	documents/10.11770268396219896811.pdf
+7	Male	1990-10-10	33416693	ikramahmed398@gmail.com	2020-06-27		documents/ICT108_Assignment.pdf
+8	Male	1990-10-10	33416694	ikramahmed398@gmail.com	2020-06-30		documents/ICT108_Assignment_UFvsQQ6.pdf
+9	Male	1990-10-10	33416695	ikramahmed398@gmail.com	2020-06-30		documents/ICT108_Assignment_1D7Q80C.pdf
+10	Male	1990-10-10	33416699	ikramahmed398@gmail.com	2020-06-30		documents/ICT108_Assignment_J5d8LKf.pdf
+11	Male	1990-10-10	33416672	ikramahmed398@gmail.com	2020-06-30		documents/ICT108_Assignment_UAYLok3.pdf
+13	Male	1990-10-10	33416273	ikramahmed398@gmail.com	2020-10-10		documents/ICT108_Assignment_lwlR6rC.pdf
+14	Male	1990-10-10	26839263	ikramahmed398@gmail.com	2021-10-10		documents/ICT108_Assignment_TTr5bbm.pdf
+15	Male	1990-10-10	22678819	ikramahmed398@gmail.com	2021-10-10		documents/ICT108_Assignment_hNKRlY4.pdf
+16	Male	1990-10-10	33419962	ikramahmed399@gmail.com	2021-10-10		documents/ICT108_Assignment_lCDiRYH.pdf
+17	Male	1990-10-10	33418872	ikramahmed399@gmail.com	2021-10-10		documents/ICT108_Assignment_4zlnXOW.pdf
+18	Female	2021-10-10	33417782	ikramahmed400@gmail.com	2021-10-10		documents/ICT108_Assignment_0ClcsZt.pdf
+21	Male	1980-10-12	33416856	ikramahmed401@gmail.com	2021-10-10		documents/ICT108_Assignment_MIWMQNk.pdf
+22	Male	1987-12-10	33416	ikramahmed401@gmail.com	2020-07-30		documents/ICT108_Assignment_eHuMq3K.pdf
+23	Male	2020-07-30	334166	ikramahmed400@gmail.com	2020-07-31		documents/ICT108_Assignment_DL9RcFg.pdf
+24	Male	2020-07-31	26862	ikramahmed399@gmail.com	2020-07-23		documents/ICT108_Assignment_Cxy8veh.pdf
+25		\N			\N		documents/ICT108_Assignment_n44m6Kc.pdf
+26	Male	2020-07-31	278922	ikramahmed400@gmail.com	2020-07-31		documents/ICT108_Assignment_IhZyydN.pdf
+45	Male	1987-10-12	33415432	ikramahmed401@gmail.com	2020-07-30		documents/ICT108_Assignment_V73wFAk.pdf
+46	Male	1987-12-10	33561234	ikramahmed399@gmail.com	2020-07-24		documents/ICT108_Assignment_7mWvltr.pdf
+19	Male	1990-10-10	33416642	ikramahmed399@gmail.com	2021-10-10		documents/ICT108_Assignment_vEsw3Vv.pdf
+\.
+
+
+--
+-- Data for Name: Student_student_majors; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Student_student_majors" (id, student_id, major_id) FROM stdin;
+1	19	1
+2	19	2
+\.
+
+
+--
+-- Data for Name: Student_student_skills; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Student_student_skills" (id, student_id, skill_id) FROM stdin;
+1	2	1
+2	7	1
+3	8	1
+4	9	2
+5	10	1
+6	11	1
+7	13	1
+8	14	1
+9	15	2
+10	16	1
+11	17	2
+12	18	1
+13	19	1
+14	21	1
+15	21	2
+16	22	1
+17	23	1
+18	24	2
+19	26	1
+20	45	1
+21	45	2
+22	46	1
+23	46	2
+\.
+
+
+--
+-- Data for Name: Student_studentjobapplication; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Student_studentjobapplication" (id, date_applied, applied_id, job_id_id) FROM stdin;
+3	2020-07-12 14:18:33.994563+04	19	6
+4	2020-07-15 15:15:45.887769+04	19	33
+5	2020-07-15 15:15:48.126045+04	19	33
+6	2020-07-15 15:15:49.102362+04	19	33
+7	2020-07-15 15:15:49.949233+04	19	33
+8	2020-07-15 15:15:51.086978+04	19	33
+9	2020-07-15 15:22:08.667334+04	19	33
+10	2020-07-15 15:22:18.099512+04	19	33
+11	2020-07-15 15:22:22.262393+04	19	33
+12	2020-07-16 22:02:50.054677+04	19	35
+13	2020-07-16 22:02:51.452144+04	19	35
+14	2020-07-16 22:05:44.988881+04	19	35
+15	2020-07-16 22:05:46.593246+04	19	35
+16	2020-07-16 22:05:47.688729+04	19	35
+17	2020-07-16 22:05:48.726327+04	19	35
+18	2020-07-16 22:05:50.469847+04	19	35
+19	2020-07-16 22:05:51.857494+04	19	35
+20	2020-07-16 22:06:27.804154+04	19	35
+21	2020-07-16 22:06:34.62739+04	19	33
+22	2020-07-16 22:09:35.861299+04	19	35
+23	2020-07-16 22:12:41.29842+04	19	35
+24	2020-07-16 22:12:50.688636+04	19	35
+25	2020-07-16 22:17:21.289973+04	19	35
+26	2020-07-16 22:20:22.361991+04	19	35
+27	2020-07-16 22:24:41.384454+04	19	35
+28	2020-07-16 22:28:52.739956+04	19	35
+29	2020-07-16 22:31:30.137767+04	19	35
+30	2020-07-16 22:33:40.195207+04	19	35
+31	2020-07-16 22:35:14.046252+04	19	35
+32	2020-07-16 22:36:13.307988+04	19	35
+33	2020-07-16 22:49:46.485409+04	19	35
+34	2020-07-16 22:55:39.938145+04	19	35
+35	2020-07-16 23:03:25.001733+04	19	24
+36	2020-07-16 23:39:13.989693+04	19	35
+37	2020-07-18 20:04:20.299963+04	19	11
+38	2020-07-18 20:04:33.822822+04	19	12
+\.
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add user	4	add_user
+14	Can change user	4	change_user
+15	Can delete user	4	delete_user
+16	Can view user	4	view_user
+17	Can add content type	5	add_contenttype
+18	Can change content type	5	change_contenttype
+19	Can delete content type	5	delete_contenttype
+20	Can view content type	5	view_contenttype
+21	Can add session	6	add_session
+22	Can change session	6	change_session
+23	Can delete session	6	delete_session
+24	Can view session	6	view_session
+25	Can add comment	7	add_comment
+26	Can change comment	7	change_comment
+27	Can delete comment	7	delete_comment
+28	Can view comment	7	view_comment
+29	Can moderate comments	7	can_moderate
+30	Can add comment flag	8	add_commentflag
+31	Can change comment flag	8	change_commentflag
+32	Can delete comment flag	8	delete_commentflag
+33	Can view comment flag	8	view_commentflag
+34	Can add site	9	add_site
+35	Can change site	9	change_site
+36	Can delete site	9	delete_site
+37	Can view site	9	view_site
+38	Can add student	10	add_student
+39	Can change student	10	change_student
+40	Can delete student	10	delete_student
+41	Can view student	10	view_student
+42	Can add student job application	11	add_studentjobapplication
+43	Can change student job application	11	change_studentjobapplication
+44	Can delete student job application	11	delete_studentjobapplication
+45	Can view student job application	11	view_studentjobapplication
+46	Can add employer	12	add_employer
+47	Can change employer	12	change_employer
+48	Can delete employer	12	delete_employer
+49	Can view employer	12	view_employer
+50	Can add admin	13	add_admin
+51	Can change admin	13	change_admin
+52	Can delete admin	13	delete_admin
+53	Can view admin	13	view_admin
+54	Can add industry	14	add_industry
+55	Can change industry	14	change_industry
+56	Can delete industry	14	delete_industry
+57	Can view industry	14	view_industry
+58	Can add skill	15	add_skill
+59	Can change skill	15	change_skill
+60	Can delete skill	15	delete_skill
+61	Can view skill	15	view_skill
+62	Can add job type	16	add_jobtype
+63	Can change job type	16	change_jobtype
+64	Can delete job type	16	delete_jobtype
+65	Can view job type	16	view_jobtype
+66	Can add job	17	add_job
+67	Can change job	17	change_job
+68	Can delete job	17	delete_job
+69	Can view job	17	view_job
+70	Can add help desk complaints	18	add_helpdeskcomplaints
+71	Can change help desk complaints	18	change_helpdeskcomplaints
+72	Can delete help desk complaints	18	delete_helpdeskcomplaints
+73	Can view help desk complaints	18	view_helpdeskcomplaints
+74	Can add user notifications	19	add_usernotifications
+75	Can change user notifications	19	change_usernotifications
+76	Can delete user notifications	19	delete_usernotifications
+77	Can view user notifications	19	view_usernotifications
+78	Can add help desk model	20	add_helpdeskmodel
+79	Can change help desk model	20	change_helpdeskmodel
+80	Can delete help desk model	20	delete_helpdeskmodel
+81	Can view help desk model	20	view_helpdeskmodel
+82	Can add post	21	add_post
+83	Can change post	21	change_post
+84	Can delete post	21	delete_post
+85	Can view post	21	view_post
+86	Can add alumni	22	add_alumni
+87	Can change alumni	22	change_alumni
+88	Can delete alumni	22	delete_alumni
+89	Can view alumni	22	view_alumni
+90	Can add alumni job application	23	add_alumnijobapplication
+91	Can change alumni job application	23	change_alumnijobapplication
+92	Can delete alumni job application	23	delete_alumnijobapplication
+93	Can view alumni job application	23	view_alumnijobapplication
+94	Can add major	24	add_major
+95	Can change major	24	change_major
+96	Can delete major	24	delete_major
+97	Can view major	24	view_major
+98	Can add alumni job save	25	add_alumnijobsave
+99	Can change alumni job save	25	change_alumnijobsave
+100	Can delete alumni job save	25	delete_alumnijobsave
+101	Can view alumni job save	25	view_alumnijobsave
+102	Can add skills	26	add_skills
+103	Can change skills	26	change_skills
+104	Can delete skills	26	delete_skills
+105	Can view skills	26	view_skills
+106	Can add education	27	add_education
+107	Can change education	27	change_education
+108	Can delete education	27	delete_education
+109	Can view education	27	view_education
+110	Can add person	28	add_person
+111	Can change person	28	change_person
+112	Can delete person	28	delete_person
+113	Can view person	28	view_person
+114	Can add personal links	29	add_personallinks
+115	Can change personal links	29	change_personallinks
+116	Can delete personal links	29	delete_personallinks
+117	Can view personal links	29	view_personallinks
+\.
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+19	pbkdf2_sha256$150000$IA4zlxVhUNWo$B7LkJBkmQdhjXTLniQyI2NLiko/YxZ/YDE4EexV1YoE=	2020-07-19 16:45:18.387524+04	f	johns@student.murdoch.edu.au	Alex	Johnson	johns@student.murdoch.edu.au	f	t	2020-07-03 17:11:32.584571+04
+2	pbkdf2_sha256$150000$2u9KcO28EST9$YZ0JiiOGgjhfGusBhI8iMBzXmMn7SrHCzvwnPMdRwYE=	\N	f	33416692@student.murdoch.edu.au	Ahmed	Ikram	33416692@student.murdoch.edu.au	f	t	2020-05-21 14:02:18.653494+04
+1	pbkdf2_sha256$150000$xYihO1jRrtvp$QaK03Kj7Lnmg50ZbYcoV0CNBd39JPcdXi7JNfvydXqo=	2020-05-21 13:58:51.357053+04	t	cfe	Ahmed	Ikram		t	t	2020-05-21 13:41:18.52388+04
+22	pbkdf2_sha256$150000$M2h7YjI315FC$y5l04jgjf2xxNipm3TphIV04tztyim8nP32tkeq8hxw=	\N	f	33416754@student.murdoch.edu.au	Justin	Michael	33416754@student.murdoch.edu.au	f	t	2020-07-09 17:47:32.288317+04
+48	pbkdf2_sha256$150000$7ZZqok2QXQqL$LSJlqU9oPJbTjRocWEmqg1C08EfmFBhjJXFa/W47BmQ=	2020-07-14 21:29:54.580624+04	f	green@gmail.com	Jay	Garrick	green@gmail.com	f	t	2020-07-13 15:26:25.939464+04
+5	pbkdf2_sha256$150000$hvScBo9bhM9G$YPGa0ys5Okpd9PKADGACYPvh7Jb5JaneOyPM8fpzsp0=	2020-06-21 14:44:13.409524+04	f	abc@gmail.com			abc@gmail.com	f	t	2020-06-21 14:43:58.690319+04
+23	pbkdf2_sha256$150000$pFcNSlGyu8zj$Xxe6Yv573TiXkBiRrQYEYfRcgsDs7Otja3CvCJpB1gI=	\N	f	22781153@student.murdoch.edu.au	Jonas	Jameson	22781153@student.murdoch.edu.au	f	t	2020-07-09 17:50:44.856746+04
+6	pbkdf2_sha256$150000$n47xY5IhWMuV$n2JmSLuRi+ahNu3GuGeL/0dj4HNghjWmBQi0Q58QVz8=	2020-06-22 13:41:47.181546+04	f	jessican@gmail.com			jessican@gmail.com	f	t	2020-06-22 13:22:21.371183+04
+8	pbkdf2_sha256$150000$8LaIjPXGxDRU$yNvIg7H75TfkaTksDrXF51szRWNzCMYaIRG7CTIdGTw=	\N	f	bcd@student.murdoch.edu.au	Jonas	Jameson	bcd@student.murdoch.edu.au	f	t	2020-06-22 15:58:42.467674+04
+9	pbkdf2_sha256$150000$30KdJKg3LKSZ$vUMFccxASwaBWv1OsLr220ngIwQTRGi9GdGWX/JJ39A=	\N	f	cde@student.murdoch.edu.au	Jann	Jameson	cde@student.murdoch.edu.au	f	t	2020-06-22 16:01:43.900754+04
+24	pbkdf2_sha256$150000$hN58Q23m4mX0$OnDRoHFKwQ9dISnN8gIFnik8RLTBLIIO9JJKEwQhisE=	\N	f	33416501@student.murdoch.edu.au	Justin	Green	33416501@student.murdoch.edu.au	f	t	2020-07-09 17:52:29.306393+04
+10	pbkdf2_sha256$150000$07JhNiZ96V48$gux9v6iLZc9akA4dauXPp2J787B264XYBHtWMLZHt5I=	\N	f	ghi@student.murdoch.edu.au	Jones	Town	ghi@student.murdoch.edu.au	f	t	2020-06-23 21:30:53.086808+04
+25	pbkdf2_sha256$150000$60Y6v77KRwv0$yQ12i04hPZ8bXJcrA66kyoEvk0zG7jrZGGx5HdusEz4=	\N	f					f	t	2020-07-09 17:57:27.40165+04
+11	pbkdf2_sha256$150000$UNRzaCfMahFS$TP4Vh2QQaBo3pRLIZNSdvUk7UyxBxP3Ki5INjgJh3Cg=	\N	f	shifi@student.murdoch.edu.au	Shufi	Jackson	shifi@student.murdoch.edu.au	f	t	2020-06-23 21:35:55.335959+04
+26	pbkdf2_sha256$150000$wlR6os8LYvrZ$ZQJpRrK5CzncdO5n+oFOmaNdqUFMvEULG3i9Zr9N7fY=	\N	f	33417692@student.murdoch.edu.au	Jonas	Michael	33417692@student.murdoch.edu.au	f	t	2020-07-09 18:17:42.257413+04
+7	pbkdf2_sha256$150000$YXqLgPh8i8vz$ke8e4UDeqlAOSVYMMrO+hhz0xFOa9bCkhFJGlUxn6r4=	2020-06-25 13:15:03.597156+04	f	abc@student.murdoch.edu.au	Justin	Ikram	abc@student.murdoch.edu.au	f	t	2020-06-22 15:19:19.553573+04
+12	pbkdf2_sha256$150000$EQrDENF8Yw0B$Iu60YbJuh6PBjPIkuH+iqIUczFelB1iLBVHDYo6ZrJw=	2020-06-28 10:11:04.174538+04	f	ghi@gmail.com			ghi@gmail.com	f	t	2020-06-28 10:10:52.275332+04
+32		\N	f	Jonas21	Justin	Town		f	f	2020-07-09 21:23:52.764775+04
+33		\N	f	James2013	Jones	Green		f	f	2020-07-09 21:27:24.324827+04
+13	pbkdf2_sha256$150000$ZuRiI7gRR9sN$0bdO7dg1r6pnQZarRB5WuDPo2W5Wd1kZ4TfAnVOJVGo=	\N	f	alex@student.murdoch.edu.au	John	Green	alex@student.murdoch.edu.au	f	t	2020-07-03 15:21:43.687327+04
+14	pbkdf2_sha256$150000$QvEzSvSG4DID$50qSxHkix6/aIlOlea0fK8cQ6i12uvpK6apLirgihHM=	\N	f	james@student.murdoch.edu.au	Joe	Jameson	james@student.murdoch.edu.au	f	t	2020-07-03 15:43:30.073901+04
+15	pbkdf2_sha256$150000$1WFx5SFMhpGa$EkBzCsdM8UObq1QrUe0Q4ZUSfs01vkp99PZ+dkV6z6U=	\N	f	jay@gmail.com	Jay	John	jay@gmail.com	f	t	2020-07-03 15:45:10.383221+04
+16	pbkdf2_sha256$150000$iGy0oimhjcoq$Ql8anLH2DHLAlLR09LLbA/o8BMINey3YXc/t6kxk+JM=	\N	f	jameson@student.murdoch.edu.au	Justin	James	jameson@student.murdoch.edu.au	f	t	2020-07-03 17:05:34.608071+04
+17	pbkdf2_sha256$150000$qIgT2pksBM1j$XpqO6RGM1jbI7AFadnkYEYn8bL+9CTqus50iuXM/jgo=	\N	f	JustinJ@student.murdoch.edu.au	Justin	James	JustinJ@student.murdoch.edu.au	f	t	2020-07-03 17:07:08.652728+04
+18	pbkdf2_sha256$150000$gmLKm9IBvSJS$u0eqwFHjVUHzCjpuwkVqaCe1r7FI7M3LLvfDJoST5Vs=	\N	f	January@student.murdoch.edu.au	Justin	James	January@student.murdoch.edu.au	f	t	2020-07-03 17:08:57.550175+04
+51	pbkdf2_sha256$150000$FII0Z09pjyBw$R3hwEQmZ4RA0Fz6drTRLUTf4P9OWF3qHyKXsuji6/Jc=	\N	f	pizzaboy@gmail.com	13773	Michael	pizzaboy@gmail.com	f	t	2020-07-13 18:42:57.504618+04
+21	pbkdf2_sha256$150000$yNhA8ZeDPxD3$RjAO5mXCz6OVAbqcgBSuf252UUOOF8uWNh0WTbLMM5s=	\N	f	barb@student.murdoch.edu.au	Barbara	Gordon	barb@student.murdoch.edu.au	f	t	2020-07-06 15:40:34.82317+04
+47	pbkdf2_sha256$150000$bwTl063P7Z6S$8u1vyp3BqI4y6BNxnRnu91ccjB681tWEEpd9E6W+U60=	\N	f	jonesJeff@gmail.com	Jones	Jeffery	jonesJeff@gmail.com	f	t	2020-07-13 15:24:28.78886+04
+40	pbkdf2_sha256$150000$0yxMXrdXHgw0$Q+MsbD0hfL0pJ4FE9lB8vo3nQ43qF2RYFEDjp9XUpv0=	\N	f	Jameson34	Jonas	Michael		f	f	2020-07-09 23:13:01.614757+04
+44	pbkdf2_sha256$150000$30AGYH9TQeDi$uy7jVgmwjQoE6aJqKMLeIyQJv0SncQefvVsYAptlfRo=	2020-07-10 22:18:32.24531+04	f	ikramahmed789@gmail.com	Justin	Michael	ikramahmed789@gmail.com	f	t	2020-07-10 20:35:53.09597+04
+41	pbkdf2_sha256$150000$ePVF38kXQni0$20FKPgBgJsveW6wLQallLXWKDxb7XfbN+xzSLKd4od0=	2020-07-10 19:13:44.881933+04	f	ikramahmed786@gmail.com			ikramahmed786@gmail.com	f	t	2020-07-10 18:50:58.331833+04
+42	pbkdf2_sha256$150000$eyyH5r5hwtRJ$KvfzEqH21FgO78x1zeUVtxEbNBjHbFwC6qkou+q58Fo=	2020-07-10 20:01:03.367903+04	f	ikramahmed123@gmail.com			ikramahmed123@gmail.com	f	t	2020-07-10 19:45:03.48416+04
+49	pbkdf2_sha256$150000$71CRAGNHVpFP$ED5STxTjOwruEcHM6OqTmk1hA29S39fF/T2Wkw0zjcY=	\N	f	blue@gmail.com	Jones	Blue	blue@gmail.com	f	t	2020-07-13 15:28:44.029635+04
+45	pbkdf2_sha256$150000$3PYloTeR92ld$3T7GDBKGO0YU3bwE5PiAKYX3NrWyQ+E7nUOWpP29I1o=	\N	f	33415432@student.murdoch.edu.au	Justin	Jameson	33415432@student.murdoch.edu.au	f	t	2020-07-10 20:49:04.324956+04
+43	pbkdf2_sha256$150000$viTwiPJ3h0fr$DGS+lm9KczItQupbWmDrOmchUUUYBnRAnZJSEcF7j9Y=	2020-07-10 20:26:53.06668+04	f	ikramahmed456@gmail.com			ikramahmed456@gmail.com	f	t	2020-07-10 20:26:40.247579+04
+46	pbkdf2_sha256$150000$I6YAHnYHz26C$TSR1PhmJKl2N7/knC7duBxeK4SXF1mBW4HlyazEdWLg=	\N	f	33561234@student.murdoch.edu.au	Jones	Town	33561234@student.murdoch.edu.au	f	t	2020-07-10 20:50:27.595137+04
+4	pbkdf2_sha256$150000$xF6Da7lxiI3S$WwfpjBvt60ZAJWHSVXgRk7c1+PcfUjLD4NgHWmSgkT0=	2020-07-12 21:20:38.294676+04	f	ikramahmed398@gmail.com			ikramahmed398@gmail.com	f	t	2020-06-15 18:26:45.768249+04
+50	pbkdf2_sha256$150000$xPRBN5wAzCzs$tQ1twkIRTydbCepeCeDOpP2JKvvFQ7kQQLEutRk2bQw=	\N	f	shone@gmail.com	Shone	Jackson	shone@gmail.com	f	t	2020-07-13 15:33:36.139264+04
+52	pbkdf2_sha256$150000$TfRxOlfWZigH$SMJA3iP8bmNudrbw06WsPMbvCsFdHmEROvFJ8dW4Kkk=	\N	f	jeff@gmail.com	Amy	Town	jeff@gmail.com	f	t	2020-07-13 19:12:53.992284+04
+53	pbkdf2_sha256$150000$sujL90KLiAVQ$X0HSdOoTA4b7CA7Kp3mKYL9+V+Gph/j9CCnPVKTslWw=	\N	f	jonesTown@gmail.com	Jones	Michael	jonesTown@gmail.com	f	t	2020-07-13 21:02:34.583076+04
+20	pbkdf2_sha256$150000$ZAUfp8jVJu9b$mvN5Q6lo4AAm+csNbqyp9DfSDtrM+KcClePdFZmfOZ4=	2020-07-21 18:29:55.972186+04	f	jones@gmail.com			jones@gmail.com	f	t	2020-07-04 12:27:57.645256+04
+55	pbkdf2_sha256$150000$M3mMDhjYVo3X$l4vfg/vmw5O0tymM1XeOL7wij/C1K4SKlIQYl4uUUV8=	\N	f	cheeto@gmail.com			cheeto@gmail.com	f	t	2020-07-13 22:34:26.034298+04
+56	pbkdf2_sha256$150000$VcxYvwoXkH3G$N0nMuhfwMBEYVEPppqv5PHY6RFhWVjG+Xc9XzLDWmb0=	\N	f	green@greenmail.com			green@greenmail.com	f	t	2020-07-13 22:36:13.104766+04
+57	pbkdf2_sha256$150000$cpuI56DIY3gY$3VVH0zkehPPkyKIrvTdx9bsl7ZgohNQXPGY5bBXYYEw=	\N	f	joo@gmail.com			joo@gmail.com	f	t	2020-07-13 22:38:38.127011+04
+58	pbkdf2_sha256$150000$v9a1XtVGJYPs$/v4CMqXOu4ymOG/wgmU9bfk+Q/BwaK9kYicXFB160YY=	\N	f	joom@gmail.com			joom@gmail.com	f	t	2020-07-13 22:40:02.190831+04
+59	pbkdf2_sha256$150000$TLzpoqHKqXRE$gbGLERMnVYIvjH+PwunErrB+4RBflbExSJR0pXd4ygQ=	\N	f	need@gmail.com			need@gmail.com	f	t	2020-07-13 22:41:03.842589+04
+60	pbkdf2_sha256$150000$5t5z1BCNihUK$1sTRb5vnJugd+/p9W2QJY4rJYkemw3nBrD+NQMa8kZM=	\N	f	ghim@student.murdoch.edu.au			ghim@student.murdoch.edu.au	f	t	2020-07-13 22:43:21.023744+04
+61	pbkdf2_sha256$150000$BTRmKewQwbZD$dj+vuEQMKjj0SJSp5jw+HpPA4td+Kg82w9FBsvGGwSI=	\N	f	jame@gmail.com			jame@gmail.com	f	t	2020-07-13 22:44:58.237697+04
+64	pbkdf2_sha256$150000$CvgFLzOpWGiA$uFpvwYt/EgT4Dl7yvJogq3T48g9Xr6fmeJofQlS9lWA=	\N	f	innovateddjango123@gmail.com	Django	Boy	innovateddjango123@gmail.com	f	t	2020-07-16 17:31:06.454051+04
+65	pbkdf2_sha256$150000$JggHXe1VIHvy$LHs8t2az4tKaqclSg2jOjZ/juTY/JmmAhtm2okX4bsI=	\N	f	fujiwarakito@gmail.com	Kito	Fujiwara	fujiwarakito@gmail.com	f	t	2020-07-16 17:34:42.963101+04
+3	pbkdf2_sha256$150000$vZfVGT2TcMQY$xtPEwS4oAHqfmZDLcqFrah4u8q8kqFQvA3d6sEbLE10=	2020-07-21 18:28:54.954468+04	t	admin				t	t	2020-06-15 18:22:04.314596+04
+62	pbkdf2_sha256$150000$qxZwBT0JWomt$8a2lZqrEzxXlse4PG8wKUNfvlgl8aQknLx0iKDq+6fY=	2020-07-21 18:30:58.432933+04	f	cruelpassions@gmail.com			cruelpassions@gmail.com	f	t	2020-07-13 22:46:03.418184+04
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+11	2020-07-04 16:38:49.332439+04	4	Another one	2	[{"changed": {"fields": ["location"]}}]	17	3
+12	2020-07-04 16:39:02.020047+04	3	Another one	2	[{"changed": {"fields": ["location"]}}]	17	3
+13	2020-07-04 16:39:13.80954+04	2	James the Job	2	[{"changed": {"fields": ["location"]}}]	17	3
+14	2020-07-04 16:39:24.335198+04	5	Pizza Handler	2	[{"changed": {"fields": ["location"]}}]	17	3
+15	2020-07-04 16:39:32.560817+04	1	Pizza Handler	2	[{"changed": {"fields": ["location"]}}]	17	3
+16	2020-07-07 09:42:46.410105+04	3	Another one	2	[{"changed": {"fields": ["location"]}}]	17	3
+17	2020-07-07 09:42:57.177018+04	4	Another one	2	[{"changed": {"fields": ["location"]}}]	17	3
+18	2020-07-07 09:43:03.817386+04	2	James the Job	2	[{"changed": {"fields": ["location"]}}]	17	3
+19	2020-07-07 09:43:10.864524+04	6	Jimmy the Job	2	[{"changed": {"fields": ["location"]}}]	17	3
+20	2020-07-07 09:43:16.98389+04	5	Pizza Handler	2	[{"changed": {"fields": ["location"]}}]	17	3
+21	2020-07-07 09:43:22.895414+04	1	Pizza Handler	2	[{"changed": {"fields": ["location"]}}]	17	3
+22	2020-07-07 17:28:22.642164+04	4	Another one	2	[{"changed": {"fields": ["location"]}}]	17	3
+23	2020-07-07 17:28:30.226595+04	3	Another one	2	[{"changed": {"fields": ["location"]}}]	17	3
+24	2020-07-07 17:28:37.090562+04	2	James the Job	2	[{"changed": {"fields": ["location"]}}]	17	3
+25	2020-07-07 17:28:44.071302+04	6	Jimmy the Job	2	[{"changed": {"fields": ["location"]}}]	17	3
+26	2020-07-07 17:28:52.669276+04	5	Pizza Handler	2	[{"changed": {"fields": ["location"]}}]	17	3
+27	2020-07-07 17:29:00.012724+04	1	Pizza Handler	2	[{"changed": {"fields": ["location"]}}]	17	3
+28	2020-07-09 11:15:08.082466+04	4	Another one	2	[{"changed": {"fields": ["location"]}}]	17	3
+29	2020-07-09 11:15:14.971191+04	3	Another one	2	[{"changed": {"fields": ["location"]}}]	17	3
+30	2020-07-09 11:15:21.253669+04	2	James the Job	2	[{"changed": {"fields": ["location"]}}]	17	3
+31	2020-07-09 11:15:30.232127+04	6	Jimmy the Job	2	[{"changed": {"fields": ["location"]}}]	17	3
+32	2020-07-09 11:15:36.576083+04	5	Pizza Handler	2	[{"changed": {"fields": ["location"]}}]	17	3
+33	2020-07-09 11:15:48.191178+04	1	Pizza Handler	2	[{"changed": {"fields": ["location"]}}]	17	3
+34	2020-07-10 12:51:47.818195+04	8	Jimmy the Job	3		17	3
+35	2020-07-10 12:51:55.16523+04	5	Pizza Handler	3		17	3
+36	2020-07-10 12:52:00.464757+04	4	Another one	3		17	3
+37	2020-07-11 11:48:34.029586+04	1	Computer science	1	[{"added": {}}]	24	3
+38	2020-07-11 12:04:51.632658+04	2	Business information systems	1	[{"added": {}}]	24	3
+39	2020-07-12 21:18:57.33531+04	2	127.0.0.1:8000	3		9	3
+40	2020-07-12 21:19:13.665307+04	1	127.0.0.1:8000	2	[{"changed": {"fields": ["domain", "name"]}}]	9	3
+41	2020-07-15 12:29:16.848899+04	1	Internship	2	[{"changed": {"fields": ["type_name"]}}]	16	3
+42	2020-07-15 12:29:22.723185+04	2	128833	1	[{"added": {}}]	16	3
+43	2020-07-15 12:30:22.117478+04	2	2873ybbee	2	[{"changed": {"fields": ["type_name"]}}]	16	3
+44	2020-07-15 12:30:29.38547+04	2	Full-time	2	[{"changed": {"fields": ["type_name"]}}]	16	3
+45	2020-07-15 12:52:34.842824+04	1	Mining	2	[{"changed": {"fields": ["industry_name"]}}]	14	3
+\.
+
+
+--
+-- Data for Name: django_comment_flags; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_comment_flags (id, flag, flag_date, comment_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_comments; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_comments (id, object_pk, user_name, user_email, user_url, comment, submit_date, ip_address, is_public, is_removed, content_type_id, site_id, user_id) FROM stdin;
+1	3		jones@gmail.com	http://dummyurl.com	Omigod that's so horrible	2020-07-14 17:27:14.518408+04	127.0.0.1	t	f	20	1	20
+2	3		jones@gmail.com	http://dummyurl.com	What happens next?	2020-07-14 17:55:21.37515+04	127.0.0.1	t	f	20	1	20
+3	3		jones@gmail.com	http://dummyurl.com	Press F to pay respects\r\n	2020-07-14 17:57:36.702381+04	127.0.0.1	t	f	20	1	20
+4	3		jones@gmail.com	http://dummyurl.com	Who's the killer?	2020-07-14 17:57:55.815635+04	127.0.0.1	t	f	20	1	20
+5	3		jones@gmail.com	http://dummyurl.com	Pics or it never happened	2020-07-14 18:03:16.271108+04	127.0.0.1	t	f	20	1	20
+6	3			http://dummyurl.com	OP is the killer!!!	2020-07-14 23:19:37.684739+04	127.0.0.1	t	f	20	1	3
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	django_comments	comment
+8	django_comments	commentflag
+9	sites	site
+10	Student	student
+11	Student	studentjobapplication
+12	Employer	employer
+13	Admin	admin
+14	Home	industry
+15	Home	skill
+16	Home	jobtype
+17	Home	job
+18	Home	helpdeskcomplaints
+19	Home	usernotifications
+20	HelpDesk	helpdeskmodel
+21	Bulletin	post
+22	Alumni	alumni
+23	Alumni	alumnijobapplication
+24	Home	major
+25	Alumni	alumnijobsave
+26	Resume	skills
+27	Resume	education
+28	Resume	person
+29	Resume	personallinks
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2020-05-21 13:34:32.802104+04
+2	auth	0001_initial	2020-05-21 13:34:32.850974+04
+3	admin	0001_initial	2020-05-21 13:34:32.933389+04
+4	admin	0002_logentry_remove_auto_add	2020-05-21 13:34:32.950376+04
+5	admin	0003_logentry_add_action_flag_choices	2020-05-21 13:34:32.95932+04
+6	contenttypes	0002_remove_content_type_name	2020-05-21 13:34:32.98525+04
+7	auth	0002_alter_permission_name_max_length	2020-05-21 13:34:32.991235+04
+8	auth	0003_alter_user_email_max_length	2020-05-21 13:34:33.003239+04
+9	auth	0004_alter_user_username_opts	2020-05-21 13:34:33.013176+04
+10	auth	0005_alter_user_last_login_null	2020-05-21 13:34:33.022152+04
+11	auth	0006_require_contenttypes_0002	2020-05-21 13:34:33.026148+04
+12	auth	0007_alter_validators_add_error_messages	2020-05-21 13:34:33.035118+04
+13	auth	0008_alter_user_username_max_length	2020-05-21 13:34:33.058057+04
+14	auth	0009_alter_user_last_name_max_length	2020-05-21 13:34:33.069026+04
+15	auth	0010_alter_group_name_max_length	2020-05-21 13:34:33.080996+04
+16	auth	0011_update_proxy_permissions	2020-05-21 13:34:33.100941+04
+17	sites	0001_initial	2020-05-21 13:34:33.114904+04
+18	django_comments	0001_initial	2020-05-21 13:34:33.15637+04
+19	django_comments	0002_update_user_email_field_length	2020-05-21 13:34:33.194258+04
+20	django_comments	0003_add_submit_date_index	2020-05-21 13:34:33.209187+04
+21	sessions	0001_initial	2020-05-21 13:34:33.221154+04
+22	sites	0002_alter_domain_unique	2020-05-21 13:34:33.243095+04
+23	Admin	0001_initial	2020-05-21 13:48:59.207542+04
+24	Bulletin	0001_initial	2020-05-21 13:48:59.239457+04
+25	Employer	0001_initial	2020-05-21 13:48:59.274363+04
+26	HelpDesk	0001_initial	2020-05-21 13:48:59.299297+04
+28	Home	0001_initial	2020-05-21 13:51:22.119607+04
+29	Student	0001_initial	2020-05-21 13:51:22.266281+04
+30	Employer	0002_auto_20200621_1405	2020-06-21 14:06:33.498638+04
+31	Home	0002_auto_20200708_1507	2020-07-08 15:07:24.93969+04
+32	Student	0002_auto_20200708_1507	2020-07-08 15:07:24.959736+04
+33	Home	0002_auto_20200710_1241	2020-07-10 12:41:58.716528+04
+34	Student	0002_auto_20200710_1241	2020-07-10 12:41:58.733483+04
+35	Alumni	0001_initial	2020-07-10 17:41:13.87191+04
+36	Alumni	0002_alumnijobapplication	2020-07-10 19:34:09.198875+04
+37	Alumni	0003_auto_20200710_2012	2020-07-10 20:12:49.418612+04
+38	Alumni	0004_auto_20200710_2014	2020-07-10 20:15:05.496955+04
+39	Student	0003_remove_student_alumni_status	2020-07-10 20:47:15.121729+04
+40	Home	0003_major	2020-07-11 11:40:27.86484+04
+41	Alumni	0005_alumni_majors	2020-07-11 11:40:27.918615+04
+42	Student	0004_student_majors	2020-07-11 11:40:27.989618+04
+43	Home	0004_auto_20200712_1143	2020-07-12 11:43:17.627039+04
+44	Home	0005_job_duration_type	2020-07-12 11:50:53.20606+04
+45	Home	0006_auto_20200712_1256	2020-07-12 12:56:10.603997+04
+46	Home	0007_auto_20200712_1345	2020-07-12 13:45:15.97002+04
+47	Alumni	0006_alumni_student_id	2020-07-14 18:33:28.995119+04
+48	Alumni	0007_alumnijobsave	2020-07-14 21:36:29.309581+04
+49	Alumni	0008_delete_alumnijobsave	2020-07-14 22:57:29.777665+04
+50	Home	0008_auto_20200715_1228	2020-07-15 12:28:41.01547+04
+51	Resume	0001_initial	2020-07-15 22:43:38.741666+04
+52	Alumni	0009_auto_20200716_1733	2020-07-16 17:34:02.692668+04
+53	Home	0009_auto_20200719_1452	2020-07-19 14:52:52.2285+04
+54	Student	0005_auto_20200719_1452	2020-07-19 14:52:52.254438+04
+55	Home	0010_auto_20200720_2308	2020-07-20 23:08:30.831914+04
+56	Home	0011_auto_20200720_2308	2020-07-20 23:08:56.761811+04
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+x7omn4sp61m0lnbhurp3gbuiskr6sv7u	ZjgyMDY3ZTJkZTM3YmIxZTQzNWE4MDVlYWNmMmRlNzcxN2Y4N2NmNDp7Il9hdXRoX3VzZXJfaWQiOiI2MiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNmU0OGY5MzYwZjNhNjM2YjBkMWRkMjc2ZGVjNzg2MTBkZWUzMDQzMiJ9	2020-08-04 18:30:58.440913+04
+70nmj9456fp0q8q63q44fvtjaxky4ftj	ZGUwNGUzOWZlZTZmZWFmMDQxZjAzNzlmNTJhZmU5MmNjNTU2MDNiOTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhMTgyMzY3MTVkZjVlYzE4NWIzNjc0ZTA4ZjUxMjRlNTAyNDllMmE0In0=	2020-06-29 18:26:59.882427+04
+aql98qa8v011s2ijkoqjsmpsn1rj6nfk	NGYyODliN2U1MWNhOTAzNzliYjg2YTJkMDM5MDBhNzg3MzA5ZmQxMTp7Il9hdXRoX3VzZXJfaWQiOiI2IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiZGYzYWUzOGE5NTExMzE3YTVkZjYzZDA1YjBmNDJiZWMwYzVmZTc2In0=	2020-07-06 13:22:35.819044+04
+h0nzf5a2q0g6dkljmqjgyus4gdgqab9r	YTZmNzYyMDRkMTQ5YmNhYTgzZGNmNGRjYzlmZTQ1ZDY5YmYwMzQ0Zjp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzMTc1NDZjYTNmMTQxYzkzZjk4MzFmYTE0Yjg3OGZjYzAyODNiOWNkIn0=	2020-07-16 15:38:59.086506+04
+fp623b3fvuav5zc2kbbdodsfv1ww4cy0	YTZmNzYyMDRkMTQ5YmNhYTgzZGNmNGRjYzlmZTQ1ZDY5YmYwMzQ0Zjp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzMTc1NDZjYTNmMTQxYzkzZjk4MzFmYTE0Yjg3OGZjYzAyODNiOWNkIn0=	2020-07-17 12:10:40.911553+04
+3ju00qpyckyhb233ngcwm7uzqd5gdg5s	YTZmNzYyMDRkMTQ5YmNhYTgzZGNmNGRjYzlmZTQ1ZDY5YmYwMzQ0Zjp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzMTc1NDZjYTNmMTQxYzkzZjk4MzFmYTE0Yjg3OGZjYzAyODNiOWNkIn0=	2020-08-03 16:24:04.202381+04
+wjrxm4jcxvymalj17der0odvt2zy9273	YTZmNzYyMDRkMTQ5YmNhYTgzZGNmNGRjYzlmZTQ1ZDY5YmYwMzQ0Zjp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzMTc1NDZjYTNmMTQxYzkzZjk4MzFmYTE0Yjg3OGZjYzAyODNiOWNkIn0=	2020-08-03 21:00:14.921625+04
+\.
+
+
+--
+-- Data for Name: django_site; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_site (id, domain, name) FROM stdin;
+1	127.0.0.1:8000	JobDomain
+\.
+
+
+--
+-- Name: Alumni_alumni_majors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Alumni_alumni_majors_id_seq"', 10, true);
+
+
+--
+-- Name: Alumni_alumni_skills_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Alumni_alumni_skills_id_seq"', 12, true);
+
+
+--
+-- Name: Alumni_alumnijobapplication_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Alumni_alumnijobapplication_id_seq"', 18, true);
+
+
+--
+-- Name: Bulletin_post_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Bulletin_post_id_seq"', 1, false);
+
+
+--
+-- Name: HelpDesk_helpdeskmodel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."HelpDesk_helpdeskmodel_id_seq"', 4, true);
+
+
+--
+-- Name: Home_helpdeskcomplaints_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Home_helpdeskcomplaints_id_seq"', 1, false);
+
+
+--
+-- Name: Home_industry_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Home_industry_id_seq"', 1, true);
+
+
+--
+-- Name: Home_job_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Home_job_id_seq"', 35, true);
+
+
+--
+-- Name: Home_job_skills_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Home_job_skills_id_seq"', 45, true);
+
+
+--
+-- Name: Home_jobtype_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Home_jobtype_id_seq"', 2, true);
+
+
+--
+-- Name: Home_major_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Home_major_id_seq"', 2, true);
+
+
+--
+-- Name: Home_skill_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Home_skill_id_seq"', 2, true);
+
+
+--
+-- Name: Home_usernotifications_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Home_usernotifications_id_seq"', 1, false);
+
+
+--
+-- Name: Resume_education_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Resume_education_id_seq"', 1, false);
+
+
+--
+-- Name: Resume_person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Resume_person_id_seq"', 1, false);
+
+
+--
+-- Name: Resume_personallinks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Resume_personallinks_id_seq"', 1, false);
+
+
+--
+-- Name: Resume_skills_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Resume_skills_id_seq"', 1, false);
+
+
+--
+-- Name: Resume_skills_skills_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Resume_skills_skills_id_seq"', 1, false);
+
+
+--
+-- Name: Student_student_majors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Student_student_majors_id_seq"', 2, true);
+
+
+--
+-- Name: Student_student_skills_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Student_student_skills_id_seq"', 23, true);
+
+
+--
+-- Name: Student_studentjobapplication_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Student_studentjobapplication_id_seq"', 38, true);
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 117, true);
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_id_seq', 65, true);
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 45, true);
+
+
+--
+-- Name: django_comment_flags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_comment_flags_id_seq', 1, false);
+
+
+--
+-- Name: django_comments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_comments_id_seq', 6, true);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 29, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 56, true);
+
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_site_id_seq', 2, true);
+
+
+--
+-- Name: Admin_admin Admin_admin_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Admin_admin"
+    ADD CONSTRAINT "Admin_admin_pkey" PRIMARY KEY (user_id);
+
+
+--
+-- Name: Alumni_alumni_majors Alumni_alumni_majors_alumni_id_major_id_e28c5c8a_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumni_majors"
+    ADD CONSTRAINT "Alumni_alumni_majors_alumni_id_major_id_e28c5c8a_uniq" UNIQUE (alumni_id, major_id);
+
+
+--
+-- Name: Alumni_alumni_majors Alumni_alumni_majors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumni_majors"
+    ADD CONSTRAINT "Alumni_alumni_majors_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Alumni_alumni Alumni_alumni_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumni"
+    ADD CONSTRAINT "Alumni_alumni_pkey" PRIMARY KEY (user_id);
+
+
+--
+-- Name: Alumni_alumni_skills Alumni_alumni_skills_alumni_id_skill_id_dcc53478_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumni_skills"
+    ADD CONSTRAINT "Alumni_alumni_skills_alumni_id_skill_id_dcc53478_uniq" UNIQUE (alumni_id, skill_id);
+
+
+--
+-- Name: Alumni_alumni_skills Alumni_alumni_skills_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumni_skills"
+    ADD CONSTRAINT "Alumni_alumni_skills_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Alumni_alumnijobapplication Alumni_alumnijobapplication_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumnijobapplication"
+    ADD CONSTRAINT "Alumni_alumnijobapplication_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Bulletin_post Bulletin_post_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Bulletin_post"
+    ADD CONSTRAINT "Bulletin_post_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Employer_employer Employer_employer_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Employer_employer"
+    ADD CONSTRAINT "Employer_employer_pkey" PRIMARY KEY (user_id);
+
+
+--
+-- Name: HelpDesk_helpdeskmodel HelpDesk_helpdeskmodel_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."HelpDesk_helpdeskmodel"
+    ADD CONSTRAINT "HelpDesk_helpdeskmodel_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Home_helpdeskcomplaints Home_helpdeskcomplaints_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_helpdeskcomplaints"
+    ADD CONSTRAINT "Home_helpdeskcomplaints_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Home_industry Home_industry_industry_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_industry"
+    ADD CONSTRAINT "Home_industry_industry_name_key" UNIQUE (industry_name);
+
+
+--
+-- Name: Home_industry Home_industry_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_industry"
+    ADD CONSTRAINT "Home_industry_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Home_job Home_job_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_job"
+    ADD CONSTRAINT "Home_job_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Home_job_skills Home_job_skills_job_id_skill_id_75461365_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_job_skills"
+    ADD CONSTRAINT "Home_job_skills_job_id_skill_id_75461365_uniq" UNIQUE (job_id, skill_id);
+
+
+--
+-- Name: Home_job_skills Home_job_skills_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_job_skills"
+    ADD CONSTRAINT "Home_job_skills_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Home_jobtype Home_jobtype_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_jobtype"
+    ADD CONSTRAINT "Home_jobtype_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Home_jobtype Home_jobtype_type_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_jobtype"
+    ADD CONSTRAINT "Home_jobtype_type_name_key" UNIQUE (type_name);
+
+
+--
+-- Name: Home_major Home_major_major_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_major"
+    ADD CONSTRAINT "Home_major_major_name_key" UNIQUE (major_name);
+
+
+--
+-- Name: Home_major Home_major_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_major"
+    ADD CONSTRAINT "Home_major_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Home_skill Home_skill_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_skill"
+    ADD CONSTRAINT "Home_skill_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Home_skill Home_skill_skill_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_skill"
+    ADD CONSTRAINT "Home_skill_skill_name_key" UNIQUE (skill_name);
+
+
+--
+-- Name: Home_usernotifications Home_usernotifications_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_usernotifications"
+    ADD CONSTRAINT "Home_usernotifications_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Resume_education Resume_education_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_education"
+    ADD CONSTRAINT "Resume_education_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Resume_person Resume_person_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_person"
+    ADD CONSTRAINT "Resume_person_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Resume_personallinks Resume_personallinks_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_personallinks"
+    ADD CONSTRAINT "Resume_personallinks_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Resume_skills Resume_skills_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_skills"
+    ADD CONSTRAINT "Resume_skills_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Resume_skills_skills Resume_skills_skills_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_skills_skills"
+    ADD CONSTRAINT "Resume_skills_skills_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Resume_skills_skills Resume_skills_skills_skills_id_skill_id_f5e6975b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_skills_skills"
+    ADD CONSTRAINT "Resume_skills_skills_skills_id_skill_id_f5e6975b_uniq" UNIQUE (skills_id, skill_id);
+
+
+--
+-- Name: Student_student_majors Student_student_majors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_student_majors"
+    ADD CONSTRAINT "Student_student_majors_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Student_student_majors Student_student_majors_student_id_major_id_82a086c1_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_student_majors"
+    ADD CONSTRAINT "Student_student_majors_student_id_major_id_82a086c1_uniq" UNIQUE (student_id, major_id);
+
+
+--
+-- Name: Student_student Student_student_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_student"
+    ADD CONSTRAINT "Student_student_pkey" PRIMARY KEY (user_id);
+
+
+--
+-- Name: Student_student_skills Student_student_skills_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_student_skills"
+    ADD CONSTRAINT "Student_student_skills_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Student_student_skills Student_student_skills_student_id_skill_id_5d73e76b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_student_skills"
+    ADD CONSTRAINT "Student_student_skills_student_id_skill_id_5d73e76b_uniq" UNIQUE (student_id, skill_id);
+
+
+--
+-- Name: Student_student Student_student_student_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_student"
+    ADD CONSTRAINT "Student_student_student_id_key" UNIQUE (student_id);
+
+
+--
+-- Name: Student_studentjobapplication Student_studentjobapplication_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_studentjobapplication"
+    ADD CONSTRAINT "Student_studentjobapplication_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_group_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_94350c0c_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_permission_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_14a6b632_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_comment_flags django_comment_flags_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_comment_flags
+    ADD CONSTRAINT django_comment_flags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_comment_flags django_comment_flags_user_id_comment_id_flag_537f77a7_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_comment_flags
+    ADD CONSTRAINT django_comment_flags_user_id_comment_id_flag_537f77a7_uniq UNIQUE (user_id, comment_id, flag);
+
+
+--
+-- Name: django_comments django_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_comments
+    ADD CONSTRAINT django_comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: django_site django_site_domain_a2e37b91_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_site
+    ADD CONSTRAINT django_site_domain_a2e37b91_uniq UNIQUE (domain);
+
+
+--
+-- Name: django_site django_site_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_site
+    ADD CONSTRAINT django_site_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: Alumni_alumni_majors_alumni_id_e2b48172; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Alumni_alumni_majors_alumni_id_e2b48172" ON public."Alumni_alumni_majors" USING btree (alumni_id);
+
+
+--
+-- Name: Alumni_alumni_majors_major_id_809e2d10; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Alumni_alumni_majors_major_id_809e2d10" ON public."Alumni_alumni_majors" USING btree (major_id);
+
+
+--
+-- Name: Alumni_alumni_skills_alumni_id_21a805b3; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Alumni_alumni_skills_alumni_id_21a805b3" ON public."Alumni_alumni_skills" USING btree (alumni_id);
+
+
+--
+-- Name: Alumni_alumni_skills_skill_id_fed6cf1d; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Alumni_alumni_skills_skill_id_fed6cf1d" ON public."Alumni_alumni_skills" USING btree (skill_id);
+
+
+--
+-- Name: Alumni_alumnijobapplication_applied_id_8e9ac55f; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Alumni_alumnijobapplication_applied_id_8e9ac55f" ON public."Alumni_alumnijobapplication" USING btree (applied_id);
+
+
+--
+-- Name: Alumni_alumnijobapplication_job_id_id_c6e6169a; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Alumni_alumnijobapplication_job_id_id_c6e6169a" ON public."Alumni_alumnijobapplication" USING btree (job_id_id);
+
+
+--
+-- Name: Bulletin_post_author_id_60a769b8; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Bulletin_post_author_id_60a769b8" ON public."Bulletin_post" USING btree (author_id);
+
+
+--
+-- Name: Bulletin_post_author_updated_id_293f363a; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Bulletin_post_author_updated_id_293f363a" ON public."Bulletin_post" USING btree (author_updated_id);
+
+
+--
+-- Name: HelpDesk_helpdeskmodel_name_Request_id_4e358d61; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "HelpDesk_helpdeskmodel_name_Request_id_4e358d61" ON public."HelpDesk_helpdeskmodel" USING btree ("name_Request_id");
+
+
+--
+-- Name: Home_helpdeskcomplaints_admin_id_id_4f0ed252; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Home_helpdeskcomplaints_admin_id_id_4f0ed252" ON public."Home_helpdeskcomplaints" USING btree (admin_id_id);
+
+
+--
+-- Name: Home_helpdeskcomplaints_user_no_id_7f4063e2; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Home_helpdeskcomplaints_user_no_id_7f4063e2" ON public."Home_helpdeskcomplaints" USING btree (user_no_id);
+
+
+--
+-- Name: Home_industry_industry_name_89303876_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Home_industry_industry_name_89303876_like" ON public."Home_industry" USING btree (industry_name varchar_pattern_ops);
+
+
+--
+-- Name: Home_job_industry_id_id_3683fdf6; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Home_job_industry_id_id_3683fdf6" ON public."Home_job" USING btree (industry_id_id);
+
+
+--
+-- Name: Home_job_job_type_id_id_3d1b66ee; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Home_job_job_type_id_id_3d1b66ee" ON public."Home_job" USING btree (job_type_id_id);
+
+
+--
+-- Name: Home_job_posted_by_id_76e5f03a; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Home_job_posted_by_id_76e5f03a" ON public."Home_job" USING btree (posted_by_id);
+
+
+--
+-- Name: Home_job_skills_job_id_9b39bc0f; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Home_job_skills_job_id_9b39bc0f" ON public."Home_job_skills" USING btree (job_id);
+
+
+--
+-- Name: Home_job_skills_skill_id_7aaa7d93; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Home_job_skills_skill_id_7aaa7d93" ON public."Home_job_skills" USING btree (skill_id);
+
+
+--
+-- Name: Home_jobtype_type_name_6c2a5a9f_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Home_jobtype_type_name_6c2a5a9f_like" ON public."Home_jobtype" USING btree (type_name varchar_pattern_ops);
+
+
+--
+-- Name: Home_major_major_name_41b0eb35_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Home_major_major_name_41b0eb35_like" ON public."Home_major" USING btree (major_name varchar_pattern_ops);
+
+
+--
+-- Name: Home_skill_skill_name_26642532_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Home_skill_skill_name_26642532_like" ON public."Home_skill" USING btree (skill_name varchar_pattern_ops);
+
+
+--
+-- Name: Home_usernotifications_from_user_id_4fd9ac97; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Home_usernotifications_from_user_id_4fd9ac97" ON public."Home_usernotifications" USING btree (from_user_id);
+
+
+--
+-- Name: Home_usernotifications_to_user_id_45da7e06; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Home_usernotifications_to_user_id_45da7e06" ON public."Home_usernotifications" USING btree (to_user_id);
+
+
+--
+-- Name: Resume_education_person_id_08408ec6; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Resume_education_person_id_08408ec6" ON public."Resume_education" USING btree (person_id);
+
+
+--
+-- Name: Resume_personallinks_person_id_b885be9a; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Resume_personallinks_person_id_b885be9a" ON public."Resume_personallinks" USING btree (person_id);
+
+
+--
+-- Name: Resume_skills_person_id_5e88fe93; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Resume_skills_person_id_5e88fe93" ON public."Resume_skills" USING btree (person_id);
+
+
+--
+-- Name: Resume_skills_skills_skill_id_b359943c; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Resume_skills_skills_skill_id_b359943c" ON public."Resume_skills_skills" USING btree (skill_id);
+
+
+--
+-- Name: Resume_skills_skills_skills_id_73f25722; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Resume_skills_skills_skills_id_73f25722" ON public."Resume_skills_skills" USING btree (skills_id);
+
+
+--
+-- Name: Student_student_majors_major_id_4e59c7cc; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Student_student_majors_major_id_4e59c7cc" ON public."Student_student_majors" USING btree (major_id);
+
+
+--
+-- Name: Student_student_majors_student_id_c14c4cf8; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Student_student_majors_student_id_c14c4cf8" ON public."Student_student_majors" USING btree (student_id);
+
+
+--
+-- Name: Student_student_skills_skill_id_1254a094; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Student_student_skills_skill_id_1254a094" ON public."Student_student_skills" USING btree (skill_id);
+
+
+--
+-- Name: Student_student_skills_student_id_842944c5; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Student_student_skills_student_id_842944c5" ON public."Student_student_skills" USING btree (student_id);
+
+
+--
+-- Name: Student_student_student_id_fdfbce03_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Student_student_student_id_fdfbce03_like" ON public."Student_student" USING btree (student_id varchar_pattern_ops);
+
+
+--
+-- Name: Student_studentjobapplication_applied_id_6b3676aa; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Student_studentjobapplication_applied_id_6b3676aa" ON public."Student_studentjobapplication" USING btree (applied_id);
+
+
+--
+-- Name: Student_studentjobapplication_job_id_id_bed1fe5e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Student_studentjobapplication_job_id_id_bed1fe5e" ON public."Student_studentjobapplication" USING btree (job_id_id);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id_97559544; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_groups_group_id_97559544 ON public.auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id_6a12ed8b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_groups_user_id_6a12ed8b ON public.auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_1fbb5f2c; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id_1fbb5f2c ON public.auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_a95ead1b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_user_permissions_user_id_a95ead1b ON public.auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_username_6821ab7c_like ON public.auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_comment_flags_comment_id_d8054933; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_comment_flags_comment_id_d8054933 ON public.django_comment_flags USING btree (comment_id);
+
+
+--
+-- Name: django_comment_flags_flag_8b141fcb; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_comment_flags_flag_8b141fcb ON public.django_comment_flags USING btree (flag);
+
+
+--
+-- Name: django_comment_flags_flag_8b141fcb_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_comment_flags_flag_8b141fcb_like ON public.django_comment_flags USING btree (flag varchar_pattern_ops);
+
+
+--
+-- Name: django_comment_flags_user_id_f3f81f0a; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_comment_flags_user_id_f3f81f0a ON public.django_comment_flags USING btree (user_id);
+
+
+--
+-- Name: django_comments_content_type_id_c4afe962; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_comments_content_type_id_c4afe962 ON public.django_comments USING btree (content_type_id);
+
+
+--
+-- Name: django_comments_site_id_9dcf666e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_comments_site_id_9dcf666e ON public.django_comments USING btree (site_id);
+
+
+--
+-- Name: django_comments_submit_date_514ed2d9; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_comments_submit_date_514ed2d9 ON public.django_comments USING btree (submit_date);
+
+
+--
+-- Name: django_comments_user_id_a0a440a1; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_comments_user_id_a0a440a1 ON public.django_comments USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: django_site_domain_a2e37b91_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_site_domain_a2e37b91_like ON public.django_site USING btree (domain varchar_pattern_ops);
+
+
+--
+-- Name: Admin_admin Admin_admin_user_id_90f68e3c_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Admin_admin"
+    ADD CONSTRAINT "Admin_admin_user_id_90f68e3c_fk_auth_user_id" FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Alumni_alumni_majors Alumni_alumni_majors_alumni_id_e2b48172_fk_Alumni_al; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumni_majors"
+    ADD CONSTRAINT "Alumni_alumni_majors_alumni_id_e2b48172_fk_Alumni_al" FOREIGN KEY (alumni_id) REFERENCES public."Alumni_alumni"(user_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Alumni_alumni_majors Alumni_alumni_majors_major_id_809e2d10_fk_Home_major_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumni_majors"
+    ADD CONSTRAINT "Alumni_alumni_majors_major_id_809e2d10_fk_Home_major_id" FOREIGN KEY (major_id) REFERENCES public."Home_major"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Alumni_alumni_skills Alumni_alumni_skills_alumni_id_21a805b3_fk_Alumni_al; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumni_skills"
+    ADD CONSTRAINT "Alumni_alumni_skills_alumni_id_21a805b3_fk_Alumni_al" FOREIGN KEY (alumni_id) REFERENCES public."Alumni_alumni"(user_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Alumni_alumni_skills Alumni_alumni_skills_skill_id_fed6cf1d_fk_Home_skill_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumni_skills"
+    ADD CONSTRAINT "Alumni_alumni_skills_skill_id_fed6cf1d_fk_Home_skill_id" FOREIGN KEY (skill_id) REFERENCES public."Home_skill"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Alumni_alumni Alumni_alumni_user_id_7a4c121e_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumni"
+    ADD CONSTRAINT "Alumni_alumni_user_id_7a4c121e_fk_auth_user_id" FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Alumni_alumnijobapplication Alumni_alumnijobappl_applied_id_8e9ac55f_fk_Alumni_al; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumnijobapplication"
+    ADD CONSTRAINT "Alumni_alumnijobappl_applied_id_8e9ac55f_fk_Alumni_al" FOREIGN KEY (applied_id) REFERENCES public."Alumni_alumni"(user_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Alumni_alumnijobapplication Alumni_alumnijobapplication_job_id_id_c6e6169a_fk_Home_job_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alumni_alumnijobapplication"
+    ADD CONSTRAINT "Alumni_alumnijobapplication_job_id_id_c6e6169a_fk_Home_job_id" FOREIGN KEY (job_id_id) REFERENCES public."Home_job"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Bulletin_post Bulletin_post_author_id_60a769b8_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Bulletin_post"
+    ADD CONSTRAINT "Bulletin_post_author_id_60a769b8_fk_auth_user_id" FOREIGN KEY (author_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Bulletin_post Bulletin_post_author_updated_id_293f363a_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Bulletin_post"
+    ADD CONSTRAINT "Bulletin_post_author_updated_id_293f363a_fk_auth_user_id" FOREIGN KEY (author_updated_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Employer_employer Employer_employer_user_id_aeab5e7c_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Employer_employer"
+    ADD CONSTRAINT "Employer_employer_user_id_aeab5e7c_fk_auth_user_id" FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: HelpDesk_helpdeskmodel HelpDesk_helpdeskmodel_name_Request_id_4e358d61_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."HelpDesk_helpdeskmodel"
+    ADD CONSTRAINT "HelpDesk_helpdeskmodel_name_Request_id_4e358d61_fk_auth_user_id" FOREIGN KEY ("name_Request_id") REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Home_helpdeskcomplaints Home_helpdeskcomplai_admin_id_id_4f0ed252_fk_Admin_adm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_helpdeskcomplaints"
+    ADD CONSTRAINT "Home_helpdeskcomplai_admin_id_id_4f0ed252_fk_Admin_adm" FOREIGN KEY (admin_id_id) REFERENCES public."Admin_admin"(user_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Home_helpdeskcomplaints Home_helpdeskcomplaints_user_no_id_7f4063e2_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_helpdeskcomplaints"
+    ADD CONSTRAINT "Home_helpdeskcomplaints_user_no_id_7f4063e2_fk_auth_user_id" FOREIGN KEY (user_no_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Home_job Home_job_industry_id_id_3683fdf6_fk_Home_industry_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_job"
+    ADD CONSTRAINT "Home_job_industry_id_id_3683fdf6_fk_Home_industry_id" FOREIGN KEY (industry_id_id) REFERENCES public."Home_industry"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Home_job Home_job_job_type_id_id_3d1b66ee_fk_Home_jobtype_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_job"
+    ADD CONSTRAINT "Home_job_job_type_id_id_3d1b66ee_fk_Home_jobtype_id" FOREIGN KEY (job_type_id_id) REFERENCES public."Home_jobtype"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Home_job Home_job_posted_by_id_76e5f03a_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_job"
+    ADD CONSTRAINT "Home_job_posted_by_id_76e5f03a_fk_auth_user_id" FOREIGN KEY (posted_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Home_job_skills Home_job_skills_job_id_9b39bc0f_fk_Home_job_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_job_skills"
+    ADD CONSTRAINT "Home_job_skills_job_id_9b39bc0f_fk_Home_job_id" FOREIGN KEY (job_id) REFERENCES public."Home_job"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Home_job_skills Home_job_skills_skill_id_7aaa7d93_fk_Home_skill_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_job_skills"
+    ADD CONSTRAINT "Home_job_skills_skill_id_7aaa7d93_fk_Home_skill_id" FOREIGN KEY (skill_id) REFERENCES public."Home_skill"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Home_usernotifications Home_usernotifications_from_user_id_4fd9ac97_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_usernotifications"
+    ADD CONSTRAINT "Home_usernotifications_from_user_id_4fd9ac97_fk_auth_user_id" FOREIGN KEY (from_user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Home_usernotifications Home_usernotifications_to_user_id_45da7e06_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Home_usernotifications"
+    ADD CONSTRAINT "Home_usernotifications_to_user_id_45da7e06_fk_auth_user_id" FOREIGN KEY (to_user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Resume_education Resume_education_person_id_08408ec6_fk_Resume_person_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_education"
+    ADD CONSTRAINT "Resume_education_person_id_08408ec6_fk_Resume_person_id" FOREIGN KEY (person_id) REFERENCES public."Resume_person"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Resume_personallinks Resume_personallinks_person_id_b885be9a_fk_Resume_person_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_personallinks"
+    ADD CONSTRAINT "Resume_personallinks_person_id_b885be9a_fk_Resume_person_id" FOREIGN KEY (person_id) REFERENCES public."Resume_person"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Resume_skills Resume_skills_person_id_5e88fe93_fk_Resume_person_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_skills"
+    ADD CONSTRAINT "Resume_skills_person_id_5e88fe93_fk_Resume_person_id" FOREIGN KEY (person_id) REFERENCES public."Resume_person"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Resume_skills_skills Resume_skills_skills_skill_id_b359943c_fk_Home_skill_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_skills_skills"
+    ADD CONSTRAINT "Resume_skills_skills_skill_id_b359943c_fk_Home_skill_id" FOREIGN KEY (skill_id) REFERENCES public."Home_skill"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Resume_skills_skills Resume_skills_skills_skills_id_73f25722_fk_Resume_skills_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Resume_skills_skills"
+    ADD CONSTRAINT "Resume_skills_skills_skills_id_73f25722_fk_Resume_skills_id" FOREIGN KEY (skills_id) REFERENCES public."Resume_skills"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Student_student_majors Student_student_majo_student_id_c14c4cf8_fk_Student_s; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_student_majors"
+    ADD CONSTRAINT "Student_student_majo_student_id_c14c4cf8_fk_Student_s" FOREIGN KEY (student_id) REFERENCES public."Student_student"(user_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Student_student_majors Student_student_majors_major_id_4e59c7cc_fk_Home_major_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_student_majors"
+    ADD CONSTRAINT "Student_student_majors_major_id_4e59c7cc_fk_Home_major_id" FOREIGN KEY (major_id) REFERENCES public."Home_major"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Student_student_skills Student_student_skil_student_id_842944c5_fk_Student_s; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_student_skills"
+    ADD CONSTRAINT "Student_student_skil_student_id_842944c5_fk_Student_s" FOREIGN KEY (student_id) REFERENCES public."Student_student"(user_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Student_student_skills Student_student_skills_skill_id_1254a094_fk_Home_skill_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_student_skills"
+    ADD CONSTRAINT "Student_student_skills_skill_id_1254a094_fk_Home_skill_id" FOREIGN KEY (skill_id) REFERENCES public."Home_skill"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Student_student Student_student_user_id_416a2365_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_student"
+    ADD CONSTRAINT "Student_student_user_id_416a2365_fk_auth_user_id" FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Student_studentjobapplication Student_studentjobap_applied_id_6b3676aa_fk_Student_s; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_studentjobapplication"
+    ADD CONSTRAINT "Student_studentjobap_applied_id_6b3676aa_fk_Student_s" FOREIGN KEY (applied_id) REFERENCES public."Student_student"(user_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: Student_studentjobapplication Student_studentjobapplication_job_id_id_bed1fe5e_fk_Home_job_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Student_studentjobapplication"
+    ADD CONSTRAINT "Student_studentjobapplication_job_id_id_bed1fe5e_fk_Home_job_id" FOREIGN KEY (job_id_id) REFERENCES public."Home_job"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_comment_flags django_comment_flags_comment_id_d8054933_fk_django_comments_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_comment_flags
+    ADD CONSTRAINT django_comment_flags_comment_id_d8054933_fk_django_comments_id FOREIGN KEY (comment_id) REFERENCES public.django_comments(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_comment_flags django_comment_flags_user_id_f3f81f0a_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_comment_flags
+    ADD CONSTRAINT django_comment_flags_user_id_f3f81f0a_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_comments django_comments_content_type_id_c4afe962_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_comments
+    ADD CONSTRAINT django_comments_content_type_id_c4afe962_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_comments django_comments_site_id_9dcf666e_fk_django_site_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_comments
+    ADD CONSTRAINT django_comments_site_id_9dcf666e_fk_django_site_id FOREIGN KEY (site_id) REFERENCES public.django_site(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_comments django_comments_user_id_a0a440a1_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_comments
+    ADD CONSTRAINT django_comments_user_id_a0a440a1_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
