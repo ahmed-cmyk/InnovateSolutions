@@ -475,3 +475,8 @@ student registration form.
 - Defined a function that executes the send mail function in another thread.
     ### NOTE
     - There is a file called .env please DO NOT commit that into the repository
+    
+## 07/22/20 - 12:25PM
+- Added another email that is sent to admin about creation of employer account
+- Fixed mobile layout for sign in page
+- Fixed mobile layout for registration pages

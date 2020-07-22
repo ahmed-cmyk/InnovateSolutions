@@ -47,16 +47,16 @@
             <form id="alumniForm" method="POST" class="form-horizontal" action="alumni_registration" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-row">
-                    <div class="form-group col-6">{{ user_form.first_name|as_crispy_field }}</div>
-                    <div class="form-group col-6">{{ user_form.last_name|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ user_form.first_name|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ user_form.last_name|as_crispy_field }}</div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-6" id="firstNameError"></div>
-                    <div class="form-group col-6" id="lastNameError"></div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12" id="firstNameError"></div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12" id="lastNameError"></div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-6">{{ user_form.password1|as_crispy_field }}</div>
-                    <div class="form-group col-6">{{ user_form.password2|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ user_form.password1|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ user_form.password2|as_crispy_field }}</div>
                 </div>
                 <div>{{ alumni_form.gender|as_crispy_field }}</div>
                 <div>{{ alumni_form.date_of_birth|as_crispy_field }}</div>
@@ -77,7 +77,7 @@
                 <label>*I have read and agree to the <a href="../terms" target="_blank">Terms and Conditions</a></label><br><br>
 
                 <div id="register" class="text-center">
-                    <button type="submit">Register</button>
+                    <button class="btn btn-danger" type="submit">Register</button>
                 </div>
             </form>
         </div><!-- End of row -->

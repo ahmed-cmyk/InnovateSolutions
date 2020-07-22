@@ -58,22 +58,21 @@ def signup(request):
                             email = str(request.user)
                             employer.save()
 
-                            # send_mail(
-                            #     'New User has signed up',
-                            #     "A new Employer has registered to use the Murdoch Career Portal.",
-                            #     DEFAULT_FROM_EMAIL, [email],
-                            #     fail_silently=True
-                            # )
+                            subject = 'Your account has been created'
+                            htmlText = "Your account has been registered and you are now ready to use the Murdoch " \
+                                       "Career Portal. "
+                            send_html_mail(subject, htmlText, [email])
+
                             subject = 'New User has signed up'
                             htmlText = "A new Employer has registered to use the Murdoch Career Portal."
-                            send_html_mail(subject, htmlText, [email])
+                            send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
                         return redirect("log_in")
                     else:
-                        messages.info(request, employer_form.errors)
+                        messages.error(request, employer_form.errors)
                         return redirect("employer_register")
                 else:
-                    messages.info(request,
+                    messages.error(request,
                                   'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric character and 1 letter.')
                     return redirect("employer_register")
         else:
