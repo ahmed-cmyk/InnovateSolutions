@@ -480,3 +480,7 @@ student registration form.
 - Added another email that is sent to admin about creation of employer account
 - Fixed mobile layout for sign in page
 - Fixed mobile layout for registration pages
+
+## 07/22/20 - 12:31PM
+- Fixed mobile layout in job creation page
+- Fixed mobile layout in edit job page

@@ -20,16 +20,16 @@
                 <div>{{ jobForm.description|as_crispy_field }}</div>
                 <div>{{ jobForm.location|as_crispy_field }}</div>
                 <div class="form-row">
-                    <div class="form-group col-6">{{ jobForm.job_type_id|as_crispy_field }}</div>
-                    <div class="form-group col-6">{{ jobForm.industry_id|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.job_type_id|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.industry_id|as_crispy_field }}</div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-6">{{ jobForm.duration|as_crispy_field }}</div>
-                    <div class="form-group col-6">{{ jobForm.duration_type|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.duration|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.duration_type|as_crispy_field }}</div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-6">{{ jobForm.salary_min|as_crispy_field }}</div>
-                    <div class="form-group col-6">{{ jobForm.salary_max|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_min|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_max|as_crispy_field }}</div>
                 </div>
                 <div>{{ jobForm.skills|as_crispy_field }}</div>
             {% elif user_type == 'admin' %}
@@ -37,22 +37,18 @@
                 <div>{{ jobForm.description|as_crispy_field }}</div>
                 <div>{{ jobForm.location|as_crispy_field }}</div>
                 <div class="form-row">
-                    <div class="form-group col-6">{{ jobForm.job_type_id|as_crispy_field }}</div>
-                    <div class="form-group col-6">{{ jobForm.industry_id|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.job_type_id|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.industry_id|as_crispy_field }}</div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-6">{{ jobForm.duration|as_crispy_field }}</div>
-                    <div class="form-group col-6">{{ jobForm.duration_type|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.duration|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.duration_type|as_crispy_field }}</div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-6">{{ jobForm.salary_min|as_crispy_field }}</div>
-                    <div class="form-group col-6">{{ jobForm.salary_max|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_min|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_max|as_crispy_field }}</div>
                 </div>
                 <div>{{ jobForm.skills|as_crispy_field }}</div>
-{#                {{ companyForm.logo|as_crispy_field }}#}
-{#                {{ companyForm.company_name|as_crispy_field }}#}
-{#                {{ companyForm.company_description|as_crispy_field }}#}
-{#                {{ companyForm.phone_number|as_crispy_field }}#}
             {% endif %}
 
             <input type="hidden" name="next" value="{% url 'job_details' job.id %}">

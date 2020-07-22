@@ -21,16 +21,16 @@
             <div>{{ form.description|as_crispy_field }}</div>
             <div>{{ form.location|as_crispy_field }}</div>
             <div class="form-row">
-                <div class="form-group col-6">{{ form.job_type_id|as_crispy_field }}</div>
-                <div class="form-group col-6">{{ form.industry_id|as_crispy_field }}</div>
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ form.job_type_id|as_crispy_field }}</div>
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ form.industry_id|as_crispy_field }}</div>
             </div>
             <div class="form-row">
-                <div class="form-group col-6">{{ form.duration|as_crispy_field }}</div>
-                <div class="form-group col-6">{{ form.duration_type|as_crispy_field }}</div>
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ form.duration|as_crispy_field }}</div>
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ form.duration_type|as_crispy_field }}</div>
             </div>
             <div class="form-row">
-                <div class="form-group col-6">{{ form.salary_min|as_crispy_field }}</div>
-                <div class="form-group col-6">{{ form.salary_max|as_crispy_field }}</div>
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ form.salary_min|as_crispy_field }}</div>
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ form.salary_max|as_crispy_field }}</div>
             </div>
             {{ form.skills.label }}
             <div class="skills-container">{{ form.skills }}</div><br>
