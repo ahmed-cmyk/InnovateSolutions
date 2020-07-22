@@ -12,7 +12,7 @@ from .models import Employer
 from .forms import InitialEmployerForm, EmployerForm
 from Student.models import Student
 from Admin.models import Admin
-from Home.models import UserNotifications
+from Home.models import UserNotifications, send_html_mail
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
@@ -58,12 +58,15 @@ def signup(request):
                             email = str(request.user)
                             employer.save()
 
-                            send_mail(
-                                'New User has signed up',
-                                "A new Employer has registered to use the Murdoch Career Portal.",
-                                DEFAULT_FROM_EMAIL, [email],
-                                fail_silently=True
-                            )
+                            # send_mail(
+                            #     'New User has signed up',
+                            #     "A new Employer has registered to use the Murdoch Career Portal.",
+                            #     DEFAULT_FROM_EMAIL, [email],
+                            #     fail_silently=True
+                            # )
+                            subject = 'New User has signed up'
+                            htmlText = "A new Employer has registered to use the Murdoch Career Portal."
+                            send_html_mail(subject, htmlText, [email])
 
                         return redirect("log_in")
                     else:
