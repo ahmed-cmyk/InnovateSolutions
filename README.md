@@ -494,3 +494,8 @@ student registration form.
 ## 07/22/20 - 03:16PM
 - Removed search bar from all views besides student and alumni.
 - Removed recent jobs list from employer view.
+
+## 07/22/20 - 05:10PM
+- Styled the alumni filter pane.
+- Removed statement that.
+- Aligned majors to the left in View Students and View Alumni.
