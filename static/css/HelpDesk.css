@@ -2,7 +2,12 @@
     margin: 5% 0;
 }
 
+#helpForm hr{
+    width: 50%;
+    background-color: #000000;
+}
+
 #commentSection hr {
-    width: 80%;
+    width: 60%;
     background-color: #000000;
 }

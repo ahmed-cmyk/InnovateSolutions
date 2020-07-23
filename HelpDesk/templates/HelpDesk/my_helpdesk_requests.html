@@ -35,8 +35,9 @@
                 </tbody>
             </table>
         {% else %}
-            <div class="text-center">
+            <div class="text-center my-5">
                 <h2>No requests to display</h2>
+                <p>To make a new request click <a href="{% url 'HelpDesk' %}">here</a></p>
             </div>
         {% endif %}
     </div>

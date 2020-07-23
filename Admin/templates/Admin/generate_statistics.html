@@ -12,7 +12,8 @@
 {% block content %}
     <div id="statBody" class="col-12">
         <form method="POST">{% csrf_token %}
-            <h1 class="text-center">Generate Statistics</h1>
+            <h2 class="text-center">Generate Statistics</h2>
+            <hr>
             <br>
             <div class="form-group">
                 {{ form.as_p }}

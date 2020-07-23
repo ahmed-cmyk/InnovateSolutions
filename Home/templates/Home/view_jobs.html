@@ -14,10 +14,12 @@
     <div id="viewBody">
         {% if jobs %}
             {% if user_type == "employer" %}
-                <p class="text-center display-4">My Jobs</p>
+                <h2 class="text-center">My Jobs</h2>
+                <hr>
                 <br>
             {% else %}
-                <p class="text-center display-4">Browse Jobs</p>
+                <h2 class="text-center">Browse Jobs</h2>
+                <hr>
                 <br>
             {% endif %}
             {% if user_type != "employer" %}

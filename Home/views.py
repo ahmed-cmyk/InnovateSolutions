@@ -276,7 +276,7 @@ def job_details(request, id):
                 postAlumni.job_id = job
                 id = request.user.id
                 alumni = Alumni.objects.get(user_id=id)
-                postAlumni.alumni_applied = alumni
+                postAlumni.applied = alumni
                 postAlumni.date_applied = timezone.now()
                 postAlumni.save()
                 return render(request, 'Home/job_details.html', args)

@@ -482,7 +482,7 @@ student registration form.
 - Fixed mobile layout for registration pages
 
 ## 07/22/20 - 12:31PM
-- Fixed mobile layout in job creation page
+- Fixed mobile layout in job **creation page
 - Fixed mobile layout in edit job page
 
 ## 07/22/20 - 02:37PM
@@ -497,5 +497,9 @@ student registration form.
 
 ## 07/22/20 - 05:10PM
 - Styled the alumni filter pane.
-- Removed statement that.
+- Removed statement that printed email password.
 - Aligned majors to the left in View Students and View Alumni.
+
+## 07/22/20 - 12:21PM
+- Fixed an issue where alumni students couldn't apply for a job without the program crashing.
+- Modified headings for a couple of pages
