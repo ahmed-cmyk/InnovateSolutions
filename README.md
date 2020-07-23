@@ -503,3 +503,7 @@ student registration form.
 ## 07/22/20 - 12:21PM
 - Fixed an issue where alumni students couldn't apply for a job without the program crashing.
 - Modified headings for a couple of pages
+
+## 07/22/20 - 04:23PM
+- Fixed a styling issue in My Jobs page
+- Re-styled the delete jobs page

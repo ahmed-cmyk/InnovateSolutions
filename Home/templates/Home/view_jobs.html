@@ -63,7 +63,6 @@
                         <form class="p-4 bg-light border border-secondary mx-auto" method="POST" action="{% url 'view_jobs' %}">{% csrf_token %}
                             <div id="formHeader" class="text-center">
                                 <h4 class="font-weight-bold">Filter Job Listings</h4>
-                                <hr class="horizontal-rule">
                             </div>
                             <div class="form-row">
                                 <div class="form-group">{{ form.min_duration|as_crispy_field }}</div>
@@ -97,8 +96,7 @@
                                         <div class="card-group col-12">
                                             <div class="card bg-light col-md-9 col-xs-7">
                                                 <div class="card-body">
-                                                    <h4 class="card-title">{{ job.job_title }}</h4>
-                                                    <hr>
+                                                    <h4 class="card-title py-2 border-bottom border-secondary">{{ job.job_title }}</h4>
                                                     <b>Job Description:</b>
                                                     <p class="card-text">
                                                         {{ job.description }}
@@ -142,8 +140,7 @@
                         <div class="card-group col-12 w-75 mb-4">
                             <div class="card bg-light col-md-9 col-xs-7">
                                 <div class="card-body">
-                                    <h4 class="card-title">{{ job.job_title }}</h4>
-                                    <hr>
+                                    <h4 class="card-title py-2 border-bottom border-secondary">{{ job.job_title }}</h4>
                                     <b>Job Description:</b>
                                     <p class="card-text">
                                         {{ job.description }}
