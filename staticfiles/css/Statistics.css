@@ -2,6 +2,11 @@
     margin: 6% 0;
 }
 
+#statBody hr {
+    background-color: #000000;
+    width: 50%;
+}
+
 #statBody form {
     width: auto;
 }

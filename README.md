@@ -507,3 +507,4 @@ student registration form.
 ## 07/22/20 - 04:23PM
 - Fixed a styling issue in My Jobs page
 - Re-styled the delete jobs page
+

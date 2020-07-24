@@ -1,9 +1,29 @@
 #createJobBody {
-  width: 60%;
   margin: auto;
 }
 
 #createJobBody hr {
     background-color: #000000;
     width: 70%;
+}
+
+/******** Mobile Devices ********/
+@media (max-width: 767px) {
+  #createJobBody {
+    width: 90%;
+  }
+}
+
+/******** Tablet Devices ********/
+@media (min-width: 768px) and (max-width: 991px) {
+  #createJobBody {
+    width: 80%;
+  }
+}
+
+/******** Desktop Devices ********/
+@media (min-width: 992px) {
+  #createJobBody {
+    width: 60%;
+  }
 }

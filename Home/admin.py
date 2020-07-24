@@ -15,7 +15,7 @@ class JobAdmin(admin.ModelAdmin):
     # list_editable = ('salary',)
     # list_filter = ('job_title', 'description')
     ordering = ['job_title']
-    change_list_template = "admin/job_change_list.html"
+    change_list_template = "Admin/job_change_list.html"
 
     def minimum_salary(self, obj):
         return obj.salary_min

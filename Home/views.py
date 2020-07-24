@@ -50,12 +50,21 @@ def index(request):
                         'form': form}
                 return render(request, "Home/view_jobs.html", args)
         else:
+<<<<<<< HEAD
 		try:
 			latest_jobs = Job.objects.order_by('-date_posted')[:3]
                 	args = {'job_list': latest_jobs, 'obj': user['obj'], 'user_type': user['user_type']}
                 	return render(request, "Home/index.html", args)
             	except:
                 	return render(request, "Home/index.html")
+=======
+            try:
+                latest_jobs = Job.objects.order_by('-date_posted')[:3]
+                args = {'job_list': latest_jobs, 'obj': user['obj'], 'user_type': user['user_type']}
+                return render(request, "Home/index.html", args)
+            except:
+                return render(request, "Home/index.html")
+>>>>>>> f653c70ddefb22e3c3a1728b9166f02fc06051ed
 
     return render(request, "Home/index.html", user)
 

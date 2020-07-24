@@ -1,13 +1,24 @@
 #form {
-  width: 60%;
   margin: auto;
 }
 
-#register button {
-  color: #FFF;
-  background-color: #CC0000;
-  border: 2px solid #FFF;
-  border-radius: 4px;
-  padding: 10px;
-  margin: 0 3px;
+/******** Mobile Devices ********/
+@media (max-width: 767px) {
+  #form {
+    width: 90%;
+  }
+}
+
+/******** Tablet Devices ********/
+@media (min-width: 768px) and (max-width: 991px) {
+  #form {
+    width: 80%;
+  }
+}
+
+/******** Desktop Devices ********/
+@media (min-width: 992px) {
+  #form {
+    width: 60%;
+  }
 }
