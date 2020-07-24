@@ -1,13 +1,19 @@
 #viewBody {
-  margin: 0 1%;
+  margin: 0 1% 0 2%;
+}
+
+#viewBody hr {
+    background-color: #000000;
+    width: 50%;
 }
 
 #filterForm {
-  border: 1px solid black;
-  border-radius: 12px;
   height: 50%;
-  background-color: #F9F9F9;
-  padding: 1% 0;
+}
+
+#filterForm form {
+  border-radius: 12px;
+  width: 95%;
 }
 
 .horizontal-rule {

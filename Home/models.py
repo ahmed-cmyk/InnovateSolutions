@@ -47,7 +47,7 @@ class Major(models.Model):
 
 
 class JobType(models.Model):
-    type_name = models.SlugField(max_length=50, unique=True)
+    type_name = models.CharField(max_length=50, unique=True)
 
     def clean(self):
         self.type_name = self.type_name.capitalize()
