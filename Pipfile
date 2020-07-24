@@ -33,6 +33,7 @@ Django = "==2.2.13"
 Pillow = "==6.2.1"
 PyPDF2 = "==1.26.0"
 boto = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
