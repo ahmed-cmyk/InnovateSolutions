@@ -1,0 +1,59 @@
+#logForm {
+  margin: auto;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+#topContent {
+  padding: 1%;
+  background-color: #CC0000;
+  color: #FFFFFF;
+}
+
+#topContent img{
+  height: 75px;
+}
+
+#formbox {
+  padding: 2.5%;
+  background-color: #F9F9F9;
+}
+
+#formbox hr {
+  width: 70%;
+  background-color: #000;
+}
+
+#formbox button {
+  color: #FFF;
+  background-color: #CC0000;
+  border: 1px solid #FFF;
+  border-radius: 8px;
+  margin: 0 3px;
+}
+
+#formbox .form-group {
+  width: 90%;
+  margin: auto;
+}
+
+/******** Mobile Devices ********/
+@media (max-width: 767px) {
+  #logForm {
+    width: 95%;
+  }
+}
+
+/******** Tablet Devices ********/
+@media (min-width: 768px) and (max-width: 991px) {
+  #logForm {
+    width: 80%;
+  }
+}
+
+/******** Desktop Devices ********/
+@media (min-width: 992px) {
+  #logForm {
+    width: 50%;
+  }
+}
