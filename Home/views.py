@@ -55,7 +55,7 @@ def index(request):
                 args = {'job_list': latest_jobs, 'obj': user['obj'], 'user_type': user['user_type']}
                 return render(request, "Home/index.html", args)
             except:
-                return render(request, "Home/index.html")
+                return render(request, "Home/index.html", user)
 
     return render(request, "Home/index.html", user)
 
