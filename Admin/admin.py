@@ -6,8 +6,8 @@ from django_comments.models import Comment
 from .models import Admin
 
 class adminAdmin(admin.ModelAdmin):
-    change_list_template = "Admin/admin_change_list.html"
-    change_form_template = "Admin/admin_change_form.html"
+    change_list_template = "admin/admin_change_list.html"
+    change_form_template = "admin/admin_change_form.html"
 
 # Register your models here.
 admin.site.register(Admin, adminAdmin)
