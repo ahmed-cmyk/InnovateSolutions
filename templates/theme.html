@@ -43,6 +43,7 @@
                                     </a>
                                 {% endif %}
                                 {% if user.is_authenticated %}
+                                    <span class="text-white d-none d-sm-inline">Welcome, {{ user_type }}</span>
                                     <div class="dropdown">
                                         <button type="button" id="userIcon" class="btn dropdown-toggle mr-4" data-toggle="dropdown">
                                             <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
