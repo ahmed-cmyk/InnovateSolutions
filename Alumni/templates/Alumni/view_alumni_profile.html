@@ -26,13 +26,14 @@
                 <p><strong>Email Address:</strong> {{ user.email }}</p>
                 <p><strong>Date of Birth:</strong> {{ obj.date_of_birth }}</p>
                 <p><strong>Gender:</strong> {{ obj.gender }}</p>
+                {% if obj.student_id %}
+                    {{ obj.student_id.label }}
+                    {{ obj.student_id }}
+                {% endif %}
                 <p><strong>Skills: </strong></p>
                 {% for skill in obj.skills.all %}
                     <li>{{ skill }}</li>
                 {% endfor %}
-                {% if obj.student_id %}
-                    {{ obj.student_id|as_crispy_field }}
-                {% endif %}
                 <br>
                 <p><strong>Majors: </strong></p>
                 {% for major in obj.majors.all %}

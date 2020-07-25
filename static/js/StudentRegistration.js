@@ -4,6 +4,10 @@ function isNumber(input) {
       return intRegex.test(input) || floatRegex.test(input);
 }
 
+function containsNumber(input) {
+    return /\d/.test(input);
+}
+
 function checkFalseStudentEmail(student_email) {
     var studentEmailRegex = /[a-zA-Z0-9]+@student.murdoch.edu.au/;
     return !studentEmailRegex.test(student_email);
@@ -69,6 +73,10 @@ $(document).ready(function () {
             $('#id_first_name').css('border', '1px solid red');
             $('#firstNameError').html('You cannot enter a number').css('color', 'red');
         }
+        else if(containsNumber(firstName)) {
+            $('#id_first_name').css('border', '1px solid red');
+            $('#firstNameError').html('Your string contains numbers').css('color', 'red');
+        }
         else {
             $('#id_first_name').css('border', '');
             $('#firstNameError').html('').css('color', '');
@@ -79,6 +87,10 @@ $(document).ready(function () {
         if(isNumber(lastName)) {
             $('#id_last_name').css('border', '1px solid red');
             $('#lastNameError').html('You cannot enter a number').css('color', 'red');
+        }
+        else if(containsNumber(lastName)) {
+            $('#id_last_name').css('border', '1px solid red');
+            $('#lastNameError').html('Your string contains numbers').css('color', 'red');
         }
         else {
             $('#id_last_name').css('border', '');
@@ -171,7 +183,7 @@ $("#studentForm").submit(function (e) {
     var password1 = $('#id_password1').val();
     var password2 = $('#id_password2').val();
 
-    if(isNumber(firstname) || isNumber(lastname) || checkFalseEmail(student_email) || checkFalseStudentEmail(student_email) || checkFalseEmail(personal_email) || checkFalseDob(dob) || checkFalseGradDate(gradDate) || checkUnmatchedPasswords(password1, password2)) {
+    if(isNumber(firstname) || isNumber(lastname) || containsNumber(firstname) || containsNumber(lastname) || checkFalseEmail(student_email) || checkFalseStudentEmail(student_email) || checkFalseEmail(personal_email) || checkFalseDob(dob) || checkFalseGradDate(gradDate) || checkUnmatchedPasswords(password1, password2)) {
         alert('There are mistakes');
         e.preventDefault();
     }

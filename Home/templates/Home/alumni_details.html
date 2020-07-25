@@ -26,6 +26,10 @@
                 <p><b>Email:</b> {{ alumni.user }}</p>
                 <p><b>Gender:</b> {{ alumni.gender }}</p>
                 <p><b>Date of Birth:</b> {{ alumni.date_of_birth }}</p>
+                {% if obj.student_id %}
+                    {{ obj.student_id.label }}
+                    {{ obj.student_id }}
+                {% endif %}
                 <b>Skills:</b>
                 {% for skill in alumni.skills.all %}
                     <li>{{ skill }}</li>

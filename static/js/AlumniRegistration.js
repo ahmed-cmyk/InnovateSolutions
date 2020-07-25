@@ -4,6 +4,10 @@ function isNumber(input) {
       return intRegex.test(input) || floatRegex.test(input);
 }
 
+function containsNumber(input) {
+    return /\d/.test(input);
+}
+
 function testEmailValidity(email) {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     return !emailReg.test(email);
@@ -33,6 +37,10 @@ $(document).ready(function () {
             $('#id_first_name').css('border', '1px solid red');
             $('#firstNameError').html('You cannot enter a number').css('color', 'red');
         }
+        else if(containsNumber(firstName)) {
+            $('#id_first_name').css('border', '1px solid red');
+            $('#firstNameError').html('Your string contains numbers').css('color', 'red');
+        }
         else {
             $('#id_first_name').css('border', '');
             $('#firstNameError').html('').css('color', '');
@@ -43,6 +51,10 @@ $(document).ready(function () {
         if(isNumber(lastName)) {
             $('#id_last_name').css('border', '1px solid red');
             $('#lastNameError').html('You cannot enter a number').css('color', 'red');
+        }
+        else if(containsNumber(lastName)) {
+            $('#id_last_name').css('border', '1px solid red');
+            $('#lastNameError').html('Your string contains numbers').css('color', 'red');
         }
         else {
             $('#id_last_name').css('border', '');
@@ -103,7 +115,7 @@ $("#alumniForm").submit(function (e) {
     var password1 = $('#id_password1').val();
     var password2 = $('#id_password2').val();
 
-    if(isNumber(firstname) || isNumber(lastname) || testEmailValidity(email) || checkUnmatchedPasswords(password1, password2)) {
+    if(isNumber(firstname) || isNumber(lastname) || containsNumber(firstname) || containsNumber(lastname) || testEmailValidity(email) || checkUnmatchedPasswords(password1, password2)) {
         alert('There are errors present in the form');
         e.preventDefault();
     }

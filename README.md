@@ -508,3 +508,6 @@ student registration form.
 - Fixed a styling issue in My Jobs page
 - Re-styled the delete jobs page
 
+## 07/25/20 - 10:00PM
+- Added new validation check in student and alumni forms (Registration & Edit)
+- Fixed crash when clicking my profile for alumni
