@@ -16,9 +16,9 @@
 
     {% if hasAdminDetails %}
         {% if admin.dp %}
-            <img src="{{ admin.dp.url }}">
+            <img class="img-fluid" src="{{ admin.dp.url }}">
         {% else %}
-            <img src="{% static 'DefaultDP.jpg' %}">
+            <img class="img-fluid" src="{% static 'DefaultDP.jpg' %}">
         {% endif %}
         <p>First Name: {{ user.first_name }}</p>
         <p>Last Name: {{ user.last_name }}</p>
