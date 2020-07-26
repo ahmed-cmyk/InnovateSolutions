@@ -12,38 +12,6 @@
 
 {% block content %}
     <div id="signupBody" class="row text-center">
-{#        <div class="col-md-4 col-xs-12">#}
-{#            <div class="signupCard">#}
-{#                <i class="fa fa-user fa-3x" aria-hidden="true"></i>#}
-{#                <br><br>#}
-{#                <h3>Student</h3>#}
-{#                <hr>#}
-{#                <p>Are you a current student of murdoch?</p>#}
-{#                <br>#}
-{#                <a href="{% url 'student_registration' %}"><button class="btn btn-primary">Student Registration</button></a>#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="col-md-4 col-xs-12">#}
-{#            <div class="signupCard">#}
-{#                <i class="fa fa-graduation-cap fa-3x" aria-hidden="true"></i>#}
-{#                <br><br>#}
-{#                <h3>Alumni</h3>#}
-{#                <hr>#}
-{#                <p>Were you a student at murdoch in the past?</p>#}
-{#                <br>#}
-{#                <a href="{% url 'alumni_register' %}"><button class="btn btn-success">Alumni Registration</button></a>#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="col-md-4 col-xs-12">#}
-{#            <div class="signupCard">#}
-{#                <i class="fa fa-briefcase fa-3x" aria-hidden="true"></i>#}
-{#                <br><br>#}
-{#                <h3>Employer</h3>#}
-{#                <hr>#}
-{#                <p>Are you an employer looking to hire talented young individuals?</p>#}
-{#                <a href="{% url 'employer_register' %}"><button class="btn btn-warning">Employer Registration</button></a>#}
-{#            </div>#}
-{#        </div>#}
         <div class="card-deck mx-auto my-5">
             <div class="card bg-light">
                 <i class="fa fa-user fa-3x card-img-top pt-4" aria-hidden="true"></i>
@@ -80,7 +48,7 @@
                 </div>
                 <div class="card-footer">
                     <a href="{% url 'employer_register' %}">
-                        <button class="btn btn-warning">Employer Registration</button>
+                        <button class="btn btn-warning text-white">Employer Registration</button>
                     </a>
                 </div>
             </div>
