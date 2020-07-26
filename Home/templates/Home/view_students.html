@@ -99,7 +99,7 @@
                                     <a href="{% url 'student_details' student.user_id %}"> {{ student.user.first_name }} {{ student.user.last_name }}</a>
                                 </td>
                                 <td>{{ student.user }}</td>
-                                <td>{{ student.expected_graduation_date }}</td>
+                                <td class="d-none d-sm-block">{{ student.expected_graduation_date }}</td>
                                 <td class="d-none d-sm-block text-left">{% for major in student.majors.all %}
                                         <li>{{ major }}</li>
                                     {% endfor %}
