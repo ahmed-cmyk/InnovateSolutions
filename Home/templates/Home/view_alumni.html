@@ -85,7 +85,7 @@
                         <tr class="text-center">
                             <th>Student Name</th>
                             <th>Email</th>
-                            <th class="d-none d-sm-block">Majors</th>
+                            <th class="d-none d-sm-table-cell">Majors</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -95,7 +95,7 @@
                                     <a href="{% url 'alumni_details' alumni.user_id %}"> {{ alumni.user.first_name }} {{ alumni.user.last_name }}</a>
                                 </td>
                                 <td>{{ alumni.user }}</td>
-                                <td class="d-none d-sm-block text-left">{% for major in alumni.majors.all %}
+                                <td class="d-none d-sm-table-cell text-left">{% for major in alumni.majors.all %}
                                         <li>{{ major }}</li>
                                     {% endfor %}
                                 </td>
