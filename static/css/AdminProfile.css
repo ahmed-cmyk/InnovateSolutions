@@ -1,0 +1,28 @@
+#admin-profile-body {
+
+}
+
+#admin-profile-body button {
+    background-color: #CC0000;
+}
+
+/******** Mobile Devices ********/
+@media (max-width: 767px) {
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/******** Tablet Devices ********/
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/******** Desktop Devices ********/
+@media (min-width: 992px) {
+    img {
+        width: 100%;
+        height: 20px;
+    }
+}

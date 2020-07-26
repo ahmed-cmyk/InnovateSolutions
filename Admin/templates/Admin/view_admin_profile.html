@@ -13,43 +13,36 @@
 <body>
 {% block messages %}{% endblock messages %}
 {% block content %}
-
-    {% if hasAdminDetails %}
-        {% if admin.dp %}
-            <img class="img-fluid" src="{{ admin.dp.url }}">
-        {% else %}
-            <img class="img-fluid" src="{% static 'DefaultDP.jpg' %}">
-        {% endif %}
-        <p>First Name: {{ user.first_name }}</p>
-        <p>Last Name: {{ user.last_name }}</p>
-        <p>Email Address: {{ user.email }}</p>
-        <p>Gender: {{ admin.gender }}</p>
-
-        <button><a href="{% url 'edit_admin_profile' %}">Edit Profile</a></button>
-        <button type="button"><a href="../../admin">Go back home</a></button>
-
-    {% else %}
-
-        <h2>Looks like you have not filled in some details yet. Fill in the form below to be able to view your
-            profile.</h2>
-
-        <form method="post" enctype="multipart/form-data" action="{% url 'view_admin_profile' %}">
-            {% csrf_token %}
-
-            {{ admin_form.as_p }}
-
-            <button type="submit">Add Details</button>
-            <button type="button"><a href="../../admin">Cancel</a></button>
-        </form>
-
     <div>
         {% for message in messages %}
             <h3> {{ message }} </h3>
         {% endfor %}
     </div>
+    {% if hasAdminDetails %}
+        <div id="admin-profile-body" class="bg-danger">
+            {% if admin.dp %}
+                <img style="width: 30vw;" src="{{ admin.dp.url }}" alt="profile picture">
+            {% else %}
+                <img style="width: 40vw;" src="{% static 'DefaultDP.jpg' %}" alt="default profile picture">
+            {% endif %}
+            <p>First Name: {{ user.first_name }}</p>
+            <p>Last Name: {{ user.last_name }}</p>
+            <p>Email Address: {{ user.email }}</p>
+            <p>Gender: {{ admin.gender }}</p>
+            <button><a href="{% url 'edit_admin_profile' %}">Edit Profile</a></button>
+            <button type="button"><a href="../../admin">Go back home</a></button>
+        </div>
+    {% else %}
+        <h2>Looks like you have not filled in some details yet. Fill in the form below to be able to view your
+            profile.</h2>
 
+        <form method="post" enctype="multipart/form-data" action="{% url 'view_admin_profile' %}">
+            {% csrf_token %}
+            {{ admin_form.as_p }}
+            <button type="submit">Add Details</button>
+            <button type="button"><a href="../../admin">Cancel</a></button>
+        </form>
     {% endif %}
-
 {% endblock %}
 </body>
 </html>
