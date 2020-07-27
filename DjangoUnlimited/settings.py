@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import urllib
+
 from django.contrib import messages
 from dotenv import load_dotenv
 
@@ -75,7 +77,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # DEFAULT_FROM_EMAIL = 'ikramahmed398@gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'murdoch-edu-au.mail.protection.outlook.com'
-EMAIL_PORT = 587
+EMAIL_PORT = 25
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_HOST_USER = 'careerportal@murdoch.edu.au'
 DEFAULT_FROM_EMAIL = 'careerportal@murdoch.edu.au'
