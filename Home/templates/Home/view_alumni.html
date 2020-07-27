@@ -69,8 +69,8 @@
                             <p>{{ form.majors|as_crispy_field }}</p>
                         </div>
                         <div class="text-center">
-                            <a href='../view_alumni'><button class="btn btn-danger">Reset</button></a>
-                            <button type="Submit" class="btn btn-primary"><b>Search</b></button>
+                            <a href="{% url 'view_alumni' %}"><button class="btn btn-danger">Reset</button></a>
+                            <button type="submit" class="btn btn-primary"><b>Search</b></button>
                         </div>
                     </form>
                 </div>
@@ -83,7 +83,7 @@
                     <table id="myTable" class="table table-sm table-bordered table-striped">
                         <thead class="thead-dark">
                         <tr class="text-center">
-                            <th>Student Name</th>
+                            <th>Alumni Name</th>
                             <th>Email</th>
                             <th class="d-none d-sm-table-cell">Majors</th>
                         </tr>

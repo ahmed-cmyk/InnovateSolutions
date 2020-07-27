@@ -494,7 +494,7 @@ def view_students(request):
         if majors:
             majors_students = Student.objects.filter(majors=majors)
         else:
-            majors_students = Student.objects.filter(majors=majors)
+            majors_students = Student.objects.all()
 
         filtered_stds = skills_students & majors_students & min_graduation_date_students & max_graduation_date_students
         students_all = Student.objects.all()
@@ -515,6 +515,7 @@ def view_students(request):
 @login_required
 def view_alumni(request):
     user = get_user_type(request)
+    print(request.method)
     if request.method == 'POST':
         skills = request.POST.get("skills")
         majors = request.POST.get("majors")
@@ -527,7 +528,7 @@ def view_alumni(request):
         if majors:
             majors_alumni = Alumni.objects.filter(majors=majors)
         else:
-            majors_alumni = Alumni.objects.filter(majors=majors)
+            majors_alumni = Alumni.objects.all()
 
         filtered_stds = skills_students & majors_alumni
         alumni_all = Alumni.objects.all()
