@@ -8,6 +8,10 @@
     width: 50%;
 }
 
+#viewBody td {
+    font-size: 0.9rem;
+}
+
 #filterForm {
   height: 50%;
 }
