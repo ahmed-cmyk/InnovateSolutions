@@ -7,6 +7,10 @@
     Job Portal - Murdoch Dubai Job Portal
 {% endblock %}
 
+{% block user_greeting %}
+    <span class="text-white d-none d-sm-inline">Welcome, {{ request.user.first_name }}</span>
+{% endblock %}
+
 {% csrf_token %}
     {% block image %}
         <div id="body-image" class="text-center d-none d-sm-block">
