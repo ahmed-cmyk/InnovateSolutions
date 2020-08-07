@@ -96,7 +96,7 @@ def view_profile(request):
     try:
         admin = Admin.objects.get(user_id=user.id)
         args = {'admin': admin, 'user': user, 'hasAdminDetails': hasAdminDetails}
-        return render(request, 'Admin/view_admin_profile.html', args)
+        return render(request, 'admin/view_admin_profile.html', args)
     except:
         if request.method == 'POST':
             admin_form = AdminForm(request.POST, request.FILES)
@@ -115,7 +115,7 @@ def view_profile(request):
             hasAdminDetails = False
             admin_form = AdminForm()
             args = {'admin_form': admin_form, 'hasAdminDetails': hasAdminDetails}
-            return render(request, 'Admin/view_admin_profile.html', args)
+            return render(request, 'admin/view_admin_profile.html', args)
 
 
 @staff_member_required
@@ -140,7 +140,7 @@ def edit_profile(request):
         user_form = EditAdminProfileForm(instance=request.user)
         admin_form = AdminForm(instance=admin)
         args = {'admin_form': admin_form, 'user_form': user_form}
-        return render(request, 'Admin/edit_admin_profile.html', args)
+        return render(request, 'admin/edit_admin_profile.html', args)
 
 
 @staff_member_required

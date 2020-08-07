@@ -515,7 +515,6 @@ def view_students(request):
 @login_required
 def view_alumni(request):
     user = get_user_type(request)
-    print(request.method)
     if request.method == 'POST':
         skills = request.POST.get("skills")
         majors = request.POST.get("majors")

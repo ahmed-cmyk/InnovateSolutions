@@ -21,9 +21,9 @@
     {% if hasAdminDetails %}
         <div id="admin-profile-body">
             {% if admin.dp %}
-                <img style="width: 30vw;" src="{{ admin.dp.url }}" alt="profile picture">
+                <img style="width: 20vw;" src="{{ admin.dp.url }}" alt="profile picture">
             {% else %}
-                <img style="width: 40vw;" src="{% static 'DefaultDP.jpg' %}" alt="default profile picture">
+                <img style="width: 20vw;" src="{% static 'DefaultDP.jpg' %}" alt="default profile picture">
             {% endif %}
             <p>First Name: {{ user.first_name }}</p>
             <p>Last Name: {{ user.last_name }}</p>

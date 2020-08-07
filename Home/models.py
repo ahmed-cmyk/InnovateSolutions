@@ -127,6 +127,7 @@ class UserNotifications(models.Model):
     to_show = models.BooleanField(default=True)
     date_time = models.DateTimeField(default=datetime.now)
 
+
 class EmailThread(threading.Thread):
     def __init__(self, subject, html_content, recipient_list):
         self.subject = subject
@@ -138,6 +139,7 @@ class EmailThread(threading.Thread):
         msg = EmailMessage(self.subject, self.html_content, EMAIL_HOST_USER, self.recipient_list)
         msg.content_subtype = "html"
         msg.send()
+
 
 def send_html_mail(subject, html_content, recipient_list):
     EmailThread(subject, html_content, recipient_list).start()
