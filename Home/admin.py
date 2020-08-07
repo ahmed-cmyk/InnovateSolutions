@@ -8,8 +8,8 @@ from .models import Industry, Skill, Job, JobType, Major
 from Employer.models import Employer
 from Student.models import Student
 
-class JobAdmin(admin.ModelAdmin):
 
+class JobAdmin(admin.ModelAdmin):
     list_display = ('job_title', 'description', 'posted_by', 'salary_min', 'salary_max', 'duration_in_months')
     list_display_links = ('job_title',)
     # list_editable = ('salary',)
@@ -25,6 +25,7 @@ class JobAdmin(admin.ModelAdmin):
 
     def duration_in_months(self, obj):
         return obj.duration
+
 
 # Register your models here.
 admin.site.register(Job, JobAdmin)
