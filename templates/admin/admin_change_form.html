@@ -6,6 +6,7 @@
 {% block content %}
     <!-- link to add new admin -->
     <button>
-        <a href="{% url 'admin_register' %}">Click to Create New Admin</a>
+        <a href="{% url 'admin_register' %}">Click to Create New Admins</a>
     </button>
+    <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}{% if form_url %}action="{{ form_url }}" {% endif %}method="post" id="{{ opts.model_name }}_form" novalidate>{% csrf_token %}{% block form_top %}{% endblock %}
 {% endblock %}
