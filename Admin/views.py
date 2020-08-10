@@ -94,8 +94,8 @@ def create_admin(request):
 @staff_member_required
 def view_pending(request):
     user = get_user_type(request)
-    employers = User.objects.filter(is_active=True)
-    args = {'user_type': user['user_type'], 'employers': employers}
+    applicants = User.objects.filter(is_active=True)
+    args = {'user_type': user['user_type'], 'applicants': applicants}
     return render(request, 'Admin/view_pending_requests.html', args)
 
 
