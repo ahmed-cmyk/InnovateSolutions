@@ -1,0 +1,30 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    View Statistics
+{% endblock %}
+
+{% block stylesheets %}
+{#    <link rel="stylesheet" type="text/css" href="{% static 'css/PendingRequests.css' %}"/>#}
+{% endblock %}
+
+{% block content %}
+    <div class="col-12 text-center">
+        {% if user.is_staff %}
+            <h2>Pending Requests</h2>
+            <hr>
+            <form method="POST" class="form-horizontal" action="#" enctype="multipart/form-data">
+                <table id="request_table" class="mx-auto">
+                    {% for employer in employers %}
+                        <tr class="my-2">
+                            <td class="text-left">{{ employer.user }}</td>
+                            <td><button class="btn btn-success" value="accept">Accept</button></td>
+                            <td><button class="btn btn-danger" value="reject">Reject</button></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

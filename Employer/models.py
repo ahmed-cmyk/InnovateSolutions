@@ -14,6 +14,7 @@ class Employer(models.Model):
     company_description = models.TextField()
     phone_number = PhoneField(blank=True)
     logo = models.ImageField(upload_to='company_logos', null=True, blank=True)
+    is_active = models.BooleanField(null=False, default=False)
 
     def __str__(self):
         name = self.company_name

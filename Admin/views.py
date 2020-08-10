@@ -12,12 +12,12 @@ from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
 from django.utils import timezone
 from datetime import timedelta, datetime, date
 import csv
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 # Create your views here.
 
 from Home.forms import CreateJobForm, EditJobForm
-from Employer.forms import InitialEmployerForm, EmployerForm
+from Employer.forms import InitialEmployerForm, EmployerForm, EmployerAccVerificationForm
 from .forms import InitialAdminForm, AdminForm, AddIndustryForm, Statistics
 from Accounts.views import isValidated, get_user_type, number_symbol_exists
 from .models import Admin
@@ -37,31 +37,33 @@ def create_admin(request):
 
         if user_form.is_valid():
             if user_form.usernameExists():
-                messages.info(request, 'Username already taken. Try a different one.') #checks if username exists in db
+                messages.info(request,
+                              'Username already taken. Try a different one.')  # checks if username exists in db
                 return redirect("admin_register")
 
             elif user_form.emailExists():
-                messages.info(request, 'Email already taken. Try a different one.') #checks if email exists in db
+                messages.info(request, 'Email already taken. Try a different one.')  # checks if email exists in db
                 return redirect("admin_register")
 
-            elif number_symbol_exists(user_form.cleaned_data["first_name"]): #checks if number/symbol exists in string
+            elif number_symbol_exists(user_form.cleaned_data["first_name"]):  # checks if number/symbol exists in string
                 messages.info(request, 'Please enter a valid first name.')
                 return redirect("admin_register")
 
-            elif number_symbol_exists(user_form.cleaned_data["last_name"]): #checks if number/symbol exists in string
+            elif number_symbol_exists(user_form.cleaned_data["last_name"]):  # checks if number/symbol exists in string
                 messages.info(request, 'Please enter a valid last name.')
                 return redirect("admin_register")
 
             elif not user_form.samePasswords():
-                messages.info(request, 'Passwords not matching. Try again.') #checks if password and confirm password are matching
+                messages.info(request,
+                              'Passwords not matching. Try again.')  # checks if password and confirm password are matching
                 return redirect("admin_register")
 
-            elif not user_form.emailDomainExists(): #checks if there is an exising domain for given email
+            elif not user_form.emailDomainExists():  # checks if there is an exising domain for given email
                 messages.info(request, 'Email domain does not exist. Try again.')
                 return redirect("admin_register")
 
             else:
-                if isValidated(user_form.cleaned_data.get('password1')): #checks if password is valid
+                if isValidated(user_form.cleaned_data.get('password1')):  # checks if password is valid
                     admin_form = AdminForm(request.POST, request.FILES)
 
                     if admin_form.is_valid():
@@ -77,7 +79,7 @@ def create_admin(request):
                         return redirect("admin_register")
                 else:
                     messages.error(request,
-                                  'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric character and 1 letter.')
+                                   'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric character and 1 letter.')
                     return redirect("admin_register")
         else:
             messages.error(request, user_form.errors)
@@ -87,6 +89,55 @@ def create_admin(request):
         admin_form = AdminForm()
         args = {'admin_form': admin_form, 'user_form': user_form}
         return render(request, 'Admin/admin_registration.html', args)
+
+
+@staff_member_required
+def view_pending(request):
+    user = request.user
+    employers = Employer.objects.all()
+    args = {'user': user, 'employers': employers}
+    return render(request, 'Admin/view_pending_requests.html', args)
+
+
+def change_accept_status(request):
+    status = request.GET.get('is_active', False)
+    user_id = request.GET.get('id', None)
+
+    user = User.objects.get(id=user_id)
+    try:
+        user.is_active = status
+        user.save()
+        return JsonResponse({"success": True})
+    except Exception as e:
+        return JsonResponse({"success": False})
+# @staff_member_required
+# def view_pending(request, id=None):
+#     employers = Employer.objects.all()
+#     form = EmployerAccVerificationForm()
+#     print(id)
+#     if id is not None:
+#         print("I'm here")
+#         print(request.method)
+#         user = User.objects.filter(id=id)
+#         args = {'user': user, 'employers': employers, 'form': form}
+#         if 'accept' in request.GET:
+#             print('I found an accept')
+#             user.is_active = True
+#             print(user.is_active)
+#             messages.success(request, 'Account Approved')
+#             return render(request, 'Admin/view_pending_requests.html', args)
+#         elif 'reject' in request.GET:
+#             print('I found a reject')
+#             user.is_active = False
+#             print(user.is_active)
+#             messages.info(request, 'Account Rejected')
+#             return render(request, 'Admin/view_pending_requests.html', args)
+#         return render(request, 'Admin/view_pending_requests.html', args)
+#     else:
+#         print("Still else")
+#         user = request.user
+#         args = {'user': user, 'employers': employers, 'form': form}
+#         return render(request, 'Admin/view_pending_requests.html', args)
 
 
 @staff_member_required
@@ -186,7 +237,8 @@ def create_job(request):
         return render(request, "Admin/admin_create_job.html", args)
 
 
-def export_stats_file(request, users, admins, students, current, alumni, employers, jobs_posted, apps, open_jobs, closed_jobs, deleted_jobs):
+def export_stats_file(request, users, admins, students, current, alumni, employers, jobs_posted, apps, open_jobs,
+                      closed_jobs, deleted_jobs):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=' + date.today().strftime("%B %d %Y") + ".csv"
     writer = csv.writer(response)
@@ -224,7 +276,8 @@ def generate_statistics(request):
         students = Student.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
         current = Student.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
         alumni = Alumni.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
-        employers = Employer.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).exclude(user_id__in=admin_users)
+        employers = Employer.objects.filter(
+            user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).exclude(user_id__in=admin_users)
         jobs_posted = Job.objects.filter(date_posted__range=[start_date, end_date])
         open_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Open")
         closed_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Closed")
@@ -243,7 +296,8 @@ def generate_statistics(request):
         deleted_jobs = len(list(set(deleted_jobs)))
         apps = len(list(set(apps)))
 
-        args = {'users': users, 'admins': admins, 'students': students, 'current': current, 'alumni': alumni, 'employers': employers,
+        args = {'users': users, 'admins': admins, 'students': students, 'current': current, 'alumni': alumni,
+                'employers': employers,
                 'jobs_posted': jobs_posted, 'open_jobs': open_jobs, 'closed_jobs': closed_jobs,
                 'deleted_jobs': deleted_jobs, 'apps': apps, 'user_type': user['user_type'], 'obj': user['obj']}
 

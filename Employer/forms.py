@@ -73,3 +73,9 @@ class EmployerForm(forms.ModelForm):
     class Meta:
         model = Employer
         exclude = ['user', 'employer_id']
+
+
+class EmployerAccVerificationForm(forms.ModelForm):
+    class Meta:
+        model = Employer
+        fields = ['user', 'is_active']

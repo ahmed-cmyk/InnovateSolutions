@@ -222,14 +222,6 @@ def create_job(request):
                     data.save()
                     form.save_m2m()
 
-                    # send_mail('New Job has been posted',
-                    #           'A new Job has been posted on the Murdoch Career Portal.',
-                    #           DEFAULT_FROM_EMAIL, [email],
-                    #           fail_silently=True)
-                    # send_mail('New Job has been posted',
-                    #           "A new job has been posted on the Murdoch Career Portal.",
-                    #           DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL],
-                    #           fail_silently=True)
                     subject = 'New Job has been posted'
                     htmlText = "Your job has been posted on the Murdoch Career Portal."
                     send_html_mail(subject, htmlText, [email])
@@ -294,9 +286,7 @@ def job_details(request, id):
     try:
         if user['user_type'] == 'student':
             student = Student.objects.get(user_id=request.user.id)
-            print('I go past student')
             job = Job.objects.get(id=id)
-            print('I go past job')
             StudentJobApplication.objects.get(job_id_id=job, applied=student)
         elif user['user_type'] == 'alumni':
             alumni = Alumni.objects.get(user_id=request.user.id)
@@ -305,7 +295,6 @@ def job_details(request, id):
         return render(request, 'Home/job_details.html', args)
 
     except:
-        print('I find these errors disturbing')
         args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'],
                 'companies': companies, 'applied': False}
         return render(request, 'Home/job_details.html', args)

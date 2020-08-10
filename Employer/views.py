@@ -58,17 +58,17 @@ def signup(request):
                             email = str(request.user)
                             employer.save()
 
-                            subject = 'Your account has been created'
-                            htmlText = "Your account has been registered and you are now ready to use the Murdoch " \
-                                       "Career Portal. "
-                            send_html_mail(subject, htmlText, [email])
-
-                            subject = 'New User has signed up'
-                            htmlText = "A new Employer has registered to use the Murdoch Career Portal."
-                            send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
+                            # subject = 'Your account has been created'
+                            # htmlText = "Your account has been registered and you are now ready to use the Murdoch " \
+                            #            "Career Portal. "
+                            # send_html_mail(subject, htmlText, [email])
+                            #
+                            # subject = 'New User has signed up'
+                            # htmlText = "A new Employer has registered to use the Murdoch Career Portal."
+                            # send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
                         messages.success(request, 'Employer account created')
-                        return redirect("log_in")
+                        return redirect("activate")
                     else:
                         messages.error(request, employer_form.errors)
                         return redirect("employer_register")
@@ -86,6 +86,10 @@ def signup(request):
         args = {'employer_form': employer_form, 'user_form': user_form, 'user_type': user['user_type']}
         return render(request, 'Employer/employer_registration.html', args)
 
+
+def activate(request):
+    user = get_user_type(request)
+    return render(request, 'Employer/pending_activation.html', user)
 
 def check_username(request):
     if request.is_ajax and request.method == 'GET':
