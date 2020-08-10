@@ -93,16 +93,17 @@ def create_admin(request):
 
 @staff_member_required
 def view_pending(request):
-    user = request.user
+    user = get_user_type(request)
     employers = Employer.objects.all()
-    args = {'user': user, 'employers': employers}
+    args = {'user_type': user['user_type'], 'employers': employers}
     return render(request, 'Admin/view_pending_requests.html', args)
 
 
 def change_accept_status(request):
     status = request.GET.get('is_active', False)
-    user_id = request.GET.get('id', None)
-
+    user_id = request.GET.get('user_id', None)
+    print(status)
+    print(user_id)
     user = User.objects.get(id=user_id)
     try:
         user.is_active = status
