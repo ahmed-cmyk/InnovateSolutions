@@ -67,6 +67,11 @@ class Job(models.Model):
         ('Ajman', 'Ajman'),
         ('Ra’s al-Khaimah', 'Ra’s al-Khaimah')
     ]
+    STATUS_CHOICES = [
+        ('Accepted', 'Accepted'),
+        ('Rejected', 'Rejected'),
+        ('Pending', 'Pending')
+    ]
     JOB_STATUS = [
         ('Open', 'Open'),
         ('Closed', 'Closed'),
@@ -91,6 +96,7 @@ class Job(models.Model):
     salary_min = models.DecimalField(max_digits=8, decimal_places=2, validators=[MinValueValidator(0.00)])
     salary_max = models.DecimalField(max_digits=8, decimal_places=2, validators=[MinValueValidator(0.00)])
     skills = models.ManyToManyField(Skill, related_name='job_skills')
+    is_active = models.CharField(null=False, max_length=10, choices=STATUS_CHOICES, default=STATUS_CHOICES[2][1])
 
     def __str__(self):
         title = self.job_title

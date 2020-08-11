@@ -1,0 +1,36 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+<!-- Stylesheet -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Profile.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    View Profile - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <div id="profileBody">
+        <h2 class="text-center">Company Profile</h2><br>
+        <div class="row" style="margin-left: 5%">
+            <div class="icon col-md-4 text-center">
+                {% if obj.logo %}
+                    <img src="{{ employer.logo.url }}" height="300.0em" width="300.0em">
+                {% else %}
+                    <img src="{% static 'DefaultDP.jpg' %}" height="300.0em" width="300.0em">
+                {% endif %}
+            </div>
+            <div class="employer-profile col-md-8 text-left">
+                <p><strong>Company Name:</strong> {{ employer.company_name }}</p>
+                <p><strong>Company Description:</strong> {{ employer.company_description }}</p>
+                <p><strong>Contact Number:</strong> {{ employer.phone_number }}</p>
+            </div>
+        </div>
+        <div id="edit-profile" class="text-center">
+            <button type="submit" class="btn btn-primary">
+                <a  class="text-decoration-none text-white" href="/employer/edit_employer_profile">Edit Profile</a>
+            </button>
+        </div>
+    </div>
+{% endblock %}
