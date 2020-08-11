@@ -16,14 +16,16 @@
     <script>
     $(".accept_button").on('click', function () {
       var user_id = $(this).val();
-      var is_active = 1;
+      var is_active_user = 1;
+      var status = 'Accepted';
       console.log(user_id);
       $.ajax({
         url: "{% url 'change_accept_status' %}",
         data: {
-          'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
-          'is_active': is_active,
-          'user_id': user_id
+            'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
+            'is_active_user': is_active_user,
+            'status': status,
+            'user_id': user_id
         },
         dataType: 'json',
         success: function (data) {
@@ -37,14 +39,16 @@
     });
     $(".reject_button").on('click', function () {
       var user_id = $(this).val();
-      var is_active = 0;
+      var is_active_user = 0;
+      var status = 'Rejected';
       console.log(user_id);
       $.ajax({
         url: "{% url 'change_accept_status' %}",
         data: {
-          'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
-          'is_active': is_active,
-          'user_id': user_id
+            'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
+            'is_active_user': is_active_user,
+            'status': status,
+            'user_id': user_id
         },
         dataType: 'json',
         success: function (data) {
@@ -69,7 +73,7 @@
                 <table id="request_table" class="mx-auto">
                     {% for applicant in applicants %}
                         <tr class="my-2">
-                            <td class="text-left">{{ applicant }}</td>
+                            <td class="username text-left">{{ applicant }}</td>
                             <td>
                                 <button id="accept_button" class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.id }}">Accept</button>
                             </td>

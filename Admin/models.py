@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 class Admin(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True,related_name='admin_user')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='admin_user')
     gender_choices = [
         ('Male', 'Male'),
         ('Female', 'Female')
