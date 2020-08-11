@@ -6,6 +6,8 @@ urlpatterns = [
     path('signup', views.signup, name='sign_up'),
     path('login', views.login, name='log_in'),
     path('ForgotPassword', views.forgot_password, name='forgot_password'),
+    path('pending_approval', views.pending_approval, name='pending_approval'),
+    path('account_rejected', views.acc_rejected, name='account_rejected'),
     path('logout', views.logout, name='logout'),
     path('get/ajax/validate_username', views.check_username, name="check_username"),
 

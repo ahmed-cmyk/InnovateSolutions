@@ -95,16 +95,16 @@ def create_admin(request):
 @staff_member_required
 def view_pending(request):
     user = get_user_type(request)
-    applicants = User.objects.filter(is_active=False)
-    args = {'user_type': user['user_type'], 'applicants': applicants}
+    applicants_students = Student.objects.filter(is_active='Pending')
+    applicants_alumni = Alumni.objects.filter(is_active='Pending')
+    applicants_employers = Employer.objects.filter(is_active='Pending')
+    args = {'user_type': user['user_type'], 'applicants_students': applicants_students, 'applicants_alumni': applicants_alumni, 'applicants_employers': applicants_employers}
     return render(request, 'Admin/view_pending_requests.html', args)
 
 
 def change_accept_status(request):
-    is_active = request.GET.get('is_active_user', False)
     status = request.GET.get('status', 'Pending')
     user_id = request.GET.get('user_id', None)
-    print(is_active)
     print(user_id)
     user = User.objects.get(id=user_id)
     print(user)
@@ -133,8 +133,6 @@ def change_accept_status(request):
         pass
 
     try:
-        user.is_active = is_active
-        user.save()
         return JsonResponse({"success": True})
     except Exception as e:
         return JsonResponse({"success": False})
@@ -186,6 +184,25 @@ def view_pending_job_details(request, id):
     args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'],
             'companies': companies, 'applied': True}
     return render(request, 'Home/job_details.html', args)
+
+
+def change_job_status(request):
+    status = request.GET.get('status', 'Pending')
+    id = request.GET.get('user_id', None)
+    try:
+        print(id)
+        job = Job.objects.get(id=id)
+        print(job)
+        job.is_active = status
+        job.save()
+        print(job.is_active)
+    except:
+        pass
+
+    try:
+        return JsonResponse({"success": True})
+    except Exception as e:
+        return JsonResponse({"success": False})
 # @staff_member_required
 # def view_pending(request, id=None):
 #     employers = Employer.objects.all()

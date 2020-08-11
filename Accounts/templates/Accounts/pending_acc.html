@@ -1,0 +1,26 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    Account Verification Pending
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/PendingApproval.css' %}"/>
+{% endblock %}
+
+{% block content %}
+    <div id="pendingRequestBody" class="col-12 text-center my-3">
+        <h2>Account - Pending Approval</h2>
+        <br><br>
+        <div id="pendingBody">
+            <img src="{% static 'images/pending_approval.png' %}" alt="pending_approval_pic">
+            <br><br>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+            </div>
+            <small>Your account is currently pending approval</small>
+        </div>
+    </div>
+{% endblock %}

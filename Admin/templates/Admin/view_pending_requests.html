@@ -16,14 +16,12 @@
     <script>
     $(".accept_button").on('click', function () {
       var user_id = $(this).val();
-      var is_active_user = 1;
       var status = 'Accepted';
       console.log(user_id);
       $.ajax({
         url: "{% url 'change_accept_status' %}",
         data: {
             'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
-            'is_active_user': is_active_user,
             'status': status,
             'user_id': user_id
         },
@@ -39,14 +37,12 @@
     });
     $(".reject_button").on('click', function () {
       var user_id = $(this).val();
-      var is_active_user = 0;
       var status = 'Rejected';
       console.log(user_id);
       $.ajax({
         url: "{% url 'change_accept_status' %}",
         data: {
             'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
-            'is_active_user': is_active_user,
             'status': status,
             'user_id': user_id
         },
@@ -72,16 +68,42 @@
                 <form method="POST" class="form-horizontal">
                 {% csrf_token %}
                     <table id="request_table" class="table table-borderless mx-auto">
-                        {% for applicant in applicants %}
-                            <tr>
-                                <td class="username text-left">{{ applicant }}</td>
-                                <td><a href="{% url 'view_account_details' applicant.id %}">View Account Details</a></td>
-                                <td>
-                                    <button id="accept_button" class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.id }}">Accept</button>
-                                    <button id="reject_button" class="reject_button btn btn-danger" type="button" name="reject" value="{{ applicant.id }}">Reject</button>
-                                </td>
-                            </tr>
-                        {% endfor %}
+                        {% if applicants_students %}
+                            {% for applicant in applicants_students %}
+                                <tr>
+                                    <td class="username text-left">{{ applicant.user }}</td>
+                                    <td><a href="{% url 'view_account_details' applicant.user_id %}">View Account Details</a></td>
+                                    <td>
+                                        <button id="accept_button" class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.user_id }}">Accept</button>
+                                        <button id="reject_button" class="reject_button btn btn-danger" type="button" name="reject" value="{{ applicant.user_id }}">Reject</button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        {% if applicants_alumni %}
+                            {% for applicant in applicants_alumni %}
+                                <tr>
+                                    <td class="username text-left">{{ applicant.user }}</td>
+                                    <td><a href="{% url 'view_account_details' applicant.user_id %}">View Account Details</a></td>
+                                    <td>
+                                        <button id="accept_button" class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.user_id }}">Accept</button>
+                                        <button id="reject_button" class="reject_button btn btn-danger" type="button" name="reject" value="{{ applicant.user_id }}">Reject</button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        {% if applicants_employers %}
+                            {% for applicant in applicants_employers %}
+                                <tr>
+                                    <td class="username text-left">{{ applicant.user }}</td>
+                                    <td><a href="{% url 'view_account_details' applicant.user_id %}">View Account Details</a></td>
+                                    <td>
+                                        <button id="accept_button" class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.user_id }}">Accept</button>
+                                        <button id="reject_button" class="reject_button btn btn-danger" type="button" name="reject" value="{{ applicant.user_id }}">Reject</button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
                     </table>
                 </form>
             </div>
