@@ -95,13 +95,15 @@ class StudentForm(forms.ModelForm):
                                             label='Major',
                                             widget=forms.CheckboxSelectMultiple,
                                             required=True)
-    dp = forms.ImageField(label='Select a profile picture (only jpeg and png file formats allowed)',
+    dp = forms.ImageField(label='Select a profile picture',
+                          help_text="Only jpeg and png file formats allowed",
                           required=False,
                           validators=[FileTypeValidator(
                               allowed_types=['image/jpeg', 'image/png']
                           )])
     cv = forms.FileField(allow_empty_file=False,
-                         label='Attach CV (only PDF, docx, and doc file formats allowed)',
+                         label='Attach CV',
+                         help_text="Only PDF, docx, and doc file formats allowed",
                          validators=[FileTypeValidator(
                              allowed_types=[
                                  "application/pdf",

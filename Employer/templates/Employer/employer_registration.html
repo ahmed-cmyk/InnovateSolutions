@@ -40,6 +40,19 @@
 {% endblock %}
 
 {% block content %}
+<script>
+    function licenseCheck(license)
+    {
+        alert("Here " + license.value);
+        if(license.value.length === 0)
+        {
+            alert("Please enter a valid Trade License");
+            return false;
+        }
+          return true;
+    }
+</script>
+
 <div id="form" class="row justify-content-center align-items-center">
     <div class="col-12">
         <h2 class="text-center">Employer Registration</h2>
@@ -59,6 +72,13 @@
             {{ employer_form.company_name|as_crispy_field }}
             <div id="companyNameError"></div>
             {{ employer_form.company_description|as_crispy_field }}
+
+            <div class="form-row">
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ employer_form.trade_license|as_crispy_field }}</div>
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ employer_form.logo|as_crispy_field }}</div>
+            </div>
+
+            {{ employer_form.contact_name|as_crispy_field }}
             {{ employer_form.phone_number|as_crispy_field }}
             <div id="phoneNumberError"></div>
             <input type="checkbox" name="terms" required>

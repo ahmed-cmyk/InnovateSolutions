@@ -47,7 +47,7 @@
                                     {% block user_greeting %}{% endblock %}
                                     <div class="dropdown">
                                         <button type="button" id="userIcon" class="btn dropdown-toggle mr-4" data-toggle="dropdown">
-                                            <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
+                                            <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i> &nbsp;{{ user.first_name}} {{ user.last_name }}
                                         </button>
                                         <ul class="dropdown-menu">
                                             {% if user_type == 'student' %}

@@ -66,13 +66,22 @@ class EmployerForm(forms.ModelForm):
                             )])
     company_name = forms.CharField(max_length=50, label='Company Name', required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
-    company_description = forms.CharField(label='Company Description', required=False, widget=forms.Textarea)
-    phone_number = forms.CharField(label="Contact Number", required=False, max_length=15, widget=forms.TextInput(
+    company_description = forms.CharField(label='Company Description', required=True, widget=forms.Textarea)
+    phone_number = forms.CharField(label="Contact Number", required=True, max_length=15, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;', 'id': "num"}))
+    contact_name = forms.CharField(max_length=50, label='Contact Name', required=True, widget=forms.TextInput(
+        attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
+    trade_license = forms.FileField(label='Trade License', required=True,
+                                    help_text="Disclaimer: Please attach a copy of your registered trade license",
+                                    validators=[FileTypeValidator(
+                                        allowed_types=['image/jpeg', 'image/png', "application/pdf", "application/msword",
+                                                       "application/vnd.openxmlformats-officedocument.wordprocessingml.document"]
+                                    )],
+                                    widget=forms.ClearableFileInput(attrs={'onchange':'licenseCheck(this);'}))
 
     class Meta:
         model = Employer
-        exclude = ['user', 'employer_id']
+        exclude = ['user', 'employer_id', 'is_active']
 
 
 class EmployerAccVerificationForm(forms.ModelForm):

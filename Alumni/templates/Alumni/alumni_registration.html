@@ -75,11 +75,21 @@
                 <div>{{ alumni_form.dp|as_crispy_field }}</div>
                 <div>{{ alumni_form.cv|as_crispy_field }}</div>
                 <br>
-                <label>
-                    <input type="checkbox" name="terms" required/>
-                </label>
-                <label>*I have read and agree to the <a href="../terms" target="_blank">Terms and Conditions</a></label><br><br>
 
+                <div style="display: flex">
+                    <div style="margin-right: 1%; margin-top: 0.25%">
+                        <input type="checkbox" name="terms" required/>
+                    </div>
+
+                    <div>
+                        <small>
+                            I hereby authorise release of my personal information including contact details and
+                            resume to Murdoch University Dubai. I am aware this information will be made available to
+                            companies and employers through the Murdoch Dubai Career Portal
+                        </small>
+                    </div>
+                </div>
+                <br>
                 <div id="register" class="text-center">
                     <button class="btn btn-danger" type="submit">Register</button>
                 </div>

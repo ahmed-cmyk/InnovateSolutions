@@ -24,13 +24,15 @@
             <div class="employer-profile col-md-8 text-left">
                 <p><strong>Company Name:</strong> {{ obj.company_name }}</p>
                 <p><strong>Company Description:</strong> {{ obj.company_description }}</p>
+                <p><strong>Trade License:</strong> <a href="{{ obj.trade_license.url }}">{{ obj.trade_license }}</a></p>
+                <p><strong>Contact Name:</strong> {{ obj.contact_name }}</p>
                 <p><strong>Contact Number:</strong> {{ obj.phone_number }}</p>
             </div>
         </div>
         <div id="edit-profile" class="text-center">
-            <button type="submit" class="btn btn-primary">
-                <a  class="text-decoration-none text-white" href="/employer/edit_employer_profile">Edit Profile</a>
-            </button>
+            <a class="text-decoration-none text-white" href="/employer/edit_employer_profile">
+                <button type="submit" class="btn btn-primary">Edit Profile</button>
+            </a>
         </div>
     </div>
 {% endblock %}
