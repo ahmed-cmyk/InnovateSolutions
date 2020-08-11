@@ -113,7 +113,7 @@ class StudentForm(forms.ModelForm):
 
     class Meta:
         model = Student
-        exclude = ['user', 'jobs_applied']
+        exclude = ['user', 'jobs_applied', 'is_active']
 
 
 class EditStudentProfileInitialForm(forms.ModelForm):

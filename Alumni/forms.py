@@ -102,7 +102,7 @@ class AlumniForm(forms.ModelForm):
 
     class Meta:
         model = Alumni
-        exclude = ['user', 'jobs_applied']
+        exclude = ['user', 'jobs_applied', 'is_active']
 
 
 class EditAlumniProfileInitialForm(forms.ModelForm):

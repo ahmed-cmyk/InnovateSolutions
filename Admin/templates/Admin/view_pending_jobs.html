@@ -16,14 +16,12 @@
     <script>
     $(".accept_button").on('click', function () {
       var user_id = $(this).val();
-      var is_active_user = 1;
       var status = 'Accepted';
       console.log(user_id);
       $.ajax({
-        url: "{% url 'change_accept_status' %}",
+        url: "{% url 'change_job_status' %}",
         data: {
             'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
-            'is_active_user': is_active_user,
             'status': status,
             'user_id': user_id
         },
@@ -39,14 +37,12 @@
     });
     $(".reject_button").on('click', function () {
       var user_id = $(this).val();
-      var is_active_user = 0;
       var status = 'Rejected';
       console.log(user_id);
       $.ajax({
-        url: "{% url 'change_accept_status' %}",
+        url: "{% url 'change_job_status' %}",
         data: {
             'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
-            'is_active_user': is_active_user,
             'status': status,
             'user_id': user_id
         },

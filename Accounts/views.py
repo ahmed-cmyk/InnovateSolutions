@@ -71,20 +71,33 @@ def login(request):
             else:
                 auth.login(request, user)
                 auth_user = get_user_type(request)
-                print(auth_user['user_type'])
-                if auth_user['user_type'] == 'employer':
-                    print('This is an employer')
-                return redirect('/', get_user_type(request))
+                print(auth_user['obj'].is_active)
+                if auth_user['obj'].is_active == 'Accepted':
+                    return redirect('/', get_user_type(request))
+                elif auth_user['obj'].is_active == 'Rejected':
+                    return redirect('account_rejected')
+                else:
+                    return redirect('pending_approval')
                 # return render(request, "Home/index.html", get_user_type(request))
     else:
         return render(request, 'login.html', get_user_type(request))
+
+
+def pending_approval(request):
+    auth.logout(request)
+    return render(request, 'Accounts/pending_acc.html')
+
+
+def acc_rejected(request):
+    auth.logout(request)
+    return render(request, 'Accounts/reject_acc.html')
 
 
 def forgot_password(request):
     if request.method == 'POST':
         return redirect("/")
     else:
-        return render(request, 'Accounts/forgot_password.html')
+        return render(request, 'registration/password_reset_email.html')
 
 
 def logout(request):
