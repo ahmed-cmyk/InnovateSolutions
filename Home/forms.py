@@ -25,7 +25,8 @@ class CreateJobForm(forms.ModelForm):
             "salary_min": "Minimum Salary (AED)",
             "salary_max": "Maximum Salary (AED)",
             "industry_id": "Industry ID",
-            "job_type_id": "Job Type ID"
+            "job_type_id": "Job Type ID",
+            "other_skills":"Other Skills (Optional)"
         }
 
 

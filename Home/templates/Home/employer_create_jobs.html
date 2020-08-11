@@ -34,6 +34,7 @@
             </div>
             {{ form.skills.label }}
             <div class="skills-container">{{ form.skills }}</div><br>
+            <div id="otherskills">{{ form.other_skills|as_crispy_field }}</div>
         {% elif user_type == 'admin' %}
             <div>{{ jobForm.job_title|as_crispy_field }}</div>
             <div>{{ jobForm.description|as_crispy_field }}</div>
