@@ -11,8 +11,8 @@ from .models import Admin
 
 import dns.resolver, dns.exception
 
+
 class InitialAdminForm(forms.ModelForm):
-    
     first_name = forms.CharField(label='First Name')
     last_name = forms.CharField(label='Last Name')
     email = forms.EmailField(label='Email Address', required=True)
@@ -36,7 +36,8 @@ class InitialAdminForm(forms.ModelForm):
         user.is_staff = True
         if commit:
             user.save()
-        permissions = Permission.objects.filter(content_type_id__in=(14,15,16,18)) #14 industry, #15 jobtype, #16 skill, #18 job
+        permissions = Permission.objects.filter(
+            content_type_id__in=(14, 15, 16, 18))  # 14 industry, #15 jobtype, #16 skill, #18 job
         user.user_permissions.add(*permissions)
         return user
 
@@ -65,11 +66,11 @@ class InitialAdminForm(forms.ModelForm):
     def samePasswords(self):
         p1 = self.cleaned_data.get("password1")
         p2 = self.cleaned_data.get("password2")
-        
+
         if p1 != p2:
             return False
         return True
-        
+
 
 class AdminForm(forms.ModelForm):
     gender_choices = [
@@ -79,13 +80,14 @@ class AdminForm(forms.ModelForm):
     gender = forms.ChoiceField(choices=gender_choices, widget=forms.Select(attrs={'class': 'custom-select'}))
 
     dp = forms.ImageField(label='Select a profile picture (only jpeg and png file formats allowed)', required=False,
-    validators=[FileTypeValidator(                                                                                                                                
-        allowed_types=['image/jpeg','image/png']
-    )])
+                          validators=[FileTypeValidator(
+                              allowed_types=['image/jpeg', 'image/png']
+                          )])
 
     class Meta:
         model = Admin
-        exclude = ['user',]
+        exclude = ['user', ]
+
 
 class EditAdminProfileForm(forms.ModelForm):
     class Meta:
@@ -100,14 +102,18 @@ class EditAdminProfileForm(forms.ModelForm):
         )
         exclude = ['email', 'password1', 'password2']
 
+
 class AddIndustryForm(forms.ModelForm):
     industry_name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs=
                                                                                          {'class': 'form-control-text',
                                                                                           'style': 'resize:none;'}))
+
+
 class Statistics(forms.Form):
     choices = [
         ('Past 7 Days', 'Past 7 Days'),
         ('Past 30 Days', 'Past 30 Days'),
         ('Past Year', 'Past Year')
     ]
-    period = forms.ChoiceField(label="Select Time Period",choices=choices, widget=forms.Select(attrs={'class': 'custom-select'}))
+    period = forms.ChoiceField(label="Select Time Period", choices=choices,
+                               widget=forms.Select(attrs={'class': 'custom-select'}))

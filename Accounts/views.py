@@ -70,6 +70,10 @@ def login(request):
                 return redirect("log_in")
             else:
                 auth.login(request, user)
+                auth_user = get_user_type(request)
+                print(auth_user['user_type'])
+                if auth_user['user_type'] == 'employer':
+                    print('This is an employer')
                 return redirect('/', get_user_type(request))
                 # return render(request, "Home/index.html", get_user_type(request))
     else:

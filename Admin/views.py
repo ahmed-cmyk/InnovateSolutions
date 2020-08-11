@@ -93,23 +93,52 @@ def create_admin(request):
 
 @staff_member_required
 def view_pending(request):
-    user = request.user
-    employers = Employer.objects.all()
-    args = {'user': user, 'employers': employers}
+    user = get_user_type(request)
+    applicants = User.objects.filter(is_active=False)
+    args = {'user_type': user['user_type'], 'applicants': applicants}
     return render(request, 'Admin/view_pending_requests.html', args)
 
 
 def change_accept_status(request):
-    status = request.GET.get('is_active', False)
-    user_id = request.GET.get('id', None)
-
+    is_active = request.GET.get('is_active_user', False)
+    status = request.GET.get('status', 'Pending')
+    user_id = request.GET.get('user_id', None)
+    print(is_active)
+    print(user_id)
     user = User.objects.get(id=user_id)
+    print(user)
     try:
-        user.is_active = status
+        user_employer = Employer.objects.get(user_id=user_id)
+        user_employer.is_active = status
+        user_employer.save()
+        print(user_employer.is_active)
+    except:
+        pass
+
+    try:
+        user_alumni = Alumni.objects.get(user_id=user_id)
+        user_alumni.is_active = status
+        user_alumni.save()
+        print(user_alumni.is_active)
+    except:
+        pass
+
+    try:
+        user_student = Student.objects.get(user_id=user_id)
+        user_student.is_active = status
+        user_student.save()
+        print(user_student.is_active)
+    except:
+        pass
+
+    try:
+        user.is_active = is_active
         user.save()
         return JsonResponse({"success": True})
     except Exception as e:
         return JsonResponse({"success": False})
+
+
 # @staff_member_required
 # def view_pending(request, id=None):
 #     employers = Employer.objects.all()

@@ -12,30 +12,78 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/PendingRequests.css' %}"/>
 {% endblock %}
 {% block jQueryCall %}
-    <script src="{% static 'js/AdminAccountVerification.js' %}" type="text/javascript"></script>
+{#    <script src="{% static 'js/AdminAccountVerification.js' %}" type="text/javascript"></script>#}
+    <script>
+    $(".accept_button").on('click', function () {
+      var user_id = $(this).val();
+      var is_active_user = 1;
+      var status = 'Accepted';
+      console.log(user_id);
+      $.ajax({
+        url: "{% url 'change_accept_status' %}",
+        data: {
+            'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
+            'is_active_user': is_active_user,
+            'status': status,
+            'user_id': user_id
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.success) {
+            console.log("ajax call success.");
+          }else{
+            console.log("ajax call not success.");
+          }
+        }
+      });
+    });
+    $(".reject_button").on('click', function () {
+      var user_id = $(this).val();
+      var is_active_user = 0;
+      var status = 'Rejected';
+      console.log(user_id);
+      $.ajax({
+        url: "{% url 'change_accept_status' %}",
+        data: {
+            'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
+            'is_active_user': is_active_user,
+            'status': status,
+            'user_id': user_id
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.success) {
+            console.log("ajax call success.");
+          }else{
+            console.log("ajax call not success.");
+          }
+        }
+      });
+    });
+    </script>
 {% endblock %}
 
 {% block content %}
     <div id="pendingRequestBody" class="col-12 text-center">
-        {% if user.is_staff %}
+        {% if user_type == 'admin' %}
             <h2>Pending Requests</h2>
             <hr>
-            <form method="POST" class="form-horizontal">
-            {% csrf_token %}
-                <table id="request_table" class="mx-auto">
-                    {% for employer in employers %}
-                        <tr class="my-2">
-                            <td class="text-left">{{ employer.user }}</td>
-                            <td>
-                                <button id="accept_button" class="btn btn-success" type="button" name="accept" value="{{employer.user_id}}">Accept</button>
-                            </td>
-                            <td>
-                                <button id="reject_button" class="btn btn-danger" type="button" name="reject" value="{{employer.user_id}}">Reject</button>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </form>
+            <div id="pendingBody">
+                <form method="POST" class="form-horizontal">
+                {% csrf_token %}
+                    <table id="request_table" class="table table-borderless mx-auto">
+                        {% for applicant in applicants %}
+                            <tr>
+                                <td class="username text-left">{{ applicant }}</td>
+                                <td>
+                                    <button id="accept_button" class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.id }}">Accept</button>
+                                    <button id="reject_button" class="reject_button btn btn-danger" type="button" name="reject" value="{{ applicant.id }}">Reject</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </form>
+            </div>
         {% endif %}
     </div>
 {% endblock %}

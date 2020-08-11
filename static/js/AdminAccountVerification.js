@@ -1,23 +1,21 @@
 $("#accept_button").on('click', function () {
-      var username = $(this).val();
-      var active = true;
-      console.log(username);
+      var user_id = $(this).val();
+      var is_active = 1;
+      console.log(user_id);
       $.ajax({
-        url: 'change_accept_status',
+        url: "{% url 'change_accept_status' %}",
         data: {
           'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
-          'active': active,
-          'job_id': username
+          'is_active': is_active,
+          'user_id': user_id
         },
         dataType: 'json',
         success: function (data) {
           if (data.success) {
-            alert("ajax call success.");
-            // here you update the HTML to change the active to innactive
+            console.log("ajax call success.");
           }else{
-            alert("ajax call not success.");
+            console.log("ajax call not success.");
           }
         }
       });
-
     });
