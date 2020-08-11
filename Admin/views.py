@@ -26,6 +26,7 @@ from Student.forms import EditStudentProfileForm
 from Student.models import Student, StudentJobApplication
 from Home.models import Job, send_html_mail
 from Employer.models import Employer
+from Employer import views as EmployerViews
 
 
 # Create your views here.
@@ -139,6 +140,52 @@ def change_accept_status(request):
         return JsonResponse({"success": False})
 
 
+@staff_member_required
+def view_pend_acc_profile(request, id):
+    try:
+        student = Student.objects.get(user_id=id)
+        user = get_user_type(request)
+        args = {'student': student, 'obj': user['obj'], 'user_type': user['user_type']}
+        return render(request, 'Home/student_details.html', args)
+    except:
+        pass
+
+    try:
+        alumni = Alumni.objects.get(user_id=id)
+        user = get_user_type(request)
+        args = {'alumni': alumni, 'obj': user['obj'], 'user_type': user['user_type']}
+        return render(request, 'Home/alumni_details.html', args)
+    except:
+        pass
+
+    try:
+        employer = Employer.objects.get(user_id=id)
+        user = get_user_type(request)
+        args = {'employer': employer, 'obj': user['obj'], 'user_type': user['user_type']}
+        return render(request, 'Admin/view_employer_profile.html', args)
+    except:
+        pass
+
+    return redirect('view_pending_requests')
+
+
+@staff_member_required
+def view_pending_jobs(request):
+    user = get_user_type(request)
+    jobs = Job.objects.filter(is_active='Pending')
+    args = {'user_type': user['user_type'], 'jobs': jobs}
+    return render(request, 'Admin/view_pending_jobs.html', args)
+
+
+@staff_member_required
+def view_pending_job_details(request, id):
+    user = get_user_type(request)
+    job = Job.objects.get(id=id)
+    companies = Employer.objects.all()
+
+    args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'],
+            'companies': companies, 'applied': True}
+    return render(request, 'Home/job_details.html', args)
 # @staff_member_required
 # def view_pending(request, id=None):
 #     employers = Employer.objects.all()
