@@ -2,6 +2,10 @@
     margin: 5% 0;
 }
 
+#no-requests {
+    margin: 10% 0;
+}
+
 #helpForm hr{
     width: 50%;
     background-color: #000000;

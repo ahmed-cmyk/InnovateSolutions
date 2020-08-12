@@ -133,7 +133,7 @@ def view_jobs(request):
             industry_id_jobs = Job.objects.all()
 
         filtered_jobs = min_duration_jobs & max_duration_jobs & chosen_duration_type & location_jobs & max_salary_jobs & min_salary_jobs & job_type_id_jobs & industry_id_jobs
-        jobs_all = Job.objects.filter(status="Open").order_by('-date_posted')
+        jobs_all = Job.objects.filter(status="Open", is_active='Accepted').order_by('-date_posted')
         jobs = jobs_all & filtered_jobs
         form = FilterJobForm()
         companies = Employer.objects.all()
@@ -145,17 +145,17 @@ def view_jobs(request):
         # jobs = Job.objects.exclude(id__in=emp_jobs)
         args = {'jobs': jobs, 'obj': user['obj'], 'user_type': user['user_type']}
     elif user['user_type'] == 'admin':
-        jobs = Job.objects.exclude(status="Deleted").order_by('-date_posted')
+        jobs = Job.objects.filter(is_active='Accepted').exclude(status="Deleted").order_by('-date_posted')
         companies = Employer.objects.all()
         form = FilterJobForm()
         args = {'jobs': jobs, 'companies': companies, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
     elif user['user_type'] == 'student':
-        jobs = Job.objects.filter(status="Open").order_by('-date_posted')
+        jobs = Job.objects.filter(status="Open", is_active='Accepted').order_by('-date_posted')
         companies = Employer.objects.all()
         form = FilterJobForm()
         args = {'jobs': jobs, 'companies': companies, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
     elif user['user_type'] == 'alumni':
-        jobs = Job.objects.filter(status="Open").order_by('-date_posted')
+        jobs = Job.objects.filter(status="Open", is_active='Accepted').order_by('-date_posted')
         companies = Employer.objects.all()
         form = FilterJobForm()
         args = {'jobs': jobs, 'companies': companies, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}

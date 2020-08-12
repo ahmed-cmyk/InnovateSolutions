@@ -11,8 +11,8 @@
 {% endblock %}
 
 {% block content %}
-    <div id="helpdeskRequestBody" class="col-12">
-        {% if helpdeskRequests %}
+    {% if helpdeskRequests %}
+        <div id="helpdeskRequestBody" class="col-12">
             <table class="table table-striped">
                 <thead class="thead-dark">
                 <tr class="text-center">
@@ -34,11 +34,11 @@
                 {% endfor %}
                 </tbody>
             </table>
-        {% else %}
-            <div class="text-center my-5">
-                <h2>No requests to display</h2>
-                <p>To make a new request click <a href="{% url 'HelpDesk' %}">here</a></p>
-            </div>
-        {% endif %}
-    </div>
+        </div>
+    {% else %}
+        <div id="no-requests" class="text-center col-12">
+            <h2>No requests to display</h2>
+            <p>To make a new request click <a href="{% url 'HelpDesk' %}">here</a></p>
+        </div>
+    {% endif %}
 {% endblock %}

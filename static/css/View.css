@@ -31,6 +31,10 @@
   border-radius: 8px;
 }
 
+#no-jobs {
+    margin: 10% 0;
+}
+
 #filter button {
   color: #FFF;
   background-color: #CC0000;

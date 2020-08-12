@@ -63,11 +63,13 @@
                         <form class="p-4 bg-light border border-secondary mx-auto" method="POST" action="{% url 'view_jobs' %}">{% csrf_token %}
                             <div id="formHeader" class="text-center">
                                 <h4 class="font-weight-bold">Filter Job Listings</h4>
+                                <hr>
                             </div>
+                            <br>
                             <div class="form-row">
-                                <div class="form-group">{{ form.min_duration|as_crispy_field }}</div>
-                                <div class="form-group">{{ form.max_duration|as_crispy_field }}</div>
-                                <div class="form-group">{{ form.duration_type|as_crispy_field }}</div>
+                                <div class="form-group col-3">{{ form.min_duration|as_crispy_field }}</div>
+                                <div class="form-group col-3">{{ form.max_duration|as_crispy_field }}</div>
+                                <div class="form-group col-6">{{ form.duration_type|as_crispy_field }}</div>
                             </div>
                             <div class="form-group">
                                 <div>{{ form.industry_id|as_crispy_field }}</div>
@@ -77,8 +79,8 @@
                             </div>
                             <div class="form-group">{{ form.job_type_id|as_crispy_field }}</div>
                             <div class="form-row">
-                                <div class="form-group">{{ form.min_salary|as_crispy_field }}</div>
-                                <div class="form-group">{{ form.max_salary|as_crispy_field }}</div>
+                                <div class="form-group col-6">{{ form.min_salary|as_crispy_field }}</div>
+                                <div class="form-group col-6">{{ form.max_salary|as_crispy_field }}</div>
                             </div>
                             <div class="form-footer text-center">
                                 <a href='../view_jobs'><button type="button" class="btn btn-danger">Reset</button></a>
@@ -174,12 +176,14 @@
                 {% endif %}
             {% endfor %}
         {% else %}
-            {% if user_type != "student" and user_type != "alumni" %}
-                <h1 class="text-center">No jobs to display</h1>
-                <p class="text-center">Want to create a new job? Click <a href="{% url 'create_job' %}">this</a> link to do just that!</p>
-            {% else %}
-                <h1 class="text-center">Sorry about that it looks like there are no Jobs available right now</h1>
-            {% endif %}
+            <div id="no-jobs">
+                {% if user_type != "student" and user_type != "alumni" %}
+                    <h1 class="text-center">No jobs to display</h1>
+                    <p class="text-center">Want to create a new job? Click <a href="{% url 'create_job' %}">this</a> link to do just that!</p>
+                {% else %}
+                    <h1 class="text-center">Sorry about that it looks like there are no Jobs available right now</h1>
+                {% endif %}
+            </div>
         {% endif %}
     </div><!-- End of viewBody -->
 {% endblock %}
