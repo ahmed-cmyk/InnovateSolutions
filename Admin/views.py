@@ -108,10 +108,15 @@ def change_accept_status(request):
     print(user_id)
     user = User.objects.get(id=user_id)
     print(user)
+
+    subject = 'Account Verification Complete'
+    htmlText = f"Your account creation request has been reviewed by an admin and the request has been {status}"
+
     try:
         user_employer = Employer.objects.get(user_id=user_id)
         user_employer.is_active = status
         user_employer.save()
+        send_html_mail(subject, htmlText, [user_employer.user])
         print(user_employer.is_active)
     except:
         pass
@@ -120,6 +125,7 @@ def change_accept_status(request):
         user_alumni = Alumni.objects.get(user_id=user_id)
         user_alumni.is_active = status
         user_alumni.save()
+        send_html_mail(subject, htmlText, [user_alumni.user])
         print(user_alumni.is_active)
     except:
         pass
@@ -128,6 +134,7 @@ def change_accept_status(request):
         user_student = Student.objects.get(user_id=user_id)
         user_student.is_active = status
         user_student.save()
+        send_html_mail(subject, htmlText, [user_student.user])
         print(user_student.is_active)
     except:
         pass
@@ -159,6 +166,7 @@ def view_pend_acc_profile(request, id):
     try:
         employer = Employer.objects.get(user_id=id)
         user = get_user_type(request)
+        send_html_mail(subject, htmlText, [employer.user])
         args = {'employer': employer, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Admin/view_employer_profile.html', args)
     except:
@@ -188,13 +196,19 @@ def view_pending_job_details(request, id):
 
 def change_job_status(request):
     status = request.GET.get('status', 'Pending')
-    id = request.GET.get('user_id', None)
+    job_id = request.GET.get('user_id', None)
+
+    subject = 'Job Verification Complete'
+    htmlText = f"Your account Job request has been reviewed by an admin and the request has been {status}"
+
     try:
         print(id)
-        job = Job.objects.get(id=id)
+        job = Job.objects.get(id=job_id)
         print(job)
+        print(job.posted_by)
         job.is_active = status
         job.save()
+        send_html_mail(subject, htmlText, [job.posted_by])
         print(job.is_active)
     except:
         pass
@@ -301,13 +315,8 @@ def create_job(request):
                 company.user_id = admin.user.id
                 company.save()
                 job = jobForm.save(commit=False)
-                job.posted_by = request.user
                 job.save()
 
-                # send_mail('New Job has been posted',
-                #           'A new Job has been posted on the Murdoch Career Portal.',
-                #           DEFAULT_FROM_EMAIL, ['ikramahmed398@gmail.com'],
-                #           fail_silently=False)
                 subject = 'New Job has been posted'
                 htmlText = 'A new Job has been posted on the Murdoch Career Portal.'
                 send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])

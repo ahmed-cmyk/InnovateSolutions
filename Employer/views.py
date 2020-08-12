@@ -58,17 +58,17 @@ def signup(request):
                             email = str(request.user)
                             employer.save()
 
-                            # subject = 'Your account has been created'
-                            # htmlText = "Your account has been registered and you are now ready to use the Murdoch " \
-                            #            "Career Portal. "
-                            # send_html_mail(subject, htmlText, [email])
-                            #
-                            # subject = 'New User has signed up'
-                            # htmlText = "A new Employer has registered to use the Murdoch Career Portal."
-                            # send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
+                            subject = 'Account Created'
+                            htmlText = 'Your account has been created and is currently pending approval'
+                            send_html_mail(subject, htmlText, [email])
+
+                            subject = 'New Employer Account Created'
+                            htmlText = f'A new employer account for the user {email} has been created and is ' \
+                                       f'currently pending approval.'
+                            send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
                         messages.success(request, 'Employer account created')
-                        return redirect("activate")
+                        return render(request, 'Accounts/pending_acc.html', get_user_type(request))
                     else:
                         messages.error(request, employer_form.errors)
                         return redirect("employer_register")

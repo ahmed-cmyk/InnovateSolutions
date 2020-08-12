@@ -20,6 +20,7 @@ from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
 
 class HelpDeskFormView(TemplateView):
     template_name = 'HelpDesk/Report_issue.html'
+
     def get(self, request, *args, **kwargs):
         user = get_user_type(request)
         if kwargs:
@@ -74,16 +75,10 @@ class HelpDeskFormView(TemplateView):
                 f = form.save(commit=False)
                 f.name_Request = request.user
                 f.save()
-                email = str(request.user)
-                # send_mail(
-                #     'HelpDesk Request',
-                #     "A new helpdesk complaint has been filed by.",
-                #     DEFAULT_FROM_EMAIL, ['ikramahmed398@gmail.com']
-                # )
+
                 subject = 'HelpDesk Request'
-                htmlText = "A new helpdesk complaint has been filed by."
-                send_html_mail(subject, htmlText, [email])
-             #   sg.send(message)
+                htmlText = f"A new HelpDesk request has been filed by the user {f.name_Request}."
+                send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
                 messages.success(request, "Your request has been submitted.")
                 return redirect('HelpDesk', f.id)
 
@@ -100,7 +95,7 @@ class HelpDeskRequests(TemplateView):
             'user_type': user['user_type'],
             'obj': user['obj']
         }
-        print (c)
+        print(c)
 
         return render(request, 'HelpDesk/Admin_List_of_Requests.html', args)
 

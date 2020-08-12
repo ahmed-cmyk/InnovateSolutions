@@ -14,7 +14,6 @@
     <form action="admin_create_job" method="post" enctype="multipart/form-data">
 
         {% csrf_token %}
-
         {{ companyForm.as_p }}
         {{ jobForm.as_p }}
 
@@ -27,9 +26,11 @@
 
     <!-- this displays any errors during submission -->
     <div>
-        {% for message in messages %}
-            <h3> {{ message }} </h3>
-        {% endfor %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="alert alert-{{ message.tags }}"> {{ message }} </p>
+            {% endfor %}
+        {% endif %}
     </div>
     
 {% endblock %}

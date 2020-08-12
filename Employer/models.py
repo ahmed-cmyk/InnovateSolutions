@@ -8,6 +8,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from Home.models import Industry
 
+
 class Employer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='employer_user')
     STATUS_CHOICES = [
@@ -20,7 +21,8 @@ class Employer(models.Model):
     phone_number = PhoneField(blank=False)
     logo = models.ImageField(upload_to='company_logos', null=True, blank=True)
     contact_name = models.CharField(max_length=50, blank=False, default='N/A')
-    trade_license = models.FileField(upload_to='trade_licenses', null=False, blank=False, default='../staticfiles/DefaultDP.jpg')
+    trade_license = models.FileField(upload_to='trade_licenses', null=False, blank=False,
+                                     default='../staticfiles/DefaultDP.jpg')
 
     is_active = models.CharField(null=False, max_length=10, choices=STATUS_CHOICES, default=STATUS_CHOICES[2][1])
 

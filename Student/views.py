@@ -51,17 +51,17 @@ def student_signup(request):
                         student.save()
                         student_form.save_m2m()
 
-                        subject = 'Student account created'
-                        htmlText = "Your account has been created."
+                        subject = 'Account Created'
+                        htmlText = 'Your account has been created and is currently pending approval'
                         send_html_mail(subject, htmlText, [email])
 
-                        subject = 'Student account created'
-                        htmlText = "A new student account with username '{{ user.get_username }}' has been posted on " \
-                                   "the Murdoch Career Portal."
+                        subject = 'New Student Account Created'
+                        htmlText = f'A new student account for the user {email} has been created and is ' \
+                                   f'currently pending approval.'
                         send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
                     messages.success(request, 'A student account has been created')
-                    return redirect('log_in')
+                    return render(request, 'Accounts/pending_acc.html', get_user_type(request))
                 else:
                     messages.error(request, student_form.errors)
                     return redirect('student_registration')

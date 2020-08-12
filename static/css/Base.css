@@ -59,6 +59,10 @@ header {
     display: inline-block;
 }
 
+a.dropdown-item {
+    color: #D21F1F;
+}
+
 #navigationBar #navBottom {
     background-color: #1D1A1A;
 }
@@ -77,7 +81,7 @@ header {
 #navigationBar #navBottom .active {
     /*color: #CC0000;*/
     /*background-color: #FFF;*/
-    border-bottom: 2px solid #CC0000;
+    border-bottom: 3px solid #CC0000;
 }
 
 main {
@@ -96,7 +100,7 @@ main {
 #jobDetBody {
     width: 90%;
     margin: auto;
-    align: center;
+    text-align: center;
 }
 
 #body-image {

@@ -19,14 +19,14 @@ class CreateJobForm(forms.ModelForm):
 
     class Meta:
         model = Job
-        exclude = ['posted_by', 'date_posted', 'status', 'date_closed']
+        exclude = ['date_posted', 'status', 'date_closed']
         labels = {
             "duration": "Duration",
             "salary_min": "Minimum Salary (AED)",
             "salary_max": "Maximum Salary (AED)",
             "industry_id": "Industry ID",
             "job_type_id": "Job Type ID",
-            "other_skills":"Other Skills (Optional)"
+            "other_skills": "Other Skills (Optional)"
         }
 
 
@@ -35,9 +35,10 @@ class EditJobForm(CreateJobForm):
         model = Job
         exclude = ['posted_by', 'date_posted', 'date_closed', 'status']
 
+
 class FilterJobForm(forms.ModelForm):
     LOCATION_CHOICES = [
-        ('--Select--','--Select--'),
+        ('--Select--', '--Select--'),
         ('Abu Dhabi', 'Abu Dhabi'),
         ('Dubai', 'Dubai'),
         ('Sharjah', 'Sharjah'),

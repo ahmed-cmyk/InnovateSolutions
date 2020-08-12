@@ -169,7 +169,6 @@ def create_job(request):
     try:
         user = get_user_type(request)
         admin = Admin.objects.get(user_id=request.user.id)
-        email = str(request.user)
         if user['user_type'] == 'admin':
             if request.method == 'POST':
                 jobForm = CreateJobForm(request.POST)
@@ -181,16 +180,17 @@ def create_job(request):
                         company.user_id = admin.user.id
                         company.save()
                         job = jobForm.save(commit=False)
-                        job.posted_by = request.user
+                        email = job.posted_by
                         job.save()
                         jobForm.save_m2m()
 
                         subject = 'New Job has been posted'
-                        htmlText = "Your job has been posted on the Murdoch Career Portal."
+                        htmlText = "Your job has been posted on the Murdoch Career Portal and is currently pending approval." \
+                                   "You will be notified once the approval process has been completed."
                         send_html_mail(subject, htmlText, [email])
 
                         subject = 'New Job has been posted'
-                        htmlText = "A new job has been posted on the Murdoch Career Portal."
+                        htmlText = "A new job has been posted on the Murdoch Career Portal and is currently pending approval."
                         send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
                         messages.success(request, "Job successfully created")
@@ -223,11 +223,12 @@ def create_job(request):
                     form.save_m2m()
 
                     subject = 'New Job has been posted'
-                    htmlText = "Your job has been posted on the Murdoch Career Portal."
+                    htmlText = "Your job has been posted on the Murdoch Career Portal and is currently pending approval." \
+                               "You will be notified once the approval process has been completed."
                     send_html_mail(subject, htmlText, [email])
 
                     subject = 'New Job has been posted'
-                    htmlText = "A new job has been posted on the Murdoch Career Portal."
+                    htmlText = "A new job has been posted on the Murdoch Career Portal and is currently pending approval."
                     send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
                     messages.success(request, "Job successfully created")
@@ -316,13 +317,11 @@ def edit_job(request, id):
                     data.save()
                     form.save_m2m()
                     next = request.POST.get('next', '/')
-                    # send_mail('Job Edit Successful',
-                    #           'You have successfully edited your job.',
-                    #           DEFAULT_FROM_EMAIL, [email],
-                    #           fail_silently=True)
+
                     subject = 'Job Edit Successful'
                     htmlText = 'You have successfully edited your job.'
                     send_html_mail(subject, htmlText, [email])
+
                     return redirect(next)
                 else:
                     messages.info(request, form.errors)
