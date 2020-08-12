@@ -7,8 +7,8 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js" integrity="sha256-0vBSIAi/8FxkNOSKyPEfdGQzFDak1dlqFKBYqBp1yC4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/PendingRequests.css' %}"/>
 {% endblock %}
 {% block jQueryCall %}
@@ -74,8 +74,8 @@
                                     <td class="username text-left">{{ applicant.user }}</td>
                                     <td><a href="{% url 'view_account_details' applicant.user_id %}">View Account Details</a></td>
                                     <td>
-                                        <button id="accept_button" class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.user_id }}">Accept</button>
-                                        <button id="reject_button" class="reject_button btn btn-danger" type="button" name="reject" value="{{ applicant.user_id }}">Reject</button>
+                                        <button class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.user_id }}">Accept</button>
+                                        <button class="reject_button btn btn-danger" type="button" name="reject" value="{{ applicant.user_id }}">Reject</button>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -86,8 +86,8 @@
                                     <td class="username text-left">{{ applicant.user }}</td>
                                     <td><a href="{% url 'view_account_details' applicant.user_id %}">View Account Details</a></td>
                                     <td>
-                                        <button id="accept_button" class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.user_id }}">Accept</button>
-                                        <button id="reject_button" class="reject_button btn btn-danger" type="button" name="reject" value="{{ applicant.user_id }}">Reject</button>
+                                        <button class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.user_id }}">Accept</button>
+                                        <button class="reject_button btn btn-danger" type="button" name="reject" value="{{ applicant.user_id }}">Reject</button>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -98,8 +98,8 @@
                                     <td class="username text-left">{{ applicant.user }}</td>
                                     <td><a href="{% url 'view_account_details' applicant.user_id %}">View Account Details</a></td>
                                     <td>
-                                        <button id="accept_button" class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.user_id }}">Accept</button>
-                                        <button id="reject_button" class="reject_button btn btn-danger" type="button" name="reject" value="{{ applicant.user_id }}">Reject</button>
+                                        <button class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.user_id }}">Accept</button>
+                                        <button class="reject_button btn btn-danger" type="button" name="reject" value="{{ applicant.user_id }}">Reject</button>
                                     </td>
                                 </tr>
                             {% endfor %}

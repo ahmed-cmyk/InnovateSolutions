@@ -57,7 +57,11 @@
             </div>
             {{ jobForm.skills.label }}
             <div class="skills-container">{{ jobForm.skills }}</div><br>
-            <div>{{ jobForm.posted_by|as_crispy_field }}</div>
+            <br><hr><br>
+            {% for employerField in employerForm %}
+                <div>{{ employerField|as_crispy_field }}</div>
+            {% endfor %}
+            <br><hr><br>
             {% for companyField in companyForm %}
                 <div>{{ companyField|as_crispy_field }}</div>
             {% endfor %}

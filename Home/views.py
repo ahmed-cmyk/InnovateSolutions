@@ -30,7 +30,7 @@ from Alumni.models import Alumni, AlumniJobApplication
 from Accounts.views import get_user_type
 from .models import Job, Skill, UserNotifications, send_html_mail
 from .forms import CreateJobForm, EditJobForm, FilterJobForm, FilterStudentForm, FilterAlumniForm
-from Employer.forms import EmployerForm
+from Employer.forms import EmployerForm, InitialEmployerForm
 from Student.forms import StudentJobApplicationForm
 from Alumni.forms import AlumniJobApplicationForm
 from django.core.mail import send_mail
@@ -172,12 +172,14 @@ def create_job(request):
         if user['user_type'] == 'admin':
             if request.method == 'POST':
                 jobForm = CreateJobForm(request.POST)
+                employerForm = InitialEmployerForm(request.POST)
                 companyForm = EmployerForm(request.POST, request.FILES)
 
                 if jobForm.is_valid() and companyForm.is_valid():
                     with transaction.atomic():
+                        user = employerForm.save()
                         company = companyForm.save(commit=False)
-                        company.user_id = admin.user.id
+                        company.user = user
                         company.save()
                         job = jobForm.save(commit=False)
                         email = job.posted_by
@@ -202,9 +204,10 @@ def create_job(request):
                     return redirect('create_job')
             else:
                 jobForm = CreateJobForm()
+                employerForm = InitialEmployerForm()
                 companyForm = EmployerForm()
-                args = {'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'],
-                        'user_type': user['user_type']}
+                args = {'jobForm': jobForm, 'employerForm': employerForm, 'companyForm': companyForm,
+                        'obj': user['obj'], 'user_type': user['user_type']}
                 return render(request, "Home/employer_create_jobs.html", args)
     except Admin.DoesNotExist:
         pass
