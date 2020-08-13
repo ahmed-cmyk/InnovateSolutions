@@ -1,7 +1,9 @@
 import datetime
 from django import forms
+from django.contrib.auth.models import User
 from django.forms import SelectDateWidget, DateField
 
+from Employer.models import Employer
 from Home.models import Job, Skill, JobType, Industry, Major
 from Student.models import Student
 from Alumni.models import Alumni
@@ -28,6 +30,10 @@ class CreateJobForm(forms.ModelForm):
             "job_type_id": "Job Type ID",
             "other_skills": "Other Skills (Optional)"
         }
+
+    def __init__(self, *args, **kwargs):
+        super(CreateJobForm, self).__init__(*args, **kwargs)
+        self.fields['posted_by'].queryset = Employer.objects.all()
 
 
 class EditJobForm(CreateJobForm):

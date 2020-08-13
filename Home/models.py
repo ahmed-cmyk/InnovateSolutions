@@ -96,7 +96,7 @@ class Job(models.Model):
     salary_min = models.DecimalField(max_digits=8, decimal_places=2, validators=[MinValueValidator(0.00)])
     salary_max = models.DecimalField(max_digits=8, decimal_places=2, validators=[MinValueValidator(0.00)])
     skills = models.ManyToManyField(Skill, related_name='job_skills')
-    is_active = models.CharField(null=False, max_length=10, choices=STATUS_CHOICES, default=STATUS_CHOICES[2][1])
+    is_active = models.CharField(blank=True, max_length=10, choices=STATUS_CHOICES, default=STATUS_CHOICES[2][1])
     other_skills = models.TextField(null=True, blank=True)
 
     def __str__(self):
