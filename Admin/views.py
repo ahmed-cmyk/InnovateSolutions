@@ -7,7 +7,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
 
-from Alumni.models import Alumni
+from Alumni.models import Alumni, AlumniJobApplication
 from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
 from django.utils import timezone
 from datetime import timedelta, datetime, date
@@ -191,9 +191,16 @@ def view_pending_job_details(request, id):
     job = Job.objects.get(id=id)
     companies = Employer.objects.all()
 
+    if request.POST.get("viewcandidates"):
+        alumniCandidates = AlumniJobApplication.objects.filter(job_id=job)
+        studentCandidates = StudentJobApplication.objects.filter(job_id=job)
+        args = {'studentCandidates': studentCandidates, 'alumniCandidates': alumniCandidates, 'obj': user['obj'],
+                'user_type': user['user_type']}
+        return render(request, 'Home/view_candidates.html', args)
+
     args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'],
             'companies': companies, 'applied': True}
-    return render(request, 'Home/job_details.html', args)
+    return render(request, 'Admin/job_details.html', args)
 
 
 def change_job_status(request):

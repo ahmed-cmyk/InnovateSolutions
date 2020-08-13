@@ -1,0 +1,120 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+<!-- Stylesheet -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Details.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    Job Listing Details - Murdoch Dubai Job Portal
+{% endblock %}
+
+{% block content %}
+    <div id="job-detail-body">
+        <form method="POST">{% csrf_token %}
+            <div class="col-12">
+                <div id="job-details">
+                    <div class="card w-75 mx-auto">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-8 col-sm-8 col-xs-12 pt-1 pl-2">
+                                    <h4 class="text-primary">{{ job.job_title }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 d-block d-sm-none">
+                            {% if company.logo %}
+                                <img class="img-fluid" src="{{ company.logo.url }}" height="auto" width="auto">
+                            {% else %}
+                                <img class="img-fluid" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
+                            {% endif %}
+                        </div>
+                        <div class="card-body row">
+                            <div class="col-10 px-2">
+                                <p class="text-secondary">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i> {{ job.date_posted }}
+                                </p>
+                                <p class="card-text"><b class="text-secondary">Job Description: </b>{{ job.description }}</p>
+                                <b class="card-text text-secondary">Required Skills: </b>
+                                {% for skill in job.skills.all %}
+                                    <li class="pl-1">{{ skill }}</li>
+                                {% endfor %}
+                            </div>
+                            {% if company.logo %}
+                                <img class="col-2 d-none d-sm-block" src="{{ company.logo.url }}" height="auto" width="auto">
+                            {% else %}
+                                <img class="col-2 d-none d-sm-block" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="card-deck w-75 mx-auto">
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <div id="job-company-info" class="card">
+                                <h4 class="card-header text-primary">Company Info</h4>
+                                {% for company in companies %}
+                                    {% if job.posted_by == company.user %}
+                                        <div class="card-body">
+                                            <p><b class="text-secondary card-text">Company Name:</b> {{ company.company_name }}</p>
+                                            <p><b class="text-secondary card-text">Location:</b> {{ job.location }}</p>
+                                            <p><b class="text-secondary card-text">Description:</b> {{ company.company_description }}</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <i class="fa fa-mobile" aria-hidden="true"></i> {{ company.phone_number }}
+                                            <i class="fa fa-envelope pl-2" aria-hidden="true"></i>
+                                            <a href="mailto:{{ company.user }}">{{ company.user }}</a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div id="job-req-skills-side">
+                                <div id="job-details" class="card">
+                                    <h4 class="card-header text-primary">Job Details</h4>
+                                    <div class="card-body">
+                                        <p><b class="card-text text-secondary">Job Type: </b><span class="badge badge-success">{{ job.job_type_id }}</span></p>
+                                        <p><b class="card-text text-secondary">Industry: </b> {{ job.industry_id }}</p>
+                                        <p><b class="card-title text-secondary">Duration: </b> {{ job.duration }} {{ job.duration_type }}</p>
+                                        <p><b class="card-title text-secondary">Salary: </b> {{ job.salary_min }} - {{ job.salary_max }} AED/Month</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div id="application" class="text-center">
+                    {% if user_type == 'student' or user_type == "alumni" %}
+                        {% if applied == False  %}
+                            <button class = "btn btn-primary" type="submit" name="apply" value="Apply&Save">&nbsp;Apply To Job</button>
+                            <br><br>
+                            <div style="margin-right: 25%; margin-left: 25%">
+                            <small>I hereby authorise release of my personal information including contact details and
+                                resume to Murdoch University Dubai. I am aware this information will be made available to
+                                companies and employers through the Murdoch Dubai Career Portal</small>
+                            </div>
+                        {% else %}
+                            <small>Your application has been submitted.</small>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="col-12">
+                    <div class="w-75 mx-auto">
+                        <div id="view-buttons" class="text-center">
+                            {% if user_type != 'student' and user_type != "alumni" %}
+                                {% if job.status == 'Open' %}
+                                    <button class="btn btn-danger my-1" type="submit" name="viewcandidates" value="ViewCandidates&Save">View Applicants</button>
+                                    <a href="{% url 'job_to_student_skills' job.id %}"><button class="btn btn-danger my-1" type="button">View Student Candidates</button></a>
+                                    <a href="{% url 'job_to_alumni_skills' job.id %}"><button class="btn btn-danger my-1" type="button">View Alumni Candidates</button></a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
