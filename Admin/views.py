@@ -116,7 +116,8 @@ def change_accept_status(request):
         user_employer = Employer.objects.get(user_id=user_id)
         user_employer.is_active = status
         user_employer.save()
-        send_html_mail(subject, htmlText, [user_employer.user])
+        receipent = user_employer.user
+        send_html_mail(subject, htmlText, [receipent])
         print(user_employer.is_active)
     except:
         pass
@@ -125,7 +126,8 @@ def change_accept_status(request):
         user_alumni = Alumni.objects.get(user_id=user_id)
         user_alumni.is_active = status
         user_alumni.save()
-        send_html_mail(subject, htmlText, [user_alumni.user])
+        receipent = user_alumni.user
+        send_html_mail(subject, htmlText, [receipent])
         print(user_alumni.is_active)
     except:
         pass
@@ -134,7 +136,8 @@ def change_accept_status(request):
         user_student = Student.objects.get(user_id=user_id)
         user_student.is_active = status
         user_student.save()
-        send_html_mail(subject, htmlText, [user_student.user])
+        receipent = user_student.user
+        send_html_mail(subject, htmlText, [receipent])
         print(user_student.is_active)
     except:
         pass
@@ -166,7 +169,6 @@ def view_pend_acc_profile(request, id):
     try:
         employer = Employer.objects.get(user_id=id)
         user = get_user_type(request)
-        send_html_mail(subject, htmlText, [employer.user])
         args = {'employer': employer, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Admin/view_employer_profile.html', args)
     except:

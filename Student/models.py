@@ -27,7 +27,7 @@ class Student(models.Model):
     jobs_applied = models.ManyToManyField(Job, through='StudentJobApplication')
     dp = models.ImageField(upload_to='profile_pictures', null=True, blank=True)
     cv = models.FileField(upload_to='documents', default='../staticfiles/DefaultCV.txt')
-    is_active = models.CharField(null=False, max_length=10, choices=STATUS_CHOICES, default=STATUS_CHOICES[2][1])
+    is_active = models.CharField(blank=True, max_length=10, choices=STATUS_CHOICES, default=STATUS_CHOICES[2][1])
 
     def __str__(self):
         name = self.user.first_name + ' ' + self.user.last_name

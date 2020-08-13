@@ -127,7 +127,7 @@ class EditStudentProfileInitialForm(forms.ModelForm):
             {'first_name': 'First Name'},
             {'last_name': 'Last Name'}
         )
-        exclude = ['email', 'password1', 'password2']
+        exclude = ['email', 'password1', 'password2', 'is_active']
 
 
 class EditStudentProfileForm(StudentForm):

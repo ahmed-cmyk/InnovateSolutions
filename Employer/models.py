@@ -24,7 +24,7 @@ class Employer(models.Model):
     trade_license = models.FileField(upload_to='trade_licenses', null=False, blank=False,
                                      default='../staticfiles/DefaultDP.jpg')
 
-    is_active = models.CharField(null=False, max_length=10, choices=STATUS_CHOICES, default=STATUS_CHOICES[2][1])
+    is_active = models.CharField(blank=True, max_length=10, choices=STATUS_CHOICES, default=STATUS_CHOICES[2][1])
 
     def __str__(self):
         name = self.company_name
