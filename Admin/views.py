@@ -116,7 +116,7 @@ def change_accept_status(request):
         user_employer = Employer.objects.get(user_id=user_id)
         user_employer.is_active = status
         user_employer.save()
-        receipent = user_employer.user
+        receipent = str(user_employer.user)
         send_html_mail(subject, htmlText, [receipent])
         print(user_employer.is_active)
     except:
@@ -126,7 +126,7 @@ def change_accept_status(request):
         user_alumni = Alumni.objects.get(user_id=user_id)
         user_alumni.is_active = status
         user_alumni.save()
-        receipent = user_alumni.user
+        receipent = str(user_alumni.user)
         send_html_mail(subject, htmlText, [receipent])
         print(user_alumni.is_active)
     except:
@@ -136,7 +136,7 @@ def change_accept_status(request):
         user_student = Student.objects.get(user_id=user_id)
         user_student.is_active = status
         user_student.save()
-        receipent = user_student.user
+        receipent = str(user_student.user)
         send_html_mail(subject, htmlText, [receipent])
         print(user_student.is_active)
     except:
@@ -217,7 +217,8 @@ def change_job_status(request):
         print(job.posted_by)
         job.is_active = status
         job.save()
-        send_html_mail(subject, htmlText, [job.posted_by])
+        receipent = str(job.posted_by)
+        send_html_mail(subject, htmlText, [receipent])
         print(job.is_active)
     except:
         pass
