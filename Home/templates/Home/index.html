@@ -16,7 +16,7 @@
 {% csrf_token %}
     {% block image %}
         <div id="body-image" class="text-center d-none d-sm-block">
-            <img src="{% static 'images/logHead.jpg' %}" alt="Home page image">
+            <img src="{% static 'images/homepage.png' %}" alt="Home page image">
             {% if user_type == 'student' or user_type == 'alumni' %}
                 <div class="col-12 w-75 mx-auto centered">
                     <form class="search" method="POST">
