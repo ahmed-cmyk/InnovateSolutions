@@ -28,9 +28,10 @@
         dataType: 'json',
         success: function (data) {
           if (data.success) {
-            console.log("ajax call success.");
+              $("#" + user_id).hide(1000);
+              console.log("ajax call success.");
           }else{
-            console.log("ajax call not success.");
+              console.log("ajax call failed.");
           }
         }
       });
@@ -49,9 +50,10 @@
         dataType: 'json',
         success: function (data) {
           if (data.success) {
-            console.log("ajax call success.");
+              $("#" + user_id).hide(1000);
+              console.log("ajax call success.");
           }else{
-            console.log("ajax call not success.");
+              console.log("ajax call failed.");
           }
         }
       });
@@ -70,7 +72,7 @@
                     <table id="request_table" class="table table-borderless mx-auto">
                         {% if applicants_students %}
                             {% for applicant in applicants_students %}
-                                <tr>
+                                <tr id="{{ applicant.user_id }}">
                                     <td class="username text-left">{{ applicant.user }}</td>
                                     <td><a href="{% url 'view_account_details' applicant.user_id %}">View Account Details</a></td>
                                     <td>
@@ -82,7 +84,7 @@
                         {% endif %}
                         {% if applicants_alumni %}
                             {% for applicant in applicants_alumni %}
-                                <tr>
+                                <tr id="{{ applicant.user_id }}">
                                     <td class="username text-left">{{ applicant.user }}</td>
                                     <td><a href="{% url 'view_account_details' applicant.user_id %}">View Account Details</a></td>
                                     <td>
@@ -94,7 +96,7 @@
                         {% endif %}
                         {% if applicants_employers %}
                             {% for applicant in applicants_employers %}
-                                <tr>
+                                <tr id="{{ applicant.user_id }}">
                                     <td class="username text-left">{{ applicant.user }}</td>
                                     <td><a href="{% url 'view_account_details' applicant.user_id %}">View Account Details</a></td>
                                     <td>
