@@ -11,6 +11,7 @@ from Admin.models import Admin
 from django.db.models import ManyToManyField
 
 from DjangoUnlimited.settings import EMAIL_HOST_USER
+from Employer.models import Employer
 
 
 class Industry(models.Model):
@@ -83,7 +84,9 @@ class Job(models.Model):
         ('Months', 'Months'),
     ]
     date_posted = models.DateField(null=False, blank=False, auto_now_add=True)
-    posted_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='job_author')
+    # employers = User.objects.filter(employer_user__company_name__isnull=False)
+    # print(employers)
+    posted_by = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='job_author')
     job_title = models.CharField(max_length=100)
     description = models.TextField()
     status = models.CharField(max_length=15, choices=JOB_STATUS, default='Open')

@@ -6,7 +6,6 @@ from phone_field import PhoneField
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from Home.models import Industry
 
 
 class Employer(models.Model):

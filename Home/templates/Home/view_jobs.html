@@ -93,7 +93,7 @@
                     {% for job in jobs %}
                         {% if user_type != "employer" %}
                             {% for company in companies %}
-                                {% if job.posted_by == company.user %}
+                                {% if job.posted_by == company %}
                                     <div class="row">
                                         <div class="card-group col-12">
                                             <div class="card bg-light col-md-9 col-xs-7">
