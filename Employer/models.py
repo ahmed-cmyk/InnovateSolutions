@@ -27,5 +27,5 @@ class Employer(models.Model):
     is_active = models.CharField(blank=True, max_length=10, choices=STATUS_CHOICES, default=STATUS_CHOICES[2][1])
 
     def __str__(self):
-        name = self.company_name
+        name = self.user.__str__()
         return name
