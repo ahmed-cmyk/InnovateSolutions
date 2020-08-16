@@ -1,4 +1,4 @@
-Django==2.2.13
+Django==2.2.15
 django-bootstrap-datepicker-plus==3.0.4
 django-cleanup==4.0.0
 django-contrib-comments==1.9.1
