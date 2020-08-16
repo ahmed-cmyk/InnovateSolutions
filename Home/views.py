@@ -147,7 +147,6 @@ def view_jobs(request):
     elif user['user_type'] == 'admin':
         jobs = Job.objects.filter(is_active='Accepted').exclude(status="Deleted").order_by('-date_posted')
         companies = Employer.objects.all()
-        print(companies)
         form = FilterJobForm()
         args = {'jobs': jobs, 'companies': companies, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
     elif user['user_type'] == 'student':

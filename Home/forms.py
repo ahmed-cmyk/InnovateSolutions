@@ -121,6 +121,8 @@ class FilterAlumniForm(forms.ModelForm):
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             widget=forms.CheckboxSelectMultiple,
                                             required=True)
+    # skills = forms.ModelChoiceField(queryset=Skill.objects.all(),
+    #                                 widget=autocomplete.ModelSelect2Multiple(url='skill-autocomplete'))
     majors = forms.ModelMultipleChoiceField(queryset=Major.objects.all(),
                                             widget=forms.CheckboxSelectMultiple,
                                             required=True)

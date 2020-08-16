@@ -64,6 +64,7 @@
                             <hr class="horizontal-rule">
                         </div>
                         <div class="form-group">
+{#                            {{ form.skills|as_crispy_field }}#}
                             {{ form.skills.label }}
                             <div class="skills-container">{{ form.skills }}</div>
                             <p>{{ form.majors|as_crispy_field }}</p>

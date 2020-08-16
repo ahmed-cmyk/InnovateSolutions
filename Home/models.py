@@ -36,6 +36,20 @@ class Skill(models.Model):
         return name
 
 
+# class SkillAutocomplete(autocomplete.Select2QuerySetView):
+#     def get_queryset(self):
+#         # Don't forget to filter out results depending on the visitor !
+#         # if not self.request.user.is_authenticated:
+#         #     return Skill.objects.none()
+#
+#         qs = Skill.objects.all()
+#
+#         if self.q:
+#             qs = qs.filter(name__istartswith=self.q)
+#
+#         return qs
+
+
 class Major(models.Model):
     major_name = models.CharField(max_length=50, unique=True)
 

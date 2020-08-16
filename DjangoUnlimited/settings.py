@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'rest_framework_datatables',
     'widget_tweaks',
+    'dbbackup_ui',
     'datatableview',
     'mathfilters',
     'phone_field',
