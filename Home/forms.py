@@ -58,6 +58,7 @@ class FilterJobForm(forms.ModelForm):
         ('Days', 'Days'),
         ('Weeks', 'Weeks'),
         ('Months', 'Months'),
+        ('Permanent', 'Permanent'),
     ]
     min_duration = forms.IntegerField(required=False)
     max_duration = forms.IntegerField(required=False)

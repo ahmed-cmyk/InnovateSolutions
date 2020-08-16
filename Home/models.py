@@ -82,6 +82,7 @@ class Job(models.Model):
         ('Days', 'Days'),
         ('Weeks', 'Weeks'),
         ('Months', 'Months'),
+        ('Permanent', 'Permanent'),
     ]
     date_posted = models.DateField(null=False, blank=False, auto_now_add=True)
     # employers = User.objects.filter(employer_user__company_name__isnull=False)
