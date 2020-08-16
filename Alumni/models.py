@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
-from phone_field import PhoneField
+from phonenumber_field.modelfields import PhoneNumberField
 
 from Home.models import Skill, Job, Major
 
@@ -17,7 +17,7 @@ class Alumni(models.Model):
         ('Rejected', 'Rejected'),
         ('Pending', 'Pending')
     ]
-    phone_number = PhoneField(blank=True)
+    phone_number = PhoneNumberField(blank=True)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     date_of_birth = models.DateField(null=True)
     student_id = models.CharField(max_length=8, null=True, blank=True)

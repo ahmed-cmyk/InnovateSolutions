@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from datetime import datetime
-from phone_field import PhoneField
+from phonenumber_field.modelfields import PhoneNumberField
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -17,7 +17,7 @@ class Employer(models.Model):
     ]
     company_name = models.CharField(max_length=50)
     company_description = models.TextField()
-    phone_number = PhoneField(blank=False)
+    phone_number = PhoneNumberField(blank=False)
     logo = models.ImageField(upload_to='company_logos', null=True, blank=True)
     contact_name = models.CharField(max_length=50, blank=False, default='N/A')
     trade_license = models.FileField(upload_to='trade_licenses', null=False, blank=False,

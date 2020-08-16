@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'dbbackup_ui',
     'datatableview',
     'mathfilters',
-    'phone_field',
+    'phonenumber_field',
     'crispy_forms',
     'Student',
     'Employer',
