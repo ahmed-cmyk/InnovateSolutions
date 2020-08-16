@@ -26,6 +26,15 @@ header {
     width: 100%;
 }
 
+#banner {
+    background-color: #1D1A1A;
+    font-size: 1.1rem;
+}
+
+#banner a {
+     text-decoration: underline;
+}
+
 #navigationBar #navTop {
     background-color: #CC0000;
 }
