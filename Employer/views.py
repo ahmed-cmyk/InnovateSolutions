@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
+from django.core.files import File
+from wsgiref.util import FileWrapper
 
 # Create your views here.
 
@@ -123,3 +125,14 @@ def edit_profile(request):
 @login_required
 def view_profile(request):
     return render(request, 'Employer/view_employer_profile.html', get_user_type(request))
+
+@login_required
+def get_employer_trade_license(request, id):
+    employer = Employer.objects.get(user_id=id)
+    trade_license = employer.trade_license
+    file_name = os.path.basename(trade_license.file.name)
+
+    wrapper = FileWrapper(File(trade_license, 'rb'))
+    response = HttpResponse(wrapper, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=' + file_name
+    return response

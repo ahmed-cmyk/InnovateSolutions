@@ -585,9 +585,21 @@ def job_to_alumni_skills(request, id):
 
 
 @login_required
-def get_cv_file(request, id):
+def get_student_cv_file(request, id):
     student = Student.objects.get(user_id=id)
     cv = student.cv
+    file_name = os.path.basename(cv.file.name)
+
+    wrapper = FileWrapper(File(cv, 'rb'))
+    response = HttpResponse(wrapper, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=' + file_name
+    return response
+
+
+@login_required
+def get_alumni_cv_file(request, id):
+    alumni = Alumni.objects.get(user_id=id)
+    cv = alumni.cv
     file_name = os.path.basename(cv.file.name)
 
     wrapper = FileWrapper(File(cv, 'rb'))

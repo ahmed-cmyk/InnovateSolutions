@@ -29,10 +29,13 @@
                 <p><strong>Contact Number:</strong> {{ employer.phone_number }}</p>
             </div>
         </div>
-        <div id="edit-profile" class="text-center">
-            <button type="submit" class="btn btn-primary">
-                <a  class="text-decoration-none text-white" href="/employer/edit_employer_profile">Edit Profile</a>
-            </button>
+        <div id="profile-buttons" class="text-center">
+            <a  class="text-decoration-none text-white" href="/employer/edit_employer_profile">
+                <button type="submit" class="btn btn-primary">Edit Profile</button>
+            </a>
+            <a class="text-decoration-none text-white" href="{% url 'get_employer_trade_license' employer.user_id %}">
+                <button type="button" class="btn btn-primary">Download CV</button>
+            </a>
         </div>
     </div>
 {% endblock %}
