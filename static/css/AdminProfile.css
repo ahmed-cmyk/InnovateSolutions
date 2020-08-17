@@ -1,28 +1,84 @@
+#view-admin-profile {
+    text-align: center;
+}
+
+#view-admin-profile h2 {
+    font-size: 1.5rem;
+}
+
 #admin-profile-body {
-
+    text-align: center;
 }
 
-#admin-profile-body button {
+#admin-profile-img, #admin-profile-fields {
+    padding: 1%;
+    text-align: center;
+    margin: auto;
+}
+
+#admin-profile-img {
+    text-align: right;
+}
+
+#admin-profile-fields {
+    justify-content: center;
+    text-align: left;
+}
+
+#admin-profile-fields p {
+    font-size: 1.1rem;
+}
+
+#admin-profile-fields .field-heading {
+    font-weight: bold;
+}
+
+ #admin-profile-bottom a {
+     color: #FFFFFF;
+     font-weight: 700;
+}
+
+#admin-profile-bottom button {
     background-color: #CC0000;
+    border: 2px solid #FFF;
+    border-radius: 12px;
+    padding: 10px;
 }
 
-/******** Mobile Devices ********/
 @media (max-width: 767px) {
-    img {
-        width: 100%;
-        height: auto;
+    .col-1, .col-2  {
+        width: 100%
+    }
+    #admin-profile-body {
+        display: inline-block;
+    }
+    #admin-profile-img {
+        margin-right: auto;
+    }
+    #admin-profile-img img {
+        width: 40vw;
+    }
+    #admin-profile-fields {
+        margin-left: auto;
     }
 }
 
-/******** Tablet Devices ********/
-@media (min-width: 768px) and (max-width: 991px) {
-
-}
-
-/******** Desktop Devices ********/
 @media (min-width: 992px) {
-    img {
-        width: 100%;
-        height: 20px;
+    .col-1, .col-2  {
+        width: 40%
+    }
+    #admin-profile-body {
+        display: flex;
+    }
+    #admin-profile-img {
+        text-align: right;
+        margin-right: 1%;
+    }
+    #admin-profile-img img {
+        width: 15vw;
+    }
+    #admin-profile-fields {
+        text-align: left;
+        margin-left: 0;
     }
 }

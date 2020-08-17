@@ -19,18 +19,31 @@
         {% endfor %}
     </div>
     {% if hasAdminDetails %}
-        <div id="admin-profile-body">
-            {% if admin.dp %}
-                <img style="width: 20vw;" src="{{ admin.dp.url }}" alt="profile picture">
-            {% else %}
-                <img style="width: 20vw;" src="{% static 'DefaultDP.jpg' %}" alt="default profile picture">
-            {% endif %}
-            <p>First Name: {{ user.first_name }}</p>
-            <p>Last Name: {{ user.last_name }}</p>
-            <p>Email Address: {{ user.email }}</p>
-            <p>Gender: {{ admin.gender }}</p>
-            <button><a href="{% url 'edit_admin_profile' %}">Edit Profile</a></button>
-            <button type="button"><a href="../../admin">Go back home</a></button>
+        <div id="view-admin-profile">
+            <h2>Admin Profile</h2>
+            <div id="admin-profile-body">
+                <div id="admin-profile-img" class="col-1">
+                    {% if admin.dp %}
+                        <img src="{{ admin.dp.url }}" alt="profile picture">
+                    {% else %}
+                        <img src="{% static 'DefaultDP.jpg' %}" alt="default profile picture">
+                    {% endif %}
+                </div>
+                <div id="admin-profile-fields" class="col-2">
+                    <p><span class="field-heading">First Name:</span> {{ user.first_name }}</p>
+                    <p><span class="field-heading">Last Name:</span> {{ user.last_name }}</p>
+                    {% if user.email %}
+                        <p><span class="field-heading">Email Address:</span> {{ user.email }}</p>
+                    {% else %}
+                        <p><span class="field-heading">Email Address:</span> N/A</p>
+                    {% endif %}
+                    <p><span class="field-heading">Gender:</span> {{ admin.gender }}</p>
+                </div>
+            </div>
+            <div id="admin-profile-bottom">
+                <button><a href="{% url 'edit_admin_profile' %}">Edit Profile</a></button>
+                <button type="button"><a href="../../admin">Go back home</a></button>
+            </div>
         </div>
     {% else %}
         <h2>Looks like you have not filled in some details yet. Fill in the form below to be able to view your
