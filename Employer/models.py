@@ -22,7 +22,7 @@ class Employer(models.Model):
     contact_name = models.CharField(max_length=50, blank=False, default='N/A')
     trade_license = models.FileField(upload_to='trade_licenses', null=False, blank=False,
                                      default='../media/trade_licenses/ICT108_Assignment.pdf')
-
+    company_website = models.URLField(blank=True)
     is_active = models.CharField(blank=True, max_length=10, choices=STATUS_CHOICES, default=STATUS_CHOICES[2][1])
 
     def __str__(self):

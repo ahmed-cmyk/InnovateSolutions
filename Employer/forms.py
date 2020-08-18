@@ -74,10 +74,11 @@ class EmployerForm(forms.ModelForm):
     trade_license = forms.FileField(label='Trade License', required=True,
                                     help_text="Disclaimer: Please attach a copy of your registered trade license",
                                     validators=[FileTypeValidator(
-                                        allowed_types=['image/jpeg', 'image/png', "application/pdf", "application/msword",
+                                        allowed_types=['image/jpeg', 'image/png', "application/pdf",
+                                                       "application/msword",
                                                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"]
                                     )],
-                                    widget=forms.ClearableFileInput(attrs={'onchange':'licenseCheck(this);'}))
+                                    widget=forms.ClearableFileInput(attrs={'onchange': 'licenseCheck(this);'}))
 
     class Meta:
         model = Employer

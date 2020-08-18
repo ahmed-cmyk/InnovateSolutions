@@ -180,6 +180,7 @@ def create_job(request):
                         user = employerForm.save()
                         company = companyForm.save(commit=False)
                         company.user = user
+                        company.is_active = 'Accepted'
                         company.save()
                         job = jobForm.save(commit=False)
                         email = job.posted_by
@@ -187,12 +188,13 @@ def create_job(request):
                         jobForm.save_m2m()
 
                         subject = 'New Job has been posted'
-                        htmlText = "Your job has been posted on the Murdoch Career Portal and is currently pending approval." \
-                                   "You will be notified once the approval process has been completed."
+                        htmlText = "Your job has been posted on the Murdoch Career Portal and is currently pending " \
+                                   "approval. You will be notified once the approval process has been completed."
                         send_html_mail(subject, htmlText, [email])
 
                         subject = 'New Job has been posted'
-                        htmlText = "A new job has been posted on the Murdoch Career Portal and is currently pending approval."
+                        htmlText = "A new job has been posted on the Murdoch Career Portal and is currently pending " \
+                                   "approval. "
                         send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
                         messages.success(request, "Job successfully created")

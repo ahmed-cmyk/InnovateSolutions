@@ -27,6 +27,9 @@
                 <p><strong>Trade License:</strong> <a href="{{ obj.trade_license.url }}">{{ obj.trade_license }}</a></p>
                 <p><strong>Contact Name:</strong> {{ obj.contact_name }}</p>
                 <p><strong>Contact Number:</strong> {{ obj.phone_number }}</p>
+                {% if obj.company_website %}
+                    <p><strong>Company Website:</strong> {{ obj.company_website }}</p>
+                {% endif %}
             </div>
         </div>
         <div id="edit-profile" class="text-center">
