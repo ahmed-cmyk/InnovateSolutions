@@ -52,12 +52,8 @@
 {#                                    <span class="text-white d-none d-sm-inline">Welcome, {{ user_type }}</span>#}
                                     {% block user_greeting %}{% endblock %}
                                     <div class="dropdown">
-                                        <button type="button" id="userIcon" class="btn dropdown-toggle mr-4" data-toggle="dropdown">
+                                        <button type="button" id="userIcon" class="btn dropdown-toggle pr-4" data-toggle="dropdown">
                                             <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i> &nbsp;
-                                            {% if user.get_full_name %}
-                                                {{ user.get_full_name }}-
-                                            {% endif %}
-                                            {{ user_type }}
                                         </button>
                                         <ul class="dropdown-menu">
                                             {% if user_type == 'student' %}
@@ -86,6 +82,12 @@
                                             </li>
                                         </ul>
                                     </div>
+                                    <span class="text-white">
+                                        {% if user.get_full_name %}
+                                            {{ user.get_full_name }}-
+                                        {% endif %}
+                                        {{ user_type }}
+                                    </span>
                                 {% endif %}
                                 <button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#navDrop">
                                     <i class="fa fa-ellipsis-v fa-2x mt-1" aria-hidden="true"></i>
