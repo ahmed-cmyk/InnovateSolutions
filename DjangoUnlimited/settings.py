@@ -13,11 +13,13 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import urllib
 
+from django.conf.locale.en import formats as en_formats
 from django.contrib import messages
 from dotenv import load_dotenv
 
 # from .api_key import SENDGRID_API_KEY, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 
+FORMAT_MODULE_PATH = 'DjangoUnlimited.formats'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

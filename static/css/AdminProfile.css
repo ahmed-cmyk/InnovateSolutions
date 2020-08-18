@@ -35,14 +35,14 @@
 
  #admin-profile-bottom a {
      color: #FFFFFF;
-     font-weight: 700;
+     font-weight: 500;
 }
 
 #admin-profile-bottom button {
     background-color: #CC0000;
     border: 2px solid #FFF;
-    border-radius: 12px;
-    padding: 10px;
+    border-radius: 6px;
+    padding: 6px 12px;
 }
 
 @media (max-width: 767px) {

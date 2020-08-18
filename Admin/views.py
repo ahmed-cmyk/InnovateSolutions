@@ -80,7 +80,8 @@ def create_admin(request):
                         return redirect("admin_register")
                 else:
                     messages.error(request,
-                                   'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric character and 1 letter.')
+                                   'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric '
+                                   'character and 1 letter.')
                     return redirect("admin_register")
         else:
             messages.error(request, user_form.errors)
@@ -227,34 +228,6 @@ def change_job_status(request):
         return JsonResponse({"success": True})
     except Exception as e:
         return JsonResponse({"success": False})
-# @staff_member_required
-# def view_pending(request, id=None):
-#     employers = Employer.objects.all()
-#     form = EmployerAccVerificationForm()
-#     print(id)
-#     if id is not None:
-#         print("I'm here")
-#         print(request.method)
-#         user = User.objects.filter(id=id)
-#         args = {'user': user, 'employers': employers, 'form': form}
-#         if 'accept' in request.GET:
-#             print('I found an accept')
-#             user.is_active = True
-#             print(user.is_active)
-#             messages.success(request, 'Account Approved')
-#             return render(request, 'Admin/view_pending_requests.html', args)
-#         elif 'reject' in request.GET:
-#             print('I found a reject')
-#             user.is_active = False
-#             print(user.is_active)
-#             messages.info(request, 'Account Rejected')
-#             return render(request, 'Admin/view_pending_requests.html', args)
-#         return render(request, 'Admin/view_pending_requests.html', args)
-#     else:
-#         print("Still else")
-#         user = request.user
-#         args = {'user': user, 'employers': employers, 'form': form}
-#         return render(request, 'Admin/view_pending_requests.html', args)
 
 
 @staff_member_required
