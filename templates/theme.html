@@ -53,7 +53,11 @@
                                     {% block user_greeting %}{% endblock %}
                                     <div class="dropdown">
                                         <button type="button" id="userIcon" class="btn dropdown-toggle mr-4" data-toggle="dropdown">
-                                            <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i> &nbsp;{{ user.get_full_name }}-{{ user_type }}
+                                            <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i> &nbsp;
+                                            {% if user.get_full_name %}
+                                                {{ user.get_full_name }}-
+                                            {% endif %}
+                                            {{ user_type }}
                                         </button>
                                         <ul class="dropdown-menu">
                                             {% if user_type == 'student' %}
