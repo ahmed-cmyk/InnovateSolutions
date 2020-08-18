@@ -112,7 +112,7 @@ def edit_profile(request):
                 form.save()
                 return redirect('view_employer_profile')
             else:
-                messages.info(request, form.errors)
+                messages.warning(request, form.errors)
                 return redirect("edit_employer_profile")
         else:
             form = EmployerForm(instance=args['obj'])

@@ -26,7 +26,10 @@
                 <p><strong>Company Description:</strong> {{ employer.company_description }}</p>
                 <p><strong>Trade License:</strong> <a href="{{ employer.trade_license.url }}">{{ employer.trade_license }}</a></p>
                 <p><strong>Contact Name:</strong> {{ employer.contact_name }}</p>
-                <p><strong>Contact Number:</strong> {{ employer.phone_number }}</p>
+                <p><strong>Contact Number:</strong> <a href="{{ employer.phone_number }}">{{ employer.phone_number }}</a></p>
+                {% if obj.company_website %}
+                    <p><strong>Company Website:</strong> <a href="{{ obj.company_website }}" target="_blank">{{ obj.company_website }}</a></p>
+                {% endif %}
             </div>
         </div>
         <div id="profile-buttons" class="text-center">
