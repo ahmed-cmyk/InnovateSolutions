@@ -62,8 +62,9 @@ $("#editAlumniForm").submit(function (e) {
     var firstname = $("#id_first_name").val();
     var lastname = $("#id_last_name").val();
 
-    if(isNumber(firstname) || isNumber(lastname)) {
+    if(isNumber(firstname) || isNumber(lastname) || containsNumber(firstname) || containsNumber(lastname) || testEmailValidity(email)) {
         e.preventDefault();
+        alert("There are errors in the form");
     }
     else {
         console.log("Success!");
@@ -77,6 +78,7 @@ $("#editStudentForm").submit(function (e) {
 
     if(isNumber(firstname) || isNumber(lastname) || containsNumber(firstname) || containsNumber(lastname) || testEmailValidity(email)) {
         e.preventDefault();
+        alert("There are errors in the form");
     }
     else {
         console.log("Success!");
