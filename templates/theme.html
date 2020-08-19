@@ -51,7 +51,7 @@
                                 {% if user.is_authenticated %}
 {#                                    <span class="text-white d-none d-sm-inline">Welcome, {{ user_type }}</span>#}
                                     {% block user_greeting %}{% endblock %}
-                                    <span class="text-white">
+                                    <span class="text-white text-capitalize">
                                         {% if user.get_full_name %}
                                             {{ user.get_full_name }}-
                                         {% endif %}
