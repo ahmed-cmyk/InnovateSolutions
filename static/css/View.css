@@ -54,6 +54,10 @@ table {
     #job-cards {
       width: 80vw;
     }
+    .employer-view {
+        width: 95%;
+        margin: 0 auto;
+    }
 }
 
 /******** Tablet Devices ********/
@@ -63,7 +67,11 @@ table {
 
 /******** Desktop Devices ********/
 @media (min-width: 992px) {
-  #job-cards {
-    width: 60vw;
-  }
+    #job-cards {
+        width: 60vw;
+    }
+    .employer-view {
+        width: 80%;
+        margin: 0 auto;
+    }
 }
