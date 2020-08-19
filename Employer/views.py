@@ -69,14 +69,14 @@ def signup(request):
                         messages.success(request, 'Employer account created')
                         return render(request, 'Accounts/pending_acc.html', get_user_type(request))
                     else:
-                        messages.error(request, employer_form.errors)
+                        messages.warning(request, employer_form.errors.as_text)
                         return redirect("employer_register")
                 else:
-                    messages.error(request,
+                    messages.warning(request,
                                   'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric character and 1 letter.')
                     return redirect("employer_register")
         else:
-            messages.info(request, user_form.errors)
+            messages.info(request, user_form.errors.as_text)
             return redirect("employer_register")
     else:
         user_form = InitialEmployerForm()
@@ -112,7 +112,7 @@ def edit_profile(request):
                 form.save()
                 return redirect('view_employer_profile')
             else:
-                messages.warning(request, form.errors)
+                messages.warning(request, form.errors.as_text)
                 return redirect("edit_employer_profile")
         else:
             form = EmployerForm(instance=args['obj'])

@@ -21,21 +21,21 @@ def student_signup(request):
         user_form = InitialStudentForm(request.POST)
         if user_form.is_valid():
             if user_form.usernameExists():
-                messages.error(request, 'Username already taken. Try a different one.')  # checks if username exists
+                messages.warning(request, 'Username already taken. Try a different one.')  # checks if username exists
                 # in db
                 return redirect("student_registration")
 
             if user_form.emailExists():
-                messages.error(request, 'Email already taken. Try a different one.')  # checks if email exists in db
+                messages.warning(request, 'Email already taken. Try a different one.')  # checks if email exists in db
                 return redirect("student_registration")
 
             if not user_form.same_passwords():
-                messages.error(request, 'Passwords not matching. Try again.')  # checks if password and confirm
+                messages.warning(request, 'Passwords not matching. Try again.')  # checks if password and confirm
                 # password are matching
                 return redirect("student_registration")
 
             if not user_form.email_domain_exists():
-                messages.error(request, 'Email domain does not exist. Try again.')  # checks if there is an existing
+                messages.warning(request, 'Email domain does not exist. Try again.')  # checks if there is an existing
                 # domain for given email
                 return redirect("student_registration")
 
@@ -63,10 +63,10 @@ def student_signup(request):
                     messages.success(request, 'A student account has been created')
                     return render(request, 'Accounts/pending_acc.html', get_user_type(request))
                 else:
-                    messages.error(request, student_form.errors)
+                    messages.warning(request, student_form.errors.as_text)
                     return redirect('student_registration')
         else:
-            messages.error(request, user_form.errors)
+            messages.warning(request, user_form.errors.as_text)
             return redirect("student_registration")
     else:
         user_form = InitialStudentForm()
@@ -91,8 +91,8 @@ def edit_profile(request):
                 student_form.save()
                 return redirect('view_student_profile')
         else:
-            messages.error(request, student_form.errors)
-            messages.error(request, user_form.errors)
+            messages.warning(request, student_form.errors.as_text)
+            messages.warning(request, user_form.errors.as_text)
             return redirect("edit_student_profile")
     else:
         user_form = EditStudentProfileInitialForm(instance=request.user)

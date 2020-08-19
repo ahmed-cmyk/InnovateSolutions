@@ -19,21 +19,21 @@ def signup(request):
 
         if user_form.is_valid():
             if user_form.usernameExists():
-                messages.error(request, 'Username already taken. Try a different one.')  # checks if username exists
+                messages.warning(request, 'Username already taken. Try a different one.')  # checks if username exists
                 # in db
                 return redirect("alumni_register")
 
             if user_form.emailExists():
-                messages.error(request, 'Email already taken. Try a different one.')  # checks if email exists in db
+                messages.warning(request, 'Email already taken. Try a different one.')  # checks if email exists in db
                 return redirect("alumni_register")
 
             if not user_form.samePasswords():
-                messages.error(request, 'Passwords not matching. Try again.') # checks if password and confirm
+                messages.warning(request, 'Passwords not matching. Try again.') # checks if password and confirm
                 # password are matching
                 return redirect("alumni_register")
 
             if not user_form.emailDomainExists():
-                messages.error(request, 'Email domain does not exist. Try again.')  # checks if there is an exising
+                messages.warning(request, 'Email domain does not exist. Try again.')  # checks if there is an exising
                 # domain for given email
                 return redirect("alumni_register")
 
@@ -63,16 +63,16 @@ def signup(request):
                         return render(request, 'Accounts/pending_acc.html', get_user_type(request))
 
                     else:
-                        messages.error(request, alumni_form.errors)
+                        messages.warning(request, alumni_form.errors.as_text)
                         return redirect("alumni_register")
 
                 else:
-                    messages.error(request,
+                    messages.warning(request,
                                   'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric character and 1 letter.')
                     return redirect("alumni_register")
 
         else:
-            messages.error(request, user_form.errors)
+            messages.warning(request, user_form.errors.as_text)
             return redirect("alumni_register")
 
     else:
@@ -100,8 +100,8 @@ def edit_profile(request):
                 messages.success(request, 'Profile edit was successful')
                 return redirect('view_alumni_profile')
         else:
-            messages.error(request, alumni_form.errors)
-            messages.error(request, user_form.errors)
+            messages.warning(request, alumni_form.errors.as_text)
+            messages.warning(request, user_form.errors.as_text)
             return redirect("edit_alumni_profile")
     else:
         user_form = EditAlumniProfileInitialForm(instance=request.user)

@@ -201,8 +201,8 @@ def create_job(request):
                         return redirect('view_jobs')
 
                 else:
-                    messages.error(request, jobForm.errors)
-                    messages.error(request, companyForm.errors)
+                    messages.warning(request, jobForm.errors.as_text)
+                    messages.warning(request, companyForm.errors.as_text)
                     return redirect('create_job')
             else:
                 jobForm = CreateJobForm()
@@ -239,7 +239,7 @@ def create_job(request):
                     messages.success(request, "Job successfully created")
                     return redirect('view_jobs')
                 else:
-                    messages.info(request, form.errors)
+                    messages.warning(request, form.errors.as_text)
                     return redirect('create_job')
             else:
                 form = CreateJobForm()
