@@ -26,7 +26,7 @@
                 <tbody>
                 {% for helpdeskRequest in reqs %}
                     <tr class="text-center">
-                        <td>{{ helpdeskRequest.issue_date|date:"d/m/Y"}}</td>
+                        <td>{{ helpdeskRequest.issue_date }}</td>
                         <td>
                             <a href="{% url 'HelpDesk' helpdeskRequest.id %}">
                                 {{ helpdeskRequest.subject }}</a>
