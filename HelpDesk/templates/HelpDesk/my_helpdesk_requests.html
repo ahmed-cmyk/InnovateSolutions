@@ -40,8 +40,8 @@
         </div>
     {% else %}
         <div id="no-requests" class="text-center col-12">
-            <h2>No requests to display</h2>
-            <p>To make a new request click <a href="{% url 'HelpDesk' %}">here</a></p>
+            <h1>You haven't made any requests yet</h1>
+            <small>To make a new request click <a href="{% url 'HelpDesk' %}">here</a></small>
         </div>
     {% endif %}
 {% endblock %}

@@ -7,23 +7,23 @@
     <title>Edit Profile</title>
 </head>
 <body>
-{% block messages %}{% endblock messages %}
-{% block content %}
+    {% block messages %}{% endblock messages %}
+    {% block content %}
 
-<h1>Edit your admin profile</h1>
-
-<form method="post" enctype="multipart/form-data" action="{% url 'edit_admin_profile' %}">
-    {% csrf_token %}
-
-        {{ user_form.as_p }}
-        {{ admin_form.as_p }}
-
-        <input type="hidden" name="next" value="{% url 'view_admin_profile' %}">
-
-        <button type="submit">Save Changes</button>
-        <button type="button"><a href="{% url 'view_admin_profile' %}">Cancel</a></button>
-    </form>
-
+    <div id="edit-admin-body">
+        <div>
+            <h1>Edit your admin profile</h1>
+            <br><br>
+            <form method="post" enctype="multipart/form-data" action="{% url 'edit_admin_profile' %}">
+            {% csrf_token %}
+                {{ user_form.as_p }}
+                {{ admin_form.as_p }}
+                <input type="hidden" name="next" value="{% url 'view_admin_profile' %}">
+                <button type="submit">Save Changes</button>
+                <button type="button"><a href="{% url 'view_admin_profile' %}">Cancel</a></button>
+            </form>
+        </div>
+    </div>
     <!-- this displays any errors during submission -->
     <div>
         {% for message in messages %}
