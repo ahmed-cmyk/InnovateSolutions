@@ -3,6 +3,7 @@
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
 <title>{% block title %}{% endblock %}</title>
+<link rel="shortcut icon" type="image/png" href="{% static 'images/Favicon.png' %}"/>
 <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}">
 {% if not is_popup and is_nav_sidebar_enabled %}
   <link rel="stylesheet" type="text/css" href="{% static "admin/css/nav_sidebar.css" %}">
