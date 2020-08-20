@@ -15,97 +15,103 @@
 {% endblock %}
 
 {% block content %}
-    <div id="viewBody">
-        <div class="text-center">
-            <h2>Browse Alumni</h2>
-            <hr>
-            <br>
-        </div>
-        {% if user_type != 'student' and user_type != 'alumni' %}
-            <!-- Button trigger modal -->
-            <div id="filter" class="text-center d-block d-sm-none">
-                <button type="button" class="btn btn-danger padding" data-toggle="modal" data-target="#filterStudents">
-                  Filter Alumni
-                </button>
+    {% if alumnus %}
+        <div id="viewBody">
+            <div class="text-center">
+                <h2>Browse Alumni</h2>
+                <hr>
+                <br>
             </div>
-            <!-- Modal -->
-            <div class="modal fade" id="filterStudents" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header bg-danger">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Filter Alumni Listing</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
+            {% if user_type != 'student' and user_type != 'alumni' %}
+                <!-- Button trigger modal -->
+                <div id="filter" class="text-center d-block d-sm-none">
+                    <button type="button" class="btn btn-danger padding" data-toggle="modal" data-target="#filterStudents">
+                      Filter Alumni
                     </button>
-                  </div>
-                    <form method="POST">
-                        <div class="modal-body">{% csrf_token %}
-                            {{ form.skills.label }}
-                            <div class="skills-container">{{ form.skills }}</div>
-                            <p>{{ form.majors|as_crispy_field }}</p>
-                            <a href='../view_alumni'>View All Alumni</a>
-                        </div>
-                        <div class="modal-footer">
-                            <a href='../view_alumni'><button class="btn btn-danger">Reset</button></a>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="Submit" class="btn btn-primary"><b>Search</b></button>
-                          </div>
-                    </form>
                 </div>
-              </div>
-            </div>
-        {% endif %}
-        <div class="row px-2">
-            <div id="filterForm" class="col-md-3 col-sm-3 d-none d-sm-block">
-                <div>
-                    <form class="px-2 bg-light border border-secondary p-3" method="POST">{% csrf_token %}
-                        <div id="formHeader" class="text-center">
-                            <h4 class="font-weight-bold">Filter Alumni Listings</h4>
-                            <hr class="horizontal-rule">
-                        </div>
-                        <div class="form-group">
-{#                            {{ form.skills|as_crispy_field }}#}
-                            {{ form.skills.label }}
-                            <div class="skills-container">{{ form.skills }}</div>
-                            <p>{{ form.majors|as_crispy_field }}</p>
-                        </div>
-                        <div class="text-center">
-                            <a href="{% url 'view_alumni' %}"><button class="btn btn-danger">Reset</button></a>
-                            <button type="submit" class="btn btn-primary"><b>Search</b></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-9 col-sm-9 col-xs-12">
-                {% if user_type != 'student' and user_type != 'alumni' %}
-                    <div class="float-right">
-                        <input class="d-none d-sm-block" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Alumni...">
+                <!-- Modal -->
+                <div class="modal fade" id="filterStudents" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header bg-danger">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Filter Alumni Listing</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                        <form method="POST">
+                            <div class="modal-body">{% csrf_token %}
+                                {{ form.skills.label }}
+                                <div class="skills-container">{{ form.skills }}</div>
+                                <p>{{ form.majors|as_crispy_field }}</p>
+                                <a href='../view_alumni'>View All Alumni</a>
+                            </div>
+                            <div class="modal-footer">
+                                <a href='../view_alumni'><button class="btn btn-danger">Reset</button></a>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="Submit" class="btn btn-primary"><b>Search</b></button>
+                              </div>
+                        </form>
                     </div>
-                    <table id="myTable" class="table table-sm table-bordered table-striped">
-                        <thead class="thead-dark">
-                        <tr class="text-center">
-                            <th>Alumni Name</th>
-                            <th>Email</th>
-                            <th class="d-none d-sm-table-cell">Majors</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            {% for alumni in alumnus %}
-                                <tr class="text-center">
-                                <td>
-                                    <a href="{% url 'alumni_details' alumni.user_id %}"> {{ alumni.user.first_name }} {{ alumni.user.last_name }}</a>
-                                </td>
-                                <td>{{ alumni.user }}</td>
-                                <td class="d-none d-sm-table-cell text-left">{% for major in alumni.majors.all %}
-                                        <li>{{ major }}</li>
-                                    {% endfor %}
-                                </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                {% endif %}
-            </div><!-- End of col -->
-        </div><!-- End of row -->
-    </div>
+                  </div>
+                </div>
+            {% endif %}
+            <div class="row px-2">
+                <div id="filterForm" class="col-md-3 col-sm-3 d-none d-sm-block">
+                    <div>
+                        <form class="px-2 bg-light border border-secondary p-3" method="POST">{% csrf_token %}
+                            <div id="formHeader" class="text-center">
+                                <h4 class="font-weight-bold">Filter Alumni Listings</h4>
+                                <hr class="horizontal-rule">
+                            </div>
+                            <div class="form-group">
+    {#                            {{ form.skills|as_crispy_field }}#}
+                                {{ form.skills.label }}
+                                <div class="skills-container">{{ form.skills }}</div>
+                                <p>{{ form.majors|as_crispy_field }}</p>
+                            </div>
+                            <div class="text-center">
+                                <a href="{% url 'view_alumni' %}"><button class="btn btn-danger">Reset</button></a>
+                                <button type="submit" class="btn btn-primary"><b>Search</b></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    {% if user_type != 'student' and user_type != 'alumni' %}
+                        <div class="float-right">
+                            <input class="d-none d-sm-block" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Alumni...">
+                        </div>
+                        <table id="myTable" class="table table-sm table-bordered table-striped">
+                            <thead class="thead-dark">
+                            <tr class="text-center">
+                                <th>Alumni Name</th>
+                                <th>Email</th>
+                                <th class="d-none d-sm-table-cell">Majors</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for alumni in alumnus %}
+                                    <tr class="text-center">
+                                    <td>
+                                        <a href="{% url 'alumni_details' alumni.user_id %}"> {{ alumni.user.first_name }} {{ alumni.user.last_name }}</a>
+                                    </td>
+                                    <td>{{ alumni.user }}</td>
+                                    <td class="d-none d-sm-table-cell text-left">{% for major in alumni.majors.all %}
+                                            <li>{{ major }}</li>
+                                        {% endfor %}
+                                    </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div><!-- End of col -->
+            </div><!-- End of row -->
+        </div>
+    {% else %}
+        <div id="empty-page" class="col-12 text-center">
+            <h2>There are no alumni currently registered</h2>
+        </div>
+    {% endif %}
 {% endblock %}

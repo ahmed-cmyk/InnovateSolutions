@@ -35,6 +35,10 @@
     margin: 10% 0;
 }
 
+#empty-page {
+    margin: 10% 0;
+}
+
 #filter button {
   color: #FFF;
   background-color: #CC0000;
