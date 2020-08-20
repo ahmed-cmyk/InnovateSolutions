@@ -74,7 +74,7 @@ class EmployerForm(forms.ModelForm):
     trade_license = forms.FileField(allow_empty_file=False, label='Trade License',
                                     help_text="*Disclaimer: Please attach a copy of your registered trade license",
                                     validators=[FileTypeValidator(
-                                        allowed_types=['image/*', "application/pdf", "application/msword",
+                                        allowed_types=["image/*", "application/pdf", "application/msword",
                                                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"]
                                     )])
 

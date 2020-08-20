@@ -44,7 +44,7 @@
     <div class="col-12">
         <h2 class="text-center">Employer Registration</h2>
         <hr>
-        <form id="companyForm" action="employer_registration" method="post">{% csrf_token %}
+        <form id="companyForm" action="employer_registration" method="post" enctype="multipart/form-data">{% csrf_token %}
             {{ user_form.email|as_crispy_field }}
             <div id="emailError"></div>
             <div id="usernameError"></div>

@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c6a0409-4c48-417e-8521-92d8a146e5b1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/static/js/StudentRegistration.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/StudentRegistration.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Employer/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Employer/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Employer/templates/Employer/employer_registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/Employer/templates/Employer/employer_registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Student/templates/Student/student_registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/Student/templates/Student/student_registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/theme.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/theme.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,11 +249,11 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="499" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1595246500543" />
-    <state x="0" y="0" key="CommitChangelistDialog2" timestamp="1595267461440">
+    <state x="0" y="0" key="CommitChangelistDialog2" timestamp="1597935756157">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.738@0.0.1366.738" timestamp="1591571146163" />
-    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1595267461440" />
+    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1597935756157" />
     <state x="0" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1592824820058" />
     <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1596052816410">
       <screen x="0" y="0" width="1536" height="864" />
@@ -303,9 +307,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1592824883600" />
-    <state x="578" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592730627655">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="514" y="310" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1597933818294">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
+    <state x="514" y="310" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.768@0.0.1366.768" timestamp="1597933818294" />
     <state x="578" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1592730627655" />
     <state x="463" y="30" width="617" height="804" key="find.popup" timestamp="1597916026145">
       <screen x="0" y="0" width="1536" height="864" />
