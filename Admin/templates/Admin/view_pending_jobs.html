@@ -63,26 +63,30 @@
 
 {% block content %}
     <div id="pendingRequestBody" class="col-12 text-center">
-        {% if user_type == 'admin' %}
-            <h2>Pending Jobs</h2>
-            <hr>
-            <div id="pendingBody">
-                <form method="POST" class="form-horizontal">
-                {% csrf_token %}
-                    <table id="request_table" class="table table-borderless mx-auto">
-                        {% for job in jobs %}
-                            <tr id="{{ job.id }}">
-                                <td class="job-name text-left">{{ job }}</td>
-                                <td><a href="{% url 'view_job_details' job.id %}">View Job Details</a></td>
-                                <td>
-                                    <button id="accept_button" class="accept_button btn btn-success" type="button" name="accept" value="{{ job.id }}">Accept</button>
-                                    <button id="reject_button" class="reject_button btn btn-danger" type="button" name="reject" value="{{ job.id }}">Reject</button>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                </form>
-            </div>
+        {% if jobs %}
+            {% if user_type == 'admin' %}
+                <h2>Pending Jobs</h2>
+                <hr>
+                <div id="pendingBody">
+                    <form method="POST" class="form-horizontal">
+                    {% csrf_token %}
+                        <table id="request_table" class="table table-borderless mx-auto">
+                            {% for job in jobs %}
+                                <tr id="{{ job.id }}">
+                                    <td class="job-name text-left">{{ job }}</td>
+                                    <td><a href="{% url 'view_job_details' job.id %}">View Job Details</a></td>
+                                    <td>
+                                        <button id="accept_button" class="accept_button btn btn-success" type="button" name="accept" value="{{ job.id }}">Accept</button>
+                                        <button id="reject_button" class="reject_button btn btn-danger" type="button" name="reject" value="{{ job.id }}">Reject</button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </form>
+                </div>
+            {% endif %}
+        {% else %}
+            <h2 class="my-5">There are no jobs pending verification</h2>
         {% endif %}
     </div>
 {% endblock %}
