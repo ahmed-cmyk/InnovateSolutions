@@ -62,8 +62,8 @@
 {% endblock %}
 
 {% block content %}
-    <div id="pendingRequestBody" class="col-12 text-center">
-        {% if jobs %}
+    {% if jobs %}
+        <div id="pendingRequestBody" class="col-12 text-center">
             {% if user_type == 'admin' %}
                 <h2>Pending Jobs</h2>
                 <hr>
@@ -85,8 +85,10 @@
                     </form>
                 </div>
             {% endif %}
-        {% else %}
-            <h2 class="empty-page">There are no jobs pending verification</h2>
-        {% endif %}
-    </div>
+        </div>
+    {% else %}
+        <div id="empty-page" class="col-12 text-center">
+            <h2>There are no jobs pending verification</h2>
+        </div>
+    {% endif %}
 {% endblock %}
