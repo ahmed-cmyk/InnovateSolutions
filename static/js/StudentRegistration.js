@@ -20,7 +20,7 @@ function checkFalseStudentEmail(student_email) {
 
 function checkFalseEmail(email) {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    return emailReg.test(email);
+    return !emailReg.test(email);
 }
 
 function checkFalseDob(date) {
