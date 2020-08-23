@@ -7,6 +7,10 @@ from django.contrib.contenttypes.models import ContentType
 from upload_validator import FileTypeValidator
 
 from .models import Admin
+from Home.models import Job, JobType, Major, Skill, Industry
+from Alumni.models import Alumni
+from Student.models import Student
+from Employer.models import Employer
 # from ..DjangoUnlimited import settings
 
 import dns.resolver, dns.exception
@@ -36,8 +40,11 @@ class InitialAdminForm(forms.ModelForm):
         user.is_staff = True
         if commit:
             user.save()
-        permissions = Permission.objects.filter(
-            content_type_id__in=(14, 15, 16, 18))  # 14 industry, #15 jobtype, #16 skill, #18 job
+        content_type = [ContentType.objects.get_for_model(Industry), ContentType.objects.get_for_model(JobType),
+                        ContentType.objects.get_for_model(Job), ContentType.objects.get_for_model(Major),
+                        ContentType.objects.get_for_model(Skill), ContentType.objects.get_for_model(Employer),
+                        ContentType.objects.get_for_model(Student), ContentType.objects.get_for_model(Alumni)]
+        permissions = Permission.objects.filter(content_type__in=content_type)  # 14 industry, #15 jobtype, #16 skill, #18 job
         user.user_permissions.add(*permissions)
         return user
 
