@@ -45,6 +45,20 @@
     padding: 6px 12px;
 }
 
+ #empty-admin a {
+     color: #FFFFFF;
+     font-weight: 500;
+}
+
+#empty-admin button {
+    background-color: #CC0000;
+    border: 2px solid #FFF;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
 @media (max-width: 767px) {
     .col-1, .col-2  {
         width: 100%
