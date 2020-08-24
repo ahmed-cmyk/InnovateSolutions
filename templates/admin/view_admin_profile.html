@@ -1,6 +1,7 @@
 {% extends "admin/base_site.html" %}
 
 {% load static %}
+{% load crispy_forms_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,15 +47,17 @@
             </div>
         </div>
     {% else %}
-        <h2>Looks like you have not filled in some details yet. Fill in the form below to be able to view your
-            profile.</h2>
-
-        <form method="post" enctype="multipart/form-data" action="{% url 'view_admin_profile' %}">
-            {% csrf_token %}
-            {{ admin_form.as_p }}
-            <button type="submit">Add Details</button>
-            <button type="button"><a href="../../admin">Cancel</a></button>
-        </form>
+        <div id="empty-admin">
+            <h2>Looks like you have not filled in some details yet. Fill in the form below to be able to view your
+                profile.</h2>
+            <form method="post" enctype="multipart/form-data" action="{% url 'view_admin_profile' %}">
+                {% csrf_token %}
+                {{ user_form.as_p }}
+                {{ admin_form.as_p }}
+                <button type="submit">Add Details</button>
+                <button type="button"><a href="../../admin">Cancel</a></button>
+            </form>
+        </div>
     {% endif %}
 {% endblock %}
 </body>

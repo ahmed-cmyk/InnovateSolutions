@@ -241,11 +241,13 @@ def view_profile(request):
     except:
         if request.method == 'POST':
             admin_form = AdminForm(request.POST, request.FILES)
+            user_form = EditAdminProfileForm(request.POST, instance=request.user)
 
-            if admin_form.is_valid():
+            if user_form.is_valid() and admin_form.is_valid():
                 with transaction.atomic():
                     admin = admin_form.save(commit=False)
                     admin.user = user
+                    user_form.save()
                     admin.save()
                     return redirect(request.path_info)
             else:
@@ -255,7 +257,8 @@ def view_profile(request):
         else:
             hasAdminDetails = False
             admin_form = AdminForm()
-            args = {'admin_form': admin_form, 'hasAdminDetails': hasAdminDetails}
+            user_form = EditAdminProfileForm(instance=request.user)
+            args = {'admin_form': admin_form, 'user_form': user_form, 'hasAdminDetails': hasAdminDetails}
             return render(request, 'admin/view_admin_profile.html', args)
 
 

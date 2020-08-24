@@ -12,15 +12,11 @@
 
 {% block content %}
     <div id="pendingRequestBody" class="col-12 text-center my-3">
-        <h2>Account - Approval Rejected</h2>
+        <h1>Account - Approval Rejected</h1>
         <br><br>
         <div id="pendingBody">
-            <img src="{% static 'images/rejected.png' %}" alt="pending_approval_pic">
-            <br><br>
-            <div class="progress">
-              <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <small>Your account creation request has been rejected</small>
+            <h2>Your account creation request has been rejected</h2>
+            <small>If you have any queries regarding why the account approval was rejected contact <a href="mailto:careerportal@murdoch.edu.au">careerportal@murdoch.edu.au</a></small>
         </div>
     </div>
 {% endblock %}
