@@ -45,7 +45,6 @@ def index(request):
                 jobs = Job.objects.annotate(search=SearchVector('job_title', 'description'), ).filter(search=text)
                 form = FilterJobForm()
                 companies = Employer.objects.all()
-
                 args = {'companies': companies, 'jobs': jobs, 'obj': user['obj'], 'user_type': user['user_type'],
                         'form': form}
                 return render(request, "Home/view_jobs.html", args)
