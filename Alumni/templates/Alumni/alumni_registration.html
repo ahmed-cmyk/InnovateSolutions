@@ -40,6 +40,40 @@
 {% endblock %}
 
 {% block content %}
+<script>
+function removeOtherSkill() {
+    var ul = document.getElementById("skills");
+    var li = ul.getElementsByTagName("li");
+
+    for(var i=0; i<li.length; i++) {
+        if(li[i].innerText.indexOf("Others") > -1) {
+          li[i].style.display = "none";
+        }
+    }
+}
+
+function searchSkill() {
+    var input = document.getElementById('myInput');
+    var filter = input.value.toUpperCase();
+    var ul = document.getElementById("skills");
+    var li = ul.getElementsByTagName("li");
+
+    for(var i=0; i<li.length; i++) {
+        if(li[i].innerText.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+
+        if(li[i].innerText.indexOf("Others") > -1) {
+          li[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+<body onload="removeOtherSkill()">
+
     <br>
         <div id="form"> 
             <h2 class="text-center">Alumni Registration</h2>
@@ -70,7 +104,10 @@
                 <div id="usernameError"></div>
                 <div>{{ alumni_form.student_id|as_crispy_field }}</div>
                 {{ alumni_form.skills.label }}
-                <div class="skills-container">{{ alumni_form.skills }}</div><br>
+                <div class="skills-container">
+                    <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
+                    {{ alumni_form.skills }}
+                </div><br>
                 <div>{{ alumni_form.majors|as_crispy_field }}</div>
                 <div>{{ alumni_form.dp|as_crispy_field }}</div>
                 <div>{{ alumni_form.cv|as_crispy_field }}</div>

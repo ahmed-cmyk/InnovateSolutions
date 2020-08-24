@@ -40,6 +40,39 @@
 {% endblock %}
 
 {% block content %}
+<script>
+function removeOtherSkill() {
+    var ul = document.getElementById("skills");
+    var li = ul.getElementsByTagName("li");
+
+    for(var i=0; i<li.length; i++) {
+        if(li[i].innerText.indexOf("Others") > -1) {
+          li[i].style.display = "none";
+        }
+    }
+}
+
+function searchSkill() {
+    var input = document.getElementById('myInput');
+    var filter = input.value.toUpperCase();
+    var ul = document.getElementById("skills");
+    var li = ul.getElementsByTagName("li");
+
+    for(var i=0; i<li.length; i++) {
+        if(li[i].innerText.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+
+        if(li[i].innerText.indexOf("Others") > -1) {
+          li[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+<body onload="removeOtherSkill()">
     <br>
         <div id="form">
             <div class="col-12">
@@ -74,7 +107,10 @@
                     <div id="studentEmailError"></div>
                     <div id="usernameError"></div>
                     {{ student_form.skills.label }}
-                    <div class="skills-container">{{ student_form.skills }}</div><br>
+                    <div class="skills-container">
+                        <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
+                        {{ student_form.skills }}
+                    </div><br>
                     <div>{{ student_form.majors|as_crispy_field }}</div>
                     <div>{{ student_form.dp|as_crispy_field }}</div>
                     <div>{{ student_form.cv|as_crispy_field }}</div>
@@ -103,4 +139,5 @@
             </div><!-- End of row -->
         </div><!-- End of container -->
     <br><br>
+</body>
 {% endblock %}

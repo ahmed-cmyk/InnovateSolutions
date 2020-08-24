@@ -242,7 +242,8 @@ def create_job(request):
                     return redirect('create_job')
             else:
                 form = CreateJobForm()
-                args = {'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
+                others, created = Skill.objects.get_or_create(skill_name="Others")
+                args = {'form': form, 'obj': user['obj'], 'user_type': user['user_type'], 'others_id': others.id}
                 return render(request, "Home/employer_create_jobs.html", args)
     except Employer.DoesNotExist:
         pass

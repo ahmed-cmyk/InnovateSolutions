@@ -14,9 +14,15 @@ from DjangoUnlimited import settings
 class CreateJobForm(forms.ModelForm):
     skills = forms.ModelMultipleChoiceField(
         label='Skills Required*',
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.CheckboxSelectMultiple(attrs={'onChange': 'checkOtherSkills(this)', 'id':'skills'}),
         queryset=Skill.objects.all(),
         required=True
+    )
+
+    other_skills = forms.CharField(
+        label='Other Skills (Optional)',
+        widget=forms.Textarea(attrs={'id':'otherskills'}),
+        required=False
     )
 
     class Meta:
@@ -27,8 +33,7 @@ class CreateJobForm(forms.ModelForm):
             "salary_min": "Minimum Salary (AED)",
             "salary_max": "Maximum Salary (AED)",
             "industry_id": "Industry ID",
-            "job_type_id": "Job Type ID",
-            "other_skills": "Other Skills (Optional)"
+            "job_type_id": "Job Type ID"
         }
 
     def __init__(self, *args, **kwargs):

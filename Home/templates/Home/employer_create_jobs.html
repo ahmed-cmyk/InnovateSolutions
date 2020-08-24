@@ -12,9 +12,52 @@
 
 {% block content %}
 <script>
+function disableOthersField() {
+    document.getElementById("otherskills").style.display = "none";
 
+    var labels = document.getElementsByTagName('label');
+    for (var i = 0; i < labels.length; i++) {
+        if (labels[i].htmlFor === "otherskills") {
+            labels[i].style.display = "none";
+        }
+    }
+}
+
+function checkOtherSkills(elem) {
+    if(elem.value == {{ others_id }}) {
+        var labels = document.getElementsByTagName('label');
+        for (var i = 0; i < labels.length; i++) {
+            if (labels[i].htmlFor === "otherskills") {
+                if(elem.checked) {
+                    document.getElementById("otherskills").style.display = "block";
+                    labels[i].style.display = "block";
+                }
+                else {
+                    document.getElementById("otherskills").style.display = "none";
+                    labels[i].style.display = "none";
+                }
+            }
+        }
+    }
+}
+
+function searchSkill() {
+    var input = document.getElementById('myInput');
+    var filter = input.value.toUpperCase();
+    var ul = document.getElementById("skills");
+    var li = ul.getElementsByTagName("li");
+
+    for(var i=0; i<li.length; i++) {
+        if(li[i].innerText.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+    }
+}
 </script>
 
+<body onload="disableOthersField()">
 <div id="createJobBody">
     <h2 class="text-center">Create Job Listing</h2>
     <hr>
@@ -37,8 +80,11 @@
                 <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ form.salary_max|as_crispy_field }}</div>
             </div>
             {{ form.skills.label }}
-            <div class="skills-container">{{ form.skills }}</div><br>
-            <div id="otherskills">{{ form.other_skills|as_crispy_field }}</div>
+            <div class="skills-container">
+                <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
+                {{ form.skills }}
+            </div><br>
+            <div>{{ form.other_skills|as_crispy_field }}</div>
         {% elif user_type == 'admin' %}
             <div>{{ jobForm.job_title|as_crispy_field }}</div>
             <div>{{ jobForm.description|as_crispy_field }}</div>
@@ -56,7 +102,10 @@
                 <div class="form-group col-6">{{ jobForm.salary_max|as_crispy_field }}</div>
             </div>
             {{ jobForm.skills.label }}
-            <div class="skills-container">{{ jobForm.skills }}</div><br>
+            <div class="skills-container">
+                <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
+                {{ jobForm.skills }}
+            </div><br>
             <br><hr><br>
             {% for employerField in employerForm %}
                 <div>{{ employerField|as_crispy_field }}</div>
@@ -76,4 +125,5 @@
         </div>
     </form>
 </div>
+</body>
 {% endblock %}

@@ -80,7 +80,7 @@ class AlumniForm(forms.ModelForm):
     student_id = forms.CharField(label='Student ID', max_length=8, min_length=8, required=False)
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             label='Skills*',
-                                            widget=forms.CheckboxSelectMultiple,
+                                            widget=forms.CheckboxSelectMultiple(attrs={'id':'skills'}),
                                             required=True)
     majors = forms.ModelMultipleChoiceField(queryset=Major.objects.all(),
                                             label='Major',

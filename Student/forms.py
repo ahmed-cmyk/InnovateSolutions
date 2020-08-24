@@ -89,7 +89,7 @@ class StudentForm(forms.ModelForm):
     personal_email = forms.EmailField(label='Personal Email Address')
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             label='Skills*',
-                                            widget=forms.CheckboxSelectMultiple,
+                                            widget=forms.CheckboxSelectMultiple(attrs={'id':'skills'}),
                                             required=True)
     majors = forms.ModelMultipleChoiceField(queryset=Major.objects.all(),
                                             label='Major',
