@@ -6,6 +6,7 @@ from django.contrib.auth.models import User, auth
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
 from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
+from django.urls import reverse
 
 from Accounts.views import isValidated, get_user_type
 from Home.models import send_html_mail
@@ -86,9 +87,8 @@ def signup(request):
 
 @login_required
 def edit_profile(request):
-    alumni = Alumni.objects.get(user_id=request.user.id)
-
     if request.method == 'POST':
+        alumni = Alumni.objects.get(user_id=request.user.id)
         user_form = EditAlumniProfileInitialForm(request.POST, instance=request.user)
         alumni_form = EditAlumniProfileForm(request.POST, request.FILES, instance=alumni)
 
@@ -102,8 +102,9 @@ def edit_profile(request):
         else:
             messages.warning(request, alumni_form.errors.as_text)
             messages.warning(request, user_form.errors.as_text)
-            return redirect("edit_alumni_profile")
+            return redirect('edit_alumni_profile')
     else:
+        alumni = Alumni.objects.get(user_id=request.user.id)
         user_form = EditAlumniProfileInitialForm(instance=request.user)
         alumni_form = EditAlumniProfileForm(instance=alumni)
         args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': "alumni", 'obj': alumni}

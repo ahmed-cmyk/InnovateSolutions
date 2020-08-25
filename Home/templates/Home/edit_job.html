@@ -11,6 +11,58 @@
 {% endblock %}
 
 {% block content %}
+<script>
+function disableOthersField() {
+    document.getElementById("otherskills").style.display = "none";
+
+    var labels = document.getElementsByTagName('label');
+    for (var i = 0; i < labels.length; i++) {
+        if (labels[i].htmlFor === "otherskills") {
+            labels[i].style.display = "none";
+        }
+    }
+}
+
+function checkOtherSkills(elem) {
+    if(elem.value == {{ others_id }}) {
+        var labels = document.getElementsByTagName('label');
+        for (var i = 0; i < labels.length; i++) {
+            if (labels[i].htmlFor === "otherskills") {
+                if(elem.checked) {
+                    document.getElementById("otherskills").style.display = "block";
+                    labels[i].style.display = "block";
+                }
+                else {
+                    document.getElementById("otherskills").style.display = "none";
+                    labels[i].style.display = "none";
+                }
+            }
+        }
+    }
+}
+
+function searchSkill() {
+    var input = document.getElementById('myInput');
+    var filter = input.value.toUpperCase();
+    var ul = document.getElementById("skills");
+    var li = ul.getElementsByTagName("li");
+
+    for(var i=0; i<li.length; i++) {
+        if(li[i].innerText.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+
+        {% if user_type == 'admin' %}
+            if(li[i].innerText.indexOf("Others") > -1) {
+              li[i].style.display = "none";
+            }
+        {% endif %}
+    }
+}
+</script>
+    <body onload="disableOthersField()">
     <div id="editJobBody" class="col-12">
         <h2 class="text-center">Edit Job Listing</h2>
         <hr>
@@ -31,7 +83,10 @@
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_min|as_crispy_field }}</div>
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_max|as_crispy_field }}</div>
                 </div>
-                <div>{{ jobForm.skills|as_crispy_field }}</div>
+                <div class="skills-container">
+                    <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
+                    {{ jobForm.skills|as_crispy_field }}
+                </div>
             {% elif user_type == 'admin' %}
                 <div>{{ jobForm.job_title|as_crispy_field }}</div>
                 <div>{{ jobForm.description|as_crispy_field }}</div>
@@ -48,7 +103,10 @@
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_min|as_crispy_field }}</div>
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_max|as_crispy_field }}</div>
                 </div>
-                <div>{{ jobForm.skills|as_crispy_field }}</div>
+                <div class="skills-container">
+                    <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
+                    {{ jobForm.skills|as_crispy_field }}
+                </div>
             {% endif %}
 
             <input type="hidden" name="next" value="{% url 'job_details' job.id %}">

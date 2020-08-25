@@ -79,9 +79,8 @@ def student_signup(request):
 
 @login_required
 def edit_profile(request):
-    student = Student.objects.get(user_id=request.user.id)
-
     if request.method == 'POST':
+        student = Student.objects.get(user_id=request.user.id)
         user_form = EditStudentProfileInitialForm(request.POST, instance=request.user)
         student_form = EditStudentProfileForm(request.POST, request.FILES, instance=student)
 
@@ -93,8 +92,9 @@ def edit_profile(request):
         else:
             messages.warning(request, student_form.errors.as_text)
             messages.warning(request, user_form.errors.as_text)
-            return redirect("edit_student_profile")
+            return redirect('edit_student_profile')
     else:
+        student = Student.objects.get(user_id=request.user.id)
         user_form = EditStudentProfileInitialForm(instance=request.user)
         student_form = EditStudentProfileForm(instance=student)
         args = {'student_form': student_form, 'user_form': user_form, 'user_type': "student", 'obj': student}

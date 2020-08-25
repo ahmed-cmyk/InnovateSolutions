@@ -6,8 +6,6 @@ from django.db import transaction
 from django.contrib.auth.decorators import login_required
 from django.core.files import File
 from wsgiref.util import FileWrapper
-from django.urls import reverse
-from urllib.parse import urlencode
 
 # Create your views here.
 
@@ -104,47 +102,30 @@ def check_username(request):
 
 
 @login_required
-def edit_profile(request, id):
+def edit_profile(request):
     user = get_user_type(request)
     if user['obj'] is not None:
         if request.method == 'POST':
-            if user['user_type'] == 'employer':
-                form = EmployerForm(request.POST, request.FILES, instance=user['obj'])
-            elif user['user_type'] == 'admin':
-                employer = Employer.objects.get(user_id=id)
-                form = EmployerForm(request.POST, request.FILES, instance=employer)
-
+            form = EmployerForm(request.POST, request.FILES, instance=user['obj'])
             if form.is_valid():
                 form.save()
-                base_url = reverse('view_employer_profile')
-                url = '{}/{}'.format(base_url, id)
-                return redirect(url)
+                return redirect('view_employer_profile')
             else:
                 messages.warning(request, form.errors.as_text)
-                return redirect("edit_employer_profile")
+                return redirect('edit_employer_profile')
         else:
-            if user['user_type'] == 'employer':
-                form = EmployerForm(instance=user['obj'])
-                args = {'employer_form': form, 'obj': user['obj'], 'user_type': user['user_type']}
-            elif user['user_type'] == 'admin':
-                employer = Employer.objects.get(user_id=id)
-                form = EmployerForm(instance=employer)
-                args = {'employer_form': form, 'obj': employer, 'user_type': user['user_type']}
+            form = EmployerForm(instance=user['obj'])
+            args = {'employer_form': form, 'obj': user['obj'], 'user_type': user['user_type']}
             return render(request, 'Employer/edit_employer_profile.html', args)
     else:
         messages.info(request, 'This employer user does not exist')
 
 
 @login_required
-def view_profile(request, id):
+def view_profile(request):
     user = get_user_type(request)
-    if user['user_type'] == 'employer':
-        args = {'obj': user['obj'], 'user_type': user['user_type']}
-        return render(request, 'Employer/view_employer_profile.html', args)
-    else:
-        employer = Employer.objects.get(user_id=id)
-        args = {'employer': employer, 'user_type': user['user_type']}
-        return render(request, 'Admin/view_employer_profile.html', args)
+    args = {'obj': user['obj'], 'user_type': user['user_type']}
+    return render(request, 'Employer/view_employer_profile.html', args)
 
 @login_required
 def get_employer_trade_license(request, id):

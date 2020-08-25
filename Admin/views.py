@@ -13,6 +13,7 @@ from django.utils import timezone
 from datetime import timedelta, datetime, date
 import csv
 from django.http import HttpResponse, JsonResponse
+from django.urls import reverse
 
 # Create your views here.
 
@@ -22,11 +23,12 @@ from .forms import InitialAdminForm, AdminForm, AddIndustryForm, Statistics
 from Accounts.views import isValidated, get_user_type, number_symbol_exists
 from .models import Admin
 from .forms import EditAdminProfileForm
-from Student.forms import EditStudentProfileForm
+from Student.forms import EditStudentProfileForm, EditStudentProfileInitialForm
 from Student.models import Student, StudentJobApplication
 from Home.models import Job, send_html_mail
 from Employer.models import Employer
 from Employer import views as EmployerViews
+from Alumni.forms import EditAlumniProfileInitialForm, EditAlumniProfileForm
 
 
 # Create your views here.
@@ -177,6 +179,101 @@ def view_pend_acc_profile(request, id):
 
     return redirect('view_pending_requests')
 
+@staff_member_required
+def view_employer_profile(request, id):
+    employer = Employer.objects.get(user_id=id)
+    args = {'employer': employer}
+    return render(request, 'Admin/view_employer_profile.html', args)
+
+
+@staff_member_required
+def edit_employer_profile(request, id):
+    user = get_user_type(request)
+    if user['obj'] is not None:
+        if request.method == 'POST':
+            employer = Employer.objects.get(user_id=id)
+            form = EmployerForm(request.POST, request.FILES, instance=employer)
+            if form.is_valid():
+                form.save()
+                url = '{}/{}'.format('/my_admin/view_employer_profile', id)
+                return redirect(url)
+            else:
+                messages.warning(request, form.errors.as_text)
+                url = '{}/{}'.format('/my_admin/edit_employer_profile', id)
+                return redirect(url)
+        else:
+            employer = Employer.objects.get(user_id=id)
+            form = EmployerForm(instance=employer)
+            args = {'employer_form': form, 'obj': employer, 'user_type': user['user_type']}
+            return render(request, 'Employer/edit_employer_profile.html', args)
+    else:
+        messages.info(request, 'This employer user does not exist')
+
+
+@staff_member_required
+def view_student_profile(request, id):
+    student = Student.objects.get(user_id=id)
+    args = {'student': student}
+    return render(request, 'Home/student_details.html', args)
+
+@staff_member_required
+def edit_student_profile(request, id):
+    if request.method == 'POST':
+        student = Student.objects.get(user_id=id)
+        user_form = EditStudentProfileInitialForm(request.POST, instance=student.user)
+        student_form = EditStudentProfileForm(request.POST, request.FILES, instance=student)
+
+        if user_form.is_valid() and student_form.is_valid():
+            with transaction.atomic():
+                user_form.save()
+                student_form.save()
+                url = '{}/{}'.format('/my_admin/view_student_profile', id)
+                return redirect(url)
+        else:
+            messages.warning(request, student_form.errors.as_text)
+            messages.warning(request, user_form.errors.as_text)
+            url = '{}/{}'.format('/my_admin/edit_student_profile', id)
+            return redirect(url)
+    else:
+        print(id)
+        student = Student.objects.get(user_id=id)
+        user_form = EditStudentProfileInitialForm(instance=student.user)
+        student_form = EditStudentProfileForm(instance=student)
+        args = {'student_form': student_form, 'user_form': user_form, 'user_type': "admin", 'obj': student}
+        return render(request, 'Student/edit_student_profile.html', args)
+
+
+@staff_member_required
+def view_alumni_profile(request, id):
+    alumni = Alumni.objects.get(user_id=id)
+    args = {'alumni': alumni}
+    return render(request, 'Home/alumni_details.html', args)
+
+
+@staff_member_required
+def edit_alumni_profile(request, id):
+    if request.method == 'POST':
+        alumni = Alumni.objects.get(user_id=id)
+        user_form = EditAlumniProfileInitialForm(request.POST, instance=alumni.user)
+        alumni_form = EditAlumniProfileForm(request.POST, request.FILES, instance=alumni)
+        if user_form.is_valid() and alumni_form.is_valid():
+            with transaction.atomic():
+                user_form.save()
+                alumni_form.save()
+                messages.success(request, 'Profile edit was successful')
+                url = '{}/{}'.format('/my_admin/view_alumni_profile', id)
+                return redirect(url)
+        else:
+            messages.warning(request, alumni_form.errors.as_text)
+            messages.warning(request, user_form.errors.as_text)
+            url = '{}/{}'.format('/my_admin/edit_alumni_profile', id)
+            return redirect(url)
+    else:
+        alumni = Alumni.objects.get(user_id=id)
+        user_form = EditAlumniProfileInitialForm(instance=alumni.user)
+        alumni_form = EditAlumniProfileForm(instance=alumni)
+        args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': "admin", 'obj': alumni}
+        return render(request, 'Alumni/edit_alumni_profile.html', args)
 
 @staff_member_required
 def view_pending_jobs(request):
