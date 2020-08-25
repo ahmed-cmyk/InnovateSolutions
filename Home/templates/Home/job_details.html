@@ -132,30 +132,34 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12 d-block d-sm-none">
-                            {% if company.logo %}
-                                <img class="img-fluid" src="{{ company.logo.url }}" height="auto" width="auto">
-                            {% else %}
-                                <img class="img-fluid" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
+                        {% for company in companies %}
+                            {% if job.posted_by == company %}
+                                <div class="col-xs-12 d-block d-sm-none">
+                                    {% if company.logo %}
+                                        <img class="img-fluid" src="{{ company.logo.url }}" height="auto" width="auto">
+                                    {% else %}
+                                        <img class="img-fluid" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
+                                    {% endif %}
+                                </div>
+                                <div class="card-body row">
+                                    <div class="col-10 px-2">
+                                        <p class="text-secondary">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i> {{ job.date_posted }}
+                                        </p>
+                                        <p class="card-text"><b class="text-secondary">Job Description: </b>{{ job.description }}</p>
+                                        <b class="card-text text-secondary">Required Skills: </b>
+                                        {% for skill in job.skills.all %}
+                                            <li class="pl-1">{{ skill }}</li>
+                                        {% endfor %}
+                                    </div>
+                                    {% if company.logo %}
+                                        <img class="col-2 d-none d-sm-block" src="{{ company.logo.url }}" height="auto" width="auto">
+                                    {% else %}
+                                        <img class="col-2 d-none d-sm-block" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
+                                    {% endif %}
+                                </div>
                             {% endif %}
-                        </div>
-                        <div class="card-body row">
-                            <div class="col-10 px-2">
-                                <p class="text-secondary">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i> {{ job.date_posted }}
-                                </p>
-                                <p class="card-text"><b class="text-secondary">Job Description: </b>{{ job.description }}</p>
-                                <b class="card-text text-secondary">Required Skills: </b>
-                                {% for skill in job.skills.all %}
-                                    <li class="pl-1">{{ skill }}</li>
-                                {% endfor %}
-                            </div>
-                            {% if company.logo %}
-                                <img class="col-2 d-none d-sm-block" src="{{ company.logo.url }}" height="auto" width="auto">
-                            {% else %}
-                                <img class="col-2 d-none d-sm-block" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
-                            {% endif %}
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <br>
