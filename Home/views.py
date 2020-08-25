@@ -30,7 +30,7 @@ from Alumni.models import Alumni, AlumniJobApplication
 from Accounts.views import get_user_type
 from .models import Job, Skill, UserNotifications, send_html_mail
 from .forms import CreateJobForm, EditJobForm, FilterJobForm, FilterStudentForm, FilterAlumniForm
-from Employer.forms import EmployerForm, InitialEmployerForm
+from Employer.forms import EmployerForm, InitialEmployerForm, EditEmployerForm
 from Student.forms import StudentJobApplicationForm
 from Alumni.forms import AlumniJobApplicationForm
 from django.core.mail import send_mail
@@ -311,16 +311,17 @@ def job_details(request, id):
 @login_required
 def edit_job(request, id):
     job = Job.objects.get(id=id)
+    job_poster = Employer.objects.get(user_id=job.posted_by_id)
     user = get_user_type(request)
     email = str(request.user)
     try:
         if user['user_type'] == 'employer':
-            Employer.objects.get(user_id=request.user.id)
+            employer = Employer.objects.get(user_id=request.user.id)
             if request.method == 'POST':
                 form = EditJobForm(request.POST, request.FILES, instance=job)
                 if form.is_valid():
                     data = form.save(commit=False)
-                    data.posted_by = request.user
+                    data.posted_by = employer
                     data.save()
                     form.save_m2m()
                     next = request.POST.get('next', '/')
@@ -345,21 +346,21 @@ def edit_job(request, id):
             admin = Admin.objects.get(user_id=request.user.id)
             if request.method == 'POST':
                 jobForm = EditJobForm(request.POST, instance=job)
-                # companyForm = EmployerForm(request.POST, request.FILES, instance=admin)
+                companyForm = EditEmployerForm(request.POST, request.FILES, instance=job_poster)
 
-                # if jobForm.is_valid() and companyForm.is_valid():
-                if jobForm.is_valid():
+                if jobForm.is_valid() and companyForm.is_valid():
+                # if jobForm.is_valid():
                     with transaction.atomic():
-                        # company = companyForm.save(commit=False)
+                        company = companyForm.save(commit=False)
                         # company.user_id = admin.user.id
-                        # company.save()
+                        company.save()
                         j = jobForm.save(commit=False)
-                        j.posted_by = request.user
+                        j.posted_by = Employer.objects.get(user_id=job_poster.user.id)
                         j.save()
                         jobForm.save_m2m()
                         next_page = request.POST.get('next', '/')
                         subject = 'Job Edit Successful'
-                        htmlText = 'You have successfully edited your job.'
+                        htmlText = 'You have successfully edited a job.'
                         send_html_mail(subject, htmlText, [email])
                         # send_mail('Job Edit Successful',
                         #           'You have successfully edited your job.',
@@ -368,14 +369,14 @@ def edit_job(request, id):
 
                         return redirect(next_page)
                 else:
-                    messages.info(request, jobForm.errors)
-                    # messages.info(request, companyForm.errors)
+                    messages.warning(request, jobForm.errors.as_text)
+                    messages.warning(request, companyForm.errors.as_text)
                     return redirect(request.path_info)
             else:
                 jobForm = EditJobForm(instance=job)
-                # companyForm = EmployerForm(instance=admin)
-                args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type']}
-                # args = {'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type']}
+                companyForm = EditEmployerForm(instance=job_poster)
+                # args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type']}
+                args = {'job': job, 'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type']}
                 return render(request, 'Home/edit_job.html', args)
     except Admin.DoesNotExist:
         pass

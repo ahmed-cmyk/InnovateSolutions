@@ -49,6 +49,18 @@
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_max|as_crispy_field }}</div>
                 </div>
                 <div>{{ jobForm.skills|as_crispy_field }}</div>
+                <hr>
+                <div>{{ companyForm.company_name|as_crispy_field }}</div>
+                <div>{{ companyForm.company_description|as_crispy_field }}</div>
+                <div>{{ companyForm.company_website|as_crispy_field }}</div>
+                <small>Website should contain http or https</small>
+                <br><br>
+                <div>{{ companyForm.contact_name|as_crispy_field }}</div>
+                <div>{{ companyForm.phone_number|as_crispy_field }}</div>
+                <small>Phone number should have country code appended before it</small>
+                <br><br>
+                <div>{{ companyForm.logo|as_crispy_field }}</div>
+                <div>{{ companyForm.trade_license|as_crispy_field }}</div>
             {% endif %}
 
             <input type="hidden" name="next" value="{% url 'job_details' job.id %}">
