@@ -430,7 +430,7 @@ def delete_job(request, id):
         htmlText = "You have deleted a job from the Murdoch Career Portal."
         send_html_mail(subject, htmlText, [email])
         messages.success(request, "You have successfully deleted the job")
-        return render(request, 'Home/job_details.html', args)
+        return redirect('view_jobs')
     else:
         form = EditJobForm()
         # args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}

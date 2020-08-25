@@ -88,8 +88,14 @@ function searchSkill() {
                         <div class="form-group col-md-6 col-sm-6 col-xs-12" id="lastNameError"></div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ user_form.password1|as_crispy_field }}</div>
-                        <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ user_form.password2|as_crispy_field }}</div>
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                            <p>{{ user_form.password1|as_crispy_field }}</p>
+                            <small>The password must contain alphanumeric characters</small>
+                        </div>
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                            <p>{{ user_form.password2|as_crispy_field }}</p>
+                            <small>Both passwords should match</small>
+                        </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6 col-sm-6 col-xs-12" id="password1Error"></div>
@@ -97,9 +103,13 @@ function searchSkill() {
                     </div>
                     <div>{{ student_form.gender|as_crispy_field }}</div>
                     <div>{{ student_form.date_of_birth|as_crispy_field }}</div>
+                    <small>Date of Birth cannot be after 2005</small>
+                    <br><br>
                     <div id="dobError"></div>
                     <div>{{ student_form.student_id|as_crispy_field }}</div>
                     <div>{{ student_form.expected_graduation_date|as_crispy_field }}</div>
+                    <small>Graduation date must be from tomorrow onwards</small>
+                    <br><br>
                     <div id="expGradDateError"></div>
                     <div>{{ student_form.personal_email|as_crispy_field }}</div>
                     <div id="personalEmailError"></div>

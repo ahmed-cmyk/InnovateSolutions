@@ -27,9 +27,17 @@
         <h1 class="text-center">Edit Profile</h1>
         <div class="col-12">
             <form method="post" enctype="multipart/form-data" action="edit_employer_profile" onsubmit="return validatePhone()">{% csrf_token %}
-                {% for field in employer_form %}
-                    <div>{{ field|as_crispy_field }}</div>
-                {% endfor %}
+                <div>{{ employer_form.company_name|as_crispy_field }}</div>
+                <div>{{ employer_form.company_description|as_crispy_field }}</div>
+                <div>{{ employer_form.company_website|as_crispy_field }}</div>
+                <small>Website should contain http or https</small>
+                <br><br>
+                <div>{{ employer_form.contact_name|as_crispy_field }}</div>
+                <div>{{ employer_form.phone_number|as_crispy_field }}</div>
+                <small>Phone number should have country code appended before it</small>
+                <br><br>
+                <div>{{ employer_form.logo|as_crispy_field }}</div>
+                <div>{{ employer_form.trade_license|as_crispy_field }}</div>
                 <div class="text-center">
                     <button class="btn btn-primary" type="submit">
                         Save Changes
