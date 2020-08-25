@@ -99,7 +99,7 @@ class Job(models.Model):
         ('Permanent', 'Permanent'),
     ]
     date_posted = models.DateField(null=False, blank=False, auto_now_add=True)
-    posted_by = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='job_author')
+    posted_by = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='job_author', blank=True)
     job_title = models.CharField(max_length=100)
     description = models.TextField()
     status = models.CharField(max_length=15, choices=JOB_STATUS, default='Open')

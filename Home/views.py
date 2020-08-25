@@ -182,6 +182,7 @@ def create_job(request):
                         company.is_active = 'Accepted'
                         company.save()
                         job = jobForm.save(commit=False)
+                        job.posted_by = Employer.objects.get(user_id=company.user.id)
                         email = job.posted_by
                         job.save()
                         jobForm.save_m2m()
