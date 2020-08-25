@@ -56,15 +56,13 @@
                 <div class="form-group col-md-6 col-sm-6 col-xs-12"  id="password1Error"></div>
                 <div class="form-group col-md-6 col-sm-6 col-xs-12"  id="password2Error"></div>
             </div>
-            {{ employer_form.company_name|as_crispy_field }}
-            <div id="companyNameError"></div>
-            {{ employer_form.company_description|as_crispy_field }}
-            {{ employer_form.logo|as_crispy_field }}
-            {{ employer_form.contact_name|as_crispy_field }}
-            {{ employer_form.phone_number|as_crispy_field }}
-            <div id="phoneNumberError"></div>
-            {{ employer_form.company_website|as_crispy_field }}
-            {{ employer_form.trade_license|as_crispy_field }}
+            <div>{{ employer_form.company_name|as_crispy_field }}</div>
+            <div>{{ employer_form.company_description|as_crispy_field }}</div>
+            <div>{{ employer_form.company_website|as_crispy_field }}</div>
+            <div>{{ employer_form.contact_name|as_crispy_field }}</div>
+            <div>{{ employer_form.phone_number|as_crispy_field }}</div>
+            <div>{{ employer_form.logo|as_crispy_field }}</div>
+            <div>{{ employer_form.trade_license|as_crispy_field }}</div>
 
             <div id="register" class="text-center">
                 <button class="btn btn-danger" type="submit">Register</button>

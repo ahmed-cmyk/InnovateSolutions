@@ -22,30 +22,34 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12 d-block d-sm-none">
-                            {% if company.logo %}
-                                <img class="img-fluid" src="{{ company.logo.url }}" height="auto" width="auto">
-                            {% else %}
-                                <img class="img-fluid" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
+                        {% for company in companies %}
+                            {% if job.posted_by == company %}
+                                <div class="col-xs-12 d-block d-sm-none">
+                                    {% if company.logo %}
+                                        <img class="img-fluid" src="{{ company.logo.url }}" height="auto" width="auto">
+                                    {% else %}
+                                        <img class="img-fluid" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
+                                    {% endif %}
+                                </div>
+                                <div class="card-body row">
+                                    <div class="col-10 px-2">
+                                        <p class="text-secondary">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i> {{ job.date_posted }}
+                                        </p>
+                                        <p class="card-text"><b class="text-secondary">Job Description: </b>{{ job.description }}</p>
+                                        <b class="card-text text-secondary">Required Skills: </b>
+                                        {% for skill in job.skills.all %}
+                                            <li class="pl-1">{{ skill }}</li>
+                                        {% endfor %}
+                                    </div>
+                                    {% if company.logo %}
+                                        <img class="col-2 d-none d-sm-block" src="{{ company.logo.url }}" height="auto" width="auto">
+                                    {% else %}
+                                        <img class="col-2 d-none d-sm-block" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
+                                    {% endif %}
+                                </div>
                             {% endif %}
-                        </div>
-                        <div class="card-body row">
-                            <div class="col-10 px-2">
-                                <p class="text-secondary">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i> {{ job.date_posted }}
-                                </p>
-                                <p class="card-text"><b class="text-secondary">Job Description: </b>{{ job.description }}</p>
-                                <b class="card-text text-secondary">Required Skills: </b>
-                                {% for skill in job.skills.all %}
-                                    <li class="pl-1">{{ skill }}</li>
-                                {% endfor %}
-                            </div>
-                            {% if company.logo %}
-                                <img class="col-2 d-none d-sm-block" src="{{ company.logo.url }}" height="auto" width="auto">
-                            {% else %}
-                                <img class="col-2 d-none d-sm-block" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
-                            {% endif %}
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <br>
@@ -58,11 +62,12 @@
                                     {% if job.posted_by == company %}
                                         <div class="card-body">
                                             <p><b class="text-secondary card-text">Company Name:</b> {{ company.company_name }}</p>
+                                            <p><b class="text-secondary card-text">Contact Name:</b> {{ company.contact_name }}</p>
                                             <p><b class="text-secondary card-text">Location:</b> {{ job.location }}</p>
                                             <p><b class="text-secondary card-text">Description:</b> {{ company.company_description }}</p>
                                         </div>
                                         <div class="card-footer">
-                                            <i class="fa fa-mobile" aria-hidden="true"></i> {{ company.phone_number }}
+                                            <i class="fa fa-mobile" aria-hidden="true"></i> <a href="{{ company.phone_number }}">{{ company.phone_number }}</a>
                                             <i class="fa fa-envelope pl-2" aria-hidden="true"></i>
                                             <a href="mailto:{{ company.user }}">{{ company.user }}</a>
                                         </div>

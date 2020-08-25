@@ -18,7 +18,8 @@ class InitialStudentForm(forms.ModelForm):
     first_name = forms.CharField(label='First Name')
     last_name = forms.CharField(label='Last Name')
     email = forms.EmailField(label='Student Email Address')
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput,
+                                help_text="The password must contain alphanumeric characters and should have a minimum of 6 characters")
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
@@ -82,14 +83,15 @@ class StudentForm(forms.ModelForm):
                                required=True,
                                widget=forms.RadioSelect(attrs={'class': 'custom-select'}))
     date_of_birth = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=True,
-                                    label="Date Of Birth")
+                                    label="Date Of Birth", help_text="You should be at least 16 years old")
     student_id = forms.CharField(label='Student ID', max_length=8, min_length=8, required=True)
     expected_graduation_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=True,
-                                               label="Expected Graduation Date")
+                                               label="Expected Graduation Date",
+                                               help_text="Graduation date must be from tomorrow onwards")
     personal_email = forms.EmailField(label='Personal Email Address')
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             label='Skills*',
-                                            widget=forms.CheckboxSelectMultiple(attrs={'id':'skills'}),
+                                            widget=forms.CheckboxSelectMultiple(attrs={'id': 'skills'}),
                                             required=True)
     majors = forms.ModelMultipleChoiceField(queryset=Major.objects.all(),
                                             label='Major',
@@ -117,6 +119,12 @@ class StudentForm(forms.ModelForm):
 
 
 class EditStudentProfileInitialForm(forms.ModelForm):
+    date_of_birth = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=True,
+                                    label="Date Of Birth", help_text="You should be at least 16 years old")
+    expected_graduation_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=True,
+                                               label="Expected Graduation Date",
+                                               help_text="Graduation date must be from tomorrow onwards")
+
     class Meta:
         model = User
         fields = (

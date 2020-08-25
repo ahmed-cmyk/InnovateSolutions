@@ -38,7 +38,6 @@ class CreateJobForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(CreateJobForm, self).__init__(*args, **kwargs)
-        self.fields['posted_by'].queryset = Employer.objects.all()
 
 
 class EditJobForm(CreateJobForm):
