@@ -33,11 +33,7 @@
                 </div>
                 <div>{{ student_form.gender|as_crispy_field }}</div>
                 <div>{{ student_form.date_of_birth|as_crispy_field }}</div>
-                <small>Date of Birth cannot be after 2005</small>
-                <br><br>
                 <div>{{ student_form.expected_graduation_date|as_crispy_field }}</div>
-                <small>Graduation date must be from tomorrow onwards</small>
-                <br><br>
                 <div>{{ student_form.personal_email|as_crispy_field }}</div>
                 <div id="personalEmailError"></div>
                 {{ student_form.skills.label }}

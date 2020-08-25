@@ -9,7 +9,8 @@ from .models import Employer
 
 class InitialEmployerForm(forms.ModelForm):
     email = forms.EmailField(label='Email Address', required=True)
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput,
+                                help_text="The password must contain alphanumeric characters and should have a minimum of 6 characters")
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
@@ -67,8 +68,12 @@ class EmployerForm(forms.ModelForm):
     company_name = forms.CharField(max_length=50, label='Company Name', required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     company_description = forms.CharField(label='Company Description', required=True, widget=forms.Textarea)
-    phone_number = forms.CharField(label="Contact Number", required=True, max_length=15, widget=forms.TextInput(
-        attrs={'class': 'form-control-text', 'style': 'resize:none;', 'id': "num"}))
+    company_website = forms.URLField(label='Company Description', required=True,
+                                     help_text="Website should start with http or https")
+    phone_number = forms.CharField(label="Contact Number", required=True, max_length=15,
+                                   help_text="Phone number should have country code appended before it",
+                                   widget=forms.TextInput(
+                                       attrs={'class': 'form-control-text', 'style': 'resize:none;', 'id': "num"}), )
     contact_name = forms.CharField(max_length=50, label='Contact Name', required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     trade_license = forms.FileField(allow_empty_file=False, label='Trade License',
@@ -91,8 +96,12 @@ class EditEmployerForm(forms.ModelForm):
     company_name = forms.CharField(max_length=50, label='Company Name', required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     company_description = forms.CharField(label='Company Description', required=True, widget=forms.Textarea)
-    phone_number = forms.CharField(label="Contact Number", required=True, max_length=15, widget=forms.TextInput(
-        attrs={'class': 'form-control-text', 'style': 'resize:none;', 'id': "num"}))
+    company_website = forms.URLField(label='Company Description', required=True,
+                                     help_text="Website should start with http or https")
+    phone_number = forms.CharField(label="Contact Number", required=True, max_length=15,
+                                   help_text="Phone number should have country code appended before it",
+                                   widget=forms.TextInput(
+                                       attrs={'class': 'form-control-text', 'style': 'resize:none;', 'id': "num"}))
     contact_name = forms.CharField(max_length=50, label='Contact Name', required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     trade_license = forms.FileField(allow_empty_file=False, label='Trade License', required=False,

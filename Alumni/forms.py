@@ -14,7 +14,8 @@ class InitialAlumniForm(forms.ModelForm):
     first_name = forms.CharField(label='First Name')
     last_name = forms.CharField(label='Last Name')
     email = forms.EmailField(label='Personal Email Address', required=True)
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput,
+                                help_text="The password must contain alphanumeric characters and should have a minimum of 6 characters")
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
@@ -76,7 +77,8 @@ class AlumniForm(forms.ModelForm):
     ]
     gender = forms.ChoiceField(choices=gender_choices, label='Gender', required=True,
                                widget=forms.RadioSelect(attrs={'class': 'custom-select'}))
-    date_of_birth = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=True)
+    date_of_birth = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=True,
+                                    help_text="You should be at least 16 years old")
     student_id = forms.CharField(label='Student ID', max_length=8, min_length=8, required=False)
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             label='Skills*',
@@ -106,6 +108,9 @@ class AlumniForm(forms.ModelForm):
 
 
 class EditAlumniProfileInitialForm(forms.ModelForm):
+    date_of_birth = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=True,
+                                    help_text="You should be at least 16 years old")
+
     class Meta:
         model = User
         fields = (
