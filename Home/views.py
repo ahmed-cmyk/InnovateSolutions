@@ -207,8 +207,9 @@ def create_job(request):
                 jobForm = CreateJobForm()
                 employerForm = InitialEmployerForm()
                 companyForm = EmployerForm()
+                others, created = Skill.objects.get_or_create(skill_name="Others")
                 args = {'jobForm': jobForm, 'employerForm': employerForm, 'companyForm': companyForm,
-                        'obj': user['obj'], 'user_type': user['user_type']}
+                        'obj': user['obj'], 'user_type': user['user_type'], 'others_id': others.id}
                 return render(request, "Home/employer_create_jobs.html", args)
     except Admin.DoesNotExist:
         pass
