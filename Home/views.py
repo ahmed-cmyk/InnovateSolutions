@@ -336,7 +336,8 @@ def edit_job(request, id):
                     return redirect(request.path_info)
             else:
                 jobForm = EditJobForm(instance=job)
-                args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type']}
+                others, created = Skill.objects.get_or_create(skill_name="Others")
+                args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type'], 'others_id': others.id}
                 return render(request, 'Home/edit_job.html', args)
     except Employer.DoesNotExist:
         pass
