@@ -26,6 +26,7 @@
     <div id="editProfileBody">
         <h1 class="text-center">Edit Profile</h1>
         <div class="col-12">
+        {% if user_type == 'employer' %}
             <form method="post" enctype="multipart/form-data" action="edit_employer_profile" onsubmit="return validatePhone()">{% csrf_token %}
                 {% for field in employer_form %}
                     <div>{{ field|as_crispy_field }}</div>
@@ -40,6 +41,22 @@
                     </a>
                 </div>
             </form>
+        {% else %}
+            <form method="post" enctype="multipart/form-data" action="{% url 'admin_edit_employer_profile' obj.user_id %}" onsubmit="return validatePhone()">{% csrf_token %}
+                {% for field in employer_form %}
+                    <div>{{ field|as_crispy_field }}</div>
+                {% endfor %}
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit">
+                        Save Changes
+                    </button>
+
+                    <a class="text-decoration-none text-white" href="{% url 'view_account_details' obj.user_id %}">
+                        <button class="btn btn-secondary" type="button">Cancel</button>
+                    </a>
+                </div>
+            </form>
+        {% endif %}
         </div>
     </div>
 {% endblock %}

@@ -33,9 +33,10 @@
             </div>
         </div>
         <div id="profile-buttons" class="text-center">
-            <a  class="text-decoration-none text-white" href="/employer/edit_employer_profile">
+            <a  class="text-decoration-none text-white" href="{% url 'admin_edit_employer_profile' employer.user_id %}">
                 <button type="submit" class="btn btn-primary">Edit Profile</button>
             </a>
+
             <a class="text-decoration-none text-white" href="{% url 'get_employer_trade_license' employer.user_id %}">
                 <button type="button" class="btn btn-primary">Download Trade License</button>
             </a>
