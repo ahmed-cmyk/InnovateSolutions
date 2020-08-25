@@ -15,7 +15,7 @@
         <h2 class="text-center">Company Profile</h2><br>
         <div class="row" style="margin-left: 5%">
             <div class="icon col-md-4 text-center">
-                {% if obj.logo %}
+                {% if employer.logo %}
                     <img src="{{ employer.logo.url }}" height="300.0em" width="300.0em">
                 {% else %}
                     <img src="{% static 'DefaultDP.jpg' %}" height="300.0em" width="300.0em">
@@ -27,8 +27,8 @@
                 <p><strong>Trade License:</strong> <a href="{{ employer.trade_license.url }}">{{ employer.trade_license }}</a></p>
                 <p><strong>Contact Name:</strong> {{ employer.contact_name }}</p>
                 <p><strong>Contact Number:</strong> <a href="tel:{{ employer.phone_number }}">{{ employer.phone_number }}</a></p>
-                {% if obj.company_website %}
-                    <p><strong>Company Website:</strong> <a href="{{ obj.company_website }}" target="_blank">{{ obj.company_website }}</a></p>
+                {% if employer.company_website %}
+                    <p><strong>Company Website:</strong> <a href="{{ employer.company_website }}" target="_blank">{{ employer.company_website }}</a></p>
                 {% endif %}
             </div>
         </div>

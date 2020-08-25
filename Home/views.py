@@ -217,14 +217,14 @@ def create_job(request):
 
     try:
         user = get_user_type(request)
-        Employer.objects.get(user_id=request.user.id)
+        employer = Employer.objects.get(user_id=request.user.id)
         email = str(request.user)
         if user['user_type'] == 'employer':
             if request.method == 'POST':
                 form = CreateJobForm(request.POST)
                 if form.is_valid():
                     data = form.save(commit=False)
-                    data.posted_by = request.user
+                    data.posted_by = employer
                     data.save()
                     form.save_m2m()
 
