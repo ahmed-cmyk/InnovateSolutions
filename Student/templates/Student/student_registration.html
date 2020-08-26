@@ -101,11 +101,11 @@ function searchSkill() {
                     <div>{{ student_form.student_id|as_crispy_field }}</div>
                     <div>{{ student_form.expected_graduation_date|as_crispy_field }}</div>
                     <div id="expGradDateError"></div>
-                    <div>{{ student_form.personal_email|as_crispy_field }}</div>
-                    <div id="personalEmailError"></div>
                     <div>{{ user_form.email|as_crispy_field }}</div>
                     <div id="studentEmailError"></div>
                     <div id="usernameError"></div>
+                    <div>{{ student_form.personal_email|as_crispy_field }}</div>
+                    <div id="personalEmailError"></div>
                     {{ student_form.skills.label }}
                     <div class="skills-container">
                         <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">

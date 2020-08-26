@@ -19,7 +19,8 @@ class InitialStudentForm(forms.ModelForm):
     last_name = forms.CharField(label='Last Name')
     email = forms.EmailField(label='Student Email Address')
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput,
-                                help_text="The password must contain alphanumeric characters and should have a minimum of 6 characters")
+                                help_text="The password must contain a combination of alphabets and numbers and "
+                                          "should have a minimum length of 8 characters")
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
