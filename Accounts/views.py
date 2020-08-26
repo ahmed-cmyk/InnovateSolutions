@@ -13,8 +13,8 @@ from Admin.models import Admin
 def isValidated(passwd):
     status = True
 
-    if len(passwd) > 8:
-        status = True
+    if len(passwd) < 8:
+        status = False
 
     if not any(char.isdigit() for char in passwd):
         status = False

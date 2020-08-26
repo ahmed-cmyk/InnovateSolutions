@@ -69,7 +69,7 @@ class EmployerForm(forms.ModelForm):
     company_name = forms.CharField(max_length=50, label='Company Name', required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     company_description = forms.CharField(label='Company Description', required=True, widget=forms.Textarea)
-    company_website = forms.URLField(label='Company Description', required=True,
+    company_website = forms.URLField(label='Company Website', required=True,
                                      help_text="Website should start with http or https")
     phone_number = forms.CharField(label="Contact Number", required=True, max_length=15,
                                    help_text="Phone number should have country code appended before it",
@@ -97,7 +97,7 @@ class EditEmployerForm(forms.ModelForm):
     company_name = forms.CharField(max_length=50, label='Company Name', required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     company_description = forms.CharField(label='Company Description', required=True, widget=forms.Textarea)
-    company_website = forms.URLField(label='Company Description', required=True,
+    company_website = forms.URLField(label='Company Website', required=True,
                                      help_text="Website should start with http or https")
     phone_number = forms.CharField(label="Contact Number", required=True, max_length=15,
                                    help_text="Phone number should have country code appended before it",

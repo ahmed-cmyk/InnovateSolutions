@@ -30,7 +30,8 @@ def signup(request):
 
         if user_form.is_valid():
             if user_form.usernameExists():
-                messages.info(request, 'Username already taken. Try a different one.')  # checks if username exists in db
+                messages.info(request,
+                              'Username already taken. Try a different one.')  # checks if username exists in db
                 return redirect("employer_register")
 
             elif user_form.emailExists():
@@ -38,11 +39,13 @@ def signup(request):
                 return redirect("employer_register")
 
             elif not user_form.samePasswords():
-                messages.info(request, 'Passwords not matching. Try again.')  # checks if password and confirm password are matching
+                messages.info(request,
+                              'Passwords not matching. Try again.')  # checks if password and confirm password are matching
                 return redirect("employer_register")
 
             elif not user_form.emailDomainExists():
-                messages.info(request, 'Email domain does not exist. Try again.')  # checks if there is an exising domain for given email
+                messages.info(request,
+                              'Email domain does not exist. Try again.')  # checks if there is an exising domain for given email
                 return redirect("employer_register")
 
             else:
@@ -72,8 +75,8 @@ def signup(request):
                         messages.warning(request, employer_form.errors.as_text)
                         return redirect("employer_register")
                 else:
-                    messages.warning(request,
-                                  'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric character and 1 letter.')
+                    messages.warning(request, 'ERROR: Password must be 8 characters or more, and must have atleast 1 '
+                                              'numeric character and 1 letter.')
                     return redirect("employer_register")
         else:
             messages.info(request, user_form.errors.as_text)
@@ -89,6 +92,7 @@ def signup(request):
 def activate(request):
     user = get_user_type(request)
     return render(request, 'Employer/pending_activation.html', user)
+
 
 def check_username(request):
     if request.is_ajax and request.method == 'GET':
@@ -126,6 +130,7 @@ def view_profile(request):
     user = get_user_type(request)
     args = {'obj': user['obj'], 'user_type': user['user_type']}
     return render(request, 'Employer/view_employer_profile.html', args)
+
 
 @login_required
 def get_employer_trade_license(request, id):
