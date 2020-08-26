@@ -41,7 +41,7 @@ def backup_database(request):
         DB_USER = 'postgres'
         DB_NAME = 'django_unlimited'
 
-        BACKUP_PATH = r'backup'
+        BACKUP_PATH = BASE_DIR + '\\backup'
         FILENAME = time.strftime("%Y%m%d-%H%M%S") + '_backup'
 
         destination = r'%s/%s' % (BACKUP_PATH, FILENAME)
