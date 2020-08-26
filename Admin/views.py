@@ -1,3 +1,6 @@
+import mimetypes
+import time
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
@@ -8,10 +11,11 @@ from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
 
 from Alumni.models import Alumni, AlumniJobApplication
-from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
+from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL, BASE_DIR
 from django.utils import timezone
 from datetime import timedelta, datetime, date
 import csv
+import subprocess
 from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 
@@ -27,11 +31,52 @@ from Student.forms import EditStudentProfileForm, EditStudentProfileInitialForm
 from Student.models import Student, StudentJobApplication
 from Home.models import Job, send_html_mail
 from Employer.models import Employer
-from Employer import views as EmployerViews
 from Alumni.forms import EditAlumniProfileInitialForm, EditAlumniProfileForm
 
 
 # Create your views here.
+@staff_member_required
+def backup_database(request):
+    if 'backup_database' in request.POST:
+        DB_USER = 'postgres'
+        DB_NAME = 'django_unlimited'
+
+        BACKUP_PATH = r'backup'
+        FILENAME = time.strftime("%Y%m%d-%H%M%S") + '_backup'
+
+        destination = r'%s/%s' % (BACKUP_PATH, FILENAME)
+
+        print('Backing up %s database to %s' % (DB_NAME, destination))
+        dump = subprocess.Popen(
+            ['pg_dump', '-U', DB_USER, '-d', DB_NAME, '-f', destination],
+            stdout=subprocess.PIPE, universal_newlines=True
+        )
+        # output_file = open(FILENAME, 'w')
+        # for line in iter(dump.stdout.readline, ""):
+        #     output_file.write(line)
+        #
+        # dump.stdout.close()
+
+        # out = dump.communicate()[0]
+        # print(out)
+        # output_file.writelines(out)
+        # path = BASE_DIR + "\\backup\\" + FILENAME
+        # print(path)
+        # download_file(path, FILENAME)
+        return redirect('backup_view')
+
+
+def download_file(path, filename):
+    # fill these variables with real values
+    fl_path = path
+    print('File path: ' + fl_path)
+
+    fl = open(fl_path, 'r')
+    mime_type, _ = mimetypes.guess_type(fl_path)
+    response = HttpResponse(fl, content_type=mime_type)
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    return response
+
 
 @staff_member_required
 def create_admin(request):
@@ -82,8 +127,8 @@ def create_admin(request):
                         return redirect("admin_register")
                 else:
                     messages.warning(request,
-                                   'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric '
-                                   'character and 1 letter.')
+                                     'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric '
+                                     'character and 1 letter.')
                     return redirect("admin_register")
         else:
             messages.warning(request, user_form.errors.as_text)
@@ -101,7 +146,8 @@ def view_pending(request):
     applicants_students = Student.objects.filter(is_active='Pending')
     applicants_alumni = Alumni.objects.filter(is_active='Pending')
     applicants_employers = Employer.objects.filter(is_active='Pending')
-    args = {'user_type': user['user_type'], 'applicants_students': applicants_students, 'applicants_alumni': applicants_alumni, 'applicants_employers': applicants_employers}
+    args = {'user_type': user['user_type'], 'applicants_students': applicants_students,
+            'applicants_alumni': applicants_alumni, 'applicants_employers': applicants_employers}
     return render(request, 'Admin/view_pending_requests.html', args)
 
 
@@ -179,6 +225,7 @@ def view_pend_acc_profile(request, id):
 
     return redirect('view_pending_requests')
 
+
 @staff_member_required
 def view_employer_profile(request, id):
     employer = Employer.objects.get(user_id=id)
@@ -215,6 +262,7 @@ def view_student_profile(request, id):
     student = Student.objects.get(user_id=id)
     args = {'student': student}
     return render(request, 'Home/student_details.html', args)
+
 
 @staff_member_required
 def edit_student_profile(request, id):
@@ -274,6 +322,7 @@ def edit_alumni_profile(request, id):
         alumni_form = EditAlumniProfileForm(instance=alumni)
         args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': "admin", 'obj': alumni}
         return render(request, 'Alumni/edit_alumni_profile.html', args)
+
 
 @staff_member_required
 def view_pending_jobs(request):
@@ -456,17 +505,25 @@ def generate_statistics(request):
             start_date = end_date - timedelta(364)
 
         # users = User.objects.filter(date_joined__range=[start_date, end_date])
-        admins = Admin.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).count()
+        admins = Admin.objects.filter(
+            user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).count()
         admin_users = User.objects.filter(id__in=Admin.objects.all())
-        students = Student.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).count()
-        current = Student.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).count()
-        alumni = Alumni.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).count()
+        students = Student.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(
+            date_joined__range=[start_date, end_date])).count()
+        current = Student.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(
+            date_joined__range=[start_date, end_date])).count()
+        alumni = Alumni.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(
+            date_joined__range=[start_date, end_date])).count()
         employers = Employer.objects.filter(
-            user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).exclude(user_id__in=admin_users).count()
+            user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).exclude(
+            user_id__in=admin_users).count()
         jobs_posted = Job.objects.filter(date_posted__range=[start_date, end_date], is_active='Accepted').count()
-        open_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Open", is_active='Accepted').count()
-        closed_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Closed", is_active='Accepted').count()
-        deleted_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Deleted", is_active='Accepted').count()
+        open_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Open",
+                                       is_active='Accepted').count()
+        closed_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Closed",
+                                         is_active='Accepted').count()
+        deleted_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Deleted",
+                                          is_active='Accepted').count()
         apps = StudentJobApplication.objects.filter(date_applied__range=[start_date, end_date]).count()
 
         # users = len(list(set(users)))
