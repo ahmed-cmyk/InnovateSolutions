@@ -24,6 +24,9 @@ class Industry(models.Model):
         name = self.industry_name
         return name
 
+    class Meta:
+        verbose_name_plural = 'Industries'
+
 
 class Skill(models.Model):
     skill_name = models.CharField(max_length=50, unique=True)
