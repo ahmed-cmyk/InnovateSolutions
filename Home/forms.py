@@ -12,6 +12,14 @@ from DjangoUnlimited import settings
 
 
 class CreateJobForm(forms.ModelForm):
+    DURATION = [
+        ('--Select--', '--Select--'),
+        ('Days', 'Days'),
+        ('Weeks', 'Weeks'),
+        ('Months', 'Months'),
+        ('Permanent', 'Permanent'),
+    ]
+
     skills = forms.ModelMultipleChoiceField(
         label='Skills Required*',
         widget=forms.CheckboxSelectMultiple(attrs={'onChange': 'checkOtherSkills(this)', 'id':'skills'}),
@@ -25,15 +33,22 @@ class CreateJobForm(forms.ModelForm):
         required=False
     )
 
+    duration_type = forms.CharField(max_length=10,
+                                    widget=forms.Select(choices=DURATION,
+                                                        attrs={'id': 'duration_type', 'onChange': 'toggleDuration(this)'}),
+                                    required=True)
+    duration = forms.IntegerField(required=False, widget=forms.NumberInput(attrs={'id': 'duration'}))
+
     class Meta:
         model = Job
         exclude = ['date_posted', 'status', 'date_closed']
         labels = {
+            "duration_type": "Duration Type",
             "duration": "Duration",
             "salary_min": "Minimum Salary (AED)",
             "salary_max": "Maximum Salary (AED)",
-            "industry_id": "Industry ID",
-            "job_type_id": "Job Type ID"
+            "industry_id": "Industry",
+            "job_type_id": "Job Type"
         }
 
     def __init__(self, *args, **kwargs):
@@ -44,6 +59,14 @@ class EditJobForm(CreateJobForm):
     class Meta:
         model = Job
         exclude = ['posted_by', 'date_posted', 'date_closed', 'status']
+        labels = {
+            "duration_type": "Duration Type",
+            "duration": "Duration",
+            "salary_min": "Minimum Salary (AED)",
+            "salary_max": "Maximum Salary (AED)",
+            "industry_id": "Industry",
+            "job_type_id": "Job Type"
+        }
 
 
 class FilterJobForm(forms.ModelForm):

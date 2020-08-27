@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from datetime import datetime
-from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import RegexValidator
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -17,7 +17,9 @@ class Employer(models.Model):
     ]
     company_name = models.CharField(max_length=50)
     company_description = models.TextField()
-    phone_number = PhoneNumberField(blank=False)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
+                                 message="Phone number must be entered in the format: '+999999999' or all numbers. Up to 15 digits allowed.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=False)
     logo = models.ImageField(upload_to='company_logos', null=True, blank=True)
     contact_name = models.CharField(max_length=50, blank=False, default='N/A')
     trade_license = models.FileField(upload_to='trade_licenses', null=False, blank=False,

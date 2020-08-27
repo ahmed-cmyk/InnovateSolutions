@@ -61,6 +61,10 @@ function searchSkill() {
         {% endif %}
     }
 }
+
+function toggleDuration(elem) {
+    document.getElementById("duration").disabled = elem.value === "Permanent";
+}
 </script>
     <body onload="disableOthersField()">
     <div id="editJobBody" class="col-12">
@@ -76,8 +80,8 @@ function searchSkill() {
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.industry_id|as_crispy_field }}</div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.duration|as_crispy_field }}</div>
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.duration_type|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.duration|as_crispy_field }}</div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_min|as_crispy_field }}</div>

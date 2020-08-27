@@ -71,14 +71,14 @@ class EmployerForm(forms.ModelForm):
     company_description = forms.CharField(label='Company Description', required=True, widget=forms.Textarea)
     company_website = forms.URLField(label='Company Website', required=True,
                                      help_text="Website should start with http or https")
-    phone_number = forms.CharField(label="Contact Number", required=True, max_length=15,
-                                   help_text="Phone number should have country code appended before it",
+    phone_number = forms.CharField(label="Contact Number", required=True, max_length=15, min_length=9,
+                                   help_text="Phone number should be minimum 9 and maximum 15 digits with no spaces or - characters",
                                    widget=forms.TextInput(
-                                       attrs={'class': 'form-control-text', 'style': 'resize:none;', 'id': "num"}), )
+                                       attrs={'class': 'form-control-text', 'style': 'resize:none;'}), )
     contact_name = forms.CharField(max_length=50, label='Contact Name', required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     trade_license = forms.FileField(allow_empty_file=False, label='Trade License',
-                                    help_text="*Disclaimer: Please attach a copy of your registered trade license",
+                                    help_text="Please attach a copy of your registered trade license",
                                     validators=[FileTypeValidator(
                                         allowed_types=["image/*", "application/pdf", "application/msword",
                                                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"]
@@ -100,13 +100,13 @@ class EditEmployerForm(forms.ModelForm):
     company_website = forms.URLField(label='Company Website', required=True,
                                      help_text="Website should start with http or https")
     phone_number = forms.CharField(label="Contact Number", required=True, max_length=15,
-                                   help_text="Phone number should have country code appended before it",
+                                   help_text="Phone number should be minimum 9 and maximum 15 digits with no spaces or - characters",
                                    widget=forms.TextInput(
-                                       attrs={'class': 'form-control-text', 'style': 'resize:none;', 'id': "num"}))
+                                       attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     contact_name = forms.CharField(max_length=50, label='Contact Name', required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     trade_license = forms.FileField(allow_empty_file=False, label='Trade License', required=False,
-                                    help_text="*Disclaimer: Please attach a copy of your registered trade license",
+                                    help_text="Please attach a copy of your registered trade license",
                                     validators=[FileTypeValidator(
                                         allowed_types=["image/*", "application/pdf", "application/msword",
                                                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"]

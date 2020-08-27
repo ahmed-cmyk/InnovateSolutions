@@ -111,7 +111,11 @@
                                                         <i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }}
                                                     </p>
                                                     <p class="card-text">
-                                                        <i class="fa fa-clock-o" aria-hidden="true"></i> {{ job.duration }} {{ job.duration_type }}
+                                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                        {% if job.duration %}
+                                                            {{ job.duration }}
+                                                        {% endif %}
+                                                        {{ job.duration_type }}
                                                         - {{ job.job_type_id }}
                                                     </p>
                                                     <p class="card-text">
@@ -162,7 +166,11 @@
                                         <i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }}
                                     </p>
                                     <p class="card-text">
-                                        <i class="fa fa-clock-o" aria-hidden="true"></i> {{ job.duration }} {{ job.duration_type }}
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        {% if job.duration %}
+                                            {{ job.duration }}
+                                        {% endif %}
+                                        {{ job.duration_type }}
                                         - {{ job.job_type_id }}
                                     </p>
                                     <p class="card-text">
