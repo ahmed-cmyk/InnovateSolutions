@@ -142,7 +142,7 @@
                                     {% endif %}
                                 </div>
                                 <div class="card-body row">
-                                    <div class="col-10 px-2">
+                                    <div class="col-9 px-2">
                                         <p class="text-secondary">
                                             <i class="fa fa-calendar" aria-hidden="true"></i> {{ job.date_posted }}
                                         </p>
@@ -157,9 +157,9 @@
                                         {% endif %}
                                     </div>
                                     {% if company.logo %}
-                                        <img class="col-2 d-none d-sm-block" src="{{ company.logo.url }}" height="auto" width="auto">
+                                        <img class="col-3 d-none d-sm-block" src="{{ company.logo.url }}" height="auto" width="auto">
                                     {% else %}
-                                        <img class="col-2 d-none d-sm-block" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
+                                        <img class="col-3 d-none d-sm-block" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
                                     {% endif %}
                                 </div>
                             {% endif %}

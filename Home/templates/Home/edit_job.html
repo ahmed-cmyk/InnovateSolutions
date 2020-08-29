@@ -13,12 +13,14 @@
 {% block content %}
 <script>
 function disableOthersField() {
-    document.getElementById("otherskills").style.display = "none";
-
-    var labels = document.getElementsByTagName('label');
-    for (var i = 0; i < labels.length; i++) {
-        if (labels[i].htmlFor === "otherskills") {
-            labels[i].style.display = "none";
+    var isEmpty = document.getElementById('otherskills').innerHTML === "";
+    if(isEmpty) {
+        document.getElementById("otherskills").style.display = "none";
+        var labels = document.getElementsByTagName('label');
+        for (var i = 0; i < labels.length; i++) {
+            if (labels[i].htmlFor === "otherskills") {
+                labels[i].style.display = "none";
+            }
         }
     }
 }
@@ -53,12 +55,6 @@ function searchSkill() {
         } else {
           li[i].style.display = "none";
         }
-
-        {% if user_type == 'admin' %}
-            if(li[i].innerText.indexOf("Others") > -1) {
-              li[i].style.display = "none";
-            }
-        {% endif %}
     }
 }
 
@@ -103,8 +99,8 @@ function toggleDuration(elem) {
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.industry_id|as_crispy_field }}</div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.duration|as_crispy_field }}</div>
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.duration_type|as_crispy_field }}</div>
+                    <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.duration|as_crispy_field }}</div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_min|as_crispy_field }}</div>
@@ -115,6 +111,8 @@ function toggleDuration(elem) {
                     <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
                     {{ jobForm.skills }}
                 </div>
+                <br>
+                <div>{{ jobForm.other_skills|as_crispy_field }}</div>
                 <hr>
                 <div>{{ companyForm.company_name|as_crispy_field }}</div>
                 <div>{{ companyForm.company_description|as_crispy_field }}</div>
@@ -131,12 +129,10 @@ function toggleDuration(elem) {
 
             <input type="hidden" name="next" value="{% url 'job_details' job.id %}">
                 <div class="text-center">
-                    <button class="btn btn-primary" type="submit">
-                        Save Changes
-                    </button>
-                    <button class="btn btn-secondary" type="button">
-                        <a class="text-decoration-none text-white" href="{% url 'job_details' job.id %}">Cancel</a>
-                    </button>
+                    <button class="btn btn-primary" type="submit">Save Changes</button>
+                    <a class="text-decoration-none text-white" href="{% url 'job_details' job.id %}">
+                        <button class="btn btn-secondary" type="button">Cancel</button>
+                    </a>
                 </div>
         </form>
     </div>
