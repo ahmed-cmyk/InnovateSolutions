@@ -50,7 +50,7 @@ def index(request):
                 return render(request, "Home/view_jobs.html", args)
         else:
             try:
-                latest_jobs = Job.objects.order_by('-date_posted')[:3]
+                latest_jobs = Job.objects.filter(status="Open", is_active='Accepted').order_by('-date_posted')[:3]
                 args = {'job_list': latest_jobs, 'obj': user['obj'], 'user_type': user['user_type']}
                 return render(request, "Home/index.html", args)
             except:
