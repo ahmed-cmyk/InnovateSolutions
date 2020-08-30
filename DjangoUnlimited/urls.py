@@ -33,7 +33,6 @@ urlpatterns = [
     path('HelpDesk/', include('HelpDesk.urls')),
     path('bulletin/', include('Bulletin.urls')),  # Using URLS from the Bulletin app
     path('backup/<str:filename>', download_file, name="backup_download"),
-    path('download_database/(?P<path>.*)$', serve, {'document root': settings.BACKUP_ROOT}),
 ]
 
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.BACKUP_URL,
