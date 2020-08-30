@@ -77,6 +77,6 @@ $("#companyForm").submit(function (e) {
         e.preventDefault();
     }
     else {
-        alert("Success!");
+        console.log("Success!");
     }
 });
