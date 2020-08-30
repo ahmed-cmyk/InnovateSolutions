@@ -1,6 +1,9 @@
 import mimetypes
+import os
 import time
+import zipfile
 
+from django.core.files.storage import get_storage_class
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
@@ -11,12 +14,13 @@ from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
 
 from Alumni.models import Alumni, AlumniJobApplication
+from DjangoUnlimited import settings
 from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL, BASE_DIR
 from django.utils import timezone
 from datetime import timedelta, datetime, date
 import csv
 import subprocess
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 
 # Create your views here.
@@ -42,9 +46,10 @@ def backup_database(request):
         DB_NAME = 'django_unlimited'
 
         BACKUP_PATH = BASE_DIR + '\\backup'
-        FILENAME = time.strftime("%Y%m%d-%H%M%S") + '_backup'
+        FILENAME = time.strftime("%Y%m%d_%H%M%S") + '_backup.sql'
+        # FILENAME = 'DB_backup.sql'
 
-        destination = r'%s/%s' % (BACKUP_PATH, FILENAME)
+        destination = r'%s\%s' % (BACKUP_PATH, FILENAME)
 
         print('Backing up %s database to %s' % (DB_NAME, destination))
         dump = subprocess.Popen(
@@ -62,20 +67,60 @@ def backup_database(request):
         # output_file.writelines(out)
         # path = BASE_DIR + "\\backup\\" + FILENAME
         # print(path)
-        # download_file(path, FILENAME)
+        # download_file(request)
         return redirect('backup_view')
+        # return redirect('backup_download/%s' % (FILENAME))
+        # return render(request, 'dbbackup_ui/_backup_forms.html', {'db_backup_file': FILENAME})
+        # return HttpResponseRedirect(reverse('backup_view', args={'db_backup_file': FILENAME}))
 
 
-def download_file(path, filename):
+def download_file(request):
     # fill these variables with real values
-    fl_path = path
-    print('File path: ' + fl_path)
+    # fl_path = "\\backup\\" + filename
+    # print('File path: ' + fl_path)
+    #
+    # fl = open(fl_path, 'r')
+    # mime_type, _ = mimetypes.guess_type(fl_path)
+    # response = HttpResponse(fl, content_type=mime_type)
+    # response['Content-Disposition'] = "attachment; filename=%s" % filename
+    # return response
+    filename = 'DB_backup.sql'
+    # file_path = os.path.join(settings.BACKUP_ROOT, filename)
+    # print(file_path)
+    # if os.path.exists(file_path):
+    # #     print('Path exists')
+    # # else:
+    # #     print('There is no path at ' + file_path)
+    #     with open(file_path, 'rb') as fh:
+    #         print("I found the file")
+    #         response = HttpResponse(fh.read(), content_type="application/sql")
+    #         print('Second line')
+    #         response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+    #         print('Third line')
+    #         print(response)
+    #         return response
+    # return redirect('backup_view')
+    # file = "127.0.0.1" + settings.BACKUP_URL + filename
+    # return HttpResponse(request, 'download_backup', {path:})
+    return redirect('backup_download/%s' % (filename))
 
-    fl = open(fl_path, 'r')
-    mime_type, _ = mimetypes.guess_type(fl_path)
-    response = HttpResponse(fl, content_type=mime_type)
-    response['Content-Disposition'] = "attachment; filename=%s" % filename
-    return response
+
+def download_source_code(request):
+    extension = 'zip'
+    code_storage = get_storage_class()()
+
+    # zip_filename = 'SourceCodeBackup.zip'
+    # ziph = zipfile.ZipFile('SourceCodeBackup.zip', 'w')
+    # for root, dirs, files in os.walk(BASE_DIR):
+    #     for file in files:
+    #         ziph.write(os.path.join(root, file))
+    #
+    # ziph.close()
+    # print('---------------Ziph---------------' + str(ziph))
+    # resp = HttpResponse(mimetype="application/x-zip-compressed")
+    # resp['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
+    #
+    # return resp
 
 
 @staff_member_required

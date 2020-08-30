@@ -24,5 +24,6 @@ urlpatterns = [
     path('view_student_profile/<int:id>', views.view_student_profile, name='admin_view_student_profile'),
     path('edit_alumni_profile/<int:id>', views.edit_alumni_profile, name='admin_edit_alumni_profile'),
     path('view_alumni_profile/<int:id>', views.view_alumni_profile, name='admin_view_alumni_profile'),
-    path('backup-database', views.backup_database, name="backup_database")
+    path('', views.backup_database, name="backup_database"),
+    path('download-source-code', views.download_source_code, name="download-source-code")
 ]

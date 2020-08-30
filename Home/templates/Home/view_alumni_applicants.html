@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <div id="viewCandidateBody" class="col-12">
+    <div id="viewCandidateBody" class="col-12 my-5">
         {% if alumniApplicants %}
             <div>
                 <table class="table table-sm text-center">
@@ -20,15 +20,15 @@
                     <tbody>
                     {% for applicants in alumniApplicants %}
                         <tr class="text-center">
-                        <td>{{ applicants.user.first_name }} {{ applicants.user.last_name }}</td>
-                        <td>{{ applicants.user }}</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-primary">
-                                <a class="text-decoration-none text-white" href="{{ applicants.applied.cv.url }}">DOWNLOAD CV</a>
-                            </button>
-                        </td>
+                            <td>{{ applicants.user.first_name }} {{ applicants.user.last_name }}</td>
+                            <td>{{ applicants.user }}</td>
+                            <td class="text-center">
+                                <a class="text-decoration-none text-white" href="{% url 'get_alumni_cv_file' applicants.user_id %}">
+                                    <button type="button" class="btn btn-primary">DOWNLOAD CV</button>
+                                </a>
+                            </td>
+                        </tr>
                     {% endfor %}
-                    </tr>
                     </tbody>
                 </table>
             </div>

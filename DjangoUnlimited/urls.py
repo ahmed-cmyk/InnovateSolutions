@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve
+
+from Admin.views import download_file
 
 urlpatterns = [
     path('', include('Home.urls')),
@@ -29,7 +32,9 @@ urlpatterns = [
     path('employer/', include('Employer.urls')),
     path('HelpDesk/', include('HelpDesk.urls')),
     path('bulletin/', include('Bulletin.urls')),  # Using URLS from the Bulletin app
-
+    path('backup/<str:filename>', download_file, name="backup_download"),
+    path('download_database/(?P<path>.*)$', serve, {'document root': settings.BACKUP_ROOT}),
 ]
 
-urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.BACKUP_URL,
+                                                                                                   document_root=settings.BACKUP_ROOT)

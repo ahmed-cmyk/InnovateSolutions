@@ -13,7 +13,7 @@
     {% csrf_token %}
     {{ media_backup_form.as_p }}
     <div class="submit-row">
-        <input type="submit" class="button" name="backup_database" value="Download database backup">
+        <input type="submit" class="button" name="backup_database" value="Create database backup">
     </div>
 </form>
 
@@ -25,3 +25,12 @@
         <input type="submit" class="button" name="mediabackup" value="Download media backup">
     </div>
 </form>
+
+{#<h2>Download Source Code</h2>#}
+{#<form method="post" action=".">#}
+{#    {% csrf_token %}#}
+{#    {{ media_backup_form.as_p }}#}
+{#    <div class="submit-row">#}
+{#        <input type="submit" class="button" name="codebackup" value="Download Source Code">#}
+{#    </div>#}
+{#</form>#}
