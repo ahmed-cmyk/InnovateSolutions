@@ -12,6 +12,14 @@
     font-size: 0.8rem;
 }
 
+#viewCandidateBody {
+    margin: 10% 0;
+}
+
+#noApplications {
+    margin: 10% 0;
+}
+
 #filterForm {
   height: 50%;
 }

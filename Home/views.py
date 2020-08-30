@@ -285,8 +285,8 @@ def job_details(request, id):
                 return render(request, 'Home/job_details.html', args)
 
         elif request.POST.get("viewcandidates"):
-            alumniCandidates = AlumniJobApplication.objects.filter(job_id=job)
-            studentCandidates = StudentJobApplication.objects.filter(job_id=job)
+            alumniCandidates = AlumniJobApplication.objects.filter(job_id=job.id)
+            studentCandidates = StudentJobApplication.objects.filter(job_id=job.id)
             args = {'studentCandidates': studentCandidates, 'alumniCandidates': alumniCandidates, 'obj': user['obj'],
                     'user_type': user['user_type']}
             return render(request, 'Home/view_candidates.html', args)

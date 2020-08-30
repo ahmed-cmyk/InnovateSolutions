@@ -6,8 +6,8 @@
 {% endblock %}
 
 {% block content %}
-    <div id="viewCandidateBody" class="col-12 my-5">
-        {% if studentCandidates or alumniCandidates %}
+    {% if studentCandidates or alumniCandidates %}
+        <div id="viewCandidateBody" class="col-12">
             <div>
                 <table class="table table-sm text-center">
                     <thead class="thead-dark">
@@ -24,7 +24,7 @@
                         <td>{{ candidates.applied }}</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-primary">
-                                <a class="text-decoration-none text-white" target="_blank" href="{{ candidates.applied.cv.url }}">DOWNLOAD CV</a>
+                                <a class="text-decoration-none text-white" href="{% url 'get_student_cv_file' candidates.applied.user_id %}">DOWNLOAD CV</a>
                             </button>
                         </td>
                     {% endfor %}
@@ -34,7 +34,7 @@
                         <td>{{ candidates.applied }}</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-primary">
-                                <a class="text-decoration-none text-white" target="_blank" href="{{ candidates.applied.cv.url }}">DOWNLOAD CV</a>
+                                <a class="text-decoration-none text-white" href="{% url 'get_alumni_cv_file' candidates.applied.user_id %}">DOWNLOAD CV</a>
                             </button>
                         </td>
                     {% endfor %}
@@ -42,10 +42,10 @@
                     </tbody>
                 </table>
             </div>
-        {% else %}
-            <div class="noApplications">
-                <h1 class="text-center">No applicants</h1>
-            </div>
-        {% endif %}
-    </div>
+        </div>
+    {% else %}
+        <div id="noApplications">
+            <h1 class="text-center">No applicants</h1>
+        </div>
+    {% endif %}
 {% endblock %}
