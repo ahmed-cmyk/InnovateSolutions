@@ -376,8 +376,9 @@ def edit_job(request, id):
             else:
                 jobForm = EditJobForm(instance=job)
                 companyForm = EditEmployerForm(instance=job_poster)
+                others, created = Skill.objects.get_or_create(skill_name="Others")
                 # args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type']}
-                args = {'job': job, 'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type']}
+                args = {'job': job, 'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type'], 'others_id': others.id}
                 return render(request, 'Home/edit_job.html', args)
     except Admin.DoesNotExist:
         pass
