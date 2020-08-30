@@ -13,7 +13,16 @@
 }
 
 #viewCandidateBody {
-    margin: 10% 0;
+    margin: 5% 0;
+}
+
+#viewCandidateBody h2, hr {
+    text-align: center;
+}
+
+#viewCandidateBody hr {
+    width: 40%;
+    background-color: #000000;
 }
 
 #noApplications {
