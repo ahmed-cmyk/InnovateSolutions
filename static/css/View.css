@@ -3,6 +3,31 @@
     margin-right: 0;
 }
 
+#header-background {
+    background-color: rgba(0, 0, 0, 0.5);;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.container img {
+    height: auto;
+    width: 120%;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: 100;
+    color: #FFFFFF;
+}
+
 #viewBody hr {
     background-color: #000000;
     width: 50%;

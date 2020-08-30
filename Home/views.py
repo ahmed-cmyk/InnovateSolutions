@@ -578,15 +578,13 @@ def job_to_student_skills(request, id):
 def job_to_alumni_skills(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
+    email = request.user
     alumniApplicants = Alumni.objects.filter(skills__in=job.skills.all())
     args = {'alumniApplicants': alumniApplicants, 'obj': user['obj'], 'user_type': user['user_type']}
 
-    # message = Mail(
-    #     from_email='info@murdochcareerportal.com',
-    #     to_emails=['ict302jan2020@gmail.com'],
-    #     subject='Alumni Skill match',
-    #     html_content="Alumni having skills matching to your job have been found."
-    # )
+    subject = 'Alumni Skill match'
+    htmlText = "Alumni/Alumnus having skills matching to your job have been found."
+    send_html_mail(subject, htmlText, [email])
 
     return render(request, "Home/view_alumni_applicants.html", args)
 
