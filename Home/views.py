@@ -495,13 +495,13 @@ def view_students(request):
             majors_students = Student.objects.all()
 
         filtered_stds = skills_students & majors_students & min_graduation_date_students & max_graduation_date_students
-        students_all = Student.objects.all()
+        students_all = Student.objects.filter(is_active="Accepted")
         students = students_all & filtered_stds
         form = FilterStudentForm()
         args = {'students': students, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, "Home/view_students.html", args)
     elif user['user_type'] == 'employer' or user['user_type'] == 'admin':
-        students = Student.objects.all()
+        students = Student.objects.filter(is_active="Accepted")
         users = User.objects.all()
         form = FilterStudentForm()
         args = {'students': students, 'obj': user['obj'], 'user_type': user['user_type'], 'form': form}
@@ -528,13 +528,13 @@ def view_alumni(request):
             majors_alumni = Alumni.objects.all()
 
         filtered_stds = skills_students & majors_alumni
-        alumni_all = Alumni.objects.all()
+        alumni_all = Alumni.objects.filter(is_active="Accepted")
         alumnus = alumni_all & filtered_stds
         form = FilterAlumniForm()
         args = {'alumnus': alumnus, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, "Home/view_alumni.html", args)
     elif user['user_type'] == 'employer' or user['user_type'] == 'admin':
-        alumnus = Alumni.objects.all()
+        alumnus = Alumni.objects.filter(is_active="Accepted")
         users = User.objects.all()
         form = FilterAlumniForm()
         args = {'alumnus': alumnus, 'obj': user['obj'], 'user_type': user['user_type'], 'form': form}

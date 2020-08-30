@@ -39,7 +39,7 @@
                 <br>
                 <p class="view"><strong> Expected Graduation Date:</strong> {{ obj.expected_graduation_date }}</p>
                 <p class="view"><strong> Personal Email Address:</strong> {{ obj.personal_email }}</p>
-    {#                <p class="view"><strong> CV: </strong> {{ obj.cv }}</p><br>#}
+                <p class="view"><strong> CV: </strong><a href="{{ obj.cv.url }}">{{ obj.cv }}</a></p><br>
             </div><!-- End of student-profile -->
         </div><!-- End of row -->
         <div id="edit-profile" class="text-center">
