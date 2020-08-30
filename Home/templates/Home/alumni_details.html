@@ -40,16 +40,15 @@
                 {% endfor %}
             </div>
         </div><!-- End of row -->
-        {% if user_type == 'admin' %}
-            <div class="text-center">
-                <a  class="text-decoration-none text-white" href="{% url 'admin_edit_alumni_profile' alumni.user_id %}">
-                    <button type="submit" class="btn btn-primary">Edit Profile</button>
-                </a>
-
-                <a class="text-decoration-none text-white" href="{% url 'get_alumni_cv_file' alumni.user_id %}">
-                    <button type="button" class="btn btn-primary">Download CV</button>
-                </a>
-            </div>
-        {% endif %}
+        <div class="text-center">
+            {% if user_type == 'admin' %}
+            <a  class="text-decoration-none text-white" href="{% url 'admin_edit_alumni_profile' alumni.user_id %}">
+                <button type="submit" class="btn btn-primary">Edit Profile</button>
+            </a>
+            {% endif %}
+            <a class="text-decoration-none text-white" href="{% url 'get_alumni_cv_file' alumni.user_id %}">
+                <button type="button" class="btn btn-primary">Download CV</button>
+            </a>
+        </div>
     </div>
 {% endblock %}
