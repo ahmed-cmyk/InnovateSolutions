@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.db import transaction
 from django.contrib.admin.views.decorators import staff_member_required
+from django.template.loader import render_to_string
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
@@ -203,16 +204,19 @@ def change_accept_status(request):
     user = User.objects.get(id=user_id)
     print(user)
 
-    subject = 'Account Verification Complete'
-    htmlText = f"Your account creation request has been reviewed by an admin and the request has been {status}"
+    subject = 'Your account creation request has been resolved'
 
     try:
         user_employer = Employer.objects.get(user_id=user_id)
         user_employer.is_active = status
         user_employer.save()
         receipent = str(user_employer.user)
+
+        first_name = user_employer.contact_name
+        context = {'first_name': first_name, 'status': status}
+
+        htmlText = render_to_string('Accounts/account_creation_resolution.html', context)
         send_html_mail(subject, htmlText, [receipent])
-        print(user_employer.is_active)
     except:
         pass
 
@@ -221,8 +225,12 @@ def change_accept_status(request):
         user_alumni.is_active = status
         user_alumni.save()
         receipent = str(user_alumni.user)
+
+        first_name = user_alumni.user.first_name
+        context = {'first_name': first_name, 'status': status}
+
+        htmlText = render_to_string('Accounts/account_creation_resolution.html', context)
         send_html_mail(subject, htmlText, [receipent])
-        print(user_alumni.is_active)
     except:
         pass
 
@@ -231,8 +239,12 @@ def change_accept_status(request):
         user_student.is_active = status
         user_student.save()
         receipent = str(user_student.user)
+
+        first_name = user_student.user.first_name
+        context = {'first_name': first_name, 'status': status}
+
+        htmlText = render_to_string('Accounts/account_creation_resolution.html', context)
         send_html_mail(subject, htmlText, [receipent])
-        print(user_student.is_active)
     except:
         pass
 
@@ -399,8 +411,7 @@ def change_job_status(request):
     status = request.GET.get('status', 'Pending')
     job_id = request.GET.get('user_id', None)
 
-    subject = 'Job Verification Complete'
-    htmlText = f"Your account Job request has been reviewed by an admin and the request has been {status}"
+    subject = 'Your job posting request has been resolved'
 
     try:
         print(id)
@@ -410,6 +421,11 @@ def change_job_status(request):
         job.is_active = status
         job.save()
         receipent = str(job.posted_by)
+
+        first_name = job.posted_by.contact_name
+        context = {'first_name': first_name, 'status': status}
+
+        htmlText = render_to_string('Employer/job_post_resolution.html', context)
         send_html_mail(subject, htmlText, [receipent])
         print(job.is_active)
     except:

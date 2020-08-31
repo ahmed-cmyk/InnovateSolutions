@@ -1,5 +1,6 @@
 from django.db.models import Max
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
@@ -187,9 +188,11 @@ def create_job(request):
                         job.save()
                         jobForm.save_m2m()
 
-                        subject = 'New Job has been posted'
-                        htmlText = "Your job has been posted on the Murdoch Career Portal and is currently pending " \
-                                   "approval. You will be notified once the approval process has been completed."
+                        first_name = companyForm.cleaned_data.get('contact_name')
+                        context = {'first_name': first_name}
+
+                        subject = 'Your job posting request has been received'
+                        htmlText = render_to_string('Employer/job_post_request.html', context)
                         send_html_mail(subject, htmlText, [email])
 
                         subject = 'New Job has been posted'
@@ -428,8 +431,11 @@ def delete_job(request, id):
         job.status = 'Deleted'
         job.save()
 
-        subject = 'Job has been deleted'
-        htmlText = "You have deleted a job from the Murdoch Career Portal."
+        first_name = job.posted_by.contact_name
+        context = {'first_name': first_name}
+
+        subject = 'Your job posting has been deleted'
+        htmlText = render_to_string('Employer/job_deletion.html', context)
         send_html_mail(subject, htmlText, [email])
         messages.success(request, "You have successfully deleted the job")
         return redirect('view_jobs')
@@ -452,8 +458,11 @@ def close_job(request, id):
         job.date_closed = timezone.now()
         job.save()
 
-        subject = 'Job has been closed'
-        htmlText = "You have successfully closed a job on the Murdoch career portal."
+        first_name = job.posted_by.contact_name
+        context = {'first_name': first_name}
+
+        subject = 'Your job posting has been closed'
+        htmlText = render_to_string('Employer/job_closing.html', context)
         send_html_mail(subject, htmlText, [email])
 
         messages.success(request, "You have successfully closed the job")

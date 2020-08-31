@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
+from django.template.loader import render_to_string
+
 from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
 from django.urls import reverse
 
@@ -29,7 +31,7 @@ def signup(request):
                 return redirect("alumni_register")
 
             if not user_form.samePasswords():
-                messages.warning(request, 'Passwords not matching. Try again.') # checks if password and confirm
+                messages.warning(request, 'Passwords not matching. Try again.')  # checks if password and confirm
                 # password are matching
                 return redirect("alumni_register")
 
@@ -51,8 +53,11 @@ def signup(request):
                             alumni.save()
                             alumni_form.save_m2m()
 
-                            subject = 'Account Created'
-                            htmlText = 'Your account has been created and is currently pending approval'
+                            first_name = user_form.cleaned_data.get('first_name')
+                            context = {'first_name': first_name}
+
+                            subject = 'Your account creation request has been received'
+                            htmlText = render_to_string('Accounts/account_creation_request.html', context)
                             send_html_mail(subject, htmlText, [email])
 
                             subject = 'New Alumni Account Created'
@@ -69,7 +74,7 @@ def signup(request):
 
                 else:
                     messages.warning(request,
-                                  'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric character and 1 letter.')
+                                     'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric character and 1 letter.')
                     return redirect("alumni_register")
 
         else:

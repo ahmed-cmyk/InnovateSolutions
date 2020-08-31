@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
+from django.template.loader import render_to_string
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.core.mail import send_mail
@@ -51,8 +52,11 @@ def student_signup(request):
                         student.save()
                         student_form.save_m2m()
 
-                        subject = 'Account Created'
-                        htmlText = 'Your account has been created and is currently pending approval'
+                        first_name = user_form.cleaned_data.get('first_name')
+                        context = {'first_name': first_name}
+
+                        subject = 'Your account creation request has been received'
+                        htmlText = render_to_string('Accounts/account_creation_request.html', context)
                         send_html_mail(subject, htmlText, [email])
 
                         subject = 'New Student Account Created'

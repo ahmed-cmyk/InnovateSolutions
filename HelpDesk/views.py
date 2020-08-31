@@ -4,12 +4,16 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, get_object_or_404, redirect
+from django.template.loader import render_to_string
 from django.utils import timezone
 from django.views.generic import TemplateView
 from django.contrib import messages
 from django_comments.models import Comment
 from Accounts.views import get_user_type
+from Alumni.models import Alumni
+from Employer.models import Employer
 from Home.models import send_html_mail
+from Student.models import Student
 from .models import HelpDeskModel
 from .forms import HelpDeskForm
 from sendgrid import SendGridAPIClient
@@ -76,9 +80,36 @@ class HelpDeskFormView(TemplateView):
                 f.name_Request = request.user
                 f.save()
 
-                subject = 'HelpDesk Request'
-                htmlText = f"A new HelpDesk request has been filed by the user {f.name_Request}."
-                send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
+                subject = 'Your email has been logged with HelpDesk'
+                email = str(request.user)
+
+                try:
+                    alumni = Alumni.objects.get(user_id=request.user.id)
+                    first_name = alumni.user.first_name
+                    context = {'first_name': first_name}
+                    htmlText = render_to_string('HelpDesk/helpdesk_request_logged.html', context)
+                    send_html_mail(subject, htmlText, [email])
+                except:
+                    pass
+
+                try:
+                    student = Student.objects.get(user_id=request.user.id)
+                    first_name = student.user.first_name
+                    context = {'first_name': first_name}
+                    htmlText = render_to_string('HelpDesk/helpdesk_request_logged.html', context)
+                    send_html_mail(subject, htmlText, [email])
+                except:
+                    pass
+
+                try:
+                    employer = Employer.objects.get(user_id=request.user.id)
+                    first_name = employer.contact_name
+                    context = {'first_name': first_name}
+                    htmlText = render_to_string('HelpDesk/helpdesk_request_logged.html', context)
+                    send_html_mail(subject, htmlText, [email])
+                except:
+                    pass
+
                 messages.success(request, "Your request has been submitted.")
                 return redirect('HelpDesk', f.id)
 

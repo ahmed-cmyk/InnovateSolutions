@@ -8,6 +8,7 @@ from django.core.files import File
 from wsgiref.util import FileWrapper
 
 # Create your views here.
+from django.template.loader import render_to_string
 
 from Accounts.views import isValidated, get_user_type
 from .models import Employer
@@ -60,8 +61,11 @@ def signup(request):
                             email = str(request.user)
                             employer.save()
 
-                            subject = 'Account Created'
-                            htmlText = 'Your account has been created and is currently pending approval'
+                            first_name = user_form.cleaned_data.get('contact_name')
+                            context = {'first_name': first_name}
+
+                            subject = 'Your account creation request has been received'
+                            htmlText = render_to_string('Accounts/account_creation_request.html', context)
                             send_html_mail(subject, htmlText, [email])
 
                             subject = 'New Employer Account Created'
