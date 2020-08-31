@@ -1,0 +1,9 @@
+{% autoescape off %}
+Dear {{ first_name }},<br><br>
+Thank you for using Murdoch University Dubai’s online career portal. Student(s)
+having skills that match your job have been found. Please proceed to the website to
+review their profiles {{ protocol }}://{{ domain }}{% url 'index' %}.<br>
+We hope you find a successful candidate for this position soon.<br><br>
+Kind regards,<br>
+The Murdoch University Dubai Team
+{% endautoescape %}
