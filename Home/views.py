@@ -188,7 +188,7 @@ def create_job(request):
                         job.save()
                         jobForm.save_m2m()
 
-                        first_name = companyForm.cleaned_data.get('contact_name')
+                        first_name = companyForm.cleaned_data.get('company_name')
                         context = {'first_name': first_name}
 
                         subject = 'Your job posting request has been received'
@@ -231,9 +231,11 @@ def create_job(request):
                     data.save()
                     form.save_m2m()
 
-                    subject = 'New Job has been posted'
-                    htmlText = "Your job has been posted on the Murdoch Career Portal and is currently pending approval." \
-                               "You will be notified once the approval process has been completed."
+                    first_name = employer.cleaned_data.get('company_name')
+                    context = {'first_name': first_name}
+
+                    subject = 'Your job posting request has been received'
+                    htmlText = render_to_string('Employer/job_post_request.html', context)
                     send_html_mail(subject, htmlText, [email])
 
                     subject = 'New Job has been posted'
@@ -366,10 +368,6 @@ def edit_job(request, id):
                         subject = 'Job Edit Successful'
                         htmlText = 'You have successfully edited a job.'
                         send_html_mail(subject, htmlText, [email])
-                        # send_mail('Job Edit Successful',
-                        #           'You have successfully edited your job.',
-                        #           DEFAULT_FROM_EMAIL, [DEFAULT_FROM_EMAIL],
-                        #           fail_silently=True)
 
                         return redirect(next_page)
                 else:
@@ -431,7 +429,7 @@ def delete_job(request, id):
         job.status = 'Deleted'
         job.save()
 
-        first_name = job.posted_by.contact_name
+        first_name = job.posted_by.company_name
         context = {'first_name': first_name}
 
         subject = 'Your job posting has been deleted'
@@ -458,7 +456,7 @@ def close_job(request, id):
         job.date_closed = timezone.now()
         job.save()
 
-        first_name = job.posted_by.contact_name
+        first_name = job.posted_by.company_name
         context = {'first_name': first_name}
 
         subject = 'Your job posting has been closed'
@@ -577,7 +575,7 @@ def job_to_student_skills(request, id):
     args = {'studentApplicants': studentApplicants, 'obj': user['obj'], 'user_type': user['user_type']}
 
     employer = Employer.objects.get(user_id=request.user.id)
-    first_name = employer.contact_name
+    first_name = employer.company_name
     context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
 
     subject = 'We found a match!'
@@ -596,7 +594,7 @@ def job_to_alumni_skills(request, id):
     args = {'alumniApplicants': alumniApplicants, 'obj': user['obj'], 'user_type': user['user_type']}
 
     employer = Employer.objects.get(user_id=request.user.id)
-    first_name = employer.contact_name
+    first_name = employer.company_name
     context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
 
     subject = 'We found a match!'

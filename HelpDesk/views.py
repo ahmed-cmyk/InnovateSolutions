@@ -103,7 +103,7 @@ class HelpDeskFormView(TemplateView):
 
                 try:
                     employer = Employer.objects.get(user_id=request.user.id)
-                    first_name = employer.contact_name
+                    first_name = employer.company_name
                     context = {'first_name': first_name}
                     htmlText = render_to_string('HelpDesk/helpdesk_request_logged.html', context)
                     send_html_mail(subject, htmlText, [email])

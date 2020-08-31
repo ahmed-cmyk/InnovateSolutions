@@ -212,7 +212,7 @@ def change_accept_status(request):
         user_employer.save()
         receipent = str(user_employer.user)
 
-        first_name = user_employer.contact_name
+        first_name = user_employer.company_name
         context = {'first_name': first_name, 'status': status}
 
         htmlText = render_to_string('Accounts/account_creation_resolution.html', context)
@@ -422,7 +422,7 @@ def change_job_status(request):
         job.save()
         receipent = str(job.posted_by)
 
-        first_name = job.posted_by.contact_name
+        first_name = job.posted_by.company_name
         context = {'first_name': first_name, 'status': status}
 
         htmlText = render_to_string('Employer/job_post_resolution.html', context)
