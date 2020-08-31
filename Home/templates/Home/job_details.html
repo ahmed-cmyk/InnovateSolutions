@@ -181,7 +181,7 @@
                                             <p><b class="text-secondary card-text">Description:</b> {{ company.company_description }}</p>
                                         </div>
                                         <div class="card-footer">
-                                            <i class="fa fa-mobile" aria-hidden="true"></i> <a href="{{ company.phone_number }}">{{ company.phone_number }}</a>
+                                            <i class="fa fa-mobile" aria-hidden="true"></i> <a href="tel:{{ company.phone_number }}">{{ company.phone_number }}</a>
                                             <i class="fa fa-envelope pl-2" aria-hidden="true"></i>
                                             <a href="mailto:{{ company.user }}">{{ company.user }}</a>
                                             {% if company.company_website %}
