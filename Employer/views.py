@@ -61,7 +61,7 @@ def signup(request):
                             email = str(request.user)
                             employer.save()
 
-                            first_name = user_form.cleaned_data.get('contact_name')
+                            first_name = user_form.cleaned_data.get('company_name')
                             context = {'first_name': first_name}
 
                             subject = 'Your account creation request has been received'
