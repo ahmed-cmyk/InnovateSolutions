@@ -24,7 +24,7 @@
             <div class="employer-profile col-md-8 text-left">
                 <p><strong>Company Name:</strong> {{ employer.company_name }}</p>
                 <p><strong>Company Description:</strong> {{ employer.company_description }}</p>
-                <p><strong>Trade License:</strong> <a href="{{ employer.trade_license.url }}">{{ employer.trade_license }}</a></p>
+                <p><strong>Trade License:</strong> <a target="_blank" href="{{ employer.trade_license.url }}">{{ employer.trade_license }}</a></p>
                 <p><strong>Contact Name:</strong> {{ employer.contact_name }}</p>
                 <p><strong>Contact Number:</strong> <a href="tel:{{ employer.phone_number }}">{{ employer.phone_number }}</a></p>
                 {% if employer.company_website %}
