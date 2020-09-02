@@ -231,7 +231,7 @@ def create_job(request):
                     data.save()
                     form.save_m2m()
 
-                    first_name = employer.cleaned_data.get('company_name')
+                    first_name = employer.company_name
                     context = {'first_name': first_name}
 
                     subject = 'Your job posting request has been received'
