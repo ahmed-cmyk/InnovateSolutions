@@ -27,27 +27,56 @@ import csv
 
 def signup(request):
     if request.method == 'POST':
+        user_data = {'email': request.POST.get('email')}
+        employer_data = {'logo': request.FILES.get('logo'),
+                         'company_name': request.POST.get('company_name'),
+                         'company_description': request.POST.get('company_description'),
+                         'company_website': request.POST.get('company_website'),
+                         'phone_number': request.POST.get('phone_number'),
+                         'contact_name': request.POST.get('contact_name'),
+                         'trade_license': request.FILES.get('trade_license')
+                         }
         user_form = InitialEmployerForm(request.POST)
 
         if user_form.is_valid():
             if user_form.usernameExists():
                 messages.info(request,
                               'Username already taken. Try a different one.')  # checks if username exists in db
-                return redirect("employer_register")
+                user_form = InitialEmployerForm(user_data)
+                employer_form = EmployerForm(employer_data)
+                user = get_user_type(request)
+                args = {'employer_form': employer_form, 'user_form': user_form, 'user_type': user['user_type']}
+                return render(request, 'Employer/employer_registration.html', args)
+                #return redirect("employer_register")
 
             elif user_form.emailExists():
                 messages.info(request, 'Email already taken. Try a different one.')  # checks if email exists in db
-                return redirect("employer_register")
+                user_form = InitialEmployerForm(user_data)
+                employer_form = EmployerForm(employer_data)
+                user = get_user_type(request)
+                args = {'employer_form': employer_form, 'user_form': user_form, 'user_type': user['user_type']}
+                return render(request, 'Employer/employer_registration.html', args)
+                #return redirect("employer_register")
 
             elif not user_form.samePasswords():
                 messages.info(request,
                               'Passwords not matching. Try again.')  # checks if password and confirm password are matching
-                return redirect("employer_register")
+                user_form = InitialEmployerForm(user_data)
+                employer_form = EmployerForm(employer_data)
+                user = get_user_type(request)
+                args = {'employer_form': employer_form, 'user_form': user_form, 'user_type': user['user_type']}
+                return render(request, 'Employer/employer_registration.html', args)
+                #return redirect("employer_register")
 
             elif not user_form.emailDomainExists():
                 messages.info(request,
                               'Email domain does not exist. Try again.')  # checks if there is an exising domain for given email
-                return redirect("employer_register")
+                user_form = InitialEmployerForm(user_data)
+                employer_form = EmployerForm(employer_data)
+                user = get_user_type(request)
+                args = {'employer_form': employer_form, 'user_form': user_form, 'user_type': user['user_type']}
+                return render(request, 'Employer/employer_registration.html', args)
+                #return redirect("employer_register")
 
             else:
                 if isValidated(user_form.cleaned_data.get('password1')):  # checks if password is valid
@@ -77,14 +106,29 @@ def signup(request):
                         return render(request, 'Accounts/pending_acc.html', get_user_type(request))
                     else:
                         messages.warning(request, employer_form.errors.as_text)
-                        return redirect("employer_register")
+                        user_form = InitialEmployerForm(user_data)
+                        employer_form = EmployerForm(employer_data)
+                        user = get_user_type(request)
+                        args = {'employer_form': employer_form, 'user_form': user_form, 'user_type': user['user_type']}
+                        return render(request, 'Employer/employer_registration.html', args)
+                        #return redirect("employer_register")
                 else:
                     messages.warning(request, 'ERROR: Password must be 8 characters or more, and must have atleast 1 '
                                               'numeric character and 1 letter.')
-                    return redirect("employer_register")
+                    user_form = InitialEmployerForm(user_data)
+                    employer_form = EmployerForm(employer_data)
+                    user = get_user_type(request)
+                    args = {'employer_form': employer_form, 'user_form': user_form, 'user_type': user['user_type']}
+                    return render(request, 'Employer/employer_registration.html', args)
+                    #return redirect("employer_register")
         else:
             messages.info(request, user_form.errors.as_text)
-            return redirect("employer_register")
+            user_form = InitialEmployerForm(user_data)
+            employer_form = EmployerForm(employer_data)
+            user = get_user_type(request)
+            args = {'employer_form': employer_form, 'user_form': user_form, 'user_type': user['user_type']}
+            return render(request, 'Employer/employer_registration.html', args)
+            #return redirect("employer_register")
     else:
         user_form = InitialEmployerForm()
         employer_form = EmployerForm()

@@ -45,7 +45,7 @@ class InitialStudentForm(forms.ModelForm):
     def usernameExists(self):
         email = self.cleaned_data.get("email")
         if User.objects.filter(username=email).exists():
-            raise forms.ValidationError("Please enter an email.")
+            return True
         return False
 
     def emailExists(self):
