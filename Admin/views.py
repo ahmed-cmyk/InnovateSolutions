@@ -570,50 +570,52 @@ def generate_statistics(request):
 
         # users = User.objects.filter(date_joined__range=[start_date, end_date])
         admins = Admin.objects.filter(
-            user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).count()
+            user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
         admin_users = User.objects.filter(id__in=Admin.objects.all())
         #students = Student.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(
         #    date_joined__range=[start_date, end_date])).count()
         current = Student.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(
-            date_joined__range=[start_date, end_date])).count()
+            date_joined__range=[start_date, end_date]))
         alumni = Alumni.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(
-            date_joined__range=[start_date, end_date])).count()
+            date_joined__range=[start_date, end_date]))
         employers = Employer.objects.filter(is_active='Accepted',
             user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).exclude(
-            user_id__in=admin_users).count()
-        jobs_posted = Job.objects.filter(date_posted__range=[start_date, end_date], is_active='Accepted').count()
-        open_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Open",
-                                       is_active='Accepted').count()
-        closed_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Closed",
-                                         is_active='Accepted').count()
-        deleted_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Deleted",
-                                          is_active='Accepted').count()
-        apps = StudentJobApplication.objects.filter(date_applied__range=[start_date, end_date]).count()
+            user_id__in=admin_users)
+        jobs_posted = Job.objects.filter(date_posted__range=[start_date, end_date], is_active='Accepted')
+        open_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Open", is_active='Accepted')
+        closed_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Closed", is_active='Accepted')
+        deleted_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Deleted", is_active='Accepted')
+        apps = StudentJobApplication.objects.filter(date_applied__range=[start_date, end_date])
 
         pending_employers = Employer.objects.filter(is_active='Pending',
             user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).exclude(
-            user_id__in=admin_users).count()
+            user_id__in=admin_users)
         pending_students = Student.objects.filter(is_active='Pending', user_id__in=User.objects.filter(
-            date_joined__range=[start_date, end_date])).count()
+            date_joined__range=[start_date, end_date]))
         pending_alumni = Alumni.objects.filter(is_active='Pending', user_id__in=User.objects.filter(
-            date_joined__range=[start_date, end_date])).count()
-        pending_users = pending_employers + pending_students + pending_alumni
-        total_users = User.objects.all().count()
-        pending_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], is_active='Pending').count()
+            date_joined__range=[start_date, end_date]))
+        pending_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], is_active='Pending')
 
         # users = len(list(set(users)))
-        # admins = len(list(set(admins)))
+        admins = len(list(set(admins)))
         # students = len(list(set(students))) + len(list(set(alumni)))
-        # current = len(list(set(current)))
-        # alumni = len(list(set(alumni)))
-        # employers = len(list(set(employers)))
+        current = len(list(set(current)))
+        alumni = len(list(set(alumni)))
+        employers = len(list(set(employers)))
+        jobs_posted = len(list(set(jobs_posted)))
+        open_jobs = len(list(set(open_jobs)))
+        closed_jobs = len(list(set(closed_jobs)))
+        deleted_jobs = len(list(set(deleted_jobs)))
+        apps = len(list(set(apps)))
+        pending_employers = len(list(set(pending_employers)))
+        pending_students = len(list(set(pending_students)))
+        pending_alumni = len(list(set(pending_alumni)))
+        pending_jobs = len(list(set(pending_jobs)))
+
+        total_users = User.objects.all()
+        pending_users = pending_employers + pending_students + pending_alumni
         users = admins + current + alumni + employers
         students = current + alumni
-        # jobs_posted = len(list(set(jobs_posted)))
-        # open_jobs = len(list(set(open_jobs)))
-        # closed_jobs = len(list(set(closed_jobs)))
-        # deleted_jobs = len(list(set(deleted_jobs)))
-        # apps = len(list(set(apps)))
 
         args = {'users': users, 'admins': admins, 'students': students, 'current': current, 'alumni': alumni,
                 'employers': employers, 'pending_users': pending_users, 'pending_jobs': pending_jobs,
