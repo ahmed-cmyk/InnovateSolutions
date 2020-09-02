@@ -16,7 +16,7 @@ urlpatterns = [
     path('admin_create_job', views.create_job, name='admin_create_job'),
     path('statistics', views.generate_statistics, name='statistics'),
     path(
-        'export_stats_file/<int:users>/<int:admins>/<int:students>/<int:current>/<int:alumni>/<int:employers>/<int:jobs_posted>/<int:apps>/<int:open_jobs>/<int:closed_jobs>/<int:deleted_jobs>/<int:total_users>/<int:pending_users>/<int:pending_jobs>',
+        'export_stats_file/<int:users>/<int:admins>/<int:students>/<int:current>/<int:alumni>/<int:employers>/<int:jobs_posted>/<int:apps>/<int:open_jobs>/<int:closed_jobs>/<int:deleted_jobs>/<int:total_users>/<int:pending_users>/<int:pending_jobs>/<int:alumni_apps>',
         views.export_stats_file, name='export_stats_file'),
     path('view_employer_profile/<int:id>', views.view_employer_profile, name='admin_view_employer_profile'),
     path('edit_employer_profile/<int:id>', views.edit_employer_profile, name='admin_edit_employer_profile'),

@@ -71,8 +71,13 @@
             </tr>
 
             <tr class="text-left">
-                <td>Student Applications</td>
+                <td>Current Student Applications</td>
                 <td class="text-center">{{ apps }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td>Alumni Applications</td>
+                <td class="text-center">{{ alumni_apps }}</td>
             </tr>
 
             <tr class="text-left">
@@ -94,7 +99,7 @@
     </div>
     <div class="text-center">
         <button type="button" class="btn btn-primary">
-            <a class="text-decoration-none text-white" href="{% url 'export_stats_file' users admins students current alumni employers jobs_posted apps open_jobs closed_jobs deleted_jobs total_users pending_users pending_jobs%}">Export Data</a>
+            <a class="text-decoration-none text-white" href="{% url 'export_stats_file' users admins students current alumni employers jobs_posted apps open_jobs closed_jobs deleted_jobs total_users pending_users pending_jobs alumni_apps %}">Export Data</a>
         </button>
     </div>
     <br><br>
