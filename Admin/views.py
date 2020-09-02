@@ -285,8 +285,9 @@ def view_pend_acc_profile(request, id):
 
 @staff_member_required
 def view_employer_profile(request, id):
+    user = get_user_type(request)
     employer = Employer.objects.get(user_id=id)
-    args = {'employer': employer}
+    args = {'employer': employer, 'user_type': user['user_type']}
     return render(request, 'Admin/view_employer_profile.html', args)
 
 
@@ -316,8 +317,9 @@ def edit_employer_profile(request, id):
 
 @staff_member_required
 def view_student_profile(request, id):
+    user = get_user_type(request)
     student = Student.objects.get(user_id=id)
-    args = {'student': student}
+    args = {'student': student, 'user_type': user['user_type']}
     return render(request, 'Home/student_details.html', args)
 
 
@@ -340,7 +342,6 @@ def edit_student_profile(request, id):
             url = '{}/{}'.format('/my_admin/edit_student_profile', id)
             return redirect(url)
     else:
-        print(id)
         student = Student.objects.get(user_id=id)
         user_form = EditStudentProfileInitialForm(instance=student.user)
         student_form = EditStudentProfileForm(instance=student)
@@ -350,8 +351,9 @@ def edit_student_profile(request, id):
 
 @staff_member_required
 def view_alumni_profile(request, id):
+    user = get_user_type(request)
     alumni = Alumni.objects.get(user_id=id)
-    args = {'alumni': alumni}
+    args = {'alumni': alumni, 'user_type': user['user_type']}
     return render(request, 'Home/alumni_details.html', args)
 
 
