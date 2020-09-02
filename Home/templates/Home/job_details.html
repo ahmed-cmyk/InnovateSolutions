@@ -232,7 +232,7 @@
                     <div class="w-75 mx-auto">
                         <div id="view-buttons" class="text-center">
                             {% if user_type != 'student' and user_type != "alumni" %}
-                                {% if job.status == 'Open' %}
+                                {% if job.status == 'Open' and job.is_active == 'Accepted' %}
                                     <button class="btn btn-danger my-1" type="submit" name="viewcandidates" value="ViewCandidates&Save">View Applicants</button>
                                     <a href="{% url 'job_to_student_skills' job.id %}"><button class="btn btn-danger my-1" type="button">View Student Candidates</button></a>
                                     <a href="{% url 'job_to_alumni_skills' job.id %}"><button class="btn btn-danger my-1" type="button">View Alumni Candidates</button></a>

@@ -571,8 +571,9 @@ def job_to_student_skills(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
     email = str(request.user)
-    studentApplicants = Student.objects.filter(skills__in=job.skills.all())
-    args = {'studentApplicants': studentApplicants, 'obj': user['obj'], 'user_type': user['user_type']}
+    studentApplicants = Student.objects.filter(skills__in=job.skills.all(), is_active='Accepted')
+    studentList = list(set(studentApplicants))
+    args = {'studentApplicants': studentList, 'obj': user['obj'], 'user_type': user['user_type']}
 
     # employer = Employer.objects.get(user_id=request.user.id)
     # first_name = employer.company_name
@@ -590,8 +591,9 @@ def job_to_alumni_skills(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
     email = str(request.user)
-    alumniApplicants = Alumni.objects.filter(skills__in=job.skills.all())
-    args = {'alumniApplicants': alumniApplicants, 'obj': user['obj'], 'user_type': user['user_type']}
+    alumniApplicants = Alumni.objects.filter(skills__in=job.skills.all(), is_active='Accepted')
+    alumniList = list(set(alumniApplicants))
+    args = {'alumniApplicants': alumniList, 'obj': user['obj'], 'user_type': user['user_type']}
 
     # employer = Employer.objects.get(user_id=request.user.id)
     # first_name = employer.company_name

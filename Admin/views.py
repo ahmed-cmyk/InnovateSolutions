@@ -533,18 +533,21 @@ def create_job(request):
 
 
 def export_stats_file(request, users, admins, students, current, alumni, employers, jobs_posted, apps, open_jobs,
-                      closed_jobs, deleted_jobs):
+                      closed_jobs, deleted_jobs, total_users, pending_users, pending_jobs):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=' + date.today().strftime("%B %d %Y") + ".csv"
     writer = csv.writer(response)
     writer.writerow(['Type of Statistics', 'Count'])
-    writer.writerow(['Total Users Signed Up', users])
-    writer.writerow(['Administrators Signed Up', admins])
-    writer.writerow(['Total Students Signed Up', students])
-    writer.writerow(['Current Students Signed Up', current])
-    writer.writerow(['Alumni Signed Up', alumni])
-    writer.writerow(['Employers Signed Up', employers])
+    writer.writerow(['Total Users', total_users])
+    writer.writerow(['Total Approved Users', users])
+    writer.writerow(['Administrators', admins])
+    writer.writerow(['Total Students', students])
+    writer.writerow(['Current Students', current])
+    writer.writerow(['Alumni Students', alumni])
+    writer.writerow(['Employers', employers])
+    writer.writerow(['Users Pending Approval', pending_users])
     writer.writerow(['Jobs Posted', jobs_posted])
+    writer.writerow(['Jobs Pending Approval', pending_jobs])
     writer.writerow(['Student Applications', apps])
     writer.writerow(['Active Jobs', open_jobs])
     writer.writerow(['Jobs Closed and Filled by Murdoch Students', closed_jobs])
@@ -569,13 +572,13 @@ def generate_statistics(request):
         admins = Admin.objects.filter(
             user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).count()
         admin_users = User.objects.filter(id__in=Admin.objects.all())
-        students = Student.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(
-            date_joined__range=[start_date, end_date])).count()
+        #students = Student.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(
+        #    date_joined__range=[start_date, end_date])).count()
         current = Student.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(
             date_joined__range=[start_date, end_date])).count()
         alumni = Alumni.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(
             date_joined__range=[start_date, end_date])).count()
-        employers = Employer.objects.filter(
+        employers = Employer.objects.filter(is_active='Accepted',
             user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).exclude(
             user_id__in=admin_users).count()
         jobs_posted = Job.objects.filter(date_posted__range=[start_date, end_date], is_active='Accepted').count()
@@ -587,13 +590,25 @@ def generate_statistics(request):
                                           is_active='Accepted').count()
         apps = StudentJobApplication.objects.filter(date_applied__range=[start_date, end_date]).count()
 
+        pending_employers = Employer.objects.filter(is_active='Pending',
+            user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).exclude(
+            user_id__in=admin_users).count()
+        pending_students = Student.objects.filter(is_active='Pending', user_id__in=User.objects.filter(
+            date_joined__range=[start_date, end_date])).count()
+        pending_alumni = Alumni.objects.filter(is_active='Pending', user_id__in=User.objects.filter(
+            date_joined__range=[start_date, end_date])).count()
+        pending_users = pending_employers + pending_students + pending_alumni
+        total_users = User.objects.all().count()
+        pending_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], is_active='Pending').count()
+
         # users = len(list(set(users)))
         # admins = len(list(set(admins)))
         # students = len(list(set(students))) + len(list(set(alumni)))
         # current = len(list(set(current)))
         # alumni = len(list(set(alumni)))
         # employers = len(list(set(employers)))
-        users = admins + students + alumni + employers
+        users = admins + current + alumni + employers
+        students = current + alumni
         # jobs_posted = len(list(set(jobs_posted)))
         # open_jobs = len(list(set(open_jobs)))
         # closed_jobs = len(list(set(closed_jobs)))
@@ -601,8 +616,8 @@ def generate_statistics(request):
         # apps = len(list(set(apps)))
 
         args = {'users': users, 'admins': admins, 'students': students, 'current': current, 'alumni': alumni,
-                'employers': employers,
-                'jobs_posted': jobs_posted, 'open_jobs': open_jobs, 'closed_jobs': closed_jobs,
+                'employers': employers, 'pending_users': pending_users, 'pending_jobs': pending_jobs,
+                'jobs_posted': jobs_posted, 'open_jobs': open_jobs, 'closed_jobs': closed_jobs, 'total_users':total_users,
                 'deleted_jobs': deleted_jobs, 'apps': apps, 'user_type': user['user_type'], 'obj': user['obj']}
 
         return render(request, "Admin/view_statistics.html", args)

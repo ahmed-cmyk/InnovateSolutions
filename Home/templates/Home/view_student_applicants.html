@@ -23,7 +23,7 @@
                     <tbody>
                     {% for applicants in studentApplicants %}
                         <tr class="text-center">
-                        <td>{{ applicants.user.first_name }} {{ applicants.user.last_name }}</td>
+                        <td><a href="{% url 'student_details' applicants.user_id %}">{{ applicants.user.first_name }} {{ applicants.user.last_name }}</a></td>
                         <td>{{ applicants.user }}</td>
                         <td class="text-center">
                             <a class="text-decoration-none text-white" href="{% url 'get_student_cv_file' applicants.user_id %}">
