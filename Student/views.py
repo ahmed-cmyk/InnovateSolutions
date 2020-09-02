@@ -41,34 +41,40 @@ def student_signup(request):
                 return redirect("student_registration")
 
             else:
-                student_form = StudentForm(request.POST, request.FILES)
+                if isValidated(user_form.cleaned_data.get('password1')):
+                    student_form = StudentForm(request.POST, request.FILES)
 
-                if student_form.is_valid():
-                    with transaction.atomic():
-                        user = user_form.save()
-                        student = student_form.save(commit=False)
-                        student.user = user
-                        email = str(student.user)
-                        student.save()
-                        student_form.save_m2m()
+                    if student_form.is_valid():
+                        with transaction.atomic():
+                            user = user_form.save()
+                            student = student_form.save(commit=False)
+                            student.user = user
+                            email = str(student.user)
+                            student.save()
+                            student_form.save_m2m()
 
-                        first_name = user_form.cleaned_data.get('first_name')
-                        context = {'first_name': first_name}
+                            first_name = user_form.cleaned_data.get('first_name')
+                            context = {'first_name': first_name}
 
-                        subject = 'Your account creation request has been received'
-                        htmlText = render_to_string('Accounts/account_creation_request.html', context)
-                        send_html_mail(subject, htmlText, [email])
+                            subject = 'Your account creation request has been received'
+                            htmlText = render_to_string('Accounts/account_creation_request.html', context)
+                            send_html_mail(subject, htmlText, [email])
 
-                        subject = 'New Student Account Created'
-                        htmlText = f'A new student account for the user {email} has been created and is ' \
-                                   f'currently pending approval.'
-                        send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
+                            subject = 'New Student Account Created'
+                            htmlText = f'A new student account for the user {email} has been created and is ' \
+                                       f'currently pending approval.'
+                            send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
-                    messages.success(request, 'A student account has been created')
-                    return render(request, 'Accounts/pending_acc.html', get_user_type(request))
+                        messages.success(request, 'A student account has been created')
+                        return render(request, 'Accounts/pending_acc.html', get_user_type(request))
+                    else:
+                        messages.warning(request, student_form.errors.as_text)
+                        return redirect('student_registration')
+
                 else:
-                    messages.warning(request, student_form.errors.as_text)
-                    return redirect('student_registration')
+                    messages.warning(request, 'ERROR: Password must be 8 characters or more, and must have atleast 1 '
+                                              'numeric character and 1 letter.')
+                    return redirect("student_registration")
         else:
             messages.warning(request, user_form.errors.as_text)
             return redirect("student_registration")

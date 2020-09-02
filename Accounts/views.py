@@ -11,18 +11,16 @@ from Admin.models import Admin
 
 
 def isValidated(passwd):
-    status = True
-
     if len(passwd) < 8:
-        status = False
+        return False
 
     if not any(char.isdigit() for char in passwd):
-        status = False
+        return False
 
     if not any(char.isalpha() for char in passwd):
-        status = False
+        return False
 
-    return status
+    return True
 
 
 def number_symbol_exists(string):
