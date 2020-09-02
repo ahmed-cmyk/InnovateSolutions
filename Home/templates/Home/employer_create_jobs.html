@@ -139,10 +139,6 @@ function toggleDuration(elem) {
             <br><br>
             <div>{{ employerForm.password2|as_crispy_field }}</div>
             <small>Both passwords should match</small>
-
-{#            {% for employerField in employerForm %}#}
-{#                <div>{{ employerField|as_crispy_field }}</div>#}
-{#            {% endfor %}#}
             <br><hr><br>
             <div>{{ companyForm.company_name|as_crispy_field }}</div>
             <div>{{ companyForm.company_description|as_crispy_field }}</div>

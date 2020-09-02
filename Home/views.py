@@ -574,13 +574,13 @@ def job_to_student_skills(request, id):
     studentApplicants = Student.objects.filter(skills__in=job.skills.all())
     args = {'studentApplicants': studentApplicants, 'obj': user['obj'], 'user_type': user['user_type']}
 
-    employer = Employer.objects.get(user_id=request.user.id)
-    first_name = employer.company_name
-    context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
-
-    subject = 'We found a match!'
-    htmlText = render_to_string('Home/found_matching_students.html', context)
-    send_html_mail(subject, htmlText, [email])
+    # employer = Employer.objects.get(user_id=request.user.id)
+    # first_name = employer.company_name
+    # context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
+    #
+    # subject = 'We found a match!'
+    # htmlText = render_to_string('Home/found_matching_students.html', context)
+    # send_html_mail(subject, htmlText, [email])
 
     return render(request, "Home/view_student_applicants.html", args)
 
@@ -593,13 +593,13 @@ def job_to_alumni_skills(request, id):
     alumniApplicants = Alumni.objects.filter(skills__in=job.skills.all())
     args = {'alumniApplicants': alumniApplicants, 'obj': user['obj'], 'user_type': user['user_type']}
 
-    employer = Employer.objects.get(user_id=request.user.id)
-    first_name = employer.company_name
-    context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
-
-    subject = 'We found a match!'
-    htmlText = render_to_string('Home/found_matching_students.html', context)
-    send_html_mail(subject, htmlText, [email])
+    # employer = Employer.objects.get(user_id=request.user.id)
+    # first_name = employer.company_name
+    # context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
+    #
+    # subject = 'We found a match!'
+    # htmlText = render_to_string('Home/found_matching_students.html', context)
+    # send_html_mail(subject, htmlText, [email])
 
     return render(request, "Home/view_alumni_applicants.html", args)
 
