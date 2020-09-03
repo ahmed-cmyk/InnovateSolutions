@@ -211,16 +211,20 @@ li>a{
 }
 
 footer .row {
-    margin-left: 15px; 
-    margin-right: 15px;
+    margin-left: 1vw;
+    margin-right: 1vw;
 }
 
 footer h3 {
     text-transform: uppercase;
 }
 
+footer #social-section {
+    font-size: 0;
+}
+
 footer #social-section img {
-    width: 100px;
+    width: 6vw;
     height: auto;
 }
 
