@@ -93,6 +93,7 @@ def get_user(request):
     except:
         pass
 
+
 @login_required
 def view_jobs(request):
     user = get_user_type(request)
@@ -166,9 +167,10 @@ def view_jobs(request):
         jobs = Job.objects.filter(status="Open", is_active='Accepted').order_by('-date_posted')
         companies = Employer.objects.all()
         student = get_user(request)
-        jobs_applied = student.jobs_applied.all()
+        jobs_applied = student.jobs_applied.all().values_list('id', flat=True)
         form = FilterJobForm()
-        args = {'jobs': jobs, 'companies': companies, 'form': form, 'obj': user['obj'], 'user_type': user['user_type'], 'jobs_applied': jobs_applied}
+        args = {'jobs': jobs, 'companies': companies, 'form': form, 'obj': user['obj'], 'user_type': user['user_type'],
+                'jobs_applied': jobs_applied}
     else:
         redirect('/')
     return render(request, 'Home/view_jobs.html', args)
@@ -273,33 +275,42 @@ def job_details(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
     companies = Employer.objects.all()
+    student_user = get_user(request)
 
-    args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'],
-            'companies': companies, 'applied': True}
+    if user['user_type'] == 'student' or user['user_type'] == 'alumni':
+        job_applied = student_user.jobs_applied.all().values_list('id', flat=True)
+        args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'],
+                'companies': companies, 'job_applied': job_applied}
+    else:
+        args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'],
+                'companies': companies}
+
     form = StudentJobApplicationForm()
     alumniForm = AlumniJobApplicationForm()
     if request.method == 'POST':
-        if request.POST.get("apply"):
+        if "apply" in request.POST:
             if user['user_type'] == 'student':
-                post = form.save(commit=False)
-                post.job_id = job
-                id = request.user.id
-                student = Student.objects.get(user_id=id)
-                post.applied = student
-                post.date_applied = timezone.now()
-                post.save()
+                if job.id not in student_user.jobs_applied.all().values_list('id', flat=True):
+                    post = form.save(commit=False)
+                    post.job_id = job
+                    id = request.user.id
+                    student = Student.objects.get(user_id=id)
+                    post.applied = student
+                    post.date_applied = timezone.now()
+                    post.save()
                 return render(request, 'Home/job_details.html', args)
             elif user['user_type'] == 'alumni':
-                postAlumni = alumniForm.save(commit=False)
-                postAlumni.job_id = job
-                id = request.user.id
-                alumni = Alumni.objects.get(user_id=id)
-                postAlumni.applied = alumni
-                postAlumni.date_applied = timezone.now()
-                postAlumni.save()
+                if job.id not in student_user.jobs_applied.all().values_list('id', flat=True):
+                    postAlumni = alumniForm.save(commit=False)
+                    postAlumni.job_id = job
+                    id = request.user.id
+                    alumni = Alumni.objects.get(user_id=id)
+                    postAlumni.applied = alumni
+                    postAlumni.date_applied = timezone.now()
+                    postAlumni.save()
                 return render(request, 'Home/job_details.html', args)
 
-        elif request.POST.get("viewcandidates"):
+        elif "viewcandidates" in request.POST:
             alumniCandidates = AlumniJobApplication.objects.filter(job_id=job.id)
             studentCandidates = StudentJobApplication.objects.filter(job_id=job.id)
             args = {'studentCandidates': studentCandidates, 'alumniCandidates': alumniCandidates, 'obj': user['obj'],
@@ -318,9 +329,15 @@ def job_details(request, id):
         return render(request, 'Home/job_details.html', args)
 
     except:
-        args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'],
-                'companies': companies, 'applied': False}
-        return render(request, 'Home/job_details.html', args)
+        if user['user_type'] == 'student' or user['user_type'] == 'alumni':
+            job_applied = student_user.jobs_applied.all().values_list('id', flat=True)
+            args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'],
+                    'companies': companies, 'job_applied': job_applied}
+            return render(request, 'Home/job_details.html', args)
+        else:
+            args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type'],
+                    'companies': companies}
+            return render(request, 'Home/job_details.html', args)
 
 
 @login_required
@@ -352,7 +369,8 @@ def edit_job(request, id):
             else:
                 jobForm = EditJobForm(instance=job)
                 others, created = Skill.objects.get_or_create(skill_name="Others")
-                args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type'], 'others_id': others.id}
+                args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type'],
+                        'others_id': others.id}
                 return render(request, 'Home/edit_job.html', args)
     except Employer.DoesNotExist:
         pass
@@ -365,7 +383,7 @@ def edit_job(request, id):
                 companyForm = EditEmployerForm(request.POST, request.FILES, instance=job_poster)
 
                 if jobForm.is_valid() and companyForm.is_valid():
-                # if jobForm.is_valid():
+                    # if jobForm.is_valid():
                     with transaction.atomic():
                         company = companyForm.save(commit=False)
                         # company.user_id = admin.user.id
@@ -389,7 +407,8 @@ def edit_job(request, id):
                 companyForm = EditEmployerForm(instance=job_poster)
                 others, created = Skill.objects.get_or_create(skill_name="Others")
                 # args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type']}
-                args = {'job': job, 'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'], 'user_type': user['user_type'], 'others_id': others.id}
+                args = {'job': job, 'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'],
+                        'user_type': user['user_type'], 'others_id': others.id}
                 return render(request, 'Home/edit_job.html', args)
     except Admin.DoesNotExist:
         pass

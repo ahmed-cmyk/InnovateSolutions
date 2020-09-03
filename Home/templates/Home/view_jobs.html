@@ -101,11 +101,9 @@
                                                     <h4 class="card-title py-2 border-bottom border-secondary">
                                                         {{ job.job_title }}
                                                         {% if user_type == 'student' or user_type == 'alumni' %}
-                                                            {% for applied_job in jobs_applied %}
-                                                                {% if job.id == applied_job.id %}
-                                                                    <span class="badge badge-info">Applied</span>
-                                                                {% endif %}
-                                                            {% endfor %}
+                                                            {% if job.id in jobs_applied %}
+                                                                <span class="badge badge-info">Applied</span>
+                                                            {% endif %}
                                                         {% endif %}
                                                     </h4>
                                                     <b>Job Description:</b>

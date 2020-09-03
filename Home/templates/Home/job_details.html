@@ -215,7 +215,7 @@
                 <br>
                 <div id="application" class="text-center">
                     {% if user_type == 'student' or user_type == "alumni" %}
-                        {% if applied == False  %}
+                        {% if job.id not in job_applied  %}
                             <button class = "btn btn-primary" type="submit" name="apply" value="Apply&Save">&nbsp;Apply To Job</button>
                             <br><br>
                             <div style="margin-right: 25%; margin-left: 25%">
