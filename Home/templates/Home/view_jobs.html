@@ -159,6 +159,8 @@
                                             <span class="badge badge-info">{{ job.is_active }}</span>
                                         {% elif job.is_active == 'Rejected' %}
                                             <span class="badge badge-danger">{{ job.is_active }}</span>
+                                        {% elif job.is_active == 'Accepted' %}
+                                            <span class="badge badge-success">{{ job.is_active }}</span>
                                         {% endif %}
                                     </h4>
                                     <b>Job Description:</b>
