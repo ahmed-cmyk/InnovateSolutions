@@ -219,6 +219,10 @@ footer h3 {
     text-transform: uppercase;
 }
 
+footer #social-section {
+    font-size: 0;
+}
+
 footer #social-section img {
     width: 6vw;
     height: auto;
