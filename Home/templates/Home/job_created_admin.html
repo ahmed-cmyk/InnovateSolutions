@@ -1,0 +1,6 @@
+{% autoescape off %}
+Dear admin,<br><br>
+A new job posting request has been submitted by {{ first_name }}. Please review the application on {{ protocol }}://{{ domain }}{% url 'view_pending_jobs' %} within 24 working hours.<br><br>
+Kind regards,<br>
+The Murdoch University Dubai Team
+{% endautoescape %}

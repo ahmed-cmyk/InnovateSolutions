@@ -91,14 +91,14 @@ def student_signup(request):
 
                             first_name = user_form.cleaned_data.get('first_name')
                             context = {'first_name': first_name}
+                            admin_context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
 
                             subject = 'Your account creation request has been received'
                             htmlText = render_to_string('Accounts/account_creation_request.html', context)
                             send_html_mail(subject, htmlText, [email])
 
-                            subject = 'New Student Account Created'
-                            htmlText = f'A new student account for the user {email} has been created and is ' \
-                                       f'currently pending approval.'
+                            subject = 'An account creation request has been received '
+                            htmlText = render_to_string('Accounts/account_creation_request_admin.html', admin_context)
                             send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
                         messages.success(request, 'A student account has been created')

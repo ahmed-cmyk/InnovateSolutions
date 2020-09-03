@@ -202,14 +202,14 @@ def create_job(request):
 
                         first_name = companyForm.cleaned_data.get('company_name')
                         context = {'first_name': first_name}
+                        admin_context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
 
                         subject = 'Your job posting request has been received'
                         htmlText = render_to_string('Employer/job_post_request.html', context)
                         send_html_mail(subject, htmlText, [email])
 
-                        subject = 'New Job has been posted'
-                        htmlText = "A new job has been posted on the Murdoch Career Portal and is currently pending " \
-                                   "approval. "
+                        subject = 'A job posting request has been received'
+                        htmlText = render_to_string('Home/job_created_admin.html', admin_context)
                         send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
                         messages.success(request, "Job successfully created")
@@ -245,13 +245,14 @@ def create_job(request):
 
                     first_name = employer.company_name
                     context = {'first_name': first_name}
+                    admin_context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
 
                     subject = 'Your job posting request has been received'
                     htmlText = render_to_string('Employer/job_post_request.html', context)
                     send_html_mail(subject, htmlText, [email])
 
-                    subject = 'New Job has been posted'
-                    htmlText = "A new job has been posted on the Murdoch Career Portal and is currently pending approval."
+                    subject = 'A job posting request has been received'
+                    htmlText = render_to_string('Home/job_created_admin.html', admin_context)
                     send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
                     messages.success(request, "Job successfully created")

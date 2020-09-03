@@ -87,8 +87,14 @@ class HelpDeskFormView(TemplateView):
                     alumni = Alumni.objects.get(user_id=request.user.id)
                     first_name = alumni.user.first_name
                     context = {'first_name': first_name}
+                    admin_context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
+
                     htmlText = render_to_string('HelpDesk/helpdesk_request_logged.html', context)
                     send_html_mail(subject, htmlText, [email])
+
+                    subject = ' A new HelpDesk request has been received'
+                    htmlText = render_to_string('HelpDesk/helpdesk_request_submitted.html', admin_context)
+                    send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
                 except:
                     pass
 
@@ -96,8 +102,14 @@ class HelpDeskFormView(TemplateView):
                     student = Student.objects.get(user_id=request.user.id)
                     first_name = student.user.first_name
                     context = {'first_name': first_name}
+                    admin_context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
+
                     htmlText = render_to_string('HelpDesk/helpdesk_request_logged.html', context)
                     send_html_mail(subject, htmlText, [email])
+
+                    subject = ' A new HelpDesk request has been received'
+                    htmlText = render_to_string('HelpDesk/helpdesk_request_submitted.html', admin_context)
+                    send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
                 except:
                     pass
 
@@ -105,8 +117,14 @@ class HelpDeskFormView(TemplateView):
                     employer = Employer.objects.get(user_id=request.user.id)
                     first_name = employer.company_name
                     context = {'first_name': first_name}
+                    admin_context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
+
                     htmlText = render_to_string('HelpDesk/helpdesk_request_logged.html', context)
                     send_html_mail(subject, htmlText, [email])
+
+                    subject = ' A new HelpDesk request has been received'
+                    htmlText = render_to_string('HelpDesk/helpdesk_request_submitted.html', admin_context)
+                    send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
                 except:
                     pass
 
