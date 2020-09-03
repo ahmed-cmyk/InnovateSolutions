@@ -49,6 +49,21 @@ function searchSkill() {
         }
     }
 }
+
+function searchMajor() {
+    var input = document.getElementById('majorInput');
+    var filter = input.value.toUpperCase();
+    var ul = document.getElementById("majors");
+    var li = ul.getElementsByTagName("li");
+
+    for(var i=0; i<li.length; i++) {
+        if(li[i].innerText.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+    }
+}
 </script>
     <body onload="removeOtherSkill()">
     <div id="editProfileBody">
@@ -69,12 +84,19 @@ function searchSkill() {
                         <div>{{ student_form.expected_graduation_date|as_crispy_field }}</div>
                         <div>{{ student_form.personal_email|as_crispy_field }}</div>
                         <div id="personalEmailError"></div>
+
                         {{ student_form.skills.label }}
                         <div class="skills-container">
                             <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
                             {{ student_form.skills }}
                         </div><br>
-                        <div>{{ student_form.majors|as_crispy_field }}</div>
+
+                        {{ student_form.majors.label }}
+                        <div class="skills-container">
+                            <input class="searchTerm form-control" type="text" id="majorInput" onkeyup="searchMajor()" placeholder="Search for majors...">
+                            {{ student_form.majors }}
+                        </div><br>
+
                         <div>{{ student_form.dp|as_crispy_field }}</div>
                         <div>{{ student_form.cv|as_crispy_field }}</div>
                         <div class="text-center">
@@ -101,12 +123,19 @@ function searchSkill() {
                         <div>{{ student_form.expected_graduation_date|as_crispy_field }}</div>
                         <div>{{ student_form.personal_email|as_crispy_field }}</div>
                         <div id="personalEmailError"></div>
+
                         {{ student_form.skills.label }}
                         <div class="skills-container">
                             <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
                             {{ student_form.skills }}
                         </div><br>
-                        <div>{{ student_form.majors|as_crispy_field }}</div>
+
+                        {{ student_form.majors.label }}
+                        <div class="skills-container">
+                            <input class="searchTerm form-control" type="text" id="majorInput" onkeyup="searchMajor()" placeholder="Search for majors...">
+                            {{ student_form.majors }}
+                        </div><br>
+
                         <div>{{ student_form.dp|as_crispy_field }}</div>
                         <div>{{ student_form.cv|as_crispy_field }}</div>
                         <div class="text-center">

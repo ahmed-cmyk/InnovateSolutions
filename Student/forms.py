@@ -95,8 +95,8 @@ class StudentForm(forms.ModelForm):
                                             widget=forms.CheckboxSelectMultiple(attrs={'id': 'skills'}),
                                             required=True)
     majors = forms.ModelMultipleChoiceField(queryset=Major.objects.all(),
-                                            label='Major',
-                                            widget=forms.CheckboxSelectMultiple,
+                                            label='Major(s)*',
+                                            widget=forms.CheckboxSelectMultiple(attrs={'id':'majors'}),
                                             required=True)
     dp = forms.ImageField(label='Select a profile picture',
                           help_text="Only jpeg and png file formats allowed",

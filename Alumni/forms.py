@@ -86,8 +86,8 @@ class AlumniForm(forms.ModelForm):
                                             widget=forms.CheckboxSelectMultiple(attrs={'id':'skills'}),
                                             required=True)
     majors = forms.ModelMultipleChoiceField(queryset=Major.objects.all(),
-                                            label='Major',
-                                            widget=forms.CheckboxSelectMultiple,
+                                            label='Major(s)*',
+                                            widget=forms.CheckboxSelectMultiple(attrs={'id':'majors'}),
                                             required=True)
     dp = forms.ImageField(label='Select a profile picture (only jpeg and png file formats allowed)',
                           required=False,

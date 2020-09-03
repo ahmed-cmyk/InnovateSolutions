@@ -48,6 +48,21 @@ function searchSkill() {
         }
     }
 }
+
+function searchMajor() {
+    var input = document.getElementById('majorInput');
+    var filter = input.value.toUpperCase();
+    var ul = document.getElementById("majors");
+    var li = ul.getElementsByTagName("li");
+
+    for(var i=0; i<li.length; i++) {
+        if(li[i].innerText.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+    }
+}
 </script>
     <body onload="removeOtherSkill()">
     <div id="editProfileBody">
@@ -70,7 +85,13 @@ function searchSkill() {
                         <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
                         {{ alumni_form.skills }}
                     </div><br>
-                    <div>{{ alumni_form.majors|as_crispy_field }}</div>
+
+                    {{ alumni_form.majors.label }}
+                    <div class="skills-container">
+                        <input class="searchTerm form-control" type="text" id="majorInput" onkeyup="searchMajor()" placeholder="Search for majors...">
+                        {{ alumni_form.majors }}
+                    </div><br>
+
                     <div>{{ alumni_form.dp|as_crispy_field }}</div>
                     <div>{{ alumni_form.cv|as_crispy_field }}</div>
                         <div class="text-center">
@@ -98,8 +119,14 @@ function searchSkill() {
                     <div class="skills-container">
                         <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
                         {{ alumni_form.skills }}
-                    </div>
-                    <div>{{ alumni_form.majors|as_crispy_field }}</div>
+                    </div><br>
+
+                    {{ alumni_form.majors.label }}
+                    <div class="skills-container">
+                        <input class="searchTerm form-control" type="text" id="majorInput" onkeyup="searchMajor()" placeholder="Search for majors...">
+                        {{ alumni_form.majors }}
+                    </div><br>
+
                     <div>{{ alumni_form.dp|as_crispy_field }}</div>
                     <div>{{ alumni_form.cv|as_crispy_field }}</div>
                         <div class="text-center">
