@@ -80,6 +80,19 @@ def sitemap(request):
     return render(request, "Home/sitemap.html", get_user_type(request))
 
 
+def get_user(request):
+    try:
+        student = Student.objects.get(user_id=request.user.id)
+        return student
+    except:
+        pass
+
+    try:
+        alumni = Alumni.objects.get(user_id=request.user.id)
+        return alumni
+    except:
+        pass
+
 @login_required
 def view_jobs(request):
     user = get_user_type(request)
@@ -149,16 +162,13 @@ def view_jobs(request):
         companies = Employer.objects.all()
         form = FilterJobForm()
         args = {'jobs': jobs, 'companies': companies, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
-    elif user['user_type'] == 'student':
+    elif user['user_type'] == 'student' or user['user_type'] == 'alumni':
         jobs = Job.objects.filter(status="Open", is_active='Accepted').order_by('-date_posted')
         companies = Employer.objects.all()
+        student = get_user(request)
+        jobs_applied = student.jobs_applied.all()
         form = FilterJobForm()
-        args = {'jobs': jobs, 'companies': companies, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
-    elif user['user_type'] == 'alumni':
-        jobs = Job.objects.filter(status="Open", is_active='Accepted').order_by('-date_posted')
-        companies = Employer.objects.all()
-        form = FilterJobForm()
-        args = {'jobs': jobs, 'companies': companies, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
+        args = {'jobs': jobs, 'companies': companies, 'form': form, 'obj': user['obj'], 'user_type': user['user_type'], 'jobs_applied': jobs_applied}
     else:
         redirect('/')
     return render(request, 'Home/view_jobs.html', args)

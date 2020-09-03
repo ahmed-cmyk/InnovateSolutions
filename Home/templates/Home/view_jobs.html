@@ -98,7 +98,16 @@
                                         <div class="card-group col-12">
                                             <div class="card bg-light col-md-9 col-xs-7">
                                                 <div class="card-body">
-                                                    <h4 class="card-title py-2 border-bottom border-secondary">{{ job.job_title }}</h4>
+                                                    <h4 class="card-title py-2 border-bottom border-secondary">
+                                                        {{ job.job_title }}
+                                                        {% if user_type == 'student' or user_type == 'alumni' %}
+                                                            {% for applied_job in jobs_applied %}
+                                                                {% if job.id == applied_job.id %}
+                                                                    <span class="badge badge-info">Applied</span>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                    </h4>
                                                     <b>Job Description:</b>
                                                     <p class="card-text">
                                                         {{ job.description }}
