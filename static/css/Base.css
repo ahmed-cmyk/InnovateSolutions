@@ -223,11 +223,6 @@ footer #social-section {
     font-size: 0;
 }
 
-footer #social-section img {
-    width: 6vw;
-    height: auto;
-}
-
 .fa-twitter {
     color: #00ACED;
 }
@@ -263,6 +258,10 @@ footer #social-section img {
         height: 40vh;
         width: 90vw;
     }
+    footer #social-section img {
+        width: 15vw;
+        height: auto;
+    }
 }
 
 /******** Tablet Devices ********/
@@ -285,6 +284,10 @@ footer #social-section img {
         position: relative;
         height: 100%;
     }
+    footer #social-section img {
+        width: 6vw;
+        height: auto;
+    }
 }
 
 /******** Desktop Devices ********/
@@ -305,5 +308,9 @@ footer #social-section img {
     }
     #body-image {
         position: relative;
+    }
+    footer #social-section img {
+        width: 6vw;
+        height: auto;
     }
 }

@@ -1,5 +1,14 @@
+#container {
+    position: relative;
+}
+
+#container img {
+    height: auto;
+    width: 100%;
+}
+
 #helpdeskRequestBody {
-    margin: 5% 0;
+    margin: 4% 0;
 }
 
 #helpdeskRequestBody hr {

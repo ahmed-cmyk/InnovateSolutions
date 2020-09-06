@@ -10,6 +10,11 @@
     My HelpDesk Requests - Murdoch Dubai Job Portal
 {% endblock %}
 
+{% block image %}
+<div id="container">
+    <img src="{% static 'images/1.png' %}" alt="Home page image">
+</div>
+{% endblock %}
 {% block content %}
     {% if helpdeskRequests %}
         <div id="helpdeskRequestBody" class="col-12">
