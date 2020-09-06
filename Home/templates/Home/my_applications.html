@@ -9,6 +9,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/Applications.css' %}"/>
 {% endblock %}
 
+{% block image %}
+<div id="container">
+    <img src="{% static 'images/5.png' %}" alt="Home page image">
+</div>
+{% endblock %}
 {% block content %}
     <div id="applicationBody" class="col-12">
         {% if jobs_applied %}
