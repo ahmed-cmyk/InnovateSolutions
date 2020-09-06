@@ -4,11 +4,9 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 import threading
-from threading import Thread
 
 # Create your models here.
 from Admin.models import Admin
-from django.db.models import ManyToManyField
 
 from DjangoUnlimited.settings import EMAIL_HOST_USER
 from Employer.models import Employer
@@ -37,20 +35,6 @@ class Skill(models.Model):
     def __str__(self):
         name = self.skill_name
         return name
-
-
-# class SkillAutocomplete(autocomplete.Select2QuerySetView):
-#     def get_queryset(self):
-#         # Don't forget to filter out results depending on the visitor !
-#         # if not self.request.user.is_authenticated:
-#         #     return Skill.objects.none()
-#
-#         qs = Skill.objects.all()
-#
-#         if self.q:
-#             qs = qs.filter(name__istartswith=self.q)
-#
-#         return qs
 
 
 class Major(models.Model):

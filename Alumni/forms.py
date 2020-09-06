@@ -3,7 +3,6 @@ import dns.exception
 import dns.resolver
 from django import forms
 from django.contrib.auth.models import User
-from django.forms import SelectDateWidget
 from upload_validator import FileTypeValidator
 
 from .models import Alumni, AlumniJobApplication

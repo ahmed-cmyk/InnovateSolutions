@@ -1,11 +1,9 @@
-from datetime import datetime, date
+from datetime import datetime
 
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.shortcuts import get_current_site
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
-from django.utils import timezone
 from django.views.generic import TemplateView
 from django.contrib import messages
 from django_comments.models import Comment
@@ -16,9 +14,6 @@ from Home.models import send_html_mail
 from Student.models import Student
 from .models import HelpDeskModel
 from .forms import HelpDeskForm
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
-from django.core.mail import send_mail
 from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
 
 

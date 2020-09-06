@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.models import User, auth
-from django.views.generic import TemplateView
+from django.contrib.auth.models import auth
 from django.http import JsonResponse
 
 from Student.models import Student
@@ -76,7 +75,6 @@ def login(request):
                     return redirect('account_rejected')
                 else:
                     return redirect('pending_approval')
-                # return render(request, "Home/index.html", get_user_type(request))
     else:
         return render(request, 'login.html', get_user_type(request))
 

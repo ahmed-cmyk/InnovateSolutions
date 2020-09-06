@@ -1,26 +1,15 @@
-from django.db.models import Max
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
-from django.views.generic import TemplateView
-from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from newsapi import NewsApiClient
-from django.core.cache import cache
-from django.core.paginator import Paginator
 from django.db import transaction
 from django.contrib import messages
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
-from django.core.mail import send_mail
-from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL, EMAIL_HOST_PASSWORD
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
+from django.http import HttpResponse
 from wsgiref.util import FileWrapper
 from django.core.files import File
-from itertools import chain
 import os
-from datetime import date, timedelta
-import psycopg2
 from django.contrib.postgres.search import SearchVector
 # Create your views here.
 
@@ -34,7 +23,6 @@ from .forms import CreateJobForm, EditJobForm, FilterJobForm, FilterStudentForm,
 from Employer.forms import EmployerForm, InitialEmployerForm, EditEmployerForm
 from Student.forms import StudentJobApplicationForm
 from Alumni.forms import AlumniJobApplicationForm
-from django.core.mail import send_mail
 
 
 def index(request):
@@ -156,7 +144,6 @@ def view_jobs(request):
         return render(request, "Home/view_jobs.html", args)
     elif user['user_type'] == 'employer':
         jobs = Job.objects.filter(posted_by=request.user.id).order_by('-date_posted').exclude(status="Deleted")
-        # jobs = Job.objects.exclude(id__in=emp_jobs)
         args = {'jobs': jobs, 'obj': user['obj'], 'user_type': user['user_type']}
     elif user['user_type'] == 'admin':
         jobs = Job.objects.filter(is_active='Accepted').exclude(status="Deleted").order_by('-date_posted')
@@ -407,7 +394,6 @@ def edit_job(request, id):
                 jobForm = EditJobForm(instance=job)
                 companyForm = EditEmployerForm(instance=job_poster)
                 others, created = Skill.objects.get_or_create(skill_name="Others")
-                # args = {'job': job, 'jobForm': jobForm, 'obj': user['obj'], 'user_type': user['user_type']}
                 args = {'job': job, 'jobForm': jobForm, 'companyForm': companyForm, 'obj': user['obj'],
                         'user_type': user['user_type'], 'others_id': others.id}
                 return render(request, 'Home/edit_job.html', args)
@@ -439,11 +425,9 @@ def reopen_job(request, id):
         job.status = 'Open'
         job.save()
         messages.success(request, "You have successfully reopened the job")
-        # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
         return redirect('job_details', job.id)
     else:
         form = EditJobForm()
-        # args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Home/reopen_job.html', args)
 
 
@@ -469,7 +453,6 @@ def delete_job(request, id):
         return redirect('view_jobs')
     else:
         form = EditJobForm()
-        # args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Home/delete_job.html', args)
 
 
@@ -494,11 +477,9 @@ def close_job(request, id):
         send_html_mail(subject, htmlText, [email])
 
         messages.success(request, "You have successfully closed the job")
-        # args = {'job': job, 'obj': user['obj'], 'user_type': user['user_type']}
         return redirect('job_details', job.id)
     else:
         form = EditJobForm()
-        # args = {'job': job, 'form': form, 'obj': user['obj'], 'user_type': user['user_type']}
         return render(request, 'Home/close_job.html', args)
 
 

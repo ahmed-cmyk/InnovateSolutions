@@ -1,14 +1,9 @@
 import datetime
 from django import forms
-from django.contrib.auth.models import User
-from django.forms import SelectDateWidget, DateField
 
-from Employer.models import Employer
 from Home.models import Job, Skill, JobType, Industry, Major
 from Student.models import Student
 from Alumni.models import Alumni
-
-from DjangoUnlimited import settings
 
 
 class CreateJobForm(forms.ModelForm):
@@ -22,20 +17,21 @@ class CreateJobForm(forms.ModelForm):
 
     skills = forms.ModelMultipleChoiceField(
         label='Skills Required*',
-        widget=forms.CheckboxSelectMultiple(attrs={'onChange': 'checkOtherSkills(this)', 'id':'skills'}),
+        widget=forms.CheckboxSelectMultiple(attrs={'onChange': 'checkOtherSkills(this)', 'id': 'skills'}),
         queryset=Skill.objects.all(),
         required=True
     )
 
     other_skills = forms.CharField(
         label='Other Skills (Optional)',
-        widget=forms.Textarea(attrs={'id':'otherskills'}),
+        widget=forms.Textarea(attrs={'id': 'otherskills'}),
         required=False
     )
 
     duration_type = forms.CharField(max_length=10,
                                     widget=forms.Select(choices=DURATION,
-                                                        attrs={'id': 'duration_type', 'onChange': 'toggleDuration(this)'}),
+                                                        attrs={'id': 'duration_type',
+                                                               'onChange': 'toggleDuration(this)'}),
                                     required=True)
     duration = forms.IntegerField(required=False, widget=forms.NumberInput(attrs={'id': 'duration'}))
 
@@ -148,8 +144,6 @@ class FilterAlumniForm(forms.ModelForm):
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
                                             widget=forms.CheckboxSelectMultiple,
                                             required=True)
-    # skills = forms.ModelChoiceField(queryset=Skill.objects.all(),
-    #                                 widget=autocomplete.ModelSelect2Multiple(url='skill-autocomplete'))
     majors = forms.ModelMultipleChoiceField(queryset=Major.objects.all(),
                                             widget=forms.CheckboxSelectMultiple,
                                             required=True)
@@ -157,8 +151,3 @@ class FilterAlumniForm(forms.ModelForm):
     class Meta:
         model = Alumni
         fields = ['skills', 'majors']
-
-    # def __init__(self, *args, **kwargs):
-    #     super(FilterAlumniForm, self).__init__(*args, **kwargs)
-    #     self.fields['min_graduation_date'].widget.attrs['placeholder'] = 'Min'
-    #     self.fields['max_graduation_date'].widget.attrs['placeholder'] = 'Max'

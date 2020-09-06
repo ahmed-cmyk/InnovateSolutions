@@ -1,34 +1,28 @@
 import mimetypes
 import os
 import time
-import zipfile
 
 from django.core.files.storage import get_storage_class
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import User
 from django.db import transaction
 from django.contrib.admin.views.decorators import staff_member_required
 from django.template.loader import render_to_string
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
-from django.core.mail import send_mail
 
 from Alumni.models import Alumni, AlumniJobApplication
-from DjangoUnlimited import settings
 from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL, BASE_DIR
 from django.utils import timezone
-from datetime import timedelta, datetime, date
+from datetime import timedelta, date
 import csv
 import subprocess
-from django.http import HttpResponse, JsonResponse, Http404, HttpResponseRedirect
-from django.urls import reverse
+from django.http import HttpResponse, JsonResponse
 
 # Create your views here.
 
-from Home.forms import CreateJobForm, EditJobForm
-from Employer.forms import InitialEmployerForm, EmployerForm, EmployerAccVerificationForm
-from .forms import InitialAdminForm, AdminForm, AddIndustryForm, Statistics
+from Home.forms import CreateJobForm
+from Employer.forms import InitialEmployerForm, EmployerForm
+from .forms import InitialAdminForm, AdminForm, Statistics
 from Accounts.views import isValidated, get_user_type, number_symbol_exists
 from .models import Admin
 from .forms import EditAdminProfileForm
@@ -48,7 +42,6 @@ def backup_database(request):
 
         BACKUP_PATH = BASE_DIR + '\\backup'
         FILENAME = time.strftime("%Y%m%d_%H%M%S") + '_backup.sql'
-        # FILENAME = 'DB_backup.sql'
 
         destination = r'%s\%s' % (BACKUP_PATH, FILENAME)
 
@@ -57,52 +50,11 @@ def backup_database(request):
             ['pg_dump', '-U', DB_USER, '-d', DB_NAME, '-f', destination],
             stdout=subprocess.PIPE, universal_newlines=True
         )
-        # output_file = open(FILENAME, 'w')
-        # for line in iter(dump.stdout.readline, ""):
-        #     output_file.write(line)
-        #
-        # dump.stdout.close()
-
-        # out = dump.communicate()[0]
-        # print(out)
-        # output_file.writelines(out)
-        # path = BASE_DIR + "\\backup\\" + FILENAME
-        # print(path)
-        # download_file(request)
         return redirect('backup_view')
-        # return redirect('backup_download/%s' % (FILENAME))
-        # return render(request, 'dbbackup_ui/_backup_forms.html', {'db_backup_file': FILENAME})
-        # return HttpResponseRedirect(reverse('backup_view', args={'db_backup_file': FILENAME}))
 
 
 def download_file(request):
-    # fill these variables with real values
-    # fl_path = "\\backup\\" + filename
-    # print('File path: ' + fl_path)
-    #
-    # fl = open(fl_path, 'r')
-    # mime_type, _ = mimetypes.guess_type(fl_path)
-    # response = HttpResponse(fl, content_type=mime_type)
-    # response['Content-Disposition'] = "attachment; filename=%s" % filename
-    # return response
     filename = 'DB_backup.sql'
-    # file_path = os.path.join(settings.BACKUP_ROOT, filename)
-    # print(file_path)
-    # if os.path.exists(file_path):
-    # #     print('Path exists')
-    # # else:
-    # #     print('There is no path at ' + file_path)
-    #     with open(file_path, 'rb') as fh:
-    #         print("I found the file")
-    #         response = HttpResponse(fh.read(), content_type="application/sql")
-    #         print('Second line')
-    #         response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-    #         print('Third line')
-    #         print(response)
-    #         return response
-    # return redirect('backup_view')
-    # file = "127.0.0.1" + settings.BACKUP_URL + filename
-    # return HttpResponse(request, 'download_backup', {path:})
     return redirect('backup_download/%s' % (filename))
 
 
@@ -573,12 +525,9 @@ def generate_statistics(request):
         elif time == "Past Year":
             start_date = end_date - timedelta(364)
 
-        # users = User.objects.filter(date_joined__range=[start_date, end_date])
         admins = Admin.objects.filter(
             user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
         admin_users = User.objects.filter(id__in=Admin.objects.all())
-        #students = Student.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(
-        #    date_joined__range=[start_date, end_date])).count()
         current = Student.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(
             date_joined__range=[start_date, end_date]))
         alumni = Alumni.objects.filter(is_active='Accepted', user_id__in=User.objects.filter(
@@ -613,9 +562,7 @@ def generate_statistics(request):
         total_users = User.objects.filter(date_joined__range=[start_date, end_date])
 
         total_users = len(list(set(total_users)))
-        # users = len(list(set(users)))
         admins = len(list(set(admins)))
-        # students = len(list(set(students))) + len(list(set(alumni)))
         current = len(list(set(current)))
         alumni = len(list(set(alumni)))
         employers = len(list(set(employers)))

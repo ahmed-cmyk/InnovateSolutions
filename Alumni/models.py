@@ -6,7 +6,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 from datetime import datetime
 from django.core.files.storage import FileSystemStorage
 import os
-from django.conf import settings
 
 from Home.models import Skill, Job, Major
 

@@ -1,6 +1,4 @@
 from django import forms
-from django.core.exceptions import ValidationError
-from django.forms import models, HiddenInput
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
@@ -11,7 +9,6 @@ from Home.models import Job, JobType, Major, Skill, Industry
 from Alumni.models import Alumni
 from Student.models import Student
 from Employer.models import Employer
-# from ..DjangoUnlimited import settings
 
 import dns.resolver, dns.exception
 

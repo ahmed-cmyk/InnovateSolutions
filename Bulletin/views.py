@@ -1,5 +1,3 @@
-from django.db.models import Q
-from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView
 
 from .forms import PostForm
@@ -11,7 +9,6 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.core import serializers
 
-from django.core.paginator import Paginator
 from Accounts.views import get_user_type
 
 

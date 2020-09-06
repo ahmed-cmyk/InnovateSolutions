@@ -1,18 +1,14 @@
-from django.core.mail import send_mail
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.models import User, auth
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 
 from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL
-from django.urls import reverse
 
 from Accounts.views import isValidated, get_user_type
 from Home.models import send_html_mail
-from .models import Alumni
 from .forms import *
 
 
@@ -39,7 +35,6 @@ def signup(request):
                 user = get_user_type(request)
                 args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
                 return render(request, 'Alumni/alumni_registration.html', args)
-                #return redirect("alumni_register")
 
             if user_form.emailExists():
                 messages.warning(request, 'Email already taken. Try a different one.')  # checks if email exists in db
@@ -48,7 +43,6 @@ def signup(request):
                 user = get_user_type(request)
                 args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
                 return render(request, 'Alumni/alumni_registration.html', args)
-                #return redirect("alumni_register")
 
             if not user_form.samePasswords():
                 messages.warning(request, 'Passwords not matching. Try again.')  # checks if password and confirm
@@ -58,7 +52,6 @@ def signup(request):
                 user = get_user_type(request)
                 args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
                 return render(request, 'Alumni/alumni_registration.html', args)
-                #return redirect("alumni_register")
 
             if not user_form.emailDomainExists():
                 messages.warning(request, 'Email domain does not exist. Try again.')  # checks if there is an exising
@@ -68,7 +61,6 @@ def signup(request):
                 user = get_user_type(request)
                 args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
                 return render(request, 'Alumni/alumni_registration.html', args)
-                #return redirect("alumni_register")
 
             else:
                 if isValidated(user_form.cleaned_data.get('password1')):  # checks if password is valid
@@ -105,7 +97,6 @@ def signup(request):
                         user = get_user_type(request)
                         args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
                         return render(request, 'Alumni/alumni_registration.html', args)
-                        #return redirect("alumni_register")
 
                 else:
                     messages.warning(request,
@@ -115,7 +106,6 @@ def signup(request):
                     user = get_user_type(request)
                     args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
                     return render(request, 'Alumni/alumni_registration.html', args)
-                    #return redirect("alumni_register")
 
         else:
             messages.warning(request, user_form.errors.as_text)
@@ -124,7 +114,6 @@ def signup(request):
             user = get_user_type(request)
             args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
             return render(request, 'Alumni/alumni_registration.html', args)
-            #return redirect("alumni_register")
 
     else:
         user_form = InitialAlumniForm()
