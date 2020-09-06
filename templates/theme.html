@@ -225,35 +225,39 @@
             <footer class="page-footer text-center mt-auto">
                 <div class="row">
                     <div class="aboutus col-md-4 col-sm-4 col-xs-12">
-                        <ul>
-                            <span class="text-center">
-                                <h4>About Us</h4>
+                        <div class="text-md-center text-left">
+                            <ul>
+                                <li><h4>About Us</h4></li>
                                 <li><a href="{% url 'faq' %}"> FAQ</a></li>
                                 <li><a href="{% static 'documents/privacy.pdf' %}" target="_blank"> Privacy</a></li>
                                 <li><a href="https://www.murdochuniversitydubai.com/" target="_blank">Murdoch University Dubai</a></li>
-                            </span>
+                            </ul>
+                        </div>
+                    </div><!-- End of aboutus -->
+                    <hr class="footer-rule d-block d-sm-none">
+                    <div id ="social-section" class="followus col-md-4 col-sm-4 col-xs-12 text-md-center text-left">
+                        <ul>
+                            <li><h4>Follow Us</h4></li>
+                            <li>
+                                <a class="image-thumbnail" target="_blank" href="https://www.instagram.com/murdochdubai/?hl=en">
+                                    <img src="{% static 'images/instagram.png' %}" alt="instagram icon">
+                                </a>
+                                <a class="image-thumbnail" target="_blank" href="https://www.facebook.com/murdochdubai/">
+                                    <img src="{% static 'images/facebook.png' %}" alt="facebook icon">
+                                </a>
+                                <a class="image-thumbnail" target="_blank" href="https://www.linkedin.com/school/murdoch-university-dxb/">
+                                    <img src="{% static 'images/linkedin.png' %}" alt="linkedin icon">
+                                </a>
+                                <a class="image-thumbnail" target="_blank" href="https://twitter.com/MurdochUniDubai?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">
+                                    <img src="{% static 'images/twitter.png' %}" alt="twitter icon">
+                                </a>
+                            </li>
                         </ul>
                     </div><!-- End of aboutus -->
                     <hr class="footer-rule d-block d-sm-none">
-                    <div id ="social-section" class="followus col-md-4 col-sm-4 col-xs-12 text-center">
-                        <h4>Follow Us</h4>
-                        <a class="image-thumbnail" target="_blank" href="https://www.instagram.com/murdochdubai/?hl=en">
-                            <img src="{% static 'images/instagram.png' %}">
-                        </a>
-                        <a class="image-thumbnail" target="_blank" href="https://www.facebook.com/murdochdubai/">
-                            <img src="{% static 'images/facebook.png' %}">
-                        </a>
-                        <a class="image-thumbnail" target="_blank" href="https://www.linkedin.com/school/murdoch-university-dxb/">
-                            <img src="{% static 'images/linkedin.png' %}">
-                        </a>
-                        <a class="image-thumbnail" target="_blank" href="https://twitter.com/MurdochUniDubai?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">
-                            <img src="{% static 'images/twitter.png' %}">
-                        </a>
-                    </div><!-- End of aboutus -->
-                    <hr class="footer-rule d-block d-sm-none">
-                    <div class="contactus col-md-4 col-sm-4 col-xs-12 text-center">
+                    <div class="contactus col-md-4 col-sm-4 col-xs-12 text-md-center text-left">
                         <ul>
-                            <h4>Contact Us</h4>
+                            <li><h4>Contact Us</h4></li>
                             <li>Level 1, Block 18</li>
                             <li>Dubai Knowledge Park</li>
                             <li>Dubai, United Arab Emirates</li>
