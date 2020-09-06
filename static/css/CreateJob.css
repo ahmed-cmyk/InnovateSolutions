@@ -11,6 +11,10 @@
   margin: auto;
 }
 
+#createJobBody h2 {
+    font-size: 1.6rem;
+}
+
 #createJobBody hr {
     background-color: #000000;
     width: 70%;

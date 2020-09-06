@@ -12,6 +12,15 @@
     margin: 5% 0;
 }
 
+#applicationBody h2 {
+    font-size: 1.6rem;
+}
+
+#applicationBody hr {
+    width: 40%;
+    background-color: #000000;
+}
+
 #applicationBody table {
     width: auto;
     margin: 5% auto;

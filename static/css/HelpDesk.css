@@ -11,6 +11,10 @@
     margin: 4% 0;
 }
 
+#helpdeskRequestBody h2 {
+    font-size: 1.6rem;
+}
+
 #helpdeskRequestBody hr {
     background-color: #000000;
     width: 40%;
