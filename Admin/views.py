@@ -182,6 +182,7 @@ def change_accept_status(request):
         context = {'first_name': first_name, 'status': status}
 
         htmlText = render_to_string('Accounts/account_creation_resolution.html', context)
+        send_mail
         send_html_mail(subject, htmlText, [receipent])
     except:
         pass

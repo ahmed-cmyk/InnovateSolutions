@@ -3,7 +3,7 @@
 # Introduction
 The purpose of this project is to redesign the existing murdoch job portal by using the portal created by the previous group as a base.
 
-#Original Project
+# Original Project
 [Link](https://github.com/roanroan/DjangoUnlimited)
 
 # Contributors
