@@ -12,18 +12,26 @@
 }
 
 #container img {
-    height: 30vh;
+    height: auto;
     width: 100%;
 }
 
-.centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3rem;
-    font-weight: 100;
-    color: #FFFFFF;
+/*#container .inner-image {*/
+/*    background: rgba(0, 0, 0, 0.5);*/
+/*    height: inherit;*/
+/*}*/
+
+/*.centered {*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    font-weight: 100;*/
+/*    color: #FFFFFF;*/
+/*}*/
+
+#viewBody h2 {
+    font-size: 1.6rem;
 }
 
 #viewBody hr {
@@ -102,6 +110,9 @@ table {
         width: 95%;
         margin: 0 auto;
     }
+    .centered {
+        font-size: 2rem;
+    }
 }
 
 /******** Tablet Devices ********/
@@ -117,5 +128,8 @@ table {
     .employer-view {
         width: 80%;
         margin: 0 auto;
+    }
+    .centered {
+        font-size: 3rem;
     }
 }

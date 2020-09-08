@@ -18,7 +18,7 @@ class CreateJobForm(forms.ModelForm):
     skills = forms.ModelMultipleChoiceField(
         label='Skills Required*',
         widget=forms.CheckboxSelectMultiple(attrs={'onChange': 'checkOtherSkills(this)', 'id': 'skills'}),
-        queryset=Skill.objects.all(),
+        queryset=Skill.objects.all().order_by('skill_name'),
         required=True
     )
 

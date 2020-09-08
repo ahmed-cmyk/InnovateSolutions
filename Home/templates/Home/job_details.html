@@ -205,7 +205,9 @@
                                                 {{ job.duration }}
                                             {% endif %}
                                             {{ job.duration_type }}</p>
-                                        <p><b class="card-title text-secondary">Salary: </b> {{ job.salary_min }} - {{ job.salary_max }} AED/Month</p>
+                                        {% if job.salary_min or job.salary_max %}
+                                            <p><b class="card-title text-secondary">Salary: </b> {{ job.salary_min }} - {{ job.salary_max }} AED/Month</p>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>

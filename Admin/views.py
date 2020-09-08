@@ -516,15 +516,16 @@ def export_stats_file(request, users, admins, students, current, alumni, employe
 def generate_statistics(request):
     user = get_user_type(request)
     if request.method == "POST":
-        end_date = timezone.now()
-        time = request.POST.get('period')
-        if time == "Past 7 Days":
-            start_date = end_date - timedelta(6)
-        elif time == "Past 30 Days":
-            start_date = end_date - timedelta(29)
-        elif time == "Past Year":
-            start_date = end_date - timedelta(364)
-
+        #end_date = timezone.now()
+        #time = request.POST.get('period')
+        #if time == "Past 7 Days":
+        #    start_date = end_date - timedelta(6)
+        #elif time == "Past 30 Days":
+        #    start_date = end_date - timedelta(29)
+        #elif time == "Past Year":
+        #    start_date = end_date - timedelta(364)
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
         admins = Admin.objects.filter(
             user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
         admin_users = User.objects.filter(id__in=Admin.objects.all())

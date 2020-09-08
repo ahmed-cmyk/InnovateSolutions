@@ -2,9 +2,13 @@
     margin: 6% 0;
 }
 
+#statBody h2 {
+    font-size: 1.6rem;
+}
+
 #statBody hr {
     background-color: #000000;
-    width: 50%;
+    width: 40%;
 }
 
 #statBody form {
