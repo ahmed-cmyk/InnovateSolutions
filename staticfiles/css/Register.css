@@ -2,6 +2,15 @@
   margin: auto;
 }
 
+#form h2 {
+    font-size: 1.6rem;
+}
+
+#form hr {
+    background-color: #000000;
+    width: 40%;
+}
+
 /******** Mobile Devices ********/
 @media (max-width: 767px) {
   #form {

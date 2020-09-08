@@ -1,5 +1,18 @@
+#container {
+    position: relative;
+}
+
+#container img {
+    height: auto;
+    width: 100%;
+}
+
 #createJobBody {
   margin: auto;
+}
+
+#createJobBody h2 {
+    font-size: 1.6rem;
 }
 
 #createJobBody hr {

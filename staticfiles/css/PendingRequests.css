@@ -2,6 +2,10 @@
     width: 70%;
 }
 
+#request_table h2 {
+    font-size: 1.6rem;
+}
+
 hr {
     background-color: #000000;
     width: 40%;

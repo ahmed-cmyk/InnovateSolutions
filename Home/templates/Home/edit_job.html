@@ -88,7 +88,7 @@ function toggleDuration(elem) {
                     <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
                     {{ jobForm.skills }}
                 </div>
-                <br>
+                <small>Select 'Others' to enter additional skills</small><br><br>
                 <div>{{ jobForm.other_skills|as_crispy_field }}</div>
             {% elif user_type == 'admin' %}
                 <div>{{ jobForm.job_title|as_crispy_field }}</div>
@@ -110,10 +110,9 @@ function toggleDuration(elem) {
                 <div class="skills-container">
                     <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
                     {{ jobForm.skills }}
-                </div>
-                <br>
+                </div><br>
                 <div>{{ jobForm.other_skills|as_crispy_field }}</div>
-                <hr>
+                <hr><br>
                 <div>{{ companyForm.company_name|as_crispy_field }}</div>
                 <div>{{ companyForm.company_description|as_crispy_field }}</div>
                 <div>{{ companyForm.company_website|as_crispy_field }}</div>

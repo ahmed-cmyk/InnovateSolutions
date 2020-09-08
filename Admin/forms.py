@@ -119,5 +119,7 @@ class Statistics(forms.Form):
         ('Past 30 Days', 'Past 30 Days'),
         ('Past Year', 'Past Year')
     ]
-    period = forms.ChoiceField(label="Select Time Period", choices=choices,
-                               widget=forms.Select(attrs={'class': 'custom-select'}))
+    #period = forms.ChoiceField(label="Select Time Period", choices=choices,
+    #                           widget=forms.Select(attrs={'class': 'custom-select'}))
+    start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=True)
+    end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=True)

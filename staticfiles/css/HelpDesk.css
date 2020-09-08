@@ -1,5 +1,18 @@
+#container {
+    position: relative;
+}
+
+#container img {
+    height: auto;
+    width: 100%;
+}
+
 #helpdeskRequestBody {
-    margin: 5% 0;
+    margin: 4% 0;
+}
+
+#helpdeskRequestBody h2 {
+    font-size: 1.6rem;
 }
 
 #helpdeskRequestBody hr {

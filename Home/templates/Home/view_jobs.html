@@ -133,9 +133,11 @@
                                                     <p class="card-text">
                                                         <i class="fa fa-industry" aria-hidden="true"></i> {{ job.industry_id }}
                                                     </p>
-                                                    <p class="card-text">
-                                                        <i class="fa fa-money" aria-hidden="true"></i> {{ job.salary_min }} - {{ job.salary_max }} AED/Month
-                                                    </p>
+                                                    {% if job.salary_min or job.salary_max %}
+                                                        <p class="card-text">
+                                                            <i class="fa fa-money" aria-hidden="true"></i> {{ job.salary_min }} - {{ job.salary_max }} AED/Month
+                                                        </p>
+                                                    {% endif %}
                                                 </div><!-- End of card-body -->
                                                 <div class="card-footer">
                                                     <a class="card-link" href="{% url 'job_details' job.id %}">
@@ -190,9 +192,11 @@
                                     <p class="card-text">
                                         <i class="fa fa-industry" aria-hidden="true"></i> {{ job.industry_id }}
                                     </p>
-                                    <p class="card-text">
-                                        <i class="fa fa-money" aria-hidden="true"></i> {{ job.salary_min }} - {{ job.salary_max }} AED/Month
-                                    </p>
+                                    {% if job.salary_min or job.salary_max %}
+                                        <p class="card-text">
+                                            <i class="fa fa-money" aria-hidden="true"></i> {{ job.salary_min }} - {{ job.salary_max }} AED/Month
+                                        </p>
+                                    {% endif %}
                                 </div><!-- End of card-body -->
                                 <div class="card-footer text-center">
                                     <a class="card-link" href="{% url 'job_details' job.id %}">

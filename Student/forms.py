@@ -90,11 +90,11 @@ class StudentForm(forms.ModelForm):
                                                label="Expected Graduation Date",
                                                help_text="Graduation date must be from tomorrow onwards")
     personal_email = forms.EmailField(label='Personal Email Address')
-    skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),
+    skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all().order_by('skill_name'),
                                             label='Skills*',
                                             widget=forms.CheckboxSelectMultiple(attrs={'id': 'skills'}),
                                             required=True)
-    majors = forms.ModelMultipleChoiceField(queryset=Major.objects.all(),
+    majors = forms.ModelMultipleChoiceField(queryset=Major.objects.all().order_by('major_name'),
                                             label='Major(s)*',
                                             widget=forms.CheckboxSelectMultiple(attrs={'id':'majors'}),
                                             required=True)

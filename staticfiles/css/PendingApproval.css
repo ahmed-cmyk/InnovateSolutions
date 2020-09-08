@@ -2,6 +2,10 @@
     margin: 8% 0;
 }
 
+#pendingRequestBody h2 {
+    font-size: 1.6rem;
+}
+
 hr{
     width: 60%;
 }
