@@ -114,12 +114,58 @@ class AddIndustryForm(forms.ModelForm):
 
 
 class Statistics(forms.Form):
-    choices = [
-        ('Past 7 Days', 'Past 7 Days'),
-        ('Past 30 Days', 'Past 30 Days'),
-        ('Past Year', 'Past Year')
+    start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date', 'id':'start_date'}), required=True)
+    end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date', 'id':'end_date'}), required=True)
+
+
+class JobStats(forms.ModelForm):
+    LOCATION_CHOICES = [
+        ('--Select--', '--Select--'),
+        ('Abu Dhabi', 'Abu Dhabi'),
+        ('Dubai', 'Dubai'),
+        ('Sharjah', 'Sharjah'),
+        ('Umm al-Qaiwain', 'Umm al-Qaiwain'),
+        ('Fujairah', 'Fujairah'),
+        ('Ajman', 'Ajman'),
+        ('Ra’s al-Khaimah', 'Ra’s al-Khaimah')
     ]
-    #period = forms.ChoiceField(label="Select Time Period", choices=choices,
-    #                           widget=forms.Select(attrs={'class': 'custom-select'}))
-    start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=True)
-    end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=True)
+    start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date', 'id':'start_date'}), required=True)
+    end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date', 'id':'end_date'}), required=True)
+    industry = forms.ModelMultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple(),
+        queryset=Industry.objects.all().order_by('industry_name'),
+        required=False,
+        label="Industry"
+    )
+    job_type = forms.ModelChoiceField(
+        widget=forms.Select(),
+        queryset=JobType.objects.all(),
+        required=False,
+        label="Job Type"
+    )
+    location = forms.CharField(max_length=100, required=False, widget=forms.Select(choices=LOCATION_CHOICES))
+
+    class Meta:
+        model = Job
+        fields = ['industry_id', 'job_type_id', 'location']
+
+    def __init__(self, *args, **kwargs):
+        super(JobStats, self).__init__(*args, **kwargs)
+        self.fields['job_type'].required = False
+        self.fields['industry'].required = False
+
+class StudentStats(forms.Form):
+    start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date', 'id':'start_date'}), required=True)
+    end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date', 'id':'end_date'}), required=True)
+    major = forms.ModelMultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple(),
+        queryset=Major.objects.all().order_by('major_name'),
+        required=False,
+        label="Major"
+    )
+    skill = forms.ModelMultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple(),
+        queryset=Skill.objects.all().order_by('skill_name'),
+        required=False,
+        label="Skills"
+    )

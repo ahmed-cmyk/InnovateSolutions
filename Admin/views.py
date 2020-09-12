@@ -22,7 +22,7 @@ from django.http import HttpResponse, JsonResponse
 
 from Home.forms import CreateJobForm
 from Employer.forms import InitialEmployerForm, EmployerForm
-from .forms import InitialAdminForm, AdminForm, Statistics
+from .forms import InitialAdminForm, AdminForm, Statistics, JobStats, StudentStats
 from Accounts.views import isValidated, get_user_type, number_symbol_exists
 from .models import Admin
 from .forms import EditAdminProfileForm
@@ -485,7 +485,7 @@ def create_job(request):
         args = {'companyForm': companyForm, 'jobForm': jobForm}
         return render(request, "Admin/admin_create_job.html", args)
 
-
+@staff_member_required
 def export_stats_file(request, users, admins, students, current, alumni, employers, jobs_posted, apps, open_jobs,
                       closed_jobs, deleted_jobs, total_users, pending_users, pending_jobs, alumni_apps, rejected_users, rejected_jobs):
     response = HttpResponse(content_type='text/csv')
@@ -516,14 +516,6 @@ def export_stats_file(request, users, admins, students, current, alumni, employe
 def generate_statistics(request):
     user = get_user_type(request)
     if request.method == "POST":
-        #end_date = timezone.now()
-        #time = request.POST.get('period')
-        #if time == "Past 7 Days":
-        #    start_date = end_date - timedelta(6)
-        #elif time == "Past 30 Days":
-        #    start_date = end_date - timedelta(29)
-        #elif time == "Past Year":
-        #    start_date = end_date - timedelta(364)
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
         admins = Admin.objects.filter(
@@ -599,3 +591,142 @@ def generate_statistics(request):
         form = Statistics()
         args = {'form': form, 'user_type': user['user_type'], 'obj': user['obj']}
         return render(request, "Admin/generate_statistics.html", args)
+
+
+@staff_member_required
+def generate_job_statistics(request):
+    user = get_user_type(request)
+    if request.method == "POST":
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        location = request.POST.get("location")
+        industry = request.POST.getlist("industry")
+        job_type = request.POST.get("job_type")
+
+        if location and location != "--Select--":
+            location_jobs = Job.objects.filter(location=location, date_posted__range=[start_date, end_date])
+        else:
+            location_jobs = Job.objects.all()
+
+        if job_type and job_type != "---------":
+            job_type_jobs = Job.objects.filter(job_type_id=job_type, date_posted__range=[start_date, end_date])
+        else:
+            job_type_jobs = Job.objects.all()
+
+        if industry:
+            industry_jobs = Job.objects.filter(industry_id__in=industry, date_posted__range=[start_date, end_date])
+        else:
+            industry_jobs = Job.objects.all()
+
+        filtered_jobs = location_jobs & job_type_jobs & industry_jobs
+        open_jobs = filtered_jobs.filter(status="Open", is_active='Accepted')
+        closed_jobs = filtered_jobs.filter(status="Closed", is_active='Accepted')
+        deleted_jobs = filtered_jobs.filter(status="Deleted", is_active='Accepted')
+        pending_jobs = filtered_jobs.filter(date_posted__range=[start_date, end_date], is_active='Pending')
+        rejected_jobs = filtered_jobs.filter(date_posted__range=[start_date, end_date], is_active='Rejected')
+
+        total_jobs = len(list(set(filtered_jobs)))
+        open_jobs = len(list(set(open_jobs)))
+        closed_jobs = len(list(set(closed_jobs)))
+        deleted_jobs = len(list(set(deleted_jobs)))
+        pending_jobs = len(list(set(pending_jobs)))
+        rejected_jobs = len(list(set(rejected_jobs)))
+        total_accepted_jobs = open_jobs + closed_jobs + deleted_jobs
+
+        args = {'total_jobs': total_jobs, 'total_accepted_jobs': total_accepted_jobs, 'open_jobs': open_jobs,
+                'closed_jobs': closed_jobs, 'deleted_jobs': deleted_jobs, 'pending_jobs': pending_jobs,
+                'rejected_jobs': rejected_jobs, 'user_type': user['user_type'], 'obj': user['obj']}
+
+        return render(request, "Admin/view_job_statistics.html", args)
+
+    else:
+        form = JobStats()
+        args = {'form': form, 'user_type': user['user_type'], 'obj': user['obj']}
+        return render(request, "Admin/generate_statistics.html", args)
+
+@staff_member_required
+def export_job_stats(request, total_jobs, accepted_jobs, open_jobs, closed_jobs, deleted_jobs, pending_jobs, rejected_jobs):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="JobStats"' + date.today().strftime("%B %d %Y") + ".csv"
+    writer = csv.writer(response)
+    writer.writerow(['Type of Statistics', 'Count'])
+    writer.writerow(['Total Jobs', total_jobs])
+    writer.writerow(['Total Accepted Jobs', accepted_jobs])
+    writer.writerow(['Open Jobs', open_jobs])
+    writer.writerow(['Closed Jobs', closed_jobs])
+    writer.writerow(['Deleted Jobs', deleted_jobs])
+    writer.writerow(['Pending Jobs', pending_jobs])
+    writer.writerow(['Rejected Jobs', rejected_jobs])
+    return response
+
+
+@staff_member_required
+def generate_student_statistics(request):
+    user = get_user_type(request)
+    if request.method == "POST":
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        major = request.POST.getlist("major")
+        skill = request.POST.getlist("skill")
+
+        students = Student.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
+        alumni = Alumni.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
+
+        if major:
+            major_students = students.filter(majors__in=major)
+            major_alumni = alumni.filter(majors__in=major)
+        else:
+            major_students = students
+            major_alumni = alumni
+
+        if skill:
+            skill_students = students.filter(skills__in=skill)
+            skill_alumni = alumni.filter(skills__in=skill)
+        else:
+            skill_students = students
+            skill_alumni = alumni
+
+        filtered_students = major_students & skill_students
+        filtered_alumni = major_alumni & skill_alumni
+        accepted_students = filtered_students.filter(is_active='Accepted')
+        accepted_alumni = filtered_alumni.filter(is_active='Accepted')
+        pending_students = filtered_students.filter(is_active='Pending')
+        pending_alumni = filtered_alumni.filter(is_active='Pending')
+        rejected_students = filtered_students.filter(is_active='Rejected')
+        rejected_alumni = filtered_alumni.filter(is_active='Rejected')
+
+        filtered_students = len(list(set(filtered_students)))
+        filtered_alumni = len(list(set(filtered_alumni)))
+        accepted_students = len(list(set(accepted_students)))
+        accepted_alumni = len(list(set(accepted_alumni)))
+        pending_students = len(list(set(pending_students)))
+        pending_alumni = len(list(set(pending_alumni)))
+        rejected_students = len(list(set(rejected_students)))
+        rejected_alumni = len(list(set(rejected_alumni)))
+
+        args = {'students': filtered_students, 'alumni': filtered_alumni, 'pending_students': pending_students,
+                'pending_alumni': pending_alumni, 'rejected_students': rejected_students, 'rejected_alumni': rejected_alumni,
+                'accepted_students': accepted_students, 'accepted_alumni' : accepted_alumni, 'user_type': user['user_type'],
+                'obj': user['obj']}
+        return render(request, "Admin/view_student_statistics.html", args)
+    else:
+        form = StudentStats()
+        args = {'form': form, 'user_type': user['user_type'], 'obj': user['obj']}
+        return render(request, "Admin/generate_statistics.html", args)
+
+@staff_member_required
+def export_student_stats(request, students, accepted_students, pending_students, rejected_students, alumni, accepted_alumni,
+                         pending_alumni, rejected_alumni):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="Student & Alumni Stats"' + date.today().strftime("%B %d %Y") + ".csv"
+    writer = csv.writer(response)
+    writer.writerow(['Type of Statistics', 'Count'])
+    writer.writerow(['Total Student', students])
+    writer.writerow(['Accepted Students', accepted_students])
+    writer.writerow(['Pending Students', pending_students])
+    writer.writerow(['Rejected Students', rejected_students])
+    writer.writerow(['Total Alumni', alumni])
+    writer.writerow(['Accepted Alumni', accepted_alumni])
+    writer.writerow(['Pending Alumni', pending_alumni])
+    writer.writerow(['Rejected Alumni', rejected_alumni])
+    return response

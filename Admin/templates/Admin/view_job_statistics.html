@@ -1,0 +1,66 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    View Job Statistics
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Statistics.css' %}"/>
+{% endblock %}
+
+{% block content %}
+    <div id="statBody" class="col-12 d-flex justify-content-center">
+        <table class="table table-striped table-responsive-sm text-center">
+            <thead class="thead-dark">
+            <tr class="text-left">
+                <th>Type of Statistics</th>
+                <th>Count</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="text-left">
+                <td><b>Total Jobs</b></td>
+                <td class="text-center"><b>{{ total_jobs }}</b></td>
+            </tr>
+
+            <tr class="text-left">
+                <td>Total Accepted Jobs</td>
+                <td class="text-center">{{ total_accepted_jobs }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td>&nbsp;&nbsp;&nbsp;Open Jobs</td>
+                <td class="text-center">{{ open_jobs }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td>&nbsp;&nbsp;&nbsp;Closed Jobs</td>
+                <td class="text-center">{{ closed_jobs }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td>&nbsp;&nbsp;&nbsp;Deleted Jobs</td>
+                <td class="text-center">{{ deleted_jobs }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td>Pending Jobs</td>
+                <td class="text-center">{{ pending_jobs }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td>Rejected Jobs</td>
+                <td class="text-center">{{ rejected_jobs }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <button type="button" class="btn btn-primary">
+            <a class="text-decoration-none text-white" href="{% url 'export_job_stats' total_jobs total_accepted_jobs open_jobs closed_jobs deleted_jobs pending_jobs rejected_jobs %}">Export Data</a>
+        </button>
+    </div>
+    <br><br>
+{% endblock %}

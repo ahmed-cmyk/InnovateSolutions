@@ -170,11 +170,20 @@
                                                     <button class="btn">View Pending jobs</button>
                                                 </a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{% url 'statistics' %}">
-                                                    <button class="btn">Statistics</button>
-                                                </a>
-                                            </li>
+                                            <div class="dropdown" style="margin-top: 0.75%">
+                                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">Statistics</button>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a class="dropdown-item" href="{% url 'statistics' %}">All Statistics</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="{% url 'student_statistics' %}">Students & Alumni Statistics</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="{% url 'job_statistics' %}">Job Statistics</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         {% endif %}
                                         {% if user_type == 'employer' %}
                                             <li class="nav-item">

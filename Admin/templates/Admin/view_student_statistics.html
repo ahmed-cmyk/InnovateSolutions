@@ -1,0 +1,71 @@
+{% extends "theme.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    View Student & Alumni Statistics
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Statistics.css' %}"/>
+{% endblock %}
+
+{% block content %}
+    <div id="statBody" class="col-12 d-flex justify-content-center">
+        <table class="table table-striped table-responsive-sm text-center">
+            <thead class="thead-dark">
+            <tr class="text-left">
+                <th>Type of Statistics</th>
+                <th>Count</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="text-left">
+                <td><b>Total Students</b></td>
+                <td class="text-center"><b>{{ students }}</b></td>
+            </tr>
+
+            <tr class="text-left">
+                <td>&nbsp;&nbsp;&nbsp;Accepted Students</td>
+                <td class="text-center">{{ accepted_students }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td>&nbsp;&nbsp;&nbsp;Pending Students</td>
+                <td class="text-center">{{ pending_students }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td>&nbsp;&nbsp;&nbsp;Rejected Student</td>
+                <td class="text-center">{{ rejected_students }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td><b>Total Alumni</b></td>
+                <td class="text-center"><b>{{ alumni }}</b></td>
+            </tr>
+
+            <tr class="text-left">
+                <td>&nbsp;&nbsp;&nbsp;Accepted Alumni</td>
+                <td class="text-center">{{ accepted_alumni }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td>&nbsp;&nbsp;&nbsp;Pending Alumni</td>
+                <td class="text-center">{{ pending_alumni }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td>&nbsp;&nbsp;&nbsp;Rejected Alumni</td>
+                <td class="text-center">{{ rejected_alumni }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <button type="button" class="btn btn-primary">
+            <a class="text-decoration-none text-white" href="{% url 'export_student_stats' students accepted_students pending_students rejected_students alumni accepted_alumni pending_alumni rejected_alumni %}">Export Data</a>
+        </button>
+    </div>
+    <br><br>
+{% endblock %}
