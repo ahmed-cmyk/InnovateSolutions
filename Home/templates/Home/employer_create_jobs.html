@@ -141,21 +141,15 @@ function toggleDuration(elem) {
             <br><hr><br>
             <div>{{ employerForm.email|as_crispy_field }}</div>
             <div>{{ employerForm.password1|as_crispy_field }}</div>
-            <br><br>
             <div>{{ employerForm.password2|as_crispy_field }}</div>
             <br><hr><br>
             <div>{{ companyForm.company_name|as_crispy_field }}</div>
             <div>{{ companyForm.company_description|as_crispy_field }}</div>
             <div>{{ companyForm.company_website|as_crispy_field }}</div>
-            <br><br>
             <div>{{ companyForm.contact_name|as_crispy_field }}</div>
             <div>{{ companyForm.phone_number|as_crispy_field }}</div>
-            <br><br>
             <div>{{ companyForm.logo|as_crispy_field }}</div>
             <div>{{ companyForm.trade_license|as_crispy_field }}</div>
-{#            {% for companyField in companyForm %}#}
-{#                <div>{{ companyField|as_crispy_field }}</div>#}
-{#            {% endfor %}#}
         {% endif %}
         <div class="text-center">
             <button class="btn btn-primary" type="submit">
