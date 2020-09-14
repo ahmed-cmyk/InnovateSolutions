@@ -77,6 +77,7 @@ def login(request):
                         return redirect('pending_approval')
                 except:
                     auth.logout(request)
+                    messages.info(request, 'Unexpected error please try again.')
                     return redirect('index')
     else:
         return render(request, 'login.html', get_user_type(request))
