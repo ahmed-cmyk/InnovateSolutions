@@ -68,7 +68,6 @@ def login(request):
             else:
                 auth.login(request, user)
                 auth_user = get_user_type(request)
-                print(auth_user['obj'].is_active)
                 if auth_user['obj'].is_active == 'Accepted':
                     return redirect('/', get_user_type(request))
                 elif auth_user['obj'].is_active == 'Rejected':
