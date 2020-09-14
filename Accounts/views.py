@@ -77,6 +77,7 @@ def login(request):
                         return redirect('pending_approval')
                 except:
                     auth.logout(request)
+                    return redirect('index')
     else:
         return render(request, 'login.html', get_user_type(request))
 
