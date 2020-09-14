@@ -695,6 +695,10 @@ def generate_student_statistics(request):
         rejected_students = filtered_students.filter(is_active='Rejected')
         rejected_alumni = filtered_alumni.filter(is_active='Rejected')
 
+        print("HERE")
+        print(students)
+        print(alumni)
+
         filtered_students = len(list(set(filtered_students)))
         filtered_alumni = len(list(set(filtered_alumni)))
         accepted_students = len(list(set(accepted_students)))

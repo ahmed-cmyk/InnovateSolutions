@@ -21,7 +21,13 @@
 <body onload="date_validate()">
     <div id="statBody" class="col-12">
         <form method="POST">{% csrf_token %}
-            <h2 class="text-center">Generate Statistics</h2>
+            {% if form.industry and form.job_type and form.location %}
+                <h2 class="text-center">Generate Job Statistics</h2>
+            {% elif form.skill and form.major %}
+                <h2 class="text-center">Generate Student & Alumni Statistics</h2>
+            {% else %}
+                <h2 class="text-center">Generate Statistics</h2>
+            {% endif %}
             <hr>
             <br>
             <div style="margin-left: 20%; margin-right: 20%">
