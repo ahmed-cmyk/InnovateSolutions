@@ -6,82 +6,10 @@
 {% endblock %}
 
 {% block title %}
-    Job Listing Details - Murdoch Dubai Job Portal
+    Job Listing Details - Murdoch Dubai Career Portal
 {% endblock %}
 
 {% block content %}
-{#    <br><br>#}
-{#    <div id="job-detail-box">#}
-{#        <div class="text-right text-xs-center">#}
-{#            {% if user_type != "student" and user_type != "alumni" %}#}
-{#                {% if job.status != 'Closed' %}#}
-{#                    <a href="{% url 'close_job' job.id %}">#}
-{#                        <button class="btn" type="button">Close Job</button>#}
-{#                    </a>#}
-{#                    <a href="{% url 'delete_job' job.id %}">#}
-{#                        <button class="btn" type="button">Delete Job</button>#}
-{#                    </a>#}
-{#                    <a href="{% url 'edit_job' job.id %}">#}
-{#                        <button class="btn" type="button">Edit Job</button>#}
-{#                    </a>#}
-{#                {% else %}#}
-{#                    <a href="{% url 'reopen_job' job.id %}">#}
-{#                        <button class="btn" type="button">Re-Open Job</button>#}
-{#                    </a>#}
-{#                {% endif %}#}
-{#            {% endif %}#}
-{#        </div>#}
-{#        <form method="POST">{% csrf_token %}#}
-{#            <div class="card border-dark mb-3">#}
-{#                <h2 class="card-header">{{ job.job_title }}</h2>#}
-{#                <div class="card-body">#}
-{#                    <p class="card-text">#}
-{#                        <i class="fa fa-calendar" aria-hidden="true"></i> {{ job.date_posted }}#}
-{#                        <i class="fa fa-map-marker pl-2" aria-hidden="true"></i> {{ job.location }}#}
-{#                        {% for company in companies %}#}
-{#                            {% if job.posted_by == company.user %}#}
-{#                                <i class="fa fa-briefcase pl-2" aria-hidden="true"></i> {{ company.company_name }}#}
-{#                            {% endif %}#}
-{#                        {% endfor %}#}
-{#                        <i class="fa fa-clock-o pl-2" aria-hidden="true"></i> {{ job.duration }} {{ job.duration_type }}#}
-{#                    </p>#}
-{#                    <hr>#}
-{#                    {% for company in companies %}#}
-{#                        {% if job.posted_by == company.user %}#}
-{#                            <p><b>Company Description:</b><br>&emsp;{{ company.company_description }}</p>#}
-{#                            <hr>#}
-{#                        {% endif %}#}
-{#                    {% endfor %}#}
-{#                    <p class="card-text"><b>About the Job:</b><br>{{ job.description }}</p>#}
-{#                    <p class="card-text"><b>Min Salary:</b> {{ job.salary_min }} | <b>Max Salary:</b> {{ job.salary_max }}</p>#}
-{#                    <b>Skills required:</b>#}
-{#                    <span class="list-group">#}
-{#                        {% for skill in job.skills.all %}#}
-{#                            <li class="list-group-item">{{ skill }}</li>#}
-{#                        {% endfor %}#}
-{#                    </span>#}
-{#                </div>#}
-{#            </div><!-- End of card -->#}
-{#            <div class="col-md-12 text-center">#}
-{#                {% if user_type == 'student' or user_type == "alumni" %}#}
-{#                    {% if applied == False  %}#}
-{#                        <small>By clicking apply you consent to share your profile with this company</small>#}
-{#                        <br>#}
-{#                        <button class = "btn" type="submit" name="apply" value="Apply&Save">&nbsp;Apply To Job</button>#}
-{#                    {% else %}#}
-{#                        <small>Your application has been submitted.</small>#}
-{#                    {% endif %}#}
-{#                {% else %}#}
-{#                    {% if job.status == 'Open' %}#}
-{#                            <button class="btn" type="submit" name="viewcandidates" value="ViewCandidates&Save">View Applicants</button>#}
-{#                            <a href="{% url 'job_to_student_skills' job.id %}"><button class="btn" type="button">View Student Candidates</button></a>#}
-{#                            <a href="{% url 'job_to_alumni_skills' job.id %}"><button class="btn" type="button">View Alumni Candidates</button></a>#}
-{#                    {% endif %}#}
-{#                {% endif %}#}
-{#            </div>#}
-{#        </form>#}
-{#    </div><!-- End of job-detail-box -->#}
-{#    <br><br>#}
     <div id="job-detail-body">
         <form method="POST">{% csrf_token %}
             <div class="col-12">

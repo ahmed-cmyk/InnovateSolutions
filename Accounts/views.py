@@ -68,12 +68,17 @@ def login(request):
             else:
                 auth.login(request, user)
                 auth_user = get_user_type(request)
-                if auth_user['obj'].is_active == 'Accepted':
-                    return redirect('/', get_user_type(request))
-                elif auth_user['obj'].is_active == 'Rejected':
-                    return redirect('account_rejected')
-                else:
-                    return redirect('pending_approval')
+                try:
+                    if auth_user['obj'].is_active == 'Accepted':
+                        return redirect('/', get_user_type(request))
+                    elif auth_user['obj'].is_active == 'Rejected':
+                        return redirect('account_rejected')
+                    else:
+                        return redirect('pending_approval')
+                except:
+                    auth.logout(request)
+                    messages.info(request, 'Unexpected error please try again.')
+                    return redirect('index')
     else:
         return render(request, 'login.html', get_user_type(request))
 

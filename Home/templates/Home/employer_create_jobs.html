@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block title %}
-    Create Job Listing - Murdoch Dubai Job Portal
+    Create Job Listing - Murdoch Dubai Career Portal
 {% endblock %}
 
 {% block image %}
@@ -141,25 +141,15 @@ function toggleDuration(elem) {
             <br><hr><br>
             <div>{{ employerForm.email|as_crispy_field }}</div>
             <div>{{ employerForm.password1|as_crispy_field }}</div>
-            <small>The password must contain alphanumeric characters</small>
-            <br><br>
             <div>{{ employerForm.password2|as_crispy_field }}</div>
-            <small>Both passwords should match</small>
             <br><hr><br>
             <div>{{ companyForm.company_name|as_crispy_field }}</div>
             <div>{{ companyForm.company_description|as_crispy_field }}</div>
             <div>{{ companyForm.company_website|as_crispy_field }}</div>
-            <small>Website should contain http or https</small>
-            <br><br>
             <div>{{ companyForm.contact_name|as_crispy_field }}</div>
             <div>{{ companyForm.phone_number|as_crispy_field }}</div>
-            <small>Phone number should have country code appended before it</small>
-            <br><br>
             <div>{{ companyForm.logo|as_crispy_field }}</div>
             <div>{{ companyForm.trade_license|as_crispy_field }}</div>
-{#            {% for companyField in companyForm %}#}
-{#                <div>{{ companyField|as_crispy_field }}</div>#}
-{#            {% endfor %}#}
         {% endif %}
         <div class="text-center">
             <button class="btn btn-primary" type="submit">
