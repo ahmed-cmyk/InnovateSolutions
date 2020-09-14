@@ -56,7 +56,7 @@
     background-color: #000000;
 }
 
-#noApplications {
+.noApplications {
     margin: 10% 0;
 }
 
@@ -117,7 +117,16 @@ table {
 
 /******** Tablet Devices ********/
 @media (min-width: 768px) and (max-width: 991px) {
-
+    #job-cards {
+        width: 60vw;
+    }
+    .employer-view {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .centered {
+        font-size: 3rem;
+    }
 }
 
 /******** Desktop Devices ********/
