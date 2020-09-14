@@ -4,14 +4,8 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/Base.css' %}"/>
 
 {% block title %}
-    Job Portal - Murdoch Dubai Job Portal
+    Job Portal - Murdoch Dubai Career Portal
 {% endblock %}
-
-{% comment %}
-{% block user_greeting %}
-    <span class="text-white text-capitalize d-none d-sm-inline">Welcome, {{ user_type }}</span>
-{% endblock %}
-{% endcomment %}
 
 {% csrf_token %}
     {% block image %}
