@@ -1,6 +1,7 @@
 import mimetypes
 import os
 import time
+import datetime
 
 from django.core.files.storage import get_storage_class
 from django.shortcuts import render, redirect
@@ -518,6 +519,7 @@ def generate_statistics(request):
     if request.method == "POST":
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
+        end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d') + timedelta(hours=23, minutes=59, seconds=59)
         admins = Admin.objects.filter(
             user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
         admin_users = User.objects.filter(id__in=Admin.objects.all())
@@ -574,7 +576,6 @@ def generate_statistics(request):
         rejected_alumni = len(list(set(rejected_alumni)))
         rejected_jobs = len(list(set(rejected_jobs)))
 
-
         pending_users = pending_employers + pending_students + pending_alumni
         rejected_users = rejected_employers + rejected_students + rejected_alumni
         users = admins + current + alumni + employers
@@ -599,6 +600,7 @@ def generate_job_statistics(request):
     if request.method == "POST":
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
+        end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d') + timedelta(hours=23, minutes=59, seconds=59)
         location = request.POST.get("location")
         industry = request.POST.getlist("industry")
         job_type = request.POST.get("job_type")
@@ -666,11 +668,13 @@ def generate_student_statistics(request):
     if request.method == "POST":
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
+        end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d') + timedelta(hours=23, minutes=59, seconds=59)
         major = request.POST.getlist("major")
         skill = request.POST.getlist("skill")
 
-        students = Student.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
-        alumni = Alumni.objects.filter(user_id__in=User.objects.filter(date_joined__range=[start_date, end_date]))
+        users = User.objects.filter(date_joined__range=[start_date, end_date])
+        students = Student.objects.filter(user_id__in=users)
+        alumni = Alumni.objects.filter(user_id__in=users)
 
         if major:
             major_students = students.filter(majors__in=major)
@@ -694,10 +698,6 @@ def generate_student_statistics(request):
         pending_alumni = filtered_alumni.filter(is_active='Pending')
         rejected_students = filtered_students.filter(is_active='Rejected')
         rejected_alumni = filtered_alumni.filter(is_active='Rejected')
-
-        print("HERE")
-        print(students)
-        print(alumni)
 
         filtered_students = len(list(set(filtered_students)))
         filtered_alumni = len(list(set(filtered_alumni)))
