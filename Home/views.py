@@ -189,7 +189,7 @@ def create_job(request):
 
                         first_name = companyForm.cleaned_data.get('company_name')
                         context = {'first_name': first_name}
-                        admin_context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
+                        admin_context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
 
                         subject = 'Your job posting request has been received'
                         htmlText = render_to_string('Employer/job_post_request.html', context)
@@ -232,7 +232,7 @@ def create_job(request):
 
                     first_name = employer.company_name
                     context = {'first_name': first_name}
-                    admin_context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
+                    admin_context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
 
                     subject = 'Your job posting request has been received'
                     htmlText = render_to_string('Employer/job_post_request.html', context)
@@ -589,7 +589,7 @@ def job_to_student_skills(request, id):
     try:
         employer = Employer.objects.get(user_id=request.user.id)
         first_name = employer.company_name
-        context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
+        context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
 
         subject = 'We found a match!'
         htmlText = render_to_string('Home/found_matching_students.html', context)
@@ -612,7 +612,7 @@ def job_to_alumni_skills(request, id):
     try:
         employer = Employer.objects.get(user_id=request.user.id)
         first_name = employer.company_name
-        context = {'first_name': first_name, 'protocol': 'http', 'domain': '127.0.0.1:8000'}
+        context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
 
         subject = 'We found a match!'
         htmlText = render_to_string('Home/found_matching_students.html', context)
