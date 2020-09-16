@@ -101,9 +101,8 @@ main {
     margin: auto;
 }
 
-#quoteBody {
-    width: 80%;
-    margin: auto;
+#search_item, .searchButton {
+    height: 6vh;
 }
 
 #jobDetBody {
@@ -111,6 +110,10 @@ main {
     margin: auto;
     text-align: center;
 }
+
+/*#jobDetBody .fa-briefcase, .fa-graduation-cap {*/
+/*    color: #cc0000;*/
+/*}*/
 
 #body-image {
     position: relative;

@@ -75,6 +75,7 @@
                                 {% for applicant in applicants_students %}
                                     <tr id="{{ applicant.user_id }}">
                                         <td class="username text-left">{{ applicant.user.first_name }} {{ applicant.user.last_name }}</td>
+                                        <td>Student</td>
                                         <td><a href="{% url 'view_account_details' applicant.user_id %}">View Account Details</a></td>
                                         <td>
                                             <button class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.user_id }}">Accept</button>
@@ -87,6 +88,7 @@
                                 {% for applicant in applicants_alumni %}
                                     <tr id="{{ applicant.user_id }}">
                                         <td class="username text-left">{{ applicant.user.first_name }} {{ applicant.user.last_name }}</td>
+                                        <td>Alumni</td>
                                         <td><a href="{% url 'view_account_details' applicant.user_id %}">View Account Details</a></td>
                                         <td>
                                             <button class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.user_id }}">Accept</button>
@@ -99,6 +101,7 @@
                                 {% for applicant in applicants_employers %}
                                     <tr id="{{ applicant.user_id }}">
                                         <td class="username text-left">{{ applicant.company_name }}</td>
+                                        <td>Employer</td>
                                         <td><a href="{% url 'view_account_details' applicant.user_id %}">View Account Details</a></td>
                                         <td>
                                             <button class="accept_button btn btn-success" type="button" name="accept" value="{{ applicant.user_id }}">Accept</button>
