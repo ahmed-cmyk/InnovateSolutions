@@ -111,9 +111,9 @@ main {
     text-align: center;
 }
 
-/*#jobDetBody .fa-briefcase, .fa-graduation-cap {*/
-/*    color: #cc0000;*/
-/*}*/
+#jobDetBody .fa-briefcase, .fa-graduation-cap {
+    color: #cc0000;
+}
 
 #body-image {
     position: relative;
