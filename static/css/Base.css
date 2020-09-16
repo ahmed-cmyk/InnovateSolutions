@@ -111,7 +111,7 @@ main {
     text-align: center;
 }
 
-#jobDetBody .fa-briefcase, .fa-graduation-cap {
+#jobDetBody .fa-briefcase, #jobDetBody .fa-graduation-cap {
     color: #cc0000;
 }
 
