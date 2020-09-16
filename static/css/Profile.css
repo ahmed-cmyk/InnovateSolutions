@@ -1,3 +1,12 @@
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+#profileBody, #edit-profile {
+    font-size: 0.8rem;
+}
+
 #profile-buttons button {
     margin: 2% auto;
 }
@@ -15,4 +24,12 @@
     border-radius: 5px 5px 5px 5px;
     outline: none;
     font-size: 15px;
+}
+
+/******** Mobile Devices ********/
+@media (max-width: 767px) {
+    /*.icon img {*/
+    /*    height: 150em;*/
+    /*    width: 150em;*/
+    /*}*/
 }

@@ -14,28 +14,28 @@
     {% csrf_token %}
     <div id="profileBody">
         <div class="row py-2">
-            <div class="icon col-md-6 col-xs-12 text-md-right">
+            <div class="icon col-md-6 col-xs-12 text-md-right text-center">
                 {% if alumni.dp %}
-                    <img src="{{ alumni.dp.url }}" height="300.0em" width="300.0em"><br>
+                    <img src="{{ alumni.dp.url }}" height="300.0rem" width="300.0rem"><br>
                 {% else %}
-                    <img src="{% static 'DefaultDP.jpg' %}" height="300.0em" width="300.0em"><br>
+                    <img src="{% static 'DefaultDP.jpg' %}" height="300.0rem" width="300.0rem"><br>
                 {% endif %}
             </div>
-            <div class="student-profile col-md-6 col-xs-12">
+            <div class="student-profile col-md-6 col-xs-12 text-left py-2">
                 <h3>{{ alumni.user.first_name }} {{ alumni.user.last_name }} - Alumni </h3>
                 <p><b>Email:</b> {{ alumni.user }}</p>
                 <p><b>Gender:</b> {{ alumni.gender }}</p>
-                <p><b>Date of Birth:</b> {{ alumni.date_of_birth }}</p>
+                <p><b>Date of Birth:</b> {{ alumni.date_of_birth|date:"d M Y" }}</p>
                 {% if obj.student_id %}
                     {{ obj.student_id.label }}
                     {{ obj.student_id }}
                 {% endif %}
-                <b>Skills:</b>
+                <b>Skills</b>
                 {% for skill in alumni.skills.all %}
                     <li>{{ skill }}</li>
                 {% endfor %}
                 <br>
-                <b>Majors: </b>
+                <b>Majors</b>
                 {% for major in alumni.majors.all %}
                     <li>{{ major }}</li>
                 {% endfor %}

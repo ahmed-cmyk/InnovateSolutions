@@ -14,25 +14,24 @@
     {% csrf_token %}
     <div id="profileBody">
         <div class="row py-2">
-            <div class="icon col-md-6 col-xs-12 text-md-right">
+            <div class="icon col-md-6 col-xs-12 text-md-right text-center">
                 {% if student.dp %}
-                    <img src="{{ student.dp.url }}" height="300.0em" width="300.0em"><br>
+                    <img src="{{ student.dp.url }}" height="300.0rem" width="300.0rem"><br>
                 {% else %}
-                    <img src="{% static 'DefaultDP.jpg' %}" height="300.0em" width="300.0em"><br>
+                    <img src="{% static 'DefaultDP.jpg' %}" height="300.0rem" width="300.0rem"><br>
                 {% endif %}
             </div>
-            <div class="student-profile col-md-6 col-xs-12">
+            <div class="student-profile col-md-6 col-xs-12 text-left py-2">
                 <h3>{{ student.user.first_name }} {{ student.user.last_name }} - Student </h3>
                 <p><b>Email:</b> {{ student.user }}</p>
                 <p><b>Gender:</b> {{ student.gender }}</p>
-                <p><b>Date of Birth:</b> {{ student.date_of_birth }}</p>
-
-                <b>Skills:</b>
+                <p><b>Date of Birth:</b> {{ student.date_of_birth|date:"d M Y" }}</p>
+                <p><b>Skills</b></p>
                 {% for skill in student.skills.all %}
                     <li>{{ skill }}</li>
                 {% endfor %}
                 <br>
-                <b>Majors: </b>
+                <p><b>Majors</b></p>
                 {% for major in student.majors.all %}
                     <li>{{ major }}</li>
                 {% endfor %}

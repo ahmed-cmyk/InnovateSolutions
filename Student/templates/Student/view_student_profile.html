@@ -14,18 +14,18 @@
     <div id="profileBody">
         <h2 class="text-center">My Profile</h2><br>
         <div class="row">
-            <div class="icon col-md-4 text-center">
+            <div class="icon col-md-6 col-xs-12 text-center">
                 {% if obj.dp %}
-                    <img src="{{ obj.dp.url }}" height="300.0em" width="300.0em">
+                    <img src="{{ obj.dp.url }}" height="300.0rem" width="300.0rem">
                 {% else %}
-                    <img src="{% static 'DefaultDP.jpg' %}" height="300.0em" width="300.0em">
+                    <img src="{% static 'DefaultDP.jpg' %}" height="300.0rem" width="300.0rem">
                 {% endif %}
             </div><!-- End of icon -->
-            <div class="student-profile col-md-8 text-left">
+            <div class="student-profile col-md-6 col-xs-12 text-left py-2">
                 <p><strong>Student ID:</strong> {{ obj.student_id }}</p>
                 <p><strong>Name:</strong> {{ user.first_name}} {{ user.last_name }}</p>
                 <p><strong>Email Address:</strong> {{ user.email }}</p>
-                <p><strong>Date of Birth:</strong> {{ obj.date_of_birth }}</p>
+                <p><strong>Date of Birth:</strong> {{ obj.date_of_birth|date:"d M Y" }}</p>
                 <p><strong>Gender:</strong> {{ obj.gender }}</p>
                 <p><strong>Skills: </strong></p>
                 {% for skill in obj.skills.all %}

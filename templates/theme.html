@@ -169,20 +169,22 @@
                                                     <button class="btn">View Pending jobs</button>
                                                 </a>
                                             </li>
-                                            <div class="nav-link dropdown">
-                                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">Statistics</button>
-                                                <ul class="dropdown-menu">
-                                                    <li>
-                                                        <a class="dropdown-item" href="{% url 'statistics' %}">All Statistics</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="{% url 'student_statistics' %}">Students & Alumni Statistics</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="{% url 'job_statistics' %}">Job Statistics</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            <li class="nav-item">
+                                                <div class="nav-link dropdown">
+                                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">Statistics</button>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item" href="{% url 'statistics' %}">All Statistics</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="{% url 'student_statistics' %}">Students & Alumni Statistics</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="{% url 'job_statistics' %}">Job Statistics</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
                                         {% endif %}
                                         {% if user_type == 'employer' %}
                                             <li class="nav-item">

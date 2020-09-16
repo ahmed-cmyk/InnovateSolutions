@@ -13,28 +13,28 @@
 {% block content %}
     <div id="profileBody">
         <h2 class="text-center">My Profile</h2>
-        <div class="row">
-            <div class="icon col-md-4 text-center">
+        <div class="row py-2">
+            <div class="icon col-md-6 text-md-right text-center">
                 {% if obj.dp %}
-                    <img src="{{ obj.dp.url }}" height="300.0em" width="300.0em">
+                    <img src="{{ obj.dp.url }}" height="300.0em" width="300.0rem">
                 {% else %}
-                    <img src="{% static 'DefaultDP.jpg' %}" height="300.0em" width="300.0em">
+                    <img src="{% static 'DefaultDP.jpg' %}" height="300.0rem" width="300.0rem">
                 {% endif %}
             </div><!-- End of icon -->
-            <div class="student-profile col-md-8 text-left">
+            <div class="student-profile col-md-6 text-left py-2">
                 <p><strong>Name:</strong> {{ user.first_name}} {{ user.last_name }}</p>
                 <p><strong>Email Address:</strong> {{ user.email }}</p>
-                <p><strong>Date of Birth:</strong> {{ obj.date_of_birth }}</p>
+                <p><strong>Date of Birth:</strong> {{ obj.date_of_birth|date:"d M Y" }}</p>
                 <p><strong>Gender:</strong> {{ obj.gender }}</p>
                 {% if obj.student_id %}
                     <p><strong>Student ID:</strong> {{ obj.student_id }}</p>
                 {% endif %}
-                <p><strong>Skills: </strong></p>
+                <p><strong>Skills</strong></p>
                 {% for skill in obj.skills.all %}
                     <li>{{ skill }}</li>
                 {% endfor %}
                 <br>
-                <p><strong>Majors: </strong></p>
+                <p><strong>Majors</strong></p>
                 {% for major in obj.majors.all %}
                     <li>{{ major }}</li>
                 {% endfor %}
