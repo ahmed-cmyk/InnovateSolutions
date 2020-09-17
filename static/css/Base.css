@@ -111,6 +111,10 @@ main {
     text-align: center;
 }
 
+.jobDetCard li {
+    list-style: circle inside;
+}
+
 #jobDetBody .fa-briefcase, #jobDetBody .fa-graduation-cap {
     color: #cc0000;
 }
