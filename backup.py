@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+import time
 from optparse import OptionParser
 from datetime import datetime
 
@@ -29,8 +30,7 @@ def main():
     now = datetime.now()
 
     day_of_year = str(now.timetuple().tm_yday).zfill(3)
-    filename = '%s.d%s' % (FILENAME_PREFIX, day_of_year)
-    filename = filename + ".sql"
+    filename = time.strftime("%Y%m%d_%H%M%S") + '_backup.sql'
     # (options, args) = parser.parse_args()
     # if options.backup_type == 'hourly':
     #     hour = str(now.hour).zfill(2)

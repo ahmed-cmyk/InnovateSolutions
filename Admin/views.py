@@ -48,7 +48,7 @@ def backup_database(request):
 
         print('Backing up %s database to %s' % (DB_NAME, destination))
         dump = subprocess.Popen(
-            ['pg_dump', '-U', DB_USER, '-d', DB_NAME, '-f', destination],
+            ['pg_dump', '-U', DB_USER, '-h', 'localhost', '-d', DB_NAME, '-f', destination],
             stdout=subprocess.PIPE, universal_newlines=True
         )
         return redirect('backup_view')
