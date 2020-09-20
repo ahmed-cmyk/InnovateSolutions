@@ -28,7 +28,9 @@ def main():
 
     now = datetime.now()
 
-    filename = "_backup"
+    day_of_year = str(now.timetuple().tm_yday).zfill(3)
+    filename = '%s.d%s' % (FILENAME_PREFIX, day_of_year)
+    filename = filename + ".sql"
     # (options, args) = parser.parse_args()
     # if options.backup_type == 'hourly':
     #     hour = str(now.hour).zfill(2)
@@ -51,8 +53,8 @@ def main():
     for line in output.splitlines():
         print(line)
 
-    print('Uploading %s to Amazon S3...' % filename)
-    upload_to_s3(destination, filename)
+    # print('Uploading %s to Amazon S3...' % filename)
+    # upload_to_s3(destination, filename)
 
 
 def upload_to_s3(source_path, destination_filename):
