@@ -111,6 +111,14 @@ main {
     text-align: center;
 }
 
+.jobDetCard {
+    display: table-cell;
+}
+
+.jobDetCard h5 {
+    font-size: 1.2rem;
+}
+
 .jobDetCard li {
     list-style: circle inside;
 }
@@ -268,6 +276,13 @@ footer #social-section {
     footer #social-section img {
         width: 20vw;
         height: auto;
+    }
+}
+
+/******* Custom Media Settings *******/
+@media(min-width: 1300px) {
+    .special-break {
+        display: none;
     }
 }
 
