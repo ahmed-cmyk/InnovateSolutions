@@ -46,7 +46,7 @@ def main():
 
     print('Backing up %s database to %s' % (DB_NAME, destination))
     ps = subprocess.Popen(
-        ['pg_dump', '-U', DB_USER, '-d', DB_NAME, '-f', destination],
+        ['pg_dump', '-U', DB_USER, '-h', 'localhost', '-d', DB_NAME, '-f', destination],
         stdout=subprocess.PIPE
     )
     output = ps.communicate()[0]
