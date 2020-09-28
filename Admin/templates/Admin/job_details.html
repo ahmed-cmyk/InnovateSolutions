@@ -36,16 +36,17 @@
                                         <p class="text-secondary">
                                             <i class="fa fa-calendar" aria-hidden="true"></i> {{ job.date_posted }}
                                         </p>
-                                        <p class="card-text"><b class="text-secondary">Job Description: </b>{{ job.description }}</p>
+                                        <p class="card-text"><b class="text-secondary">Job Description</b></p>
+                                        <p class="card-text">{{ job.description }}</p>
                                         <b class="card-text text-secondary">Required Skills: </b>
                                         {% for skill in job.skills.all %}
                                             <li class="pl-1">{{ skill }}</li>
                                         {% endfor %}
                                     </div>
                                     {% if company.logo %}
-                                        <img class="col-2 d-none d-sm-block" src="{{ company.logo.url }}" height="auto" width="auto">
+                                        <img class="col-2 d-none d-sm-block" src="{{ company.logo.url }}" height="auto" width="250px">
                                     {% else %}
-                                        <img class="col-2 d-none d-sm-block" src="{% static 'DefaultDP.jpg' %}" height="auto" width="auto">
+                                        <img class="col-2 d-none d-sm-block" src="{% static 'DefaultDP.jpg' %}" height="auto" width="250px">
                                     {% endif %}
                                 </div>
                             {% endif %}

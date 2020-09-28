@@ -7,13 +7,21 @@
 {#  </div>#}
 {#</form>#}
 {#<br/><hr/>#}
+<script>
+    $(function () {
+        $('#backup-button').submit(function (e) {
+            e.preventDefault();
+            alert('Submitted');
+        });
+    });
+</script>
 
 <h2>Backup Database</h2>
 <form method="post" action="{% url 'backup_database' %}">
     {% csrf_token %}
     {{ media_backup_form.as_p }}
     <div class="submit-row">
-        <input type="submit" class="button" name="backup_database" value="Create database backup">
+        <input type="submit" id="backup-button" class="button" name="backup_database" value="Create database backup">
     </div>
 </form>
 
