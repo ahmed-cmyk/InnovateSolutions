@@ -17,6 +17,7 @@ urlpatterns = [
     path('alumni_details/<int:id>', views.alumni_details, name='alumni_details'),
     path('job_to_student_skills/<int:id>', views.job_to_student_skills, name='job_to_student_skills'),
     path('job_to_alumni_skills/<int:id>', views.job_to_alumni_skills, name='job_to_alumni_skills'),
+    path('get_job_description_file/<int:id>', views.get_job_description_file, name='get_job_description_file'),
     path('get_student_cv_file/<int:id>', views.get_student_cv_file, name='get_student_cv_file'),
     path('get_alumni_cv_file/<int:id>', views.get_alumni_cv_file, name='get_alumni_cv_file'),
     path('terms', views.terms, name='terms'),

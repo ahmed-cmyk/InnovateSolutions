@@ -367,7 +367,7 @@ def edit_job(request, id):
         if user['user_type'] == 'admin':
             admin = Admin.objects.get(user_id=request.user.id)
             if request.method == 'POST':
-                jobForm = EditJobForm(request.POST, instance=job)
+                jobForm = EditJobForm(request.POST, request.FILES, instance=job)
                 companyForm = EditEmployerForm(request.POST, request.FILES, instance=job_poster)
 
                 if jobForm.is_valid() and companyForm.is_valid():
@@ -630,6 +630,17 @@ def get_student_cv_file(request, id):
     file_name = os.path.basename(cv.file.name)
 
     wrapper = FileWrapper(File(cv, 'rb'))
+    response = HttpResponse(wrapper, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=' + file_name
+    return response
+
+@login_required
+def get_job_description_file(request, id):
+    job = Job.objects.get(id=id)
+    job_description = job.description_upload
+    file_name = os.path.basename(job_description.file.name)
+
+    wrapper = FileWrapper(File(job_description, 'rb'))
     response = HttpResponse(wrapper, content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename=' + file_name
     return response

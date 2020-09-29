@@ -9,6 +9,7 @@ import os
 
 from Home.models import Skill, Job, Major
 
+
 class OverwriteStorage(FileSystemStorage):
     def get_available_name(self, name, max_length=None):
         dir_name, file_name = os.path.split(name)
@@ -30,6 +31,7 @@ class OverwriteStorage(FileSystemStorage):
                     )
                 name = os.path.join(dir_name, "%s_%s%s" % (file_root, date, file_ext))
         return name
+
 
 class Alumni(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='alumni_user')
@@ -62,4 +64,3 @@ class AlumniJobApplication(models.Model):
     job_id = models.ForeignKey(Job, null=True, on_delete=models.CASCADE, related_name='alumni_job')
     applied = models.ForeignKey(Alumni, on_delete=models.CASCADE, related_name='alumni_apply')
     date_applied = models.DateTimeField(null=True, auto_now_add=True)
-

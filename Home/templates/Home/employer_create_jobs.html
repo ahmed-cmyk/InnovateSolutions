@@ -107,6 +107,7 @@ function toggleDuration(elem) {
         {% if user_type == 'employer' %}
             <div>{{ form.job_title|as_crispy_field }}</div>
             <div>{{ form.description|as_crispy_field }}</div>
+            <div>{{ jobForm.description_upload|as_crispy_field }}</div>
             <div>{{ form.location|as_crispy_field }}</div>
             <div class="form-row">
                 <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ form.job_type_id|as_crispy_field }}</div>
@@ -130,6 +131,7 @@ function toggleDuration(elem) {
         {% elif user_type == 'admin' %}
             <div>{{ jobForm.job_title|as_crispy_field }}</div>
             <div>{{ jobForm.description|as_crispy_field }}</div>
+            <div>{{ jobForm.description_upload|as_crispy_field }}</div>
             <div>{{ jobForm.location|as_crispy_field }}</div>
             <div class="form-row">
                 <div class="form-group col-6">{{ jobForm.job_type_id|as_crispy_field }}</div>

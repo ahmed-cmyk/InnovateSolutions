@@ -1,3 +1,7 @@
+import os
+
+from django.core.exceptions import SuspiciousFileOperation
+from django.core.files.storage import FileSystemStorage
 from django.core.mail import EmailMessage
 from django.db import models
 from datetime import datetime
@@ -11,6 +15,28 @@ from Admin.models import Admin
 from DjangoUnlimited.settings import EMAIL_HOST_USER
 from Employer.models import Employer
 
+
+class OverwriteStorage(FileSystemStorage):
+    def get_available_name(self, name, max_length=None):
+        dir_name, file_name = os.path.split(name)
+        file_root, file_ext = os.path.splitext(file_name)
+
+        while self.exists(name) or (max_length and len(name) > max_length):
+            date = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
+            name = os.path.join(dir_name, "%s_%s%s" % (file_root, date, file_ext))
+            if max_length is None:
+                continue
+            truncation = len(name) - max_length
+            if truncation > 0:
+                file_root = file_root[:-truncation]
+                if not file_root:
+                    raise SuspiciousFileOperation(
+                        'Storage can not find an available filename for "%s". '
+                        'Please make sure that the corresponding file field '
+                        'allows sufficient "max_length".' % name
+                    )
+                name = os.path.join(dir_name, "%s_%s%s" % (file_root, date, file_ext))
+        return name
 
 class Industry(models.Model):
     industry_name = models.CharField(max_length=50, unique=True)
@@ -90,6 +116,7 @@ class Job(models.Model):
     posted_by = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='job_author', blank=True)
     job_title = models.CharField(max_length=100)
     description = models.TextField()
+    description_upload = models.FileField(upload_to='documents', storage=OverwriteStorage(), null=True, blank=True)
     status = models.CharField(max_length=15, choices=JOB_STATUS, default='Open')
     date_closed = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=100, choices=LOCATION_CHOICES)

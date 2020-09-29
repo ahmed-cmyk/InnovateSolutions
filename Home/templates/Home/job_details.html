@@ -76,6 +76,10 @@
                                         </p>
                                         <p class="card-text"><b class="text-secondary">Job Description</b></p>
                                         <p id="job-description" class="card-text">{{ job.description|safe }}</p>
+                                        {% if job.description_upload %}
+                                            <a href="{% url 'get_job_description_file' job.id %}">Download Extra Job Details</a>
+                                            <br /><br />
+                                        {% endif %}
                                         <b class="card-text text-secondary">Required Skills: </b>
                                         {% for skill in job.skills.all %}
                                             <li class="pl-1">{{ skill }}</li>
