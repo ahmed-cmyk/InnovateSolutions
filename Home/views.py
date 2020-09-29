@@ -170,7 +170,7 @@ def create_job(request):
         admin = Admin.objects.get(user_id=request.user.id)
         if user['user_type'] == 'admin':
             if request.method == 'POST':
-                jobForm = CreateJobForm(request.POST)
+                jobForm = CreateJobForm(request.POST, request.FILES)
                 employerForm = InitialEmployerForm(request.POST)
                 companyForm = EmployerForm(request.POST, request.FILES)
 
@@ -223,7 +223,7 @@ def create_job(request):
         email = str(request.user)
         if user['user_type'] == 'employer':
             if request.method == 'POST':
-                form = CreateJobForm(request.POST)
+                form = CreateJobForm(request.POST, request.FILES)
                 if form.is_valid():
                     data = form.save(commit=False)
                     data.posted_by = employer
