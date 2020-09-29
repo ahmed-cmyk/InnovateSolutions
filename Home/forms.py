@@ -74,7 +74,8 @@ class FilterJobForm(forms.ModelForm):
         ('Umm al-Qaiwain', 'Umm al-Qaiwain'),
         ('Fujairah', 'Fujairah'),
         ('Ajman', 'Ajman'),
-        ('Ra’s al-Khaimah', 'Ra’s al-Khaimah')
+        ('Ra’s al-Khaimah', 'Ra’s al-Khaimah'),
+        ('Remote', 'Remote'),
     ]
     DURATION = [
         ('--Select--', '--Select--'),

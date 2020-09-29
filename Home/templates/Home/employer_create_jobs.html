@@ -4,6 +4,7 @@
 <!-- Additional Stylesheet -->
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/CreateJob.css' %}"/>
+    <script src="https://tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -17,6 +18,15 @@
 {% endblock %}
 {% block content %}
 <script>
+tinymce.init({selector:'textarea',
+    plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "emoticons template paste textcolor colorpicker textpattern"
+    ],
+});
+
 function disableOthersField() {
     document.getElementById("otherskills").style.display = "none";
 

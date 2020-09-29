@@ -86,9 +86,9 @@
                                         {% endif %}
                                     </div>
                                     {% if company.logo %}
-                                        <img class="col-3 d-none d-sm-block" src="{{ company.logo.url }}" height="auto" width="250px">
+                                        <img class="col-3 d-none d-sm-block" src="{{ company.logo.url }}" height="250px" width="250px">
                                     {% else %}
-                                        <img class="col-3 d-none d-sm-block" src="{% static 'DefaultDP.jpg' %}" height="auto" width="250px">
+                                        <img class="col-3 d-none d-sm-block" src="{% static 'DefaultDP.jpg' %}" height="250px" width="250px">
                                     {% endif %}
                                 </div>
                             {% endif %}

@@ -67,7 +67,8 @@ class Job(models.Model):
         ('Umm al-Qaiwain', 'Umm al-Qaiwain'),
         ('Fujairah', 'Fujairah'),
         ('Ajman', 'Ajman'),
-        ('Ra’s al-Khaimah', 'Ra’s al-Khaimah')
+        ('Ra’s al-Khaimah', 'Ra’s al-Khaimah'),
+        ('Remote', 'Remote'),
     ]
     STATUS_CHOICES = [
         ('Accepted', 'Accepted'),
