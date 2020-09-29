@@ -113,7 +113,7 @@
                                                     </h4>
                                                     <b>Job Description:</b>
                                                     <p class="card-text">
-                                                        {{ job.description }}
+                                                        {{ job.description|safe }}
                                                     </p>
                                                 </div><!-- End of card-body -->
                                             </div>
@@ -172,7 +172,7 @@
                                     </h4>
                                     <b>Job Description:</b>
                                     <p class="card-text">
-                                        {{ job.description }}
+                                        {{ job.description|safe }}
                                     </p>
                                 </div><!-- End of card-body -->
                             </div>

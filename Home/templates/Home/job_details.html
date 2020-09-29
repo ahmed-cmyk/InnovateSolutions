@@ -75,7 +75,7 @@
                                             <i class="fa fa-calendar" aria-hidden="true"></i> {{ job.date_posted }}
                                         </p>
                                         <p class="card-text"><b class="text-secondary">Job Description</b></p>
-                                        <p class="card-text">{{ job.description }}</p>
+                                        <p id="job-description" class="card-text">{{ job.description|safe }}</p>
                                         <b class="card-text text-secondary">Required Skills: </b>
                                         {% for skill in job.skills.all %}
                                             <li class="pl-1">{{ skill }}</li>
@@ -107,7 +107,7 @@
                                             <p><b class="text-secondary card-text">Company Name:</b> {{ company.company_name }}</p>
                                             <p><b class="text-secondary card-text">Contact Name:</b> {{ company.contact_name }}</p>
                                             <p><b class="text-secondary card-text">Location:</b> {{ job.location }}</p>
-                                            <p><b class="text-secondary card-text">Description:</b> {{ company.company_description }}</p>
+                                            <p><b class="text-secondary card-text">Description:</b> {{ company.company_description|safe }}</p>
                                         </div>
                                         <div class="card-footer">
                                             <i class="fa fa-mobile" aria-hidden="true"></i> <a href="tel:{{ company.phone_number }}">{{ company.phone_number }}</a>
