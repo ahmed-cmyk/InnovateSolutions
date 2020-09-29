@@ -4,6 +4,7 @@
 <!-- Stylesheet -->
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/EditJob.css' %}"/>
+    <script src="https://tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -12,6 +13,15 @@
 
 {% block content %}
 <script>
+tinymce.init({selector:'#id_description, #id_company_description',
+    plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "emoticons template paste textcolor colorpicker textpattern"
+    ],
+});
+
 function disableOthersField() {
     var isEmpty = document.getElementById('otherskills').innerHTML === "";
     if(isEmpty) {
