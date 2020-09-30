@@ -115,7 +115,7 @@ class Job(models.Model):
     date_posted = models.DateField(null=False, blank=False, auto_now_add=True)
     posted_by = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='job_author', blank=True)
     job_title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     description_upload = models.FileField(upload_to='documents', storage=OverwriteStorage(), null=True, blank=True)
     status = models.CharField(max_length=15, choices=JOB_STATUS, default='Open')
     date_closed = models.DateField(null=True, blank=True)

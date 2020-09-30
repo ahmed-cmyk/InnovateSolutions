@@ -4,7 +4,7 @@
 <!-- Additional Stylesheet -->
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/CreateJob.css' %}"/>
-    <script src="https://tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.5.0/tinymce.min.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -107,7 +107,7 @@ function toggleDuration(elem) {
         {% if user_type == 'employer' %}
             <div>{{ form.job_title|as_crispy_field }}</div>
             <div>{{ form.description|as_crispy_field }}</div>
-            <div>{{ jobForm.description_upload|as_crispy_field }}</div>
+            <div>{{ form.description_upload|as_crispy_field }}</div>
             <div>{{ form.location|as_crispy_field }}</div>
             <div class="form-row">
                 <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ form.job_type_id|as_crispy_field }}</div>
