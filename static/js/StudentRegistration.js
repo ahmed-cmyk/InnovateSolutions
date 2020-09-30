@@ -111,9 +111,9 @@ $(document).ready(function () {
         }
     });
     $('#id_password1').focusout(function () {
-        if($(this).val().length < 6) {
+        if($(this).val().length < 8) {
             $('#id_password1').css('border', '1px solid red');
-            $('#password1Error').html('Your password cannot be fewer than 6 characters').css('color', 'red');
+            $('#password1Error').html('Your password cannot be fewer than 8 characters').css('color', 'red');
         }
         else {
             $('#id_password1').css('border', '');

@@ -114,7 +114,7 @@ def student_signup(request):
                         #return redirect('student_registration')
 
                 else:
-                    messages.warning(request, 'ERROR: Password must be 8 characters or more, and must have atleast 1 '
+                    messages.warning(request, 'ERROR: Password must be 8 characters or more, and must have at least 1 numeric character and 1 letter.'
                                               'numeric character and 1 letter.')
                     user_form = InitialStudentForm(user_data)
                     student_form = StudentForm(student_data)

@@ -100,7 +100,7 @@ def signup(request):
 
                 else:
                     messages.warning(request,
-                                     'ERROR: Password must be 8 characters or more, and must have atleast 1 numeric character and 1 letter.')
+                                     'ERROR: Password must be 8 characters or more, and must have at least 1 numeric character and 1 letter.')
                     user_form = InitialAlumniForm(user_data)
                     alumni_form = AlumniForm(alumni_data)
                     user = get_user_type(request)
