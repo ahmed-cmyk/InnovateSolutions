@@ -10,8 +10,8 @@ from .models import Employer
 class InitialEmployerForm(forms.ModelForm):
     email = forms.EmailField(label='Email Address', required=True)
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput,
-                                help_text="The password must contain a combination of alphabets and numbers and "
-                                          "should have a minimum length of 8 characters")
+                                help_text="The password must be 8 characters or more, and must have at least 1 "
+                                          "numeric character and 1 letter.")
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
@@ -70,9 +70,9 @@ class EmployerForm(forms.ModelForm):
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
     company_description = forms.CharField(label='Company Description', required=False, widget=forms.Textarea)
     company_website = forms.URLField(label='Company Website', required=True,
-                                     help_text="Website should start with http or https")
+                                     help_text="The website should start with http or https.")
     phone_number = forms.CharField(label="Contact Number", required=True, max_length=15, min_length=9,
-                                   help_text="Phone number should be minimum 9 and maximum 15 digits with no spaces or - characters",
+                                   help_text="The contact number should be a minimum 9 and a maximum 15 digits with no spaces or - characters.",
                                    widget=forms.TextInput(
                                        attrs={'class': 'form-control-text', 'style': 'resize:none;'}), )
     contact_name = forms.CharField(max_length=50, label='Contact Name', required=True, widget=forms.TextInput(
@@ -90,7 +90,7 @@ class EmployerForm(forms.ModelForm):
 
 
 class EditEmployerForm(forms.ModelForm):
-    logo = forms.ImageField(label='Logo', required=False, help_text="Only jpeg or png file formats allowed.",
+    logo = forms.ImageField(label='Logo', required=False, help_text="Only jpeg or png file formats are allowed.",
                             validators=[FileTypeValidator(
                                 allowed_types=['image/jpeg', 'image/png']
                             )])
