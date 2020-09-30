@@ -23,7 +23,7 @@
             </div>
             <div class="employer-profile col-md-6 text-left py-2">
                 <p><strong>Company Name:</strong> {{ obj.company_name }}</p>
-                <p><strong>Company Description:</strong> {{ obj.company_description }}</p>
+                <p><strong>Company Description:</strong> {{ obj.company_description|safe }}</p>
                 <p><strong>Trade License:</strong> <a target="_blank" href="{{ obj.trade_license.url }}">{{ obj.trade_license }}</a></p>
                 <p><strong>Contact Name:</strong> {{ obj.contact_name }}</p>
                 <p><strong>Contact Number:</strong> <a href="teL:{{ obj.phone_number }}">{{ obj.phone_number }}</a></p>
