@@ -27,55 +27,24 @@ def student_signup(request):
                  'student_id': request.POST.get('student_id'),
                  'expected_graduation_date': request.POST.get('expected_graduation_date'),
                  'personal_email': request.POST.get('personal_email'),
-                 'skills': request.POST.get('skills'),
-                 'majors': request.POST.get('majors'),
+                 'skills': request.POST.getlist('skills'),
+                 'majors': request.POST.getlist('majors'),
                  'dp': request.FILES.get('dp'),
                  'cv': request.FILES.get('cv')}
 
         user_form = InitialStudentForm(request.POST)
         if user_form.is_valid():
             if user_form.usernameExists():
-                messages.warning(request, 'Username already taken. Try a different one.')  # checks if username exists in db
-                user_form = InitialStudentForm(user_data)
-                student_form = StudentForm(student_data)
-                user = get_user_type(request)
-                args = {'student_form': student_form, 'user_form': user_form, 'user_type': user['user_type']}
+                messages.error(request, 'Username already taken. Try a different one.', extra_tags='danger')  # checks if username exists in db
 
-                return render(request, 'Student/student_registration.html', args)
-                #return redirect("student_registration")
+            elif user_form.emailExists():
+                messages.error(request, 'Email already taken. Try a different one.', extra_tags='danger')  # checks if email exists in db
 
-            if user_form.emailExists():
-                messages.warning(request, 'Email already taken. Try a different one.')  # checks if email exists in db
-                user_form = InitialStudentForm(user_data)
-                student_form = StudentForm(student_data)
-                user = get_user_type(request)
-                args = {'student_form': student_form, 'user_form': user_form, 'user_type': user['user_type']}
+            elif not user_form.same_passwords():
+                messages.error(request, 'Passwords not matching. Try again.', extra_tags='danger')  # checks if password and confirm password are matching
 
-                return render(request, 'Student/student_registration.html', args)
-                #return redirect("student_registration")
-
-            if not user_form.same_passwords():
-                messages.warning(request, 'Passwords not matching. Try again.')  # checks if password and confirm
-                # password are matching
-                user_form = InitialStudentForm(user_data)
-                student_form = StudentForm(student_data)
-                user = get_user_type(request)
-                args = {'student_form': student_form, 'user_form': user_form, 'user_type': user['user_type']}
-
-                return render(request, 'Student/student_registration.html', args)
-                #return redirect("student_registration")
-
-            if not user_form.email_domain_exists():
-                messages.warning(request, 'Email domain does not exist. Try again.')  # checks if there is an existing
-                # domain for given email
-                user_form = InitialStudentForm(user_data)
-                student_form = StudentForm(student_data)
-                user = get_user_type(request)
-                args = {'student_form': student_form, 'user_form': user_form, 'user_type': user['user_type']}
-
-                return render(request, 'Student/student_registration.html', args)
-                #return redirect("student_registration")
-
+            elif not user_form.email_domain_exists():
+                messages.error(request, 'Email domain does not exist. Try again.', extra_tags='danger')  # checks if there is an existing domain for given email
             else:
                 if isValidated(user_form.cleaned_data.get('password1')):
                     student_form = StudentForm(request.POST, request.FILES)
@@ -104,41 +73,22 @@ def student_signup(request):
                         messages.success(request, 'A student account has been created')
                         return render(request, 'Accounts/pending_acc.html', get_user_type(request))
                     else:
-                        messages.warning(request, student_form.errors.as_text)
-                        user_form = InitialStudentForm(user_data)
-                        student_form = StudentForm(student_data)
-                        user = get_user_type(request)
-                        args = {'student_form': student_form, 'user_form': user_form, 'user_type': user['user_type']}
-
-                        return render(request, 'Student/student_registration.html', args)
-                        #return redirect('student_registration')
-
+                        messages.error(request, student_form.errors, extra_tags='danger')
                 else:
-                    messages.warning(request, 'ERROR: Password must be 8 characters or more, and must have at least 1 numeric character and 1 letter.'
-                                              'numeric character and 1 letter.')
-                    user_form = InitialStudentForm(user_data)
-                    student_form = StudentForm(student_data)
-                    user = get_user_type(request)
-                    args = {'student_form': student_form, 'user_form': user_form, 'user_type': user['user_type']}
-
-                    return render(request, 'Student/student_registration.html', args)
-                    #return redirect("student_registration")
+                    messages.error(request, 'Password must be 8 characters or more, and must have at least 1 numeric character '
+                                            'and 1 letter.', extra_tags='danger')
         else:
-            messages.warning(request, user_form.errors.as_text)
-            user_form = InitialStudentForm(user_data)
-            student_form = StudentForm(student_data)
-            user = get_user_type(request)
-            args = {'student_form': student_form, 'user_form': user_form, 'user_type': user['user_type']}
+            messages.error(request, user_form.errors, extra_tags='danger')
 
-            return render(request, 'Student/student_registration.html', args)
-            #return redirect("student_registration")
+        user_form = InitialStudentForm(user_data)
+        student_form = StudentForm(student_data)
     else:
         user_form = InitialStudentForm()
         student_form = StudentForm()
-        user = get_user_type(request)
-        args = {'student_form': student_form, 'user_form': user_form, 'user_type': user['user_type']}
 
-        return render(request, 'Student/student_registration.html', args)
+    user = get_user_type(request)
+    args = {'student_form': student_form, 'user_form': user_form, 'user_type': user['user_type']}
+    return render(request, 'Student/student_registration.html', args)
 
 
 @login_required
@@ -154,8 +104,8 @@ def edit_profile(request):
                 student_form.save()
                 return redirect('view_student_profile')
         else:
-            messages.warning(request, student_form.errors.as_text)
-            messages.warning(request, user_form.errors.as_text)
+            messages.error(request, student_form.errors, extra_tags='danger')
+            messages.error(request, user_form.errors, extra_tags='danger')
             return redirect('edit_student_profile')
     else:
         student = Student.objects.get(user_id=request.user.id)

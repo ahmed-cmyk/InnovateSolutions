@@ -77,7 +77,7 @@ class EmployerForm(forms.ModelForm):
                                        attrs={'class': 'form-control-text', 'style': 'resize:none;'}), )
     contact_name = forms.CharField(max_length=50, label='Contact Name', required=True, widget=forms.TextInput(
         attrs={'class': 'form-control-text', 'style': 'resize:none;'}))
-    trade_license = forms.FileField(allow_empty_file=False, label='Trade License',
+    trade_license = forms.FileField(allow_empty_file=False, label='Trade License', required=False,
                                     help_text="Please attach a copy of your registered trade license",
                                     validators=[FileTypeValidator(
                                         allowed_types=["image/*", "application/pdf", "application/msword",

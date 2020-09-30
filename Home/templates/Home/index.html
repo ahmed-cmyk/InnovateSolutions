@@ -51,6 +51,7 @@
             <br><hr><br>
         {% endif %}
     </div>
+    {% if not user.is_authenticated %}
     <div id="jobDetBody" class="row text-center w-90 my-3">
         <div class="jobDetCard col-md-6 col-sm-6 col-xs-12">
             <i class="fa fa-graduation-cap fa-3x" aria-hidden="true"></i>
@@ -75,17 +76,32 @@
             </ul>
         </div>
     </div>
-    {% if user.is_authenticated and user_type != 'employer' and job_list %}
+    {% endif %}
+
+    {% if user.is_authenticated and job_list %}
         <div class="col-12 job-cards-index w-75 mx-auto">
-            <br><hr><br>
-            <h3 class="text-secondary text-center">Recent Jobs</h3>
-            <br>
+            {% if user_type == 'employer' %}
+                <h3 class="text-secondary text-center">My Recent Jobs</h3>
+            {% else %}
+                <h3 class="text-secondary text-center">Recent Jobs</h3>
+            {% endif %}
+            <hr><br>
             {% for job in job_list %}
                 <div class="row">
                     <div class="card-group my-2 col-12">
                         <div class="card bg-light col-md-9 col-xs-7">
                             <div class="card-body">
-                                <h4 class="card-title">{{ job.job_title }}</h4>
+                                <h4 class="card-title">{{ job.job_title }}
+                                    {% if user_type == 'employer' %}
+                                        {% if job.is_active == 'Pending' %}
+                                            <span style="font-size: small" class="badge badge-info">{{ job.is_active }}</span>
+                                        {% elif job.is_active == 'Rejected' %}
+                                            <span style="font-size: small" class="badge badge-danger">{{ job.is_active }}</span>
+                                        {% elif job.is_active == 'Accepted' %}
+                                            <span style="font-size: small" class="badge badge-success">{{ job.is_active }}</span>
+                                        {% endif %}
+                                    {% endif %}
+                                </h4>
                                 <hr>
                                 <b>Job Description:</b>
                                 <p class="card-text">

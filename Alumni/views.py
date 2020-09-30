@@ -29,38 +29,16 @@ def signup(request):
 
         if user_form.is_valid():
             if user_form.usernameExists():
-                messages.warning(request, 'Username already taken. Try a different one.')  # checks if username exists in db
-                user_form = InitialAlumniForm(user_data)
-                alumni_form = AlumniForm(alumni_data)
-                user = get_user_type(request)
-                args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
-                return render(request, 'Alumni/alumni_registration.html', args)
+                messages.error(request, 'Username already taken. Try a different one.', extra_tags='danger')  # checks if username exists in db
 
-            if user_form.emailExists():
-                messages.warning(request, 'Email already taken. Try a different one.')  # checks if email exists in db
-                user_form = InitialAlumniForm(user_data)
-                alumni_form = AlumniForm(alumni_data)
-                user = get_user_type(request)
-                args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
-                return render(request, 'Alumni/alumni_registration.html', args)
+            elif user_form.emailExists():
+                messages.error(request, 'Email already taken. Try a different one.', extra_tags='danger')  # checks if email exists in db
 
-            if not user_form.samePasswords():
-                messages.warning(request, 'Passwords not matching. Try again.')  # checks if password and confirm
-                # password are matching
-                user_form = InitialAlumniForm(user_data)
-                alumni_form = AlumniForm(alumni_data)
-                user = get_user_type(request)
-                args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
-                return render(request, 'Alumni/alumni_registration.html', args)
+            elif not user_form.samePasswords():
+                messages.error(request, 'Passwords not matching. Try again.', extra_tags='danger')  # checks if password and confirm password are matching
 
-            if not user_form.emailDomainExists():
-                messages.warning(request, 'Email domain does not exist. Try again.')  # checks if there is an exising
-                # domain for given email
-                user_form = InitialAlumniForm(user_data)
-                alumni_form = AlumniForm(alumni_data)
-                user = get_user_type(request)
-                args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
-                return render(request, 'Alumni/alumni_registration.html', args)
+            elif not user_form.emailDomainExists():
+                messages.error(request, 'Email domain does not exist. Try again.', extra_tags='danger')  # checks if there is an existing domain for given email
 
             else:
                 if isValidated(user_form.cleaned_data.get('password1')):  # checks if password is valid
@@ -91,37 +69,22 @@ def signup(request):
                         return render(request, 'Accounts/pending_acc.html', get_user_type(request))
 
                     else:
-                        messages.warning(request, alumni_form.errors.as_text)
-                        user_form = InitialAlumniForm(user_data)
-                        alumni_form = AlumniForm(alumni_data)
-                        user = get_user_type(request)
-                        args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
-                        return render(request, 'Alumni/alumni_registration.html', args)
-
+                        messages.error(request, alumni_form.errors, extra_tags='danger')
                 else:
-                    messages.warning(request,
-                                     'ERROR: Password must be 8 characters or more, and must have at least 1 numeric character and 1 letter.')
-                    user_form = InitialAlumniForm(user_data)
-                    alumni_form = AlumniForm(alumni_data)
-                    user = get_user_type(request)
-                    args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
-                    return render(request, 'Alumni/alumni_registration.html', args)
-
+                    messages.error(request,
+                                     'Password must be 8 characters or more, and must have at least 1 numeric character and 1 letter.')
         else:
-            messages.warning(request, user_form.errors.as_text)
-            user_form = InitialAlumniForm(user_data)
-            alumni_form = AlumniForm(alumni_data)
-            user = get_user_type(request)
-            args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
-            return render(request, 'Alumni/alumni_registration.html', args)
+            messages.error(request, user_form.errors, extra_tags='danger')
 
+        user_form = InitialAlumniForm(user_data)
+        alumni_form = AlumniForm(alumni_data)
     else:
         user_form = InitialAlumniForm()
         alumni_form = AlumniForm()
-        user = get_user_type(request)
-        args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
 
-        return render(request, 'Alumni/alumni_registration.html', args)
+    user = get_user_type(request)
+    args = {'alumni_form': alumni_form, 'user_form': user_form, 'user_type': user['user_type']}
+    return render(request, 'Alumni/alumni_registration.html', args)
 
 
 @login_required
@@ -135,12 +98,13 @@ def edit_profile(request):
             with transaction.atomic():
                 user_form.save()
                 alumni_form.save()
-
                 messages.success(request, 'Profile edit was successful')
                 return redirect('view_alumni_profile')
         else:
-            messages.warning(request, alumni_form.errors.as_text)
-            messages.warning(request, user_form.errors.as_text)
+            if alumni_form.errors:
+                messages.error(request, alumni_form.errors, extra_tags='danger')
+            if user_form.errors:
+                messages.error(request, user_form.errors, extra_tags='danger')
             return redirect('edit_alumni_profile')
     else:
         alumni = Alumni.objects.get(user_id=request.user.id)

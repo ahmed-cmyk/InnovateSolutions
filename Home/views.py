@@ -39,7 +39,10 @@ def index(request):
                 return render(request, "Home/view_jobs.html", args)
         else:
             try:
-                latest_jobs = Job.objects.filter(status="Open", is_active='Accepted').order_by('-date_posted')[:3]
+                if user['user_type'] == 'employer':
+                    latest_jobs = Job.objects.filter(posted_by=user['obj']).order_by('-date_posted')[:3]
+                else:
+                    latest_jobs = Job.objects.filter(status="Open", is_active='Accepted').order_by('-date_posted')[:3]
                 args = {'job_list': latest_jobs, 'obj': user['obj'], 'user_type': user['user_type']}
                 return render(request, "Home/index.html", args)
             except:
@@ -170,6 +173,27 @@ def create_job(request):
         admin = Admin.objects.get(user_id=request.user.id)
         if user['user_type'] == 'admin':
             if request.method == 'POST':
+                job_data = {'job_title': request.POST.get('job_title'),
+                            'description': request.POST.get('description'),
+                            'description_upload': request.FILES.get('description_upload'),
+                            'location': request.POST.get('location'),
+                            'job_type_id': request.POST.get('job_type_id'),
+                            'industry_id': request.POST.get('industry_id'),
+                            'duration_type': request.POST.get('duration_type'),
+                            'duration': request.POST.get('duration'),
+                            'salary_min': request.POST.get('salary_min'),
+                            'salary_max': request.POST.get('salary_max'),
+                            'skills': request.POST.getlist('skills')
+                            }
+                employer_data = {'email': request.POST.get('email')}
+                company_data = {'logo': request.FILES.get('logo'),
+                                'company_name': request.POST.get('company_name'),
+                                'company_description': request.POST.get('company_description'),
+                                'company_website': request.POST.get('company_website'),
+                                'phone_number': request.POST.get('phone_number'),
+                                'contact_name': request.POST.get('contact_name'),
+                                'trade_license': request.FILES.get('trade_license')
+                                }
                 jobForm = CreateJobForm(request.POST, request.FILES)
                 employerForm = InitialEmployerForm(request.POST)
                 companyForm = EmployerForm(request.POST, request.FILES)
@@ -203,17 +227,24 @@ def create_job(request):
                         return redirect('view_jobs')
 
                 else:
-                    messages.warning(request, jobForm.errors.as_text)
-                    messages.warning(request, companyForm.errors.as_text)
-                    return redirect('create_job')
+                    if jobForm.errors:
+                        messages.error(request, jobForm.errors, extra_tags='danger')
+                    if companyForm.errors:
+                        messages.error(request, companyForm.errors, extra_tags='danger')
+                    if employerForm.errors:
+                        messages.error(request, employerForm.errors, extra_tags='danger')
+                    jobForm = CreateJobForm(job_data)
+                    employerForm = InitialEmployerForm(employer_data)
+                    companyForm = EmployerForm(company_data)
             else:
                 jobForm = CreateJobForm()
                 employerForm = InitialEmployerForm()
                 companyForm = EmployerForm()
-                others, created = Skill.objects.get_or_create(skill_name="Others")
-                args = {'jobForm': jobForm, 'employerForm': employerForm, 'companyForm': companyForm,
-                        'obj': user['obj'], 'user_type': user['user_type'], 'others_id': others.id}
-                return render(request, "Home/employer_create_jobs.html", args)
+
+            others, created = Skill.objects.get_or_create(skill_name="Others")
+            args = {'jobForm': jobForm, 'employerForm': employerForm, 'companyForm': companyForm,
+                    'obj': user['obj'], 'user_type': user['user_type'], 'others_id': others.id}
+            return render(request, "Home/employer_create_jobs.html", args)
     except Admin.DoesNotExist:
         pass
 
@@ -223,6 +254,18 @@ def create_job(request):
         email = str(request.user)
         if user['user_type'] == 'employer':
             if request.method == 'POST':
+                job_data = {'job_title': request.POST.get('job_title'),
+                            'description': request.POST.get('description'),
+                            'description_upload': request.FILES.get('description_upload'),
+                            'location': request.POST.get('location'),
+                            'job_type_id': request.POST.get('job_type_id'),
+                            'industry_id': request.POST.get('industry_id'),
+                            'duration_type': request.POST.get('duration_type'),
+                            'duration': request.POST.get('duration'),
+                            'salary_min': request.POST.get('salary_min'),
+                            'salary_max': request.POST.get('salary_max'),
+                            'skills': request.POST.getlist('skills')
+                            }
                 form = CreateJobForm(request.POST, request.FILES)
                 if form.is_valid():
                     data = form.save(commit=False)
@@ -245,13 +288,14 @@ def create_job(request):
                     messages.success(request, "Job successfully created")
                     return redirect('view_jobs')
                 else:
-                    messages.warning(request, form.errors.as_text)
-                    return redirect('create_job')
+                    messages.error(request, form.errors, extra_tags='danger')
+                    form = CreateJobForm(job_data)
             else:
                 form = CreateJobForm()
-                others, created = Skill.objects.get_or_create(skill_name="Others")
-                args = {'form': form, 'obj': user['obj'], 'user_type': user['user_type'], 'others_id': others.id}
-                return render(request, "Home/employer_create_jobs.html", args)
+
+            others, created = Skill.objects.get_or_create(skill_name="Others")
+            args = {'form': form, 'obj': user['obj'], 'user_type': user['user_type'], 'others_id': others.id}
+            return render(request, "Home/employer_create_jobs.html", args)
     except Employer.DoesNotExist:
         pass
 
