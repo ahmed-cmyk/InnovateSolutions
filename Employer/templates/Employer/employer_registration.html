@@ -13,13 +13,13 @@
 {% block jQueryCall %}
         <script src="{% static 'js/EmployerRegistration.js' %}" type="text/javascript"></script>
         <script>
-        tinymce.init({selector:'#id_description, #id_company_description',
+        tinymce.init({selector:'#id_company_description',
             plugins: [
-                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-                "searchreplace wordcount visualblocks visualchars code fullscreen",
-                "insertdatetime media nonbreaking save table contextmenu directionality",
-                "emoticons template paste textcolor colorpicker textpattern"
-            ],
+        "advlist lists anchor emoticons"
+    ],
+    toolbar: [
+        'undo redo | bold italic subscript | indent outdent bullist numlist | anchor | emoticons'
+    ],
         });
 
         $("#id_email").focusout(function (e) {
