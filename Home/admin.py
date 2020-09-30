@@ -13,7 +13,7 @@ class JobAdmin(admin.ModelAdmin):
     list_display = ('job_title', 'posted_by', 'salary_min', 'salary_max', 'duration_in_months')
     list_display_links = ('job_title',)
     # list_editable = ('salary',)
-    # list_filter = ('job_title', 'description')
+    list_filter = ('date_posted', 'status', 'location', 'job_type_id', 'industry_id', 'is_active')
     ordering = ['job_title']
     change_list_template = "Admin/job_change_list.html"
 
