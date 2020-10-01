@@ -40,7 +40,7 @@ def index(request):
         else:
             try:
                 if user['user_type'] == 'employer':
-                    latest_jobs = Job.objects.filter(posted_by=user['obj'], status="Open", is_active='Accepted').order_by('-date_posted')[:3]
+                    latest_jobs = Job.objects.filter(posted_by=user['obj'], status="Open").exclude(is_active='Rejected').order_by('-date_posted')[:3]
                 else:
                     latest_jobs = Job.objects.filter(status="Open", is_active='Accepted').order_by('-date_posted')[:3]
                 args = {'job_list': latest_jobs, 'obj': user['obj'], 'user_type': user['user_type']}
