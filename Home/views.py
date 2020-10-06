@@ -198,33 +198,36 @@ def create_job(request):
                 employerForm = InitialEmployerForm(request.POST)
                 companyForm = EmployerForm(request.POST, request.FILES)
 
-                if jobForm.is_valid() and companyForm.is_valid():
+                if jobForm.is_valid() and employerForm.is_valid() and companyForm.is_valid():
                     with transaction.atomic():
-                        user = employerForm.save()
-                        company = companyForm.save(commit=False)
-                        company.user = user
-                        company.is_active = 'Accepted'
-                        company.save()
-                        job = jobForm.save(commit=False)
-                        job.posted_by = Employer.objects.get(user_id=company.user.id)
-                        email = company.user
-                        job.save()
-                        jobForm.save_m2m()
+                        if employerForm.usernameExists():
+                            messages.error(request, 'Username already taken. Try a different one.', extra_tags='danger')
+                        else:
+                            user = employerForm.save()
+                            company = companyForm.save(commit=False)
+                            company.user = user
+                            company.is_active = 'Accepted'
+                            company.save()
+                            job = jobForm.save(commit=False)
+                            job.posted_by = Employer.objects.get(user_id=company.user.id)
+                            email = company.user
+                            job.save()
+                            jobForm.save_m2m()
 
-                        first_name = companyForm.cleaned_data.get('company_name')
-                        context = {'first_name': first_name}
-                        admin_context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
+                            first_name = companyForm.cleaned_data.get('company_name')
+                            context = {'first_name': first_name}
+                            admin_context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
 
-                        subject = 'Your job posting request has been received'
-                        htmlText = render_to_string('Employer/job_post_request.html', context)
-                        send_html_mail(subject, htmlText, [email])
+                            subject = 'Your job posting request has been received'
+                            htmlText = render_to_string('Employer/job_post_request.html', context)
+                            send_html_mail(subject, htmlText, [email])
 
-                        subject = 'A job posting request has been received'
-                        htmlText = render_to_string('Home/job_created_admin.html', admin_context)
-                        send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
+                            subject = 'A job posting request has been received'
+                            htmlText = render_to_string('Home/job_created_admin.html', admin_context)
+                            send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
-                        messages.success(request, "Job successfully created")
-                        return redirect('view_jobs')
+                            messages.success(request, "Job successfully created")
+                            return redirect('view_jobs')
 
                 else:
                     if jobForm.errors:

@@ -22,7 +22,6 @@
 {% block jQueryCall %}
     <script>
  $("#id_email").focusout(function (e) {
-      e.preventDefault();
       var username = $(this).val();
       $.ajax({
             type: 'GET',
@@ -30,6 +29,7 @@
             data: {"username": username},
             success: function (response) {
                   if(!response["valid"]) {
+                      e.preventDefault();
                         $("#usernameError").css('color', 'red').html("This username is already being used");
                     }
                   else {
