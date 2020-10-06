@@ -4,6 +4,9 @@
 <!-- Additional Stylesheet -->
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/CreateJob.css' %}"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.5.0/tinymce.min.js"></script>
 {% endblock %}
 
@@ -15,6 +18,30 @@
 <div id="container">
     <img src="{% static 'images/2.png' %}" alt="Home page image">
 </div>
+{% endblock %}
+{% block jQueryCall %}
+    <script>
+ $("#id_email").focusout(function (e) {
+      e.preventDefault();
+      var username = $(this).val();
+      $.ajax({
+            type: 'GET',
+            url: "{% url 'check_student_username' %}",
+            data: {"username": username},
+            success: function (response) {
+                  if(!response["valid"]) {
+                        $("#usernameError").css('color', 'red').html("This username is already being used");
+                    }
+                  else {
+                        $("#usernameError").css('color', '').html("");
+                  }
+            },
+            error: function (response) {
+                  console.log(response);
+            }
+      });
+    });
+    </script>
 {% endblock %}
 {% block content %}
 <script>
@@ -154,6 +181,7 @@ function toggleDuration(elem) {
             </div>
             <br><hr><br>
             <div>{{ employerForm.email|as_crispy_field }}</div>
+            <div id="usernameError"></div>
             <div class="form-row">
                 <div class="form-group col-6">{{ employerForm.password1|as_crispy_field }}</div>
                 <div class="form-group col-6">{{ employerForm.password2|as_crispy_field }}</div>
