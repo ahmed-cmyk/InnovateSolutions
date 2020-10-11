@@ -12,7 +12,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.template.loader import render_to_string
 
 from Alumni.models import Alumni, AlumniJobApplication
-from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL, BASE_DIR
+from DjangoUnlimited.settings import DEFAULT_FROM_EMAIL, BASE_DIR, BACKUP_ROOT
 from django.utils import timezone
 from datetime import timedelta, date
 import csv
@@ -41,9 +41,9 @@ def backup_database(request):
         DB_USER = 'postgres'
         DB_NAME = 'django_unlimited'
 
-        BACKUP_PATH = r'backup'
+        # BACKUP_PATH = r'backup'
         filename = time.strftime("%Y%m%d_%H%M%S") + '_backup.sql'
-        destination = r'%s/%s' % (BACKUP_PATH, filename)
+        destination = r'%s/%s' % (BACKUP_ROOT, filename)
 
         print('Backing up %s database to %s' % (DB_NAME, destination))
         ps = subprocess.Popen(
