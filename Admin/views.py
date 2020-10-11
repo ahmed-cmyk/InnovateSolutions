@@ -41,15 +41,14 @@ def backup_database(request):
         DB_USER = 'postgres'
         DB_NAME = 'django_unlimited'
 
-        BACKUP_PATH = BASE_DIR + '\\backup'
-        FILENAME = time.strftime("%Y%m%d_%H%M%S") + '_backup.sql'
-
-        destination = r'%s\%s' % (BACKUP_PATH, FILENAME)
+        BACKUP_PATH = r'backup'
+        filename = time.strftime("%Y%m%d_%H%M%S") + '_backup.sql'
+        destination = r'%s/%s' % (BACKUP_PATH, filename)
 
         print('Backing up %s database to %s' % (DB_NAME, destination))
-        dump = subprocess.Popen(
+        ps = subprocess.Popen(
             ['pg_dump', '-U', DB_USER, '-h', 'localhost', '-d', DB_NAME, '-f', destination],
-            stdout=subprocess.PIPE, universal_newlines=True
+            stdout=subprocess.PIPE
         )
         return redirect('backup_view')
 
