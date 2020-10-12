@@ -9,11 +9,6 @@ function isNumber(input) {
     return intRegex.test(input) || floatRegex.test(input);
 }
 
-function checkFalseUAENumber(number) {
-    var phoneReg = /^(?:\+971|00971|0)?(?:50|51|52|55|56|2|3|4|6|7|9)\d{7}$/;
-    return !phoneReg.test(number);
-}
-
 function checkUnmatchedPasswords(password1, password2) {
     if (password1 !== password2) {
         return true;

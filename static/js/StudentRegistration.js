@@ -9,7 +9,7 @@ function containsNumber(input) {
 }
 
 function checkString(input) {
-    var stringRegex = /^[a-z]+$/i;
+    var stringRegex = /^([a-zA-Z]+\s)*[a-zA-Z]+$/;
     return !stringRegex.test(input);
 }
 
@@ -102,8 +102,8 @@ $(document).ready(function () {
             $('#lastNameError').html('Your string contains numbers').css('color', 'red');
         }
         else if(checkString(lastName)) {
-            $('#id_first_name').css('border', '1px solid red');
-            $('#firstNameError').html('You can only enter characters').css('color', 'red');
+            $('#id_last_name').css('border', '1px solid red');
+            $('#lastNameError').html('You can only enter characters').css('color', 'red');
         }
         else {
             $('#id_last_name').css('border', '');
