@@ -26,10 +26,11 @@
         <form method="POST">
             <div class="form-control-feedback">
                 {% csrf_token %}
-                <p>Subject:</p>
-                {{ help_desk_form.subject }}
-                <br>
-                <p>Please describe the issue or concern you are facing in detail:</p>
+                <p><b>Subject:</b> {{ help_desk_form.subject }}</p>
+                {% if user_type == 'admin' %}
+                    <p><b>Posted by:</b> {{ thread.name_Request }}</p>
+                {% endif %}
+                <p><b>Please describe the issue or concern you are facing in detail:</b></p>
                 {{ help_desk_form.issue }}
 
                 {% if not thread %}

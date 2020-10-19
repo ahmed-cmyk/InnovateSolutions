@@ -16,23 +16,25 @@
                 <h2 class="text-center">List of HelpDesk Requests</h2>
                 <hr>
                 <br><br>
-                <table class="table table-striped mx-auto w-75">
+                <table class="table table-sm table-striped mx-auto w-75">
                     <thead>
                     <tr class="text-center thead-dark">
                         <th>Request Date</th>
+                        <th class="d-none d-sm-block">Requester</th>
                         <th>Issue</th>
-                        <th>Subject</th>
+                        <th class="d-none d-sm-block">Description</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for helpdeskRequest in reqs %}
                         <tr class="text-center">
                             <td>{{ helpdeskRequest.issue_date }}</td>
+                            <td class="d-none d-sm-block">{{ helpdeskRequest.name_Request }}</td>
                             <td>
                                 <a href="{% url 'HelpDesk' helpdeskRequest.id %}">
                                     {{ helpdeskRequest.subject }}</a>
                             </td>
-                            <td> {{ helpdeskRequest.issue }} </td>
+                            <td class="d-none d-sm-block"> {{ helpdeskRequest.issue }} </td>
                         </tr>
                     {% endfor %}
                     </tbody>
