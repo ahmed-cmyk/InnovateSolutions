@@ -226,6 +226,9 @@ def create_job(request):
                             htmlText = render_to_string('Home/job_created_admin.html', admin_context)
                             send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
 
+                            job_to_alumni_skills(request, job.id)
+                            job_to_student_skills(request, job.id)
+
                             messages.success(request, "Job successfully created")
                             return redirect('view_jobs')
 
