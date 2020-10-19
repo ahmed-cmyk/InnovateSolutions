@@ -631,7 +631,6 @@ def alumni_details(request, id):
 def job_to_student_skills(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
-    email = str(request.user)
     studentApplicants = Student.objects.filter(skills__in=job.skills.all(), is_active='Accepted')
     studentList = list(set(studentApplicants))
     args = {'studentApplicants': studentList, 'obj': user['obj'], 'user_type': user['user_type']}
@@ -642,8 +641,9 @@ def job_to_student_skills(request, id):
         context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
 
         subject = 'We found a match!'
-        htmlText = render_to_string('Home/found_matching_students.html', context)
-        send_html_mail(subject, htmlText, [email])
+        htmlText = render_to_string('Home/found_matching_jobs.html', context)
+        for student in studentList:
+            send_html_mail(subject, htmlText, [student.user])
     except:
         pass
 
@@ -654,7 +654,6 @@ def job_to_student_skills(request, id):
 def job_to_alumni_skills(request, id):
     user = get_user_type(request)
     job = Job.objects.get(id=id)
-    email = str(request.user)
     alumniApplicants = Alumni.objects.filter(skills__in=job.skills.all(), is_active='Accepted')
     alumniList = list(set(alumniApplicants))
     args = {'alumniApplicants': alumniList, 'obj': user['obj'], 'user_type': user['user_type']}
@@ -665,8 +664,9 @@ def job_to_alumni_skills(request, id):
         context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
 
         subject = 'We found a match!'
-        htmlText = render_to_string('Home/found_matching_students.html', context)
-        send_html_mail(subject, htmlText, [email])
+        htmlText = render_to_string('Home/found_matching_jobs.html', context)
+        for alumni in alumniList:
+            send_html_mail(subject, htmlText, [alumni.user])
     except:
         pass
 
