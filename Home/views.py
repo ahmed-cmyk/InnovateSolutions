@@ -644,7 +644,8 @@ def job_to_student_skills(request, id):
             first_name = student.user.first_name
             context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
             htmlText = render_to_string('Home/found_matching_jobs.html', context)
-            send_html_mail(subject, htmlText, [student.user])
+            email = str(student.user)
+            send_html_mail(subject, htmlText, [email])
     except:
         pass
 
@@ -665,7 +666,8 @@ def job_to_alumni_skills(request, id):
             first_name = alumni.user.first_name
             context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
             htmlText = render_to_string('Home/found_matching_jobs.html', context)
-            send_html_mail(subject, htmlText, [alumni.user])
+            email = str(alumni.user)
+            send_html_mail(subject, htmlText, [email])
     except:
         pass
 
