@@ -40,7 +40,9 @@ def index(request):
         else:
             try:
                 if user['user_type'] == 'employer':
-                    latest_jobs = Job.objects.filter(posted_by=user['obj']).exclude(is_active='Rejected', status="Deleted").order_by('-date_posted')[:3]
+                    latest_jobs = Job.objects.filter(posted_by=user['obj']).exclude(is_active='Rejected',
+                                                                                    status="Deleted").order_by(
+                        '-date_posted')[:3]
                 else:
                     latest_jobs = Job.objects.filter(status="Open", is_active='Accepted').order_by('-date_posted')[:3]
                 args = {'job_list': latest_jobs, 'obj': user['obj'], 'user_type': user['user_type']}
@@ -216,7 +218,8 @@ def create_job(request):
 
                             first_name = companyForm.cleaned_data.get('company_name')
                             context = {'first_name': first_name}
-                            admin_context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
+                            admin_context = {'first_name': first_name, 'protocol': 'https',
+                                             'domain': 'murdochdubaicareerportal.com'}
 
                             subject = 'Your job posting request has been received'
                             htmlText = render_to_string('Employer/job_post_request.html', context)
@@ -225,9 +228,6 @@ def create_job(request):
                             subject = 'A job posting request has been received'
                             htmlText = render_to_string('Home/job_created_admin.html', admin_context)
                             send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
-
-                            job_to_alumni_skills(request, job.id)
-                            job_to_student_skills(request, job.id)
 
                             messages.success(request, "Job successfully created")
                             return redirect('view_jobs')
@@ -281,7 +281,8 @@ def create_job(request):
 
                     first_name = employer.company_name
                     context = {'first_name': first_name}
-                    admin_context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
+                    admin_context = {'first_name': first_name, 'protocol': 'https',
+                                     'domain': 'murdochdubaicareerportal.com'}
 
                     subject = 'Your job posting request has been received'
                     htmlText = render_to_string('Employer/job_post_request.html', context)
@@ -290,9 +291,6 @@ def create_job(request):
                     subject = 'A job posting request has been received'
                     htmlText = render_to_string('Home/job_created_admin.html', admin_context)
                     send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
-
-                    job_to_alumni_skills(request, data.id)
-                    job_to_student_skills(request, data.id)
 
                     messages.success(request, "Job successfully created")
                     return redirect('view_jobs')
@@ -638,17 +636,6 @@ def job_to_student_skills(request, id):
     studentList = list(set(studentApplicants))
     args = {'studentApplicants': studentList, 'obj': user['obj'], 'user_type': user['user_type']}
 
-    try:
-        subject = 'We found a match!'
-        for student in studentList:
-            first_name = student.user.first_name
-            context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
-            htmlText = render_to_string('Home/found_matching_jobs.html', context)
-            email = str(student.user)
-            send_html_mail(subject, htmlText, [email])
-    except:
-        pass
-
     return render(request, "Home/view_student_applicants.html", args)
 
 
@@ -660,9 +647,36 @@ def job_to_alumni_skills(request, id):
     alumniList = list(set(alumniApplicants))
     args = {'alumniApplicants': alumniList, 'obj': user['obj'], 'user_type': user['user_type']}
 
+    return render(request, "Home/view_alumni_applicants.html", args)
+
+
+@login_required
+def find_student_match(job_id):
+    job = Job.objects.get(id=job_id)
+    studentApplicants = Student.objects.filter(skills__in=job.skills.all(), is_active='Accepted')
+    studentList = list(set(studentApplicants))
+
     try:
-        subject = 'We found a match!'
+        for student in studentList:
+            subject = 'We found a match!'
+            first_name = student.user.first_name
+            context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
+            htmlText = render_to_string('Home/found_matching_jobs.html', context)
+            email = str(student.user)
+            send_html_mail(subject, htmlText, [email])
+    except:
+        pass
+
+
+@login_required
+def find_alumni_match(job_id):
+    job = Job.objects.get(id=job_id)
+    alumniApplicants = Alumni.objects.filter(skills__in=job.skills.all(), is_active='Accepted')
+    alumniList = list(set(alumniApplicants))
+
+    try:
         for alumni in alumniList:
+            subject = 'We found a match!'
             first_name = alumni.user.first_name
             context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
             htmlText = render_to_string('Home/found_matching_jobs.html', context)
@@ -670,8 +684,6 @@ def job_to_alumni_skills(request, id):
             send_html_mail(subject, htmlText, [email])
     except:
         pass
-
-    return render(request, "Home/view_alumni_applicants.html", args)
 
 
 @login_required
@@ -684,6 +696,7 @@ def get_student_cv_file(request, id):
     response = HttpResponse(wrapper, content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename=' + file_name
     return response
+
 
 @login_required
 def get_job_description_file(request, id):

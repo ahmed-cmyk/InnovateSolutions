@@ -23,6 +23,7 @@ from django.http import HttpResponse, JsonResponse
 
 from Home.forms import CreateJobForm
 from Employer.forms import InitialEmployerForm, EmployerForm
+from Home.views import find_student_match, find_alumni_match
 from .forms import InitialAdminForm, AdminForm, Statistics, JobStats, StudentStats
 from Accounts.views import isValidated, get_user_type, number_symbol_exists
 from .models import Admin
@@ -368,20 +369,19 @@ def change_job_status(request):
     subject = 'Your job posting request has been resolved'
 
     try:
-        print(id)
         job = Job.objects.get(id=job_id)
-        print(job)
-        print(job.posted_by)
         job.is_active = status
         job.save()
         receipent = str(job.posted_by)
+
+        find_student_match(job_id)
+        find_alumni_match(job_id)
 
         first_name = job.posted_by.company_name
         context = {'first_name': first_name, 'status': status}
 
         htmlText = render_to_string('Employer/job_post_resolution.html', context)
         send_html_mail(subject, htmlText, [receipent])
-        print(job.is_active)
     except:
         pass
 
