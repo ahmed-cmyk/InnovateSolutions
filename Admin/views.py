@@ -374,8 +374,9 @@ def change_job_status(request):
         job.save()
         receipent = str(job.posted_by)
 
-        find_student_match(job_id)
-        find_alumni_match(job_id)
+        if job.is_active == 'Accepted':
+            find_student_match(job_id)
+            find_alumni_match(job_id)
 
         first_name = job.posted_by.company_name
         context = {'first_name': first_name, 'status': status}
