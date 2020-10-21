@@ -650,13 +650,11 @@ def job_to_alumni_skills(request, id):
     return render(request, "Home/view_alumni_applicants.html", args)
 
 
-@login_required
 def find_student_match(job_id):
-    job = Job.objects.get(id=job_id)
-    studentApplicants = Student.objects.filter(skills__in=job.skills.all(), is_active='Accepted')
-    studentList = list(set(studentApplicants))
-
     try:
+        job = Job.objects.get(id=job_id)
+        studentApplicants = Student.objects.filter(skills__in=job.skills.all(), is_active='Accepted')
+        studentList = list(set(studentApplicants))
         for student in studentList:
             subject = 'We found a match!'
             first_name = student.user.first_name
@@ -668,13 +666,11 @@ def find_student_match(job_id):
         pass
 
 
-@login_required
 def find_alumni_match(job_id):
-    job = Job.objects.get(id=job_id)
-    alumniApplicants = Alumni.objects.filter(skills__in=job.skills.all(), is_active='Accepted')
-    alumniList = list(set(alumniApplicants))
-
     try:
+        job = Job.objects.get(id=job_id)
+        alumniApplicants = Alumni.objects.filter(skills__in=job.skills.all(), is_active='Accepted')
+        alumniList = list(set(alumniApplicants))
         for alumni in alumniList:
             subject = 'We found a match!'
             first_name = alumni.user.first_name

@@ -370,7 +370,7 @@ def change_job_status(request):
 
     try:
         job = Job.objects.get(id=job_id)
-        job.is_active = status
+        job.is_active = 'Pending'
         job.save()
         receipent = str(job.posted_by)
 
