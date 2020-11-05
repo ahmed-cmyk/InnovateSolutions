@@ -101,15 +101,30 @@ main {
     margin: auto;
 }
 
-#quoteBody {
-    width: 80%;
-    margin: auto;
+#search_item, .searchButton {
+    height: 6vh;
 }
 
 #jobDetBody {
     width: 90%;
     margin: auto;
     text-align: center;
+}
+
+.jobDetCard {
+    display: table-cell;
+}
+
+.jobDetCard h5 {
+    font-size: 1.2rem;
+}
+
+.jobDetCard li {
+    list-style: circle inside;
+}
+
+#jobDetBody .fa-briefcase, #jobDetBody .fa-graduation-cap {
+    color: #cc0000;
 }
 
 #body-image {
@@ -201,7 +216,7 @@ footer .footer-rule {
     font-size: 0.9em;
 }
 
-ul{
+footer ul{
     list-style-type:none;
 }
 
@@ -261,6 +276,13 @@ footer #social-section {
     footer #social-section img {
         width: 20vw;
         height: auto;
+    }
+}
+
+/******* Custom Media Settings *******/
+@media(min-width: 1300px) {
+    .special-break {
+        display: none;
     }
 }
 

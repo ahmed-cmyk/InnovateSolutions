@@ -24,7 +24,9 @@
             <div class="employer-profile col-md-8 text-left">
                 <p><strong>Company Name:</strong> {{ employer.company_name }}</p>
                 <p><strong>Company Description:</strong> {{ employer.company_description|safe }}</p>
-                <p><strong>Trade License:</strong> <a target="_blank" href="{{ employer.trade_license.url }}">{{ employer.trade_license }}</a></p>
+                {% if employer.trade_license %}
+                    <p><strong>Trade License:</strong> <a target="_blank" href="{{ employer.trade_license.url }}">{{ employer.trade_license }}</a></p>
+                {% endif %}
                 <p><strong>Contact Name:</strong> {{ employer.contact_name }}</p>
                 <p><strong>Contact Number:</strong> <a href="tel:{{ employer.phone_number }}">{{ employer.phone_number }}</a></p>
                 {% if employer.company_website %}
@@ -37,9 +39,11 @@
                 <button type="submit" class="btn btn-primary">Edit Profile</button>
             </a>
 
-            <a class="text-decoration-none text-white" href="{% url 'get_employer_trade_license' employer.user_id %}">
-                <button type="button" class="btn btn-primary">Download Trade License</button>
-            </a>
+            {% if employer.trade_license %}
+                <a class="text-decoration-none text-white" href="{% url 'get_employer_trade_license' employer.user_id %}">
+                    <button type="button" class="btn btn-primary">Download Trade License</button>
+                </a>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
