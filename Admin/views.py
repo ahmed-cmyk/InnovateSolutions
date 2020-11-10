@@ -158,6 +158,7 @@ def change_accept_status(request):
     print(user)
 
     subject = 'Your account creation request has been resolved'
+    subject_two = 'Your account creation request has been accepted'
 
     try:
         user_employer = Employer.objects.get(user_id=user_id)
@@ -168,8 +169,12 @@ def change_accept_status(request):
         first_name = user_employer.company_name
         context = {'first_name': first_name, 'status': status}
 
-        htmlText = render_to_string('Accounts/account_creation_resolution.html', context)
-        send_html_mail(subject, htmlText, [receipent])
+        if str(status) == 'accepted':
+            htmlText = render_to_string('Accounts/account_creation_accepted.html', context)
+            send_html_mail(subject_two, htmlText, [receipent])
+        else:
+            htmlText = render_to_string('Accounts/account_creation_resolution.html', context)
+            send_html_mail(subject, htmlText, [receipent])
     except:
         pass
 
@@ -182,8 +187,12 @@ def change_accept_status(request):
         first_name = user_alumni.user.first_name
         context = {'first_name': first_name, 'status': status}
 
-        htmlText = render_to_string('Accounts/account_creation_resolution.html', context)
-        send_html_mail(subject, htmlText, [receipent])
+        if str(status) == 'accepted':
+            htmlText = render_to_string('Accounts/account_creation_accepted.html', context)
+            send_html_mail(subject_two, htmlText, [receipent])
+        else:
+            htmlText = render_to_string('Accounts/account_creation_resolution.html', context)
+            send_html_mail(subject, htmlText, [receipent])
     except:
         pass
 
@@ -196,8 +205,12 @@ def change_accept_status(request):
         first_name = user_student.user.first_name
         context = {'first_name': first_name, 'status': status}
 
-        htmlText = render_to_string('Accounts/account_creation_resolution.html', context)
-        send_html_mail(subject, htmlText, [receipent])
+        if str(status) == 'accepted':
+            htmlText = render_to_string('Accounts/account_creation_accepted.html', context)
+            send_html_mail(subject_two, htmlText, [receipent])
+        else:
+            htmlText = render_to_string('Accounts/account_creation_resolution.html', context)
+            send_html_mail(subject, htmlText, [receipent])
     except:
         pass
 

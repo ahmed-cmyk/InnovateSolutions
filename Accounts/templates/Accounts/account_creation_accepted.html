@@ -1,0 +1,26 @@
+{% autoescape off %}
+{% load staticfiles %}
+Dear {{ first_name }},<br><br>
+Thank you for registering on the Murdoch University Career Portal.  Your CV has been approved so feel free to start applying for positions when you are ready.<br>
+A few pointers to improve your success in obtaining a great work experience:<br>
+<ul>
+    <li>Upload a professional photo to accompany your profile information.</li>
+    <li>When you itemise your soft skills, don’t forget to match them to the most sought-after skills employers are seeking. If you can demonstrate how you have developed them, employers will easily recognise your value. These important skills are:
+        <ul>
+            <li>Critical thinking<li>
+            <li>Problem-solving<li>
+            <li>Creativity<li>
+            <li>Presentation skills<li>
+            <li>Communications skills<li>
+            <li>Digital literacy<li>
+            <li>Financial literacy<li>
+            <li>Teamwork<li>
+        </ul>
+    </li>
+</ul>
+Best of luck and please let us know if you need any further assistance.<br><br>
+Kind regards,<br>
+The Murdoch University Dubai Team<br>
+<img src="{% static 'images/careerportal_signaturebanner.png' %}" alt="Career Portal Signature Banner">
+{% endautoescape %}
+
