@@ -1,10 +1,8 @@
 {% autoescape off %}
-{% load staticfiles %}
 Dear {{ first_name }},<br><br>
 A new job that suits your qualifications has been posted on the Murdoch Dubai
 Career Portal {{ protocol }}://{{ domain }}{% url 'index' %}. Please visit the site to start your application.<br><br>
 All the best!<br><br>
 Kind regards,<br>
 The Murdoch University Dubai Team<br>
-<img src="{% static 'images/careerportal_signaturebanner.png' %}" alt="Career Portal Signature Banner">
 {% endautoescape %}
