@@ -169,7 +169,7 @@ def change_accept_status(request):
         first_name = user_employer.company_name
         context = {'first_name': first_name, 'status': status}
 
-        if str(status) == 'accepted':
+        if str(status) == 'Accepted':
             htmlText = render_to_string('Accounts/account_creation_accepted.html', context)
             send_html_mail(subject_two, htmlText, [receipent])
         else:
@@ -187,7 +187,7 @@ def change_accept_status(request):
         first_name = user_alumni.user.first_name
         context = {'first_name': first_name, 'status': status}
 
-        if str(status) == 'accepted':
+        if str(status) == 'Accepted':
             htmlText = render_to_string('Accounts/account_creation_accepted.html', context)
             send_html_mail(subject_two, htmlText, [receipent])
         else:
@@ -205,7 +205,7 @@ def change_accept_status(request):
         first_name = user_student.user.first_name
         context = {'first_name': first_name, 'status': status}
 
-        if str(status) == 'accepted':
+        if str(status) == 'Accepted':
             htmlText = render_to_string('Accounts/account_creation_accepted.html', context)
             send_html_mail(subject_two, htmlText, [receipent])
         else:
