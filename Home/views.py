@@ -401,6 +401,10 @@ def edit_job(request, id):
                     htmlText = 'You have successfully edited your job.'
                     send_html_mail(subject, htmlText, [email])
 
+                    if job.is_active == 'Accepted':
+                        find_student_match(id)
+                        find_alumni_match(id)
+
                     return redirect(next)
                 else:
                     messages.info(request, form.errors)
@@ -432,9 +436,14 @@ def edit_job(request, id):
                         j.save()
                         jobForm.save_m2m()
                         next_page = request.POST.get('next', '/')
+
                         subject = 'Job Edit Successful'
                         htmlText = 'You have successfully edited a job.'
                         send_html_mail(subject, htmlText, [email])
+
+                        if job.is_active == 'Accepted':
+                            find_student_match(id)
+                            find_alumni_match(id)
 
                         return redirect(next_page)
                 else:
