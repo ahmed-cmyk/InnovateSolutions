@@ -667,7 +667,7 @@ def find_student_match(job_id):
         for student in studentList:
             subject = 'We found a match!'
             first_name = student.user.first_name
-            context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
+            context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com', 'job_id': job_id}
             htmlText = render_to_string('Home/found_matching_jobs.html', context)
             email = str(student.user)
             send_html_mail(subject, htmlText, [email])
@@ -683,7 +683,7 @@ def find_alumni_match(job_id):
         for alumni in alumniList:
             subject = 'We found a match!'
             first_name = alumni.user.first_name
-            context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
+            context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com', 'job_id': job_id}
             htmlText = render_to_string('Home/found_matching_jobs.html', context)
             email = str(alumni.user)
             send_html_mail(subject, htmlText, [email])
