@@ -65,7 +65,7 @@ def signup(request):
 
                             first_name = user_form.cleaned_data.get('company_name')
                             context = {'first_name': first_name}
-                            admin_context = {'first_name': first_name, 'protocol': 'http', 'domain': 'murdochdubaicareerportal.com'}
+                            admin_context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
 
                             subject = 'Your account creation request has been received'
                             htmlText = render_to_string('Accounts/account_creation_request.html', context)
