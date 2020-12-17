@@ -135,7 +135,11 @@
                                                     </p>
                                                     {% if job.salary_min or job.salary_max %}
                                                         <p class="card-text">
-                                                            <i class="fa fa-money" aria-hidden="true"></i> {{ job.salary_min }} - {{ job.salary_max }} AED/{{ job.duration_type }}
+                                                            {% if job.salary_min != job.salary_max %}
+                                                                <i class="fa fa-money" aria-hidden="true"></i> {{ job.salary_min }} - {{ job.salary_max }} AED/{{ job.duration_type }}
+                                                            {% else %}
+                                                                <i class="fa fa-money" aria-hidden="true"></i> {{ job.salary_min }} AED/{{ job.duration_type }}
+                                                            {% endif %}
                                                         </p>
                                                     {% endif %}
                                                 </div><!-- End of card-body -->
@@ -194,7 +198,11 @@
                                     </p>
                                     {% if job.salary_min or job.salary_max %}
                                         <p class="card-text">
-                                            <i class="fa fa-money" aria-hidden="true"></i> {{ job.salary_min }} - {{ job.salary_max }} AED/Month
+                                            {% if job.salary_min != job.salary_max %}
+                                                <i class="fa fa-money" aria-hidden="true"></i> {{ job.salary_min }} - {{ job.salary_max }} AED/{{ job.duration_type }}
+                                            {% else %}
+                                                <i class="fa fa-money" aria-hidden="true"></i> {{ job.salary_min }} AED/{{ job.duration_type }}
+                                            {% endif %}
                                         </p>
                                     {% endif %}
                                 </div><!-- End of card-body -->

@@ -1,4 +1,5 @@
 .env
+venv/
 media/
 backup/*
 myprojectenv/

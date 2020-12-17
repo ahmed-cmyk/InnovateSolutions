@@ -7,6 +7,13 @@ from Alumni.models import Alumni
 
 
 class CreateJobForm(forms.ModelForm):
+    JOB_LEVEL = [
+        ('--Select--', '--Select--'),
+        ('Entry', 'Entry'),
+        ('Mid', 'Mid'),
+        ('Senior', 'Senior')
+    ]
+
     DURATION = [
         ('--Select--', '--Select--'),
         ('Days', 'Days'),
@@ -33,12 +40,17 @@ class CreateJobForm(forms.ModelForm):
                                                         attrs={'id': 'duration_type',
                                                                'onChange': 'toggleDuration(this)'}),
                                     required=True)
+    job_level = forms.CharField(max_length=10,
+                                    widget=forms.Select(choices=JOB_LEVEL,
+                                                        attrs={'id': 'job_levels'}),
+                                    required=True)
     duration = forms.IntegerField(required=False, widget=forms.NumberInput(attrs={'id': 'duration'}))
 
     class Meta:
         model = Job
         exclude = ['date_posted', 'status', 'date_closed']
         labels = {
+            "job_level": "Job Level",
             "duration_type": "Duration Type",
             "duration": "Duration",
             "salary_min": "Minimum Salary (AED)",
@@ -56,6 +68,7 @@ class EditJobForm(CreateJobForm):
         model = Job
         exclude = ['posted_by', 'date_posted', 'date_closed', 'status']
         labels = {
+            "job_level": "Job Level",
             "duration_type": "Duration Type",
             "duration": "Duration",
             "salary_min": "Minimum Salary (AED)",

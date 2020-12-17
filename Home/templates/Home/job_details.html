@@ -128,6 +128,7 @@
                                     <h4 class="card-header text-primary">Job Details</h4>
                                     <div class="card-body">
                                         <p><b class="card-text text-secondary">Job Type: </b><span class="badge badge-success">{{ job.job_type_id }}</span></p>
+                                        <p><b class="card-text text-secondary">Job Level: </b><span class="badge badge-info">{{ job.job_level }}</span></p>
                                         <p><b class="card-text text-secondary">Industry: </b> {{ job.industry_id }}</p>
                                         <p><b class="card-title text-secondary">Duration: </b>
                                             {% if job.duration %}
@@ -135,7 +136,11 @@
                                             {% endif %}
                                             {{ job.duration_type }}</p>
                                         {% if job.salary_min or job.salary_max %}
-                                            <p><b class="card-title text-secondary">Salary: </b> {{ job.salary_min }} - {{ job.salary_max }} AED/{{ job.duration_type }}</p>
+                                            {% if job.salary_min != job.salary_max %}
+                                                <p><b class="card-title text-secondary">Salary: </b> {{ job.salary_min }} - {{ job.salary_max }} AED/{{ job.duration_type }}</p>
+                                            {% else %}
+                                                <p><b class="card-title text-secondary">Salary: </b> {{ job.salary_min }} AED/{{ job.duration_type }}</p>
+                                            {% endif %}
                                         {% endif %}
                                     </div>
                                 </div>

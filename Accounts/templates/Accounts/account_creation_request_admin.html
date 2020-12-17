@@ -1,5 +1,4 @@
 {% autoescape off %}
-{% load staticfiles %}
 Dear admin,<br><br>
 A new account creation request has been submitted by {{ first_name }}. Please review the application on {{ protocol }}://{{ domain }}{% url 'view_pending_requests' %} within 24 working hours.<br><br>
 Kind regards,<br>
