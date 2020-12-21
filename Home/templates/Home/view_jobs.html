@@ -122,6 +122,11 @@
                                                     <p class="card-text">
                                                         <i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }}
                                                     </p>
+                                                    {% if job.job_level %}
+                                                    <p class="card-text">
+                                                        <i class="fa fa-level-up" aria-hidden="true"></i> {{ job.job_level }}
+                                                    </p>
+                                                {% endif %}
                                                     <p class="card-text">
                                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                                         {% if job.duration %}
@@ -185,6 +190,11 @@
                                     <p class="card-text">
                                         <i class="fa fa-map-marker" aria-hidden="true"></i> {{ job.location }}
                                     </p>
+                                    {% if job.job_level %}
+                                        <p class="card-text">
+                                            <i class="fa fa-level-up" aria-hidden="true"></i> {{ job.job_level }}
+                                        </p>
+                                    {% endif %}
                                     <p class="card-text">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                         {% if job.duration %}

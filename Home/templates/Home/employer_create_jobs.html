@@ -21,25 +21,48 @@
 {% endblock %}
 {% block jQueryCall %}
     <script>
- $("#id_email").focusout(function (e) {
-      var username = $(this).val();
-      $.ajax({
-            type: 'GET',
-            url: "{% url 'check_student_username' %}",
-            data: {"username": username},
-            success: function (response) {
-                  if(!response["valid"]) {
-                      e.preventDefault();
-                        $("#usernameError").css('color', 'red').html("This username is already being used");
+    $("#id_email").focusout(function (e) {
+        var username = $(this).val();
+        $.ajax({
+                type: 'GET',
+                url: "{% url 'check_student_username' %}",
+                data: {"username": username},
+                success: function (response) {
+                    if(!response["valid"]) {
+                        e.preventDefault();
+                            $("#usernameError").css('color', 'red').html("This username is already being used");
+                        }
+                    else {
+                            $("#usernameError").css('color', '').html("");
                     }
-                  else {
-                        $("#usernameError").css('color', '').html("");
-                  }
-            },
-            error: function (response) {
-                  console.log(response);
-            }
-      });
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+        });
+        });
+    
+    $("#id_salary_min").focusout(function (e) {
+        var min = parseInt($(this).val());
+        var max = parseInt($("#id_salary_max").val());
+        
+        if(min > max) {
+            console.log(min);
+            e.preventDefault();
+            $("#maxError").css('color', 'red');
+            $("#minError").css('color', 'red').html("The minimum salary cannot be higher than the maximum ");
+        }
+    });
+    $("#id_salary_max").focusout(function (e) {
+        var min = parseInt($("#id_salary_min").val());
+        var max = parseInt($(this).val());
+        
+        if(min > max) {
+            console.log(max);
+            e.preventDefault();
+            $("#maxError").css('color', 'red')
+            $("#minError").css('color', 'red').html("The minimum salary cannot be higher than the maximum ");
+        }
     });
     </script>
 {% endblock %}
@@ -175,6 +198,10 @@ function toggleDuration(elem) {
             <div class="form-row">
                 <div class="form-group col-6">{{ jobForm.salary_min|as_crispy_field }}</div>
                 <div class="form-group col-6">{{ jobForm.salary_max|as_crispy_field }}</div>
+            </div>
+            <div class="form-row">
+                <div id="minError" class="form-group col-6"></div>
+                <div id="maxError" class="form-group col-6"></div>
             </div>
             {{ jobForm.skills.label }}
             <div class="skills-container">
