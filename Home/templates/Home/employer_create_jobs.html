@@ -51,6 +51,9 @@
             e.preventDefault();
             $("#maxError").css('color', 'red');
             $("#minError").css('color', 'red').html("The minimum salary cannot be higher than the maximum ");
+        } else {
+            $("#maxError").css('color', '')
+            $("#minError").css('color', '').html("");
         }
     });
     $("#id_salary_max").focusout(function (e) {
@@ -62,6 +65,9 @@
             e.preventDefault();
             $("#maxError").css('color', 'red')
             $("#minError").css('color', 'red').html("The minimum salary cannot be higher than the maximum ");
+        } else {
+            $("#maxError").css('color', '')
+            $("#minError").css('color', '').html("");
         }
     });
     </script>
