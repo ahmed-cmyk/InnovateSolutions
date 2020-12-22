@@ -180,6 +180,10 @@ function toggleDuration(elem) {
                 <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ form.salary_min|as_crispy_field }}</div>
                 <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ form.salary_max|as_crispy_field }}</div>
             </div>
+            <div class="form-row">
+                <div id="minError" class="form-group col-6"></div>
+                <div id="maxError" class="form-group col-6"></div>
+            </div>
             {{ form.skills.label }}
             <div class="skills-container">
                 <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
