@@ -8,7 +8,7 @@ from Alumni.models import Alumni
 
 class CreateJobForm(forms.ModelForm):
     JOB_LEVEL = [
-        ('--Select--', '--Select--'),
+        ('Unspecified', 'Unspecified'),
         ('Entry', 'Entry'),
         ('Mid', 'Mid'),
         ('Senior', 'Senior')
@@ -40,7 +40,7 @@ class CreateJobForm(forms.ModelForm):
                                                         attrs={'id': 'duration_type',
                                                                'onChange': 'toggleDuration(this)'}),
                                     required=True)
-    job_level = forms.CharField(max_length=10,
+    job_level = forms.CharField(max_length=15,
                                     widget=forms.Select(choices=JOB_LEVEL,
                                                         attrs={'id': 'job_levels'}),
                                     required=True)

@@ -107,6 +107,7 @@ class Job(models.Model):
         ('Deleted', 'Deleted')
     ]
     JOB_LEVEL = [
+        ('Unspecified', 'Unspecified'),
         ('Entry', 'Entry'),
         ('Mid', 'Mid'),
         ('Senior', 'Senior')
@@ -127,7 +128,7 @@ class Job(models.Model):
     location = models.CharField(max_length=100, choices=LOCATION_CHOICES)
     job_type_id = models.ForeignKey(JobType, on_delete=models.CASCADE, related_name='job_type')
     industry_id = models.ForeignKey(Industry, on_delete=models.CASCADE, related_name='job_industry')
-    job_level = models.CharField(max_length=10, choices=JOB_LEVEL, null=True, blank=True)
+    job_level = models.CharField(max_length=15, choices=JOB_LEVEL, null=True, blank=True)
     duration_type = models.CharField(max_length=10, choices=DURATION)
     duration = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(1)])
     salary_min = models.DecimalField(null=True, blank=True, max_digits=8, decimal_places=2, validators=[MinValueValidator(0.00)])

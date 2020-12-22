@@ -212,6 +212,7 @@ def create_job(request):
                             company.is_active = 'Accepted'
                             company.save()
                             job = jobForm.save(commit=False)
+                            print(job.job_level)
                             job.posted_by = Employer.objects.get(user_id=company.user.id)
                             email = company.user
                             job.save()
