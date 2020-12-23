@@ -41,36 +41,8 @@
                 }
         });
         });
-    
-    $("#id_salary_min").focusout(function (e) {
-        var min = parseInt($(this).val());
-        var max = parseInt($("#id_salary_max").val());
-        
-        if(min > max) {
-            console.log(min);
-            e.preventDefault();
-            $("#maxError").css('color', 'red');
-            $("#minError").css('color', 'red').html("The minimum salary cannot be higher than the maximum ");
-        } else {
-            $("#maxError").css('color', '')
-            $("#minError").css('color', '').html("");
-        }
-    });
-    $("#id_salary_max").focusout(function (e) {
-        var min = parseInt($("#id_salary_min").val());
-        var max = parseInt($(this).val());
-        
-        if(min > max) {
-            console.log(max);
-            e.preventDefault();
-            $("#maxError").css('color', 'red')
-            $("#minError").css('color', 'red').html("The minimum salary cannot be higher than the maximum ");
-        } else {
-            $("#maxError").css('color', '')
-            $("#minError").css('color', '').html("");
-        }
-    });
     </script>
+    <script src="{% static 'js/ManageJob.js' %}" type="text/javascript"></script>
 {% endblock %}
 {% block content %}
 <script>

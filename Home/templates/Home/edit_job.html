@@ -4,11 +4,18 @@
 <!-- Stylesheet -->
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/EditJob.css' %}"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.5.0/tinymce.min.js"></script>
 {% endblock %}
 
 {% block title %}
     Edit Job - Murdoch Dubai Career Portal
+{% endblock %}
+
+{% block jQueryCall %}
+    <script src="{% static 'js/ManageJob.js' %}" type="text/javascript"></script>
 {% endblock %}
 
 {% block content %}
@@ -95,6 +102,10 @@ function toggleDuration(elem) {
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_min|as_crispy_field }}</div>
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_max|as_crispy_field }}</div>
                 </div>
+                <div class="form-row">
+                    <div id="minError" class="form-group col-6"></div>
+                    <div id="maxError" class="form-group col-6"></div>
+                </div>
                 {{ jobForm.skills.label }}
                 <div class="skills-container">
                     <input class="searchTerm form-control" type="text" id="myInput" onkeyup="searchSkill()" placeholder="Search for skills...">
@@ -119,6 +130,10 @@ function toggleDuration(elem) {
                 <div class="form-row">
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_min|as_crispy_field }}</div>
                     <div class="form-group col-md-6 col-sm-6 col-xs-12">{{ jobForm.salary_max|as_crispy_field }}</div>
+                </div>
+                <div class="form-row">
+                    <div id="minError" class="form-group col-6"></div>
+                    <div id="maxError" class="form-group col-6"></div>
                 </div>
                 {{ jobForm.skills.label }}
                 <div class="skills-container">
