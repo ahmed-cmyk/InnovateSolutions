@@ -42,7 +42,6 @@ $("#createJobBody").submit(function (e) {
     }
     else {
         console.log("Success!");
-        e.preventDefault();
     }
 });
 
@@ -56,6 +55,5 @@ $("#editJobBody").submit(function (e) {
     }
     else {
         console.log("Success!");
-        e.preventDefault();
     }
 });

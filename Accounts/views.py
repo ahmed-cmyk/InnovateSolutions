@@ -56,29 +56,44 @@ def login(request):
         username = request.POST['username']
         password = request.POST['password']
 
-        user = auth.authenticate(username=username, password=password)
+        try:
+            print("Username: " + username)
+            print(type(username))
+            print(Student.objects.all())
+            student = Student.objects.get(personal_email=username)
+            print("Student name"+ str(student))
+            username = student.user
+            print("Student user: " + str(username))
+        except:
+            pass
 
-        if user is None:
-            messages.info(request, 'Credentials do not exist, please try a different username/password')
-            return redirect("log_in")
-        else:
-            if user.is_superuser == True or user.is_staff == True:
-                messages.info(request, 'To login in as admin, please visit the admin site.')
+        try:
+            user = auth.authenticate(username=username, password=password)
+
+            if user is None:
+                messages.info(request, 'Credentials do not exist, please try a different username/password')
                 return redirect("log_in")
             else:
-                auth.login(request, user)
-                auth_user = get_user_type(request)
-                try:
-                    if auth_user['obj'].is_active == 'Accepted':
-                        return redirect('/', get_user_type(request))
-                    elif auth_user['obj'].is_active == 'Rejected':
-                        return redirect('account_rejected')
-                    else:
-                        return redirect('pending_approval')
-                except:
-                    auth.logout(request)
-                    messages.info(request, 'Unexpected error please try again.')
-                    return redirect('index')
+                if user.is_superuser == True or user.is_staff == True:
+                    messages.info(request, 'To login in as admin, please visit the admin site.')
+                    return redirect("log_in")
+                else:
+                    auth.login(request, user)
+                    auth_user = get_user_type(request)
+                    try:
+                        if auth_user['obj'].is_active == 'Accepted':
+                            return redirect('/', get_user_type(request))
+                        elif auth_user['obj'].is_active == 'Rejected':
+                            return redirect('account_rejected')
+                        else:
+                            return redirect('pending_approval')
+                    except:
+                        auth.logout(request)
+                        messages.info(request, 'Unexpected error please try again.')
+                        return redirect('index')
+        except:
+            pass
+
     else:
         return render(request, 'login.html', get_user_type(request))
 
