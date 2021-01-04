@@ -673,7 +673,7 @@ def find_student_match(job_id):
             context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com', 'job_id': job_id}
             htmlText = render_to_string('Home/found_matching_jobs.html', context)
             email = str(student.user)
-            student_email = str(student.user.personal_email)
+            student_email = str(student.personal_email)
             send_html_mail(subject, htmlText, [email])
             send_html_mail(subject, htmlText, [student_email])
     except:

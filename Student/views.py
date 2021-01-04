@@ -55,7 +55,7 @@ def student_signup(request):
                             student = student_form.save(commit=False)
                             student.user = user
                             email = str(student.user)
-                            student_email = str(student.user.personal_email)
+                            student_email = str(student.personal_email)
                             student.save()
                             student_form.save_m2m()
 

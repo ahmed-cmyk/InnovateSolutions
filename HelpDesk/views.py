@@ -96,7 +96,7 @@ class HelpDeskFormView(TemplateView):
                 try:
                     student = Student.objects.get(user_id=request.user.id)
                     first_name = student.user.first_name
-                    student_email = str(student.user.personal_email)
+                    student_email = str(student.personal_email)
                     context = {'first_name': first_name}
                     admin_context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
 
