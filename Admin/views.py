@@ -201,6 +201,7 @@ def change_accept_status(request):
         user_student.is_active = status
         user_student.save()
         receipent = str(user_student.user)
+        student_receipent = str(user_student.personal_email)
 
         first_name = user_student.user.first_name
         context = {'first_name': first_name, 'status': status}
@@ -208,9 +209,11 @@ def change_accept_status(request):
         if str(status) == 'Accepted':
             htmlText = render_to_string('Accounts/account_creation_accepted.html', context)
             send_html_mail(subject_two, htmlText, [receipent])
+            send_html_mail(subject_two, htmlText, [student_receipent])
         else:
             htmlText = render_to_string('Accounts/account_creation_resolution.html', context)
             send_html_mail(subject, htmlText, [receipent])
+            send_html_mail(subject, htmlText, [student_receipent])
     except:
         pass
 
