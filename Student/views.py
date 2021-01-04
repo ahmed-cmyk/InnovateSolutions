@@ -55,6 +55,7 @@ def student_signup(request):
                             student = student_form.save(commit=False)
                             student.user = user
                             email = str(student.user)
+                            student_email = str(student.user.personal_email)
                             student.save()
                             student_form.save_m2m()
 
@@ -65,6 +66,7 @@ def student_signup(request):
                             subject = 'Your account creation request has been received'
                             htmlText = render_to_string('Accounts/account_creation_request.html', context)
                             send_html_mail(subject, htmlText, [email])
+                            send_html_mail(subject, htmlText, [student_email])
 
                             subject = 'An account creation request has been received '
                             htmlText = render_to_string('Accounts/account_creation_request_admin.html', admin_context)

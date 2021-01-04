@@ -96,11 +96,13 @@ class HelpDeskFormView(TemplateView):
                 try:
                     student = Student.objects.get(user_id=request.user.id)
                     first_name = student.user.first_name
+                    student_email = str(student.user.personal_email)
                     context = {'first_name': first_name}
                     admin_context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
 
                     htmlText = render_to_string('HelpDesk/helpdesk_request_logged.html', context)
                     send_html_mail(subject, htmlText, [email])
+                    send_html_mail(subject, htmlText, [student_email])
 
                     subject = ' A new HelpDesk request has been received'
                     htmlText = render_to_string('HelpDesk/helpdesk_request_submitted.html', admin_context)
