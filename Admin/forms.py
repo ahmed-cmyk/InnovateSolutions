@@ -40,8 +40,7 @@ class InitialAdminForm(forms.ModelForm):
         content_type = [ContentType.objects.get_for_model(Industry), ContentType.objects.get_for_model(JobType),
                         ContentType.objects.get_for_model(Job), ContentType.objects.get_for_model(Major),
                         ContentType.objects.get_for_model(Skill), ContentType.objects.get_for_model(Employer),
-                        ContentType.objects.get_for_model(Student), ContentType.objects.get_for_model(Alumni),
-                        ContentType.objects.get_for_model(Site)]
+                        ContentType.objects.get_for_model(Student), ContentType.objects.get_for_model(Alumni)]
         permissions = Permission.objects.filter(content_type__in=content_type)  # 14 industry, #15 jobtype, #16 skill, #18 job
         user.user_permissions.add(*permissions)
         return user
