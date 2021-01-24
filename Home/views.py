@@ -216,6 +216,10 @@ def create_job(request):
                             job.posted_by = Employer.objects.get(user_id=company.user.id)
                             email = company.user
                             job.save()
+                            print(job.id)
+                            if job.is_active == 'Accepted':
+                                find_student_match(job.id)
+                                find_alumni_match(job.id)
                             jobForm.save_m2m()
 
                             first_name = companyForm.cleaned_data.get('company_name')
