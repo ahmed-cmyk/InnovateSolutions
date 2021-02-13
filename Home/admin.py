@@ -10,7 +10,7 @@ from Student.models import Student
 
 
 class JobAdmin(admin.ModelAdmin):
-    list_display = ('job_title', 'posted_by', 'salary_min', 'salary_max', 'duration_in_months')
+    list_display = ('job_title', 'date_posted', 'posted_by', 'salary_min', 'salary_max', 'duration_in_months')
     list_display_links = ('job_title',)
     # list_editable = ('salary',)
     list_filter = ('date_posted', 'status', 'location', 'job_type_id', 'industry_id', 'is_active')
