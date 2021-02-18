@@ -102,6 +102,10 @@ table {
   width: auto;
 }
 
+body p.card-text {
+    font-size: 0.8rem;
+}
+
 /******** Mobile Devices ********/
 @media (max-width: 767px) {
     #filter button {

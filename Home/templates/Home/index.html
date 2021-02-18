@@ -9,7 +9,7 @@
 
 {% csrf_token %}
     {% block image %}
-        <div id="body-image" class="text-center d-none d-sm-block">
+        <div id="body-image" class="text-center">
             <img src="{% static 'images/homepage.png' %}" alt="Home page image">
             {% if user_type == 'student' or user_type == 'alumni' %}
                 <div class="col-12 w-75 mx-auto centered">
