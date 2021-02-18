@@ -25,7 +25,7 @@
                 </div>
             {% endif %}
         </div>
-        <div id="body-image" class="text-center d-none d-sm-block d-md-none">
+        <!-- <div id="body-image" class="text-center d-none d-sm-block d-md-none">
             <img src="{% static 'images/homepage-mobile.png' %}" alt="Mobile Home page image">
             {% if user_type == 'student' or user_type == 'alumni' %}
                 <div class="col-12 w-75 mx-auto centered">
@@ -40,7 +40,7 @@
                     </form>
                 </div>
             {% endif %}
-        </div>
+        </div> -->
     {% endblock %}
 {% block content %}
     {% if user_type == 'student' or user_type == 'alumni' %}
