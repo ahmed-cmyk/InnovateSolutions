@@ -9,8 +9,24 @@
 
 {% csrf_token %}
     {% block image %}
-        <div id="body-image" class="text-center">
+        <div id="body-image" class="text-center d-sm-none d-md-block">
             <img src="{% static 'images/homepage.png' %}" alt="Home page image">
+            {% if user_type == 'student' or user_type == 'alumni' %}
+                <div class="col-12 w-75 mx-auto centered">
+                    <form class="search" method="POST">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input class="searchTerm form-control" id="search_item" type="text" name="search_item"  placeholder="What job are you looking for?" >
+                            <div class="input-group-append">
+                                <button class="searchButton input-group-text" type="submit"><i class="fa fa-search fa-3x"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+        <div id="body-image" class="text-center d-none d-sm-block d-md-none">
+            <img src="{% static 'images/homepage-mobile.png' %}" alt="Mobile Home page image">
             {% if user_type == 'student' or user_type == 'alumni' %}
                 <div class="col-12 w-75 mx-auto centered">
                     <form class="search" method="POST">
