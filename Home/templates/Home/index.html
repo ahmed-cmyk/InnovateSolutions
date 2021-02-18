@@ -9,7 +9,7 @@
 
 {% csrf_token %}
     {% block image %}
-        <div id="body-image" class="text-center d-sm-none d-md-block">
+        <div id="body-image" class="text-center d-none d-sm-none d-md-block">
             <img src="{% static 'images/homepage.png' %}" alt="Home page image">
             {% if user_type == 'student' or user_type == 'alumni' %}
                 <div class="col-12 w-75 mx-auto centered">
@@ -25,8 +25,8 @@
                 </div>
             {% endif %}
         </div>
-        <!-- <div id="body-image" class="text-center d-none d-sm-block d-md-none">
-            <img src="{% static 'images/homepage-mobile.png' %}" alt="Mobile Home page image">
+        <div id="body-image" class="text-center d-block d-sm-none">
+            <img src="{% static 'images/homepage-mobile.png' %}" alt="Home page image">
             {% if user_type == 'student' or user_type == 'alumni' %}
                 <div class="col-12 w-75 mx-auto centered">
                     <form class="search" method="POST">
@@ -40,7 +40,7 @@
                     </form>
                 </div>
             {% endif %}
-        </div> -->
+        </div>
     {% endblock %}
 {% block content %}
     {% if user_type == 'student' or user_type == 'alumni' %}
