@@ -63,7 +63,8 @@ def signup(request):
                             email = str(request.user)
                             employer.save()
 
-                            first_name = user_form.cleaned_data.get('company_name')
+                            first_name = str(employer.company_name)
+                            print(first_name)
                             context = {'first_name': first_name}
                             admin_context = {'first_name': first_name, 'protocol': 'https', 'domain': 'murdochdubaicareerportal.com'}
 
