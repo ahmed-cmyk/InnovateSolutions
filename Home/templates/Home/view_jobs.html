@@ -139,6 +139,9 @@
                                                         - {{ job.job_type_id }}
                                                     </p>
                                                     <p class="card-text">
+                                                        <i class="fa fa-users" aria-hidden="true"></i> {{ job.available_positions }}
+                                                    </p>
+                                                    <p class="card-text">
                                                         <i class="fa fa-industry" aria-hidden="true"></i> {{ job.industry_id }}
                                                     </p>
                                                     {% if job.salary_min or job.salary_max %}
@@ -208,6 +211,9 @@
                                         {% endif %}
                                         {{ job.duration_type }}
                                         - {{ job.job_type_id }}
+                                    </p>
+                                    <p class="card-text">
+                                        <i class="fa fa-users" aria-hidden="true"></i> {{ job.available_positions }}
                                     </p>
                                     <p class="card-text">
                                         <i class="fa fa-industry" aria-hidden="true"></i> {{ job.industry_id }}
