@@ -43,19 +43,19 @@
         </div>
     {% endblock %}
 {% block content %}
-    {% if user_type == 'student' or user_type == 'alumni' %}
-        <div class="col-12 d-block d-sm-none">
-            <form class="search" method="POST">
-                {% csrf_token %}
-                <div class="input-group">
-                    <input class="searchTerm form-control" id="search_item" type="text" name="search_item"  placeholder="What job are you looking for?" >
-                    <div class="input-group-append">
-                        <button class="searchButton input-group-text" type="submit"><i class="fa fa-search fa-3x"></i></button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    {% endif %}
+{#    {% if user_type == 'student' or user_type == 'alumni' %}#}
+{#        <div class="col-12 d-block d-sm-none">#}
+{#            <form class="search" method="POST">#}
+{#                {% csrf_token %}#}
+{#                <div class="input-group">#}
+{#                    <input class="searchTerm form-control" id="search_item" type="text" name="search_item"  placeholder="What job are you looking for?" >#}
+{#                    <div class="input-group-append">#}
+{#                        <button class="searchButton input-group-text" type="submit"><i class="fa fa-search fa-3x"></i></button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </form>#}
+{#        </div>#}
+{#    {% endif %}#}
     <div id="mobileButtons" class="col-xs-12 text-center d-block d-sm-none">
         {% if not user.is_authenticated %}
             <a class="text-decoration-none" href="{% url 'sign_up' %}">
