@@ -593,7 +593,7 @@ def generate_statistics(request):
         deleted_jobs = len(list(set(deleted_jobs)))
         apps = len(list(set(apps)))
         alumni_apps = len(list(set(alumni_apps)))
-        internships_posted = len(list(set(internships_posted)))
+        internships_posted = len(list(set(internships_posted))) if len(list(set(internships_posted))) else 0
         pending_employers = len(list(set(pending_employers)))
         pending_students = len(list(set(pending_students)))
         pending_alumni = len(list(set(pending_alumni)))
@@ -673,12 +673,12 @@ def generate_job_statistics(request):
         rejected_jobs = len(list(set(rejected_jobs)))
         total_accepted_jobs = open_jobs + closed_jobs + deleted_jobs
 
-        total_internships_posted = len(list(set(total_internships_posted)))
-        open_internships = len(list(set(open_internships)))
-        closed_internships = len(list(set(closed_internships)))
-        deleted_internships = len(list(set(deleted_internships)))
-        pending_internships = len(list(set(pending_internships)))
-        rejected_internships = len(list(set(rejected_internships)))
+        total_internships_posted = len(list(set(total_internships_posted))) if len(list(set(total_internships_posted))) else 0
+        open_internships = len(list(set(open_internships))) if len(list(set(open_internships))) else 0
+        closed_internships = len(list(set(closed_internships))) if len(list(set(closed_internships))) else 0
+        deleted_internships = len(list(set(deleted_internships))) if len(list(set(deleted_internships))) else 0
+        pending_internships = len(list(set(pending_internships))) if len(list(set(pending_internships))) else 0
+        rejected_internships = len(list(set(rejected_internships))) if len(list(set(rejected_internships))) else 0
         total_accepted_internships = open_internships + closed_internships + deleted_internships
 
         args = {'total_jobs': total_jobs, 'total_accepted_jobs': total_accepted_jobs,
