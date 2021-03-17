@@ -20,7 +20,7 @@ urlpatterns = [
     path(
         'export_stats_file/<int:users>/<int:admins>/<int:students>/<int:current>/<int:alumni>/<int:employers>/<int:jobs_posted>/<int:apps>/<int:open_jobs>/<int:closed_jobs>/<int:deleted_jobs>/<int:total_users>/<int:pending_users>/<int:pending_jobs>/<int:alumni_apps>/<int:rejected_users>/<int:rejected_jobs>',
         views.export_stats_file, name='export_stats_file'),
-    path('export_job_stats/<int:total_jobs>/<int:accepted_jobs>/<int:open_jobs>/<int:closed_jobs>/<int:deleted_jobs>/<int:pending_jobs>/<int:rejected_jobs>',
+    path('export_job_stats/<int:total_jobs>/<int:accepted_jobs>/<int:open_jobs>/<int:closed_jobs>/<int:deleted_jobs>/<int:pending_jobs>/<int:rejected_jobs>/<int:total_internships_posted>/<int:total_accepted_internships>/<int:open_internships>/<int:closed_internships>/<int:deleted_internships>/<int:pending_internships>/<int:rejected_internships>',
          views.export_job_stats, name='export_job_stats'),
     path('export_student_stats/<int:students>/<int:accepted_students>/<int:pending_students>/<int:rejected_students>/<int:alumni>/<int:accepted_alumni>/<int:pending_alumni>/<int:rejected_alumni>',
          views.export_student_stats, name='export_student_stats'),

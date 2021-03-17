@@ -54,12 +54,47 @@
                 <td>Rejected Jobs</td>
                 <td class="text-center">{{ rejected_jobs }}</td>
             </tr>
+
+            <tr class="text-left">
+                <td>Total Internships</td>
+                <td class="text-center">{{ total_internships_posted }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td><b>Total Accepted Internships</b></td>
+                <td class="text-center"><b>{{ total_accepted_internships }}</b></td>
+            </tr>
+
+            <tr class="text-left">
+                <td>&nbsp;&nbsp;&nbsp;Open Internships</td>
+                <td class="text-center">{{ open_internships }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td>&nbsp;&nbsp;&nbsp;Closed Internships</td>
+                <td class="text-center">{{ closed_internships }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td>&nbsp;&nbsp;&nbsp;Deleted Internships</td>
+                <td class="text-center">{{ deleted_internships }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td>Pending Internships</td>
+                <td class="text-center">{{ pending_internships }}</td>
+            </tr>
+
+            <tr class="text-left">
+                <td>Rejected Internships</td>
+                <td class="text-center">{{ rejected_internships }}</td>
+            </tr>
             </tbody>
         </table>
     </div>
     <div class="text-center">
         <button type="button" class="btn btn-primary">
-            <a class="text-decoration-none text-white" href="{% url 'export_job_stats' total_jobs total_accepted_jobs open_jobs closed_jobs deleted_jobs pending_jobs rejected_jobs %}">Export Data</a>
+            <a class="text-decoration-none text-white" href="{% url 'export_job_stats' total_jobs total_accepted_jobs open_jobs closed_jobs deleted_jobs pending_jobs rejected_jobs total_internships_posted total_accepted_internships open_internships closed_internships deleted_internships pending_internships rejected_internships %}">Export Data</a>
         </button>
     </div>
     <br><br>
