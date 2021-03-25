@@ -26,6 +26,9 @@
                 <p><strong>Email Address:</strong> {{ user.email }}</p>
                 <p><strong>Date of Birth:</strong> {{ obj.date_of_birth|date:"d M Y" }}</p>
                 <p><strong>Gender:</strong> {{ obj.gender }}</p>
+                {% if obj.phone_number %}
+                    <p><strong>Phone Number:</strong> {{ obj.phone_number }}</p>
+                {% endif %}
                 {% if obj.student_id %}
                     <p><strong>Student ID:</strong> {{ obj.student_id }}</p>
                 {% endif %}

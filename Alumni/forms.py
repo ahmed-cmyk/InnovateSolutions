@@ -79,6 +79,10 @@ class AlumniForm(forms.ModelForm):
                                widget=forms.RadioSelect(attrs={'class': 'custom-select'}))
     date_of_birth = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=True,
                                     help_text="You should be at least 16 years old")
+    phone_number = forms.CharField(label="Contact Number", required=False, max_length=15, min_length=9,
+                                   help_text="The contact number should be a minimum 9 and a maximum 15 digits with no spaces or - characters.",
+                                   widget=forms.TextInput(
+                                       attrs={'class': 'form-control-text', 'style': 'resize:none;'}), )
     student_id = forms.CharField(label='Student ID', max_length=8, min_length=8, required=False)
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all().order_by('skill_name'),
                                             label='Skills*',

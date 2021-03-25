@@ -78,6 +78,7 @@ function searchMajor() {
                         <div class="form-group col-6" id="firstNameError"></div>
                         <div class="form-group col-6" id="lastNameError"></div>
                     </div>
+                    <div>{{ alumni_form.phone_number|as_crispy_field }}</div>
                     <div>{{ alumni_form.gender|as_crispy_field }}</div>
                     <div>{{ alumni_form.date_of_birth|as_crispy_field }}</div>
                     {{ alumni_form.skills.label }}
@@ -113,6 +114,7 @@ function searchMajor() {
                         <div class="form-group col-6" id="firstNameError"></div>
                         <div class="form-group col-6" id="lastNameError"></div>
                     </div>
+                    <div>{{ alumni_form.phone_number|as_crispy_field }}</div>
                     <div>{{ alumni_form.gender|as_crispy_field }}</div>
                     <div>{{ alumni_form.date_of_birth|as_crispy_field }}</div>
                     {{ alumni_form.skills.label }}

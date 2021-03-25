@@ -560,7 +560,7 @@ def generate_statistics(request):
         open_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Open", is_active='Accepted')
         closed_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Closed", is_active='Accepted')
         deleted_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Deleted", is_active='Accepted')
-        internships_posted = Job.objects.filter(job_type_id=4, is_active='Accepted')
+        internships_posted = Job.objects.filter(job_type_id_id=4, is_active='Accepted')
         apps = StudentJobApplication.objects.filter(date_applied__range=[start_date, end_date])
         alumni_apps = AlumniJobApplication.objects.filter(date_applied__range=[start_date, end_date])
 
