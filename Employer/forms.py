@@ -72,7 +72,7 @@ class EmployerForm(forms.ModelForm):
     company_website = forms.URLField(label='Company Website', required=True,
                                      help_text="The website should start with http or https.")
     phone_number = forms.CharField(label="Contact Number", required=True, max_length=15, min_length=9,
-                                   help_text="The contact number should be a minimum 9 and a maximum 15 digits with no spaces or - characters.",
+                                   help_text="The contact number should be a minimum 9  and must be appended by a plus symbol followed by the country code extension",
                                    widget=forms.TextInput(
                                        attrs={'class': 'form-control-text', 'style': 'resize:none;'}), )
     contact_name = forms.CharField(max_length=50, label='Contact Name', required=True, widget=forms.TextInput(

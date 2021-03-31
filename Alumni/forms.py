@@ -15,7 +15,7 @@ class InitialAlumniForm(forms.ModelForm):
     email = forms.EmailField(label='Personal Email Address', required=True)
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput,
                                 help_text="The password must be 8 characters or more, and must have at least 1 "
-                                          "numeric character and 1 letter.")
+                                          "numeric character and 1 letter")
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
@@ -80,7 +80,7 @@ class AlumniForm(forms.ModelForm):
     date_of_birth = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=True,
                                     help_text="You should be at least 16 years old")
     phone_number = forms.CharField(label="Contact Number", required=False, max_length=15, min_length=9,
-                                   help_text="The contact number should be a minimum 9 and a maximum 15 digits with no spaces or - characters.",
+                                   help_text="The contact number should be a minimum 9  and must be appended by a plus symbol followed by the country code extension",
                                    widget=forms.TextInput(
                                        attrs={'class': 'form-control-text', 'style': 'resize:none;'}), )
     student_id = forms.CharField(label='Student ID', max_length=8, min_length=8, required=False)
