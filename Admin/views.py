@@ -543,6 +543,9 @@ def get_total_jobs(jobs):
 def generate_statistics(request):
     user = get_user_type(request)
     if request.method == "POST":
+
+        normal_jobs = Job.objects.exclude(job_type_id=JOB_ID)
+
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
         end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d') + timedelta(hours=23, minutes=59, seconds=59)
@@ -556,11 +559,11 @@ def generate_statistics(request):
         employers = Employer.objects.filter(is_active='Accepted',
             user_id__in=User.objects.filter(date_joined__range=[start_date, end_date])).exclude(
             user_id__in=admin_users)
-        jobs_posted = get_total_jobs(Job.objects.filter(date_posted__range=[start_date, end_date], is_active='Accepted'))
-        open_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Open", is_active='Accepted')
-        closed_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Closed", is_active='Accepted')
-        deleted_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], status="Deleted", is_active='Accepted')
-        internships_posted = Job.objects.filter(job_type_id_id=JOB_ID, is_active='Accepted')
+        jobs_posted = get_total_jobs(normal_jobs.filter(date_posted__range=[start_date, end_date], is_active='Accepted'))
+        open_jobs = get_total_jobs(normal_jobs.filter(date_posted__range=[start_date, end_date], status="Open", is_active='Accepted'))
+        closed_jobs = get_total_jobs(normal_jobs.filter(date_posted__range=[start_date, end_date], status="Closed", is_active='Accepted'))
+        deleted_jobs = get_total_jobs(normal_jobs.filter(date_posted__range=[start_date, end_date], status="Deleted", is_active='Accepted'))
+        internships_posted = get_total_jobs(normal_jobs.filter(job_type_id_id=JOB_ID, is_active='Accepted'))
         apps = StudentJobApplication.objects.filter(date_applied__range=[start_date, end_date])
         alumni_apps = AlumniJobApplication.objects.filter(date_applied__range=[start_date, end_date])
 
@@ -579,8 +582,8 @@ def generate_statistics(request):
             date_joined__range=[start_date, end_date]))
         rejected_alumni = Alumni.objects.filter(is_active='Rejected', user_id__in=User.objects.filter(
             date_joined__range=[start_date, end_date]))
-        pending_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], is_active='Pending')
-        rejected_jobs = Job.objects.filter(date_posted__range=[start_date, end_date], is_active='Rejected')
+        pending_jobs = get_total_jobs(normal_jobs.filter(date_posted__range=[start_date, end_date], is_active='Pending'))
+        rejected_jobs = get_total_jobs(normal_jobs.filter(date_posted__range=[start_date, end_date], is_active='Rejected'))
         total_users = User.objects.filter(date_joined__range=[start_date, end_date])
 
         total_users = len(list(set(total_users)))
@@ -588,20 +591,14 @@ def generate_statistics(request):
         current = len(list(set(current)))
         alumni = len(list(set(alumni)))
         employers = len(list(set(employers)))
-        open_jobs = len(list(set(open_jobs)))
-        closed_jobs = len(list(set(closed_jobs)))
-        deleted_jobs = len(list(set(deleted_jobs)))
         apps = len(list(set(apps)))
         alumni_apps = len(list(set(alumni_apps)))
-        internships_posted = len(list(set(internships_posted))) if len(list(set(internships_posted))) else 0
         pending_employers = len(list(set(pending_employers)))
         pending_students = len(list(set(pending_students)))
         pending_alumni = len(list(set(pending_alumni)))
-        pending_jobs = len(list(set(pending_jobs)))
         rejected_employers = len(list(set(rejected_employers)))
         rejected_students = len(list(set(rejected_students)))
         rejected_alumni = len(list(set(rejected_alumni)))
-        rejected_jobs = len(list(set(rejected_jobs)))
 
         pending_users = pending_employers + pending_students + pending_alumni
         rejected_users = rejected_employers + rejected_students + rejected_alumni
@@ -649,36 +646,25 @@ def generate_job_statistics(request):
             industry_jobs = Job.objects.all()
 
         filtered_jobs = location_jobs & job_type_jobs & industry_jobs
-        normal_jobs = filtered_jobs.exclude(job_type_id=4)
-        open_jobs = normal_jobs.filter(status="Open", is_active='Accepted')
-        closed_jobs = normal_jobs.filter(status="Closed", is_active='Accepted')
-        deleted_jobs = normal_jobs.filter(status="Deleted", is_active='Accepted')
-        pending_jobs = normal_jobs.filter(date_posted__range=[start_date, end_date], is_active='Pending')
-        rejected_jobs = normal_jobs.filter(date_posted__range=[start_date, end_date], is_active='Rejected')
+        normal_jobs = filtered_jobs.exclude(job_type_id=JOB_ID)
+        open_jobs = get_total_jobs(normal_jobs.filter(status="Open", is_active='Accepted'))
+        closed_jobs = get_total_jobs(normal_jobs.filter(status="Closed", is_active='Accepted'))
+        deleted_jobs = get_total_jobs(normal_jobs.filter(status="Deleted", is_active='Accepted'))
+        pending_jobs = get_total_jobs(normal_jobs.filter(date_posted__range=[start_date, end_date], is_active='Pending'))
+        rejected_jobs = get_total_jobs(normal_jobs.filter(date_posted__range=[start_date, end_date], is_active='Rejected'))
 
-        total_internships_posted = filtered_jobs.filter(job_type_id=JOB_ID)
-        open_internships = filtered_jobs.filter(job_type_id=JOB_ID, status='Open', is_active='Accepted')
-        closed_internships = filtered_jobs.filter(job_type_id=JOB_ID, status='Closed', is_active='Accepted')
-        deleted_internships = filtered_jobs.filter(job_type_id=JOB_ID, status='Deleted', is_active='Accepted')
-        pending_internships = filtered_jobs.filter(job_type_id=JOB_ID, date_posted__range=[start_date, end_date],
-                                                 is_active='Pending')
-        rejected_internships = filtered_jobs.filter(job_type_id=JOB_ID, date_posted__range=[start_date, end_date],
-                                                  is_active='Rejected')
+        total_internships_posted = get_total_jobs(filtered_jobs.filter(job_type_id=JOB_ID))
+        open_internships = get_total_jobs(filtered_jobs.filter(job_type_id=JOB_ID, status='Open', is_active='Accepted'))
+        closed_internships = get_total_jobs(filtered_jobs.filter(job_type_id=JOB_ID, status='Closed', is_active='Accepted'))
+        deleted_internships = get_total_jobs(filtered_jobs.filter(job_type_id=JOB_ID, status='Deleted', is_active='Accepted'))
+        pending_internships = get_total_jobs(filtered_jobs.filter(job_type_id=JOB_ID, date_posted__range=[start_date, end_date],
+                                                 is_active='Pending'))
+        rejected_internships = get_total_jobs(filtered_jobs.filter(job_type_id=JOB_ID, date_posted__range=[start_date, end_date],
+                                                  is_active='Rejected'))
 
         total_jobs = get_total_jobs(filtered_jobs)
-        open_jobs = len(list(set(open_jobs)))
-        closed_jobs = len(list(set(closed_jobs)))
-        deleted_jobs = len(list(set(deleted_jobs)))
-        pending_jobs = len(list(set(pending_jobs)))
-        rejected_jobs = len(list(set(rejected_jobs)))
         total_accepted_jobs = open_jobs + closed_jobs + deleted_jobs
 
-        total_internships_posted = len(list(set(total_internships_posted))) if len(list(set(total_internships_posted))) else 0
-        open_internships = len(list(set(open_internships))) if len(list(set(open_internships))) else 0
-        closed_internships = len(list(set(closed_internships))) if len(list(set(closed_internships))) else 0
-        deleted_internships = len(list(set(deleted_internships))) if len(list(set(deleted_internships))) else 0
-        pending_internships = len(list(set(pending_internships))) if len(list(set(pending_internships))) else 0
-        rejected_internships = len(list(set(rejected_internships))) if len(list(set(rejected_internships))) else 0
         total_accepted_internships = open_internships + closed_internships + deleted_internships
 
         args = {'total_jobs': total_jobs, 'total_accepted_jobs': total_accepted_jobs,
