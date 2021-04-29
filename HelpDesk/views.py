@@ -87,7 +87,7 @@ class HelpDeskFormView(TemplateView):
                     htmlText = render_to_string('HelpDesk/helpdesk_request_logged.html', context)
                     send_html_mail(subject, htmlText, [email])
 
-                    subject = ' A new HelpDesk request has been received'
+                    subject = 'A new HelpDesk request has been received'
                     htmlText = render_to_string('HelpDesk/helpdesk_request_submitted.html', admin_context)
                     send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
                 except:
@@ -104,7 +104,7 @@ class HelpDeskFormView(TemplateView):
                     send_html_mail(subject, htmlText, [email])
                     send_html_mail(subject, htmlText, [student_email])
 
-                    subject = ' A new HelpDesk request has been received'
+                    subject = 'A new HelpDesk request has been received'
                     htmlText = render_to_string('HelpDesk/helpdesk_request_submitted.html', admin_context)
                     send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
                 except:
@@ -119,7 +119,7 @@ class HelpDeskFormView(TemplateView):
                     htmlText = render_to_string('HelpDesk/helpdesk_request_logged.html', context)
                     send_html_mail(subject, htmlText, [email])
 
-                    subject = ' A new HelpDesk request has been received'
+                    subject = 'A new HelpDesk request has been received'
                     htmlText = render_to_string('HelpDesk/helpdesk_request_submitted.html', admin_context)
                     send_html_mail(subject, htmlText, [DEFAULT_FROM_EMAIL])
                 except:
