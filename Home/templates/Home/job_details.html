@@ -109,15 +109,17 @@
                                             <p><b class="text-secondary card-text">Location:</b> {{ job.location }}</p>
                                             <p><b class="text-secondary card-text">Description:</b> {{ company.company_description|safe }}</p>
                                         </div>
-                                        <div class="card-footer">
-                                            <i class="fa fa-mobile" aria-hidden="true"></i> <a href="tel:{{ company.phone_number }}">{{ company.phone_number }}</a>
-                                            <i class="fa fa-envelope pl-2" aria-hidden="true"></i>
-                                            <a href="mailto:{{ company.user }}">{{ company.user }}</a>
-                                            {% if company.company_website %}
-                                                <i class="fa fa-globe" aria-hidden="true"></i>
-                                                <a href="{{ company.company_website }}" target="_blank">Company Site</a>
-                                            {% endif %}
-                                        </div>
+                                        {% if user_type == 'employer' or user.is_superuser %}
+                                            <div class="card-footer">
+                                                <i class="fa fa-mobile" aria-hidden="true"></i> <a href="tel:{{ company.phone_number }}">{{ company.phone_number }}</a>
+                                                <i class="fa fa-envelope pl-2" aria-hidden="true"></i>
+                                                <a href="mailto:{{ company.user }}">{{ company.user }}</a>
+                                                {% if company.company_website %}
+                                                    <i class="fa fa-globe" aria-hidden="true"></i>
+                                                    <a href="{{ company.company_website }}" target="_blank">Company Site</a>
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
                                     {% endif %}
                                 {% endfor %}
                             </div>
