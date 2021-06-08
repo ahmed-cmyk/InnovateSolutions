@@ -64,7 +64,7 @@
                             {% if job.posted_by == company %}
                                 <div class="col-xs-12 d-block d-sm-none">
                                     {% if company.logo %}
-                                        <img src="{{ company.logo.url }}" height="auto" width="auto">
+                                        <img src="{{ company.logo.url }}" width="100%">
                                     {% endif %}
                                 </div>
                                 <div class="card-body row">
@@ -88,7 +88,7 @@
                                         {% endif %}
                                     </div>
                                     {% if company.logo %}
-                                        <img class="col-3 d-none d-sm-block" src="{{ company.logo.url }}" height="250px" width="250px">
+                                        <img class="col-3 d-none d-sm-block" src="{{ company.logo.url }}" width="100%">
                                     {% endif %}
                                 </div>
                             {% endif %}
