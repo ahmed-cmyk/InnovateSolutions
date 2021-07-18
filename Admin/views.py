@@ -533,8 +533,8 @@ def get_total_jobs(jobs):
 
     count = 0
 
-    if jobs:
-        for job in jobs:
+    for job in jobs:
+        if job.available_positions is not None:
             count += job.available_positions
 
     return count
