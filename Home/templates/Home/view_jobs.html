@@ -53,7 +53,7 @@
                                     {{ form.min_salary }} {{ form.max_salary }}<br>
                                 </div><!-- End of modal-body -->
                                 <div class="modal-footer">
-                                    <a href="{% url 'view_jobs' %}"><button type="reset" class="btn btn-danger">Reset</button></a>
+                                    <a href="{% url 'view_jobs' %}"><button type="reset" class="btn btn-red">Reset</button></a>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Search</button>
                                 </div><!-- End of modal-footer -->
@@ -88,7 +88,7 @@
                                 <div class="form-group col-6">{{ form.max_salary|as_crispy_field }}</div>
                             </div>
                             <div class="form-footer text-center">
-                                <a href="{% url 'view_jobs' %}"><button type="button" class="btn btn-danger">Reset</button></a>
+                                <a href="{% url 'view_jobs' %}"><button type="button" class="btn btn-red">Reset</button></a>
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div><!-- End of modal-footer -->
                         </form>

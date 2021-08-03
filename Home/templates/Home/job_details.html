@@ -24,7 +24,7 @@
                                     <button class="btn btn-warning" type="button">Close Job</button>
                                 </a>
                                 <a href="{% url 'delete_job' job.id %}" class="py-1">
-                                    <button class="btn btn-danger" type="button">Delete Job</button>
+                                    <button class="btn btn-red" type="button">Delete Job</button>
                                 </a>
                             {% else %}
                                 <a href="{% url 'reopen_job' job.id %}">
@@ -49,7 +49,7 @@
                                                 <button class="btn btn-warning" type="button">Close Job</button>
                                             </a>
                                             <a href="{% url 'delete_job' job.id %}" class="py-1">
-                                                <button class="btn btn-danger" type="button">Delete Job</button>
+                                                <button class="btn btn-red" type="button">Delete Job</button>
                                             </a>
                                         {% else %}
                                             <a href="{% url 'reopen_job' job.id %}">
@@ -175,9 +175,9 @@
                         <div id="view-buttons" class="text-center">
                             {% if user_type != 'student' and user_type != "alumni" %}
                                 {% if job.status == 'Open' and job.is_active == 'Accepted' %}
-                                    <button class="btn btn-danger my-1" type="submit" name="viewcandidates" value="ViewCandidates&Save">View Applicants</button>
-                                    <a href="{% url 'job_to_student_skills' job.id %}"><button class="btn btn-danger my-1" type="button">View Student Candidates</button></a>
-                                    <a href="{% url 'job_to_alumni_skills' job.id %}"><button class="btn btn-danger my-1" type="button">View Alumni Candidates</button></a>
+                                    <button class="btn btn-red my-1" type="submit" name="viewcandidates" value="ViewCandidates&Save">View Applicants</button>
+                                    <a href="{% url 'job_to_student_skills' job.id %}"><button class="btn btn-red my-1" type="button">View Student Candidates</button></a>
+                                    <a href="{% url 'job_to_alumni_skills' job.id %}"><button class="btn btn-red my-1" type="button">View Alumni Candidates</button></a>
                                 {% endif %}
                             {% endif %}
                         </div>

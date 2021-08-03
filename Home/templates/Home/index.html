@@ -59,10 +59,10 @@
     <div id="mobileButtons" class="col-xs-12 text-center d-block d-sm-none">
         {% if not user.is_authenticated %}
             <a class="text-decoration-none" href="{% url 'sign_up' %}">
-                <button class="btn btn-danger" type="button">Sign Up</button>
+                <button class="btn btn-red" type="button">Sign Up</button>
             </a>
             <a class="text-decoration-none" href="{% url 'log_in' %}">
-                <button class="btn btn-danger">Login</button>
+                <button class="btn btn-red">Login</button>
             </a>
             <br><hr><br>
         {% endif %}
