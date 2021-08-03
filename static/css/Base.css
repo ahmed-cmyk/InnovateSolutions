@@ -40,8 +40,7 @@ header {
 }
 
 #navTop #murdochLogo img {
-    width: 170px;
-    height: 40px;
+    width: 10em;
 }
 
 /*#userElements {
@@ -259,6 +258,11 @@ footer #social-section {
     color: #DD2A7B;
 }
 
+button.btn-red {
+    background-color: #E12744;
+    color: #FFF;
+}
+
 /******** Mobile Devices ********/
 @media (max-width: 767px) {
     #navigationBar .navElements {
@@ -273,6 +277,9 @@ footer #social-section {
         width: 100%;
         text-align: center;
         border-bottom: 1px solid white;
+    }
+    #navTop #murdochLogo img {
+        width: 8em;
     }
     #body-image img {
         height: 40vh;
