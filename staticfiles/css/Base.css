@@ -36,7 +36,7 @@ header {
 }
 
 #navigationBar #navTop {
-    background-color: #CC0000;
+    background-color: #E12744;
 }
 
 #navTop #murdochLogo img {
@@ -50,7 +50,7 @@ header {
 
 #userElements #signup, #login {
     color: #FFF;
-    background-color: #CC0000;
+    background-color: #E12744;
     border: 2px solid #FFF;
     border-radius: 12px;
 }
@@ -83,14 +83,14 @@ a.dropdown-item {
 }
 
 #navigationBar #navBottom button:hover {
-    color: #CC0000;
+    color: #E12744;
     background-color: #FFF;
 }
 
 #navigationBar #navBottom .active {
-    /*color: #CC0000;*/
+    /*color: #E12744/
     /*background-color: #FFF;*/
-    border-bottom: 3px solid #CC0000;
+    border-bottom: 3px solid #E12744
 }
 
 main {
@@ -124,7 +124,7 @@ main {
 }
 
 #jobDetBody .fa-briefcase, #jobDetBody .fa-graduation-cap {
-    color: #cc0000;
+    color: #E12744;
 }
 
 #body-image {
@@ -172,7 +172,7 @@ div.col-md-8.col-sm-8.col-xs-12, div.col-md-4.col-sm-4.col-xs-12 {
 
 .input-group .searchTerm {
     width: 100%;
-    border: 2px solid #CC0000;
+    border: 2px solid #E12744
     border-right: none;
     border-radius: 5px 0 0 5px;
     outline: none;
@@ -181,8 +181,8 @@ div.col-md-8.col-sm-8.col-xs-12, div.col-md-4.col-sm-4.col-xs-12 {
 }
 
 .input-group .searchButton {
-    border: 1px solid #CC0000;
-    background: #CC0000;
+    border: 1px solid #E12744;
+    background: #E12744
     text-align: center;
     color: #fff;
     border-radius: 0 5px 5px 0;
