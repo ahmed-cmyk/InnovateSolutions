@@ -548,12 +548,22 @@ def close_job(request, id):
             first_name = student.user.first_name
             context = {'first_name': first_name, 'job_name': job.job_title}
             htmlText = render_to_string('Student/job_closed.html', context)
-            subject = 'The job you applied for has closed'
+            subject = 'Job posting has been closed'
 
             email = str(student.user)
             student_email = str(student.personal_email)
             send_html_mail(subject, htmlText, [email])
             send_html_mail(subject, htmlText, [student_email])
+
+        alumni = Alumni.objects.filter(jobs_applied=job.id)
+        for alumnus in alumni:
+            first_name = alumnus.user.first_name
+            context = {'first_name': first_name, 'job_name': job.job_title}
+            htmlText = render_to_string('Student/job_closed.html', context)
+            subject = 'Job posting has been closed'
+
+            email = str(alumnus.user)
+            send_html_mail(subject, htmlText, [email])
 
         messages.success(request, "You have successfully closed the job")
         return redirect('job_details', job.id)
